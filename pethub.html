@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Pet Hub</title>
+        <script src="//cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.js"></script>
+    </head>
+</html>
+<body>
+ <script type= "text/javascript">
+
+
+var config = {
+    type: Phaser.CANVAS,
+    width: window.innerWidth,
+    height: window.innerHeight,
+    
+    scene: {
+        preload: preload,
+        create: create
+    }
+};
+var game = new Phaser.Game(config);
+
+function preload ()
+{
+    this.load.image('sky', 'testImages/sky.png');
+    }
+
+function create ()
+{
+    this.add.image(300, 400, 'sky');
+}
+
+</script>
+</body>
