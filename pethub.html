@@ -27,10 +27,12 @@
 
             parent: 'wrapper',
             scale: {
-                type: Phaser.AUTO,
-                mode: Phaser.DOM.FIT,
+                mode: Phaser.Scale.FIT ,
                 width:800,
-                height:600,
+                height:400,
+                type: Phaser.AUTO,
+                autoCenter: Phaser.Scale.autoCenter
+                       
             },
             scene: {
                 preload: preload,
@@ -39,9 +41,10 @@
         };
         var game = new Phaser.Game(config);
 
+
 function preload ()
 {
-    this.load.image('sky', 'testImages/sky.png');
+    background = this.load.image('sky', 'testImages/sky.png');
     this.load.image('button', 'testImages/button.png')
     }
 
@@ -49,7 +52,9 @@ function create ()
 {
    
     
-    this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');
+    background = this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');
+    
+    this.add.sprite(this.scale.width/2, this.scale.height/2, 'button');
 }
 function update(){
     
