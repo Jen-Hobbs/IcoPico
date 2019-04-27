@@ -10,27 +10,24 @@
  <script type= "text/javascript">
 
 
-var config = {
-    type: Phaser.CANVAS,
-    width: window.innerWidth,
-    height: window.innerHeight,
-    
-    scene: {
-        preload: preload,
-        create: create
-    }
-};
 var game = new Phaser.Game(config);
 
 function preload ()
 {
     this.load.image('sky', 'testImages/sky.png');
+    this.load.image('button', 'testImages/button.png')
     }
 
 function create ()
 {
-    this.add.image(300, 400, 'sky');
+   
+    
+    this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');
 }
+function update(){
+    
+}
+
 
 </script>
 </body>
