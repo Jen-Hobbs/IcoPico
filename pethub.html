@@ -13,7 +13,7 @@
         }
 
         #wrapper {
-            min-height: 100%; 
+            /* min-height: 100%;  */
             background-color: blueviolet;
         }
     </style>
@@ -40,7 +40,8 @@
             }
         };
         var game = new Phaser.Game(config);
-
+        var background;
+        var button;
 
 function preload ()
 {
@@ -52,10 +53,14 @@ function create ()
 {
    
     
-    background = this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');
+    background = this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');    
     
-    this.add.sprite(this.scale.width/2, this.scale.height/2, 'button');
+    button = this.add.sprite(this.scale.width/2, this.scale.height/2, 'button');
+    button.setInteractive();
+    button.on('pointerdown', () => {console.log('point down');})
+    
 }
+
 function update(){
     
 }
