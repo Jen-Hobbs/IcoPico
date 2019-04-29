@@ -4,6 +4,8 @@
         <meta charset="UTF-8"/>
         <title>Pet Hub</title>
         <script src="//cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.js"></script>
+        <script type="text/javascript" src="shop.js"></script>
+        <script type="text/javascript" src="pethub.js"></script>
     </head>
     <!--style to make div span the whole screen-->
     <style type="text/css">
@@ -13,7 +15,7 @@
         }
 
         #wrapper {
-            /* min-height: 100%;  */
+             /* min-height: 100%;   */
             background-color: blueviolet;
         }
     </style>
@@ -22,48 +24,4 @@
     <!--wrapper div for whole screen-->
     <div id="wrapper"></div>
 
-    <script type= "text/javascript">
-        var config = {
-
-            parent: 'wrapper',
-            scale: {
-                mode: Phaser.Scale.FIT ,
-                width:800,
-                height:400,
-                type: Phaser.AUTO,
-                autoCenter: Phaser.Scale.autoCenter
-                       
-            },
-            scene: {
-                preload: preload,
-                create: create
-            }
-        };
-        var game = new Phaser.Game(config);
-        var background;
-        var button;
-
-function preload ()
-{
-    background = this.load.image('sky', 'testImages/sky.png');
-    this.load.image('button', 'testImages/button.png')
-    }
-
-function create ()
-{
-   
-    
-    background = this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');    
-    
-    button = this.add.sprite(this.scale.width/2, this.scale.height/2, 'button');
-    button.setInteractive();
-    button.on('pointerdown', () => {console.log('point down');})
-    
-}
-
-function update(){
-    
-}
-
-    </script>
 </body>
