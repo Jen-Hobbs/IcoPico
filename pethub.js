@@ -18,7 +18,11 @@ background = this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');
 
 button = this.add.sprite(this.scale.width/2, this.scale.height/2, 'button');
 button.setInteractive();
-button.on('pointerdown', () => {this.scene.start("shop")})
+button.on('pointerdown', () => {
+//launch adds onto current scene
+//start gets rid of current scene and adds new scene ontop
+    this.scene.launch("shop") 
+})
 
 }
 }
@@ -34,6 +38,7 @@ var config = {
                
     },
     scene: [pethub, shop]
+    
 };
 var game = new Phaser.Game(config);
 var background;
