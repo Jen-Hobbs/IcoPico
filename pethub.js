@@ -21,14 +21,7 @@ let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menu')
     menu2.on('pointerdown', ()=> {
         this.scene.launch('ShowMenu');      
     })
-// button = this.add.sprite(this.scale.width*.05, this.scale.height*.5, 'button');
-// button.setInteractive();
-// button.on('pointerdown', function() {
-// //launch adds onto current scene
-// //start gets rid of current scene and adds new scene ontop
 
-//     this.scene.start("shop");
-// })
 
 }
 update(){
@@ -46,9 +39,10 @@ var config = {
         autoCenter: Phaser.Scale.autoCenter
                
     },
-    scene: [pethub, shop, ShowMenu]
+    scene: [pethub, Shop, ShowMenu, Task]
     
 };
+
 var game = new Phaser.Game(config);
 var background;
 var button;

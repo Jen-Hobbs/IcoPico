@@ -3,9 +3,9 @@ class ShowMenu extends Phaser.Scene {
         super({key:"ShowMenu", active:false});
     }
     preload(){
-        // this.load.image("task", 'testImages/buttonTask.png');
-        this.load.image('shop', 'testImages/buttonShop.png');
-        this.load.image('pethub', 'testImages/buttonPet.png')
+        this.load.image("buttonTask", 'testImages/buttonTask.png');
+        this.load.image('buttonShop', 'testImages/buttonShop.png');
+        this.load.image('buttonPethub', 'testImages/buttonPet.png')
     }
     create(){
         let graphics = this.add.graphics();
@@ -15,16 +15,24 @@ class ShowMenu extends Phaser.Scene {
         menu.on('pointerdown', () => {
            this.scene.stop('ShowMenu');
         })
-        let pet = this.add.sprite(this.scale.width*.05, this.scale.height*.2, 'pethub');
+        let pet = this.add.sprite(this.scale.width*.05, this.scale.height*.2, 'buttonPethub');
         pet.setInteractive();
-        pet.on('pointerdown'), () =>{
-            this.scene.start("Pethub");   
-        }
-        // let shop =  this.add.sprite(this.scale.width*.05, this.scale.height*.4, 'shop');
-        // pet.setInteractive();
-        // pet.on('pointerdown'), () =>{
-        //     this.scene.start('Shop');   
-        // }
+        pet.on('pointerdown', () =>{
+            console.log('pet');
+            this.scene.start("Pethub");
+        })
+        let shop =  this.add.sprite(this.scale.width*.05, this.scale.height*.35, 'buttonShop');
+        shop.setInteractive();
+        shop.on('pointerdown', () =>{
+            console.log('shop');
+            this.scene.start('Shop');   
+        })
+        let task =  this.add.sprite(this.scale.width*.05, this.scale.height*.5, 'buttonTask');
+        task.setInteractive();
+        task.on('pointerdown', () =>{
+            console.log(task);
+            this.scene.start('Task');   
+        })
     }
     update(){
 
