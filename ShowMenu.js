@@ -8,8 +8,7 @@ class ShowMenu extends Phaser.Scene {
         let menu = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menu');
         menu.setInteractive();
         menu.on('pointerdown', () => {
-           console.log('dropmenu');
-            this.scene.stop('ShowMenu');
+           this.scene.stop('ShowMenu');
         })
     }
     update(){
