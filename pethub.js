@@ -29,11 +29,10 @@ var config = {
 
     parent: 'wrapper',
     scale: {
-        mode: Phaser.Scale.FIT ,
+        mode: Phaser.Structs.Size.WIDTH_CONTROLS_HEIGHT ,
         width: 800,
         height:400,
         type: Phaser.AUTO,
-        autoCenter: Phaser.Scale.autoCenter
                
     },
     scene: [pethub, Shop, Task, Bag, ShowMenu]
