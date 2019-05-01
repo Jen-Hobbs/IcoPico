@@ -3,11 +3,13 @@ class shop extends Phaser.Scene {
         super({key:"shop", active:false});
     }
     preload(){
-        this.load.image('sky', 'testImages/sky.png');
+
+        this.load.image("shinyboi", 'testImages/shinyboi.png')
     }
     create(){
-        this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');    
+        //this.add.image(400, 300, 'shinyboi');
+        this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');     
+        this.add.text(this.scale.width/2, this.scale.height/2, "shop");
 
-        this.add.text(20, 20, "text");
     }
 }
