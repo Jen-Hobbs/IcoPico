@@ -1,13 +1,13 @@
 
 class pethub extends Phaser.Scene{
 constructor(){
-    super({key:'Pethub', active: true})
+    super({key:'pethub', active: true})
 }
 
  preload ()
 {
 background = this.load.image('sky', 'testImages/sky.png');
-this.load.image("menu", 'testImages/menu.png')
+this.load.image('button', 'testImages/button.png')
 }
 
 create ()
@@ -15,13 +15,10 @@ create ()
 
 
 background = this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');    
-let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menu');    
-    menu2.setInteractive();
-    menu2.on('pointerdown', ()=> {  
-        this.scene.launch('ShowMenu');      
-    })
-}
-update(){
+
+button = this.add.sprite(this.scale.width/2, this.scale.height/2, 'button');
+button.setInteractive();
+button.on('pointerdown', () => {this.scene.start("shop")})
 
 }
 }
@@ -29,16 +26,15 @@ var config = {
 
     parent: 'wrapper',
     scale: {
-        mode: Phaser.Structs.Size.WIDTH_CONTROLS_HEIGHT ,
-        width: 800,
+        mode: Phaser.Scale.FIT ,
+        width:800,
         height:400,
         type: Phaser.AUTO,
+        autoCenter: Phaser.Scale.autoCenter
                
     },
-    scene: [pethub, Shop, Task, Bag, ShowMenu]
-    
+    scene: [pethub, shop]
 };
-
 var game = new Phaser.Game(config);
 var background;
 var button;
