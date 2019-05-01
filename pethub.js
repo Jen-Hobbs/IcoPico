@@ -27,14 +27,7 @@ var config = {
     parent: 'wrapper',
     scale: {
         mode: Phaser.Scale.FIT ,
-<<<<<<< HEAD
-<<<<<<< HEAD
-        width:800,
-=======
-=======
->>>>>>> parent of ff3424e... small changes for size of game
         width: 800,
->>>>>>> parent of ff3424e... small changes for size of game
         height:400,
         type: Phaser.AUTO,
         autoCenter: Phaser.Scale.autoCenter
