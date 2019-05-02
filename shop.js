@@ -4,6 +4,9 @@ class Shop extends Phaser.Scene {
     }
     preload(){
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 691001e... trying to push again
         this.load.image("menu", 'testImages/menu.png')
     }
     create(){
@@ -15,6 +18,7 @@ class Shop extends Phaser.Scene {
         menu2.on('pointerdown', ()=> {
             this.scene.launch('ShowMenu');     
         })
+<<<<<<< HEAD
 =======
         this.load.image('sky', 'testImages/sky.png');
     }
@@ -23,6 +27,8 @@ class Shop extends Phaser.Scene {
 
         this.add.text(20, 20, "text");
 >>>>>>> parent of cb1994f... Merge branch 'Joanna'
+=======
+>>>>>>> parent of 691001e... trying to push again
     }
     
 }
