@@ -3,7 +3,9 @@ class pethub extends Phaser.Scene{
     constructor(){
         super({key:'Pethub', active: true})
     }
-    
+    init(data){
+        console.log('init', data);
+    }
      preload ()
     {
     this.load.image('backPet', 'testImages/sky.png');
@@ -21,7 +23,8 @@ class pethub extends Phaser.Scene{
         })
     }
     update(){
-    
+
+        // console.log(data.hi);
     }
     }
     var config = {

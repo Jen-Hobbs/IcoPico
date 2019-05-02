@@ -5,6 +5,7 @@ class Task extends Phaser.Scene {
     preload(){
         this.load.image('backTask', 'testImages/sky.png');
         this.load.image("menuTask", 'testImages/menu.png');
+        this.load.image('button', 'testImages/button.png');
     }
     create(){
         this.add.sprite(this.scale.width/2, this.scale.height/2, 'backTask'); 
@@ -15,6 +16,14 @@ class Task extends Phaser.Scene {
          menu2.on('pointerdown', ()=> {
             this.scene.run('ShowMenu');
             this.scene.bringToTop('ShowMenu');   
+        })
+        let button = this.add.sprite(this.scale.width*.5, this.scale.height*.5, 'button');
+        button.setInteractive();
+        button.on('pointerdown', ()=> {
+            this.scene.sleep();
+            this.scene.bringToTop('Pethub');
+            this.scene.run('Pethub', {hi: 'hi'});
+            
         })
     }
     
