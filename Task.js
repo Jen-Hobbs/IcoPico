@@ -25,6 +25,9 @@ class Task extends Phaser.Scene {
             this.scene.run('Pethub', {hi: 'hi'});
             
         })
+        console.log(information[0]);
+        information[0] = '3';
+        
     }
     
 }

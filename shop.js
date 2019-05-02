@@ -15,7 +15,8 @@ class Shop extends Phaser.Scene {
         menu2.on('pointerdown', ()=> {
             this.scene.run('ShowMenu');
             this.scene.bringToTop('ShowMenu');  
-        })
+        });
+        console.log(information[0]);
     }
     
 }
