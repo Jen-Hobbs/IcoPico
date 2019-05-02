@@ -3,6 +3,7 @@ class Shop extends Phaser.Scene {
         super({key:"Shop", active:false});
     }
     preload(){
+<<<<<<< HEAD
         this.load.image("menu", 'testImages/menu.png')
     }
     create(){
@@ -14,6 +15,14 @@ class Shop extends Phaser.Scene {
         menu2.on('pointerdown', ()=> {
             this.scene.launch('ShowMenu');     
         })
+=======
+        this.load.image('sky', 'testImages/sky.png');
+    }
+    create(){
+        this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');    
+
+        this.add.text(20, 20, "text");
+>>>>>>> parent of cb1994f... Merge branch 'Joanna'
     }
     
 }
