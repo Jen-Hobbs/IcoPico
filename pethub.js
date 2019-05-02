@@ -77,11 +77,21 @@ var config = {
         mode: Phaser.Structs.Size.WIDTH_CONTROLS_HEIGHT ,
 =======
         mode: Phaser.Scale.FIT ,
+<<<<<<< HEAD
 >>>>>>> parent of cb1994f... Merge branch 'Joanna'
 =======
         mode: Phaser.Structs.Size.WIDTH_CONTROLS_HEIGHT ,
 >>>>>>> parent of 691001e... trying to push again
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        width:800,
+=======
+=======
+>>>>>>> parent of ff3424e... small changes for size of game
+>>>>>>> parent of 92cb29a... fixes
         width: 800,
+>>>>>>> parent of ff3424e... small changes for size of game
         height:400,
         type: Phaser.AUTO,
                
