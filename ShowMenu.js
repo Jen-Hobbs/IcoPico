@@ -20,25 +20,33 @@ class ShowMenu extends Phaser.Scene {
         pet.setInteractive();
         pet.on('pointerdown', () =>{
             console.log('pet');
-            this.scene.start("Pethub");
+            this.scene.bringToTop("Pethub");
+            this.scene.start('Pethub');
+            this.scene.bringToTop('ShowMenu');   
         })
         let shop =  this.add.sprite(this.scale.width*.05, this.scale.height*.35, 'buttonShop');
         shop.setInteractive();
         shop.on('pointerdown', () =>{
             console.log('shop');
-            this.scene.start('Shop');   
+            this.scene.bringToTop('Shop');
+            this.scene.start('Shop');
+            this.scene.bringToTop('ShowMenu');   
         })
         let task =  this.add.sprite(this.scale.width*.05, this.scale.height*.5, 'buttonTask');
         task.setInteractive();
         task.on('pointerdown', () =>{
             console.log(task);
-            this.scene.start('Task');   
+            this.scene.bringToTop('Task');  
+            this.scene.start('Task');
+            this.scene.bringToTop('ShowMenu');    
         })
         let bag =  this.add.sprite(this.scale.width*.05, this.scale.height*.65, 'buttonBag');
         bag.setInteractive();
         bag.on('pointerdown', () =>{
             console.log(task);
-            this.scene.start('Bag');   
+            this.scene.bringToTop('Bag');  
+            this.scene.start('Bag'); 
+            this.scene.bringToTop('ShowMenu');   
         })
     }
     update(){
