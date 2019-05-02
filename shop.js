@@ -1,8 +1,9 @@
-class Shop extends Phaser.Scene {
+class shop extends Phaser.Scene {
     constructor(){
-        super({key:"Shop", active:false});
+        super({key:"shop", active:false});
     }
     preload(){
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -43,6 +44,13 @@ class Shop extends Phaser.Scene {
             this.scene.launch('ShowMenu');     
         })
 >>>>>>> parent of 1ea7e64... Revert "Merge pull request #4 from Jen-Hobbs/master"
+=======
+        this.load.image('sky', 'testImages/sky.png');
     }
-    
+    create(){
+        this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');    
+
+        this.add.text(20, 20, "text");
+>>>>>>> parent of 9df190f... Merge pull request #4 from Jen-Hobbs/master
+    }
 }
