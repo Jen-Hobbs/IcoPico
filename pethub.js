@@ -3,6 +3,7 @@ class pethub extends Phaser.Scene{
 constructor(){
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 691001e... trying to push again
     super({key:'Pethub', active: true})
@@ -30,11 +31,15 @@ update(){
 
 =======
     super({key:'pethub', active: true})
+=======
+    super({key:'Pethub', active: true})
+>>>>>>> parent of 1ea7e64... Revert "Merge pull request #4 from Jen-Hobbs/master"
 }
 
  preload ()
 {
 background = this.load.image('sky', 'testImages/sky.png');
+<<<<<<< HEAD
 this.load.image('button', 'testImages/button.png')
 =======
 
@@ -49,6 +54,9 @@ let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menu')
         this.scene.launch('ShowMenu');      
     })
 >>>>>>> parent of 691001e... trying to push again
+=======
+this.load.image("menu", 'testImages/menu.png')
+>>>>>>> parent of 1ea7e64... Revert "Merge pull request #4 from Jen-Hobbs/master"
 }
 update(){
 
@@ -58,10 +66,13 @@ create ()
 
 
 background = this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');    
-
-button = this.add.sprite(this.scale.width/2, this.scale.height/2, 'button');
-button.setInteractive();
-button.on('pointerdown', () => {this.scene.start("shop")})
+let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menu');    
+    menu2.setInteractive();
+    menu2.on('pointerdown', ()=> {  
+        this.scene.launch('ShowMenu');      
+    })
+}
+update(){
 
 >>>>>>> parent of cb1994f... Merge branch 'Joanna'
 =======
@@ -72,6 +83,7 @@ var config = {
 
     parent: 'wrapper',
     scale: {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         mode: Phaser.Structs.Size.WIDTH_CONTROLS_HEIGHT ,
@@ -101,10 +113,15 @@ var config = {
 =======
         width:800,
 >>>>>>> parent of 6856d5b... help
+=======
+        mode: Phaser.Structs.Size.WIDTH_CONTROLS_HEIGHT ,
+        width: 800,
+>>>>>>> parent of 1ea7e64... Revert "Merge pull request #4 from Jen-Hobbs/master"
         height:400,
         type: Phaser.AUTO,
                
     },
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -114,10 +131,15 @@ var config = {
 =======
     scene: [pethub, shop]
 >>>>>>> parent of cb1994f... Merge branch 'Joanna'
+=======
+    scene: [pethub, Shop, Task, Bag, ShowMenu]
+    
+>>>>>>> parent of 1ea7e64... Revert "Merge pull request #4 from Jen-Hobbs/master"
 };
 
 var game = new Phaser.Game(config);
 var background;
+<<<<<<< HEAD
 <<<<<<< HEAD
 var button;
 <<<<<<< HEAD
@@ -126,3 +148,6 @@ var button;
 >>>>>>> parent of cb1994f... Merge branch 'Joanna'
 =======
 >>>>>>> parent of 691001e... trying to push again
+=======
+var button;
+>>>>>>> parent of 1ea7e64... Revert "Merge pull request #4 from Jen-Hobbs/master"
