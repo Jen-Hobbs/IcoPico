@@ -79,6 +79,7 @@ var config = {
         mode: Phaser.Scale.FIT ,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of cb1994f... Merge branch 'Joanna'
 =======
         mode: Phaser.Structs.Size.WIDTH_CONTROLS_HEIGHT ,
@@ -97,6 +98,9 @@ var config = {
 >>>>>>> parent of f61cc72... fk
         width: 800,
 >>>>>>> parent of ff3424e... small changes for size of game
+=======
+        width:800,
+>>>>>>> parent of 6856d5b... help
         height:400,
         type: Phaser.AUTO,
                
