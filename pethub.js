@@ -17,6 +17,7 @@ constructor(){
 {
 background = this.load.image('sky', 'testImages/sky.png');
 this.load.image('button', 'testImages/button.png')
+<<<<<<< HEAD
 }
 <<<<<<< HEAD
 
@@ -56,6 +57,8 @@ let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menu')
     })
 >>>>>>> parent of 691001e... trying to push again
 =======
+=======
+>>>>>>> parent of 330ab45... Merge pull request #3 from Jen-Hobbs/Jennifer
 this.load.image("menu", 'testImages/menu.png')
 >>>>>>> parent of 1ea7e64... Revert "Merge pull request #4 from Jen-Hobbs/master"
 }
@@ -67,23 +70,30 @@ create ()
 
 
 background = this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');    
-let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menu');    
+let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menu');  
     menu2.setInteractive();
-    menu2.on('pointerdown', ()=> {  
+    menu2.on('pointerdown', ()=> {
         this.scene.launch('ShowMenu');      
     })
+
+
 }
 update(){
+<<<<<<< HEAD
 
 >>>>>>> parent of cb1994f... Merge branch 'Joanna'
 =======
 >>>>>>> parent of 691001e... trying to push again
+=======
+    
+>>>>>>> parent of 330ab45... Merge pull request #3 from Jen-Hobbs/Jennifer
 }
 }
 var config = {
 
     parent: 'wrapper',
     scale: {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -123,11 +133,16 @@ var config = {
         mode: Phaser.Scale.FIT ,
         width:800,
 >>>>>>> parent of 9df190f... Merge pull request #4 from Jen-Hobbs/master
+=======
+        mode: Phaser.Scale.FIT ,
+        width:800,
+>>>>>>> parent of 330ab45... Merge pull request #3 from Jen-Hobbs/Jennifer
         height:400,
         type: Phaser.AUTO,
         autoCenter: Phaser.Scale.autoCenter
                
     },
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -141,6 +156,9 @@ var config = {
 >>>>>>> parent of cb1994f... Merge branch 'Joanna'
 =======
     scene: [pethub, Shop, Task, Bag, ShowMenu]
+=======
+    scene: [pethub, Shop, ShowMenu, Task]
+>>>>>>> parent of 330ab45... Merge pull request #3 from Jen-Hobbs/Jennifer
     
 >>>>>>> parent of 1ea7e64... Revert "Merge pull request #4 from Jen-Hobbs/master"
 =======

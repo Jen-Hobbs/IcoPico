@@ -7,13 +7,17 @@ class shop extends Phaser.Scene {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 691001e... trying to push again
         this.load.image("menu", 'testImages/menu.png')
+=======
+>>>>>>> parent of 330ab45... Merge pull request #3 from Jen-Hobbs/Jennifer
     }
     create(){
         this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');     
         this.add.text(this.scale.width/2, this.scale.height/2, "shop");
+<<<<<<< HEAD
         let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menu');  
     
         menu2.setInteractive();
@@ -23,6 +27,9 @@ class shop extends Phaser.Scene {
 <<<<<<< HEAD
 =======
         this.load.image('sky', 'testImages/sky.png');
+=======
+
+>>>>>>> parent of 330ab45... Merge pull request #3 from Jen-Hobbs/Jennifer
     }
     create(){
         this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');    
