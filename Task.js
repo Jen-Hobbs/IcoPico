@@ -1,6 +1,6 @@
 class Task extends Phaser.Scene {
     constructor(){
-        super({key:"Task", active:true});
+        super({key:"Task", active:false});
     }
     preload(){
         this.load.image('backTask', 'testImages/sky.png');
@@ -12,9 +12,9 @@ class Task extends Phaser.Scene {
         let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menuTask');  
     
         menu2.setInteractive();
-        menu2.on('pointerdown', ()=> {
-            console.log("task");
-            this.scene.bringToTop('ShowMenu'); 
+         menu2.on('pointerdown', ()=> {
+            this.scene.run('ShowMenu');
+            this.scene.bringToTop('ShowMenu');   
         })
     }
     

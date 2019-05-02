@@ -1,6 +1,6 @@
 class Shop extends Phaser.Scene {
     constructor(){
-        super({key:"Shop", active:true});
+        super({key:"Shop", active:false});
     }
     preload(){
         this.load.image('backShop', 'testImages/sky.png');
@@ -13,6 +13,7 @@ class Shop extends Phaser.Scene {
     
         menu2.setInteractive();
         menu2.on('pointerdown', ()=> {
+            this.scene.run('ShowMenu');
             this.scene.bringToTop('ShowMenu');  
         })
     }

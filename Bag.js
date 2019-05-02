@@ -1,6 +1,6 @@
 class Bag extends Phaser.Scene {
     constructor(){
-        super({key:"Bag", active:true});
+        super({key:"Bag", active:false});
     }
     preload(){
          this.load.image('backBag', 'testImages/sky.png');
@@ -12,6 +12,7 @@ class Bag extends Phaser.Scene {
         let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menuBag');    
         menu2.setInteractive();
          menu2.on('pointerdown', ()=> {
+            this.scene.run('ShowMenu');
             this.scene.bringToTop('ShowMenu');   
         })
     }

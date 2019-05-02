@@ -16,7 +16,8 @@ class pethub extends Phaser.Scene{
     let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menuPet');    
         menu2.setInteractive();
         menu2.on('pointerdown', ()=> {  
-            this.scene.bringToTop('ShowMenu'); 
+            this.scene.run('ShowMenu'); 
+            this.scene.bringToTop('ShowMenu');
         })
     }
     update(){
