@@ -5,7 +5,8 @@ class ShowMenu extends Phaser.Scene {
     preload(){
         this.load.image("buttonTask", 'testImages/buttonTask.png');
         this.load.image('buttonShop', 'testImages/buttonShop.png');
-        this.load.image('buttonPethub', 'testImages/buttonPet.png')
+        this.load.image('buttonPethub', 'testImages/buttonPet.png');
+        this.load.image('buttonBag', 'testImages/buttonBag.png')
     }
     create(){
         let graphics = this.add.graphics();
@@ -32,6 +33,12 @@ class ShowMenu extends Phaser.Scene {
         task.on('pointerdown', () =>{
             console.log(task);
             this.scene.start('Task');   
+        })
+        let bag =  this.add.sprite(this.scale.width*.05, this.scale.height*.65, 'buttonBag');
+        bag.setInteractive();
+        bag.on('pointerdown', () =>{
+            console.log(task);
+            this.scene.start('Bag');   
         })
     }
     update(){
