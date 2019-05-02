@@ -6,17 +6,17 @@ class pethub extends Phaser.Scene{
     
      preload ()
     {
-    background = this.load.image('sky', 'testImages/sky.png');
-    this.load.image("menu", 'testImages/menu.png')
+    this.load.image('backPet', 'testImages/sky.png');
+    this.load.image("menuPet", 'testImages/menu.png');
     }
     
     create ()
     {
-    background = this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');    
-    let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menu');    
+     this.add.sprite(this.scale.width/2, this.scale.height/2, 'backPet');    
+    let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menuPet');    
         menu2.setInteractive();
         menu2.on('pointerdown', ()=> {  
-            this.scene.launch('ShowMenu');      
+            this.scene.bringToTop('ShowMenu'); 
         })
     }
     update(){
@@ -34,11 +34,11 @@ class pethub extends Phaser.Scene{
             autoCenter: Phaser.Scale.autoCenter
                    
         },
-        scene: [pethub, Shop, Task, Bag, ShowMenu]
+        scene: [ShowMenu, Shop, Task, Bag, pethub]
         
     };
     
     var game = new Phaser.Game(config);
-    var background;
-    var button;
+    
+
     
