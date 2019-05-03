@@ -14,14 +14,23 @@ class pethub extends Phaser.Scene{
     this.load.image('backPet', 'testImages/sky.png');
     this.load.image("menuPet", 'testImages/menu.png');
     this.load.image("button", 'testImages/button.png');
+    this.load.image("star", 'testImages/star.png');
     this.load.spritesheet('animate', 'testImages/animate.png', {frameWidth: 50, frameHeight: 50});
     console.log('hello world'); //run reloads scene
     }
     
     create ()
     {
-     this.add.sprite(this.scale.width/2, this.scale.height/2, 'backPet');    
         
+    // this.add.sprite(this.scale.width/2, this.scale.height/2, 'backPet');  
+    // for (var i = 0; i <= 3; i++){
+    //     this.add.sprite(this.scale.width/i, this.scale.height/2, 'backPet');
+    // }
+    let stars = this.add.group({
+        key: 'backPet',
+        repeat: petNumber,
+        setXY: { x: 12, y: this.scale.height/2, stepX: 800 }
+    }); 
     let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menuPet');    
         menu2.setInteractive();
         menu2.on('pointerdown', ()=> {  
@@ -56,12 +65,14 @@ class pethub extends Phaser.Scene{
 
     }
     }
+    
+    let petNumber = 3;
     var config = {
     
         parent: 'wrapper',
         scale: {
-            mode: Phaser.Scale.FIT ,
-            width: 800,
+            //mode: Phaser.Scale.FIT ,
+            width: 800 * petNumber,
             height:400,
             type: Phaser.AUTO,
             autoCenter: Phaser.Scale.autoCenter
@@ -73,4 +84,5 @@ class pethub extends Phaser.Scene{
     
     var game = new Phaser.Game(config);
     var player;
+    var display;
     
