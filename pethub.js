@@ -21,16 +21,17 @@ class pethub extends Phaser.Scene{
     
     create ()
     {
-        
-    // this.add.sprite(this.scale.width/2, this.scale.height/2, 'backPet');  
+    var container = this.add.container(0, 100);
+    container.add(this.add.sprite(this.scale.width/2, this.scale.height/2, 'backPet')); 
+
     // for (var i = 0; i <= 3; i++){
     //     this.add.sprite(this.scale.width/i, this.scale.height/2, 'backPet');
     // }
-    let stars = this.add.group({
-        key: 'backPet',
-        repeat: petNumber,
-        setXY: { x: 12, y: this.scale.height/2, stepX: 800 }
-    }); 
+    // let stars = this.add.group({
+    //     key: 'backPet',
+    //     repeat: petNumber,
+    //     setXY: { x: 12, y: this.scale.height/2, stepX: 800 }
+    // }); 
     let menu2 = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menuPet');    
         menu2.setInteractive();
         menu2.on('pointerdown', ()=> {  
@@ -56,6 +57,7 @@ class pethub extends Phaser.Scene{
             frameRate: 5,
             repeat: 5
         });
+    container.addAt([menu2, button], 1);
     }
     update(){
         // if(this.check == 1){
@@ -72,8 +74,8 @@ class pethub extends Phaser.Scene{
         parent: 'wrapper',
         scale: {
             //mode: Phaser.Scale.FIT ,
-            width: 800 * petNumber,
-            height:400,
+            width: 800,
+            height:600,
             type: Phaser.AUTO,
             autoCenter: Phaser.Scale.autoCenter
                    
