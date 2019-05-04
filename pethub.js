@@ -21,6 +21,7 @@ class pethub extends Phaser.Scene{
     
     create ()
     {
+        
     var container = this.add.container(0, 100);
     container.add(this.add.sprite(this.scale.width/2, this.scale.height/2, 'backPet')); 
 
