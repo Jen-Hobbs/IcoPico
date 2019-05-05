@@ -3,6 +3,7 @@ class ShowMenu extends Phaser.Scene {
         super({key:"ShowMenu", active:false});
     }
     preload(){
+        this.load.image("menu", 'images/icons/menu1.png');
         this.load.image("buttonTask", 'testImages/buttonTask.png');
         this.load.image('buttonShop', 'testImages/buttonShop.png');
         this.load.image('buttonPethub', 'testImages/buttonPet.png');
@@ -14,39 +15,38 @@ class ShowMenu extends Phaser.Scene {
         let menu = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menu');
         menu.setInteractive();
         menu.on('pointerdown', () => {
-           this.scene.stop('ShowMenu');
+           this.scene.sleep('ShowMenu');
         })
         let pet = this.add.sprite(this.scale.width*.05, this.scale.height*.2, 'buttonPethub');
         pet.setInteractive();
         pet.on('pointerdown', () =>{
             console.log('pet');
-            this.scene.bringToTop("Pethub");
-            this.scene.start('Pethub');
-            this.scene.bringToTop('ShowMenu');   
+            this.scene.run("Pethub");
+            this.scene.bringToTop("Pethub");       
+            this.scene.sleep('ShowMenu');      
         })
         let shop =  this.add.sprite(this.scale.width*.05, this.scale.height*.35, 'buttonShop');
         shop.setInteractive();
         shop.on('pointerdown', () =>{
             console.log('shop');
-            this.scene.bringToTop('Shop');
-            this.scene.start('Shop');
-            this.scene.bringToTop('ShowMenu');   
+            this.scene.run('Shop');
+            this.scene.bringToTop('Shop'); 
+            this.scene.sleep('ShowMenu');  
         })
+
         let task =  this.add.sprite(this.scale.width*.05, this.scale.height*.5, 'buttonTask');
         task.setInteractive();
         task.on('pointerdown', () =>{
-            console.log(task);
+            this.scene.run('Task');
             this.scene.bringToTop('Task');  
-            this.scene.start('Task');
-            this.scene.bringToTop('ShowMenu');    
+            this.scene.sleep('ShowMenu'); 
         })
         let bag =  this.add.sprite(this.scale.width*.05, this.scale.height*.65, 'buttonBag');
         bag.setInteractive();
         bag.on('pointerdown', () =>{
-            console.log(task);
-            this.scene.bringToTop('Bag');  
-            this.scene.start('Bag'); 
-            this.scene.bringToTop('ShowMenu');   
+            this.scene.run('Bag');
+            this.scene.bringToTop('Bag');   
+            this.scene.sleep('ShowMenu');
         })
     }
     update(){
