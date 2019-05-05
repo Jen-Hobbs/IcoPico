@@ -3,7 +3,7 @@ class ShowMenu extends Phaser.Scene {
         super({key:"ShowMenu", active:false});
     }
     preload(){
-        this.load.image("menu", 'testImages/menu.png');
+        this.load.image("menu", 'images/icons/menu1.png');
         this.load.image("buttonTask", 'testImages/buttonTask.png');
         this.load.image('buttonShop', 'testImages/buttonShop.png');
         this.load.image('buttonPethub', 'testImages/buttonPet.png');

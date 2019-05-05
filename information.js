@@ -1,2 +1,2 @@
 
-    let information = ['1','2','3','4'];
+    let information = ['animate', 'shinyboi', 'button'];
