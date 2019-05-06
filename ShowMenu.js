@@ -11,13 +11,13 @@ class ShowMenu extends Phaser.Scene {
     }
     create(){
         let graphics = this.add.graphics();
-        graphics.fillStyle(0X38a081,.8).fillRect(0,0,75, this.scale.height);
-        let menu = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menu');
+        graphics.fillStyle(0X38a081,.8).fillRect(0,0,100, this.scale.height);
+        let menu = this.add.sprite(this.scale.width*.04, this.scale.height*.05, 'menu');
         menu.setInteractive();
         menu.on('pointerdown', () => {
            this.scene.sleep('ShowMenu');
         })
-        let pet = this.add.sprite(this.scale.width*.05, this.scale.height*.2, 'buttonPethub');
+        let pet = this.add.sprite(this.scale.width*.04, this.scale.height*.2, 'buttonPethub');
         pet.setInteractive();
         pet.on('pointerdown', () =>{
             console.log('pet');
@@ -25,7 +25,7 @@ class ShowMenu extends Phaser.Scene {
             this.scene.bringToTop("Pethub");       
             this.scene.sleep('ShowMenu');      
         })
-        let shop =  this.add.sprite(this.scale.width*.05, this.scale.height*.35, 'buttonShop');
+        let shop =  this.add.sprite(this.scale.width*.04, this.scale.height*.35, 'buttonShop');
         shop.setInteractive();
         shop.on('pointerdown', () =>{
             console.log('shop');
@@ -34,14 +34,14 @@ class ShowMenu extends Phaser.Scene {
             this.scene.sleep('ShowMenu');  
         })
 
-        let task =  this.add.sprite(this.scale.width*.05, this.scale.height*.5, 'buttonTask');
+        let task =  this.add.sprite(this.scale.width*.04, this.scale.height*.5, 'buttonTask');
         task.setInteractive();
         task.on('pointerdown', () =>{
             this.scene.run('Task');
             this.scene.bringToTop('Task');  
             this.scene.sleep('ShowMenu'); 
         })
-        let bag =  this.add.sprite(this.scale.width*.05, this.scale.height*.65, 'buttonBag');
+        let bag =  this.add.sprite(this.scale.width*.04, this.scale.height*.65, 'buttonBag');
         bag.setInteractive();
         bag.on('pointerdown', () =>{
             this.scene.run('Bag');
