@@ -12,14 +12,14 @@ class pethub extends Phaser.Scene{
      preload ()
     {
         for(var i = 0; i < information.length; i++){
-            this.load.image('pet' + i, 'testImages/' + information[i] + '.png');
+            this.load.image('pet' + i, 'images/pets/' + information[i] + '.png');
         }
         this.load.image('arrow', 'images/buttons/Other/arrow.png');
-        this.load.image('backPet', 'testImages/sky.png');
+        this.load.image('backPet', 'images/sky.png');
         this.load.image("menuPet", 'images/buttons/Other/menu1.png');
-        this.load.image('blackHeart', 'images/icons/black_heart.png');
-        this.load.image('yellowHeart', 'images/icons/yellow_heart.png');
-        this.load.image('redHeart', 'images/icons/red_heart.png');
+        this.load.image('blackHeart', 'images/buttons/pet_hub/black_heart.png');
+        this.load.image('yellowHeart', 'images/buttons/pet_hub/yellow_heart.png');
+        this.load.image('redHeart', 'images/buttons/pet_hub/red_heart.png');
     // this.load.image("button", 'testImages/button.png');
     // this.load.image("star", 'testImages/star.png');
     // this.load.spritesheet('animate', 'testImages/animate.png', {frameWidth: 50, frameHeight: 50});

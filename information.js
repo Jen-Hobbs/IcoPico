@@ -1,5 +1,5 @@
 
-    let information = ['animate', 'shinyboi', 'button'];
+    let information = ['shinyboi', 'shinyboi', 'shinyboi'];
     var player = {
         'happiness' :[20, 60, 70]
         // 'pet1' : {
