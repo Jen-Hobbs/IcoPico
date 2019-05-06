@@ -20,10 +20,7 @@ class pethub extends Phaser.Scene{
         this.load.image('blackHeart', 'images/icons/black_heart.png');
         this.load.image('yellowHeart', 'images/icons/yellow_heart.png');
         this.load.image('redHeart', 'images/icons/red_heart.png');
-    // this.load.image("button", 'testImages/button.png');
-    // this.load.image("star", 'testImages/star.png');
-    // this.load.spritesheet('animate', 'testImages/animate.png', {frameWidth: 50, frameHeight: 50});
-    // console.log('hello world'); //run reloads scene
+
     }
     
     create ()
