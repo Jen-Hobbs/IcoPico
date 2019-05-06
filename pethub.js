@@ -17,6 +17,9 @@ class pethub extends Phaser.Scene{
         this.load.image('arrow', 'images/buttons/Other/arrow.png');
         this.load.image('backPet', 'testImages/sky.png');
         this.load.image("menuPet", 'images/buttons/Other/menu1.png');
+        this.load.image('blackHeart', 'images/icons/black_heart.png');
+        this.load.image('yellowHeart', 'images/icons/yellow_heart.png');
+        this.load.image('redHeart', 'images/icons/red_heart.png');
     // this.load.image("button", 'testImages/button.png');
     // this.load.image("star", 'testImages/star.png');
     // this.load.spritesheet('animate', 'testImages/animate.png', {frameWidth: 50, frameHeight: 50});
@@ -25,7 +28,8 @@ class pethub extends Phaser.Scene{
     
     create ()
     {
-        this.cameras.main.setBounds(0, 0, 800*information.length , 600);
+        this.cameras.main.setBounds(0, 0, 1236*information.length , 681);
+        this.cameras.main.setBackgroundColor('#aaa');
         var pet = [];
         var arrowR = [];
         var arrowL = [];
@@ -45,10 +49,10 @@ class pethub extends Phaser.Scene{
                 else{
                     pos = 0;
                 }
-                cam.centerOn(400 + 800*pos, 0);
+                cam.centerOn(618 + 1236*pos, 0);
             });
             //left arrow
-            arrowL[i] = this.add.sprite(this.scale.width*0.05, this.scale.height/2, 'arrow');
+            arrowL[i] = this.add.sprite(this.scale.width*0.04, this.scale.height/2, 'arrow');
             arrowL[i].flipX = !arrowL[i].flipX;
             arrowL[i].setInteractive();
             arrowL[i].on('pointerdown', ()=>{
@@ -59,21 +63,26 @@ class pethub extends Phaser.Scene{
                 else{
                     pos--;
                 }
-                cam.centerOn(400 + 800*pos, 0);
+                cam.centerOn(618 + 1236*pos, 0);
             });
             //menu button
-            let menu = this.add.sprite(this.scale.width*.05, this.scale.height*.05, 'menuPet');    
+            let menu = this.add.sprite(this.scale.width*.04, this.scale.height*.05, 'menuPet');    
             menu.setInteractive();
             menu.on('pointerdown', ()=> {  
                 this.scene.run('ShowMenu'); 
                 this.scene.bringToTop('ShowMenu');
             });
-            pet[i] = this.add.container(i*800, 0);
+
+
+
+            pet[i] = this.add.container(i*1236, 0);
             pet[i].add(this.add.sprite(this.scale.width/2, this.scale.height/2, 'backPet')); //background
             pet[i].add(this.add.sprite(this.scale.width/2, this.scale.height/2, 'pet' + i)); //addpet
             pet[i].add(arrowR[i]);
             pet[i].add(arrowL[i]);
             pet[i].add(menu);
+            this.checkHappiness(i, pet);
+            this.circle();
         }
     }
     update(){
@@ -83,6 +92,22 @@ class pethub extends Phaser.Scene{
         // }
 
     }
+    circle(){
+        var cir = Phaser.Geom.Circle(this.scale.width*.95, this.scale.height*95, 50);
+        var graphics = this.add.graphics(cir);
+
+    }
+    checkHappiness(i, pet){
+        if(player.happiness[i] < 33){
+            pet[i].add(this.add.sprite(this.scale.width * .95, this.scale.height * .07, 'blackHeart'));
+        }
+        else if(player.happiness[i] < 66){
+            pet[i].add(this.add.sprite(this.scale.width * .95, this.scale.height * .07, 'yellowHeart'));
+        }
+        else{
+            pet[i].add(this.add.sprite(this.scale.width * .95, this.scale.height * .07, 'redHeart'));
+        }
+    }
     }
     
     let petNumber = 3;
@@ -91,8 +116,8 @@ class pethub extends Phaser.Scene{
         parent: 'wrapper',
         scale: {
             mode: Phaser.Scale.FIT ,
-            width: 800,
-            height:600,
+            width: 1236,
+            height: 681,
             type: Phaser.AUTO,
             autoCenter: Phaser.Scale.autoCenter
                    
