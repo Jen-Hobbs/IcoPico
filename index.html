@@ -1,31 +1,40 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8"/>
-        <title>Pet Hub</title>
-        <!-- <script src="//cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.js"></script>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Pet Hub</title>
+    <!-- <script src="//cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.js"></script>
         <script type="text/javascript" src="Shop.js"></script>
         <script type="text/javascript" src="Task.js"></script>
         <script type="text/javascript" src="ShowMenu.js"></script>
         <script type="text/javascript" src="Bag.js"></script>
         <script type="text/javascript" src="Pethub.js"></script>
         <script type="text/javascript" src="information.js"></script> -->
-        <link rel="stylesheet" href="style.css">
-       
-    </head>
-   
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
 </html>
+
 <body>
     <!--wrapper div for whole screen-->
-    <h1>Icopico</h1>
 
     <!-- Coloured Divs -->
-    <div id="box_outside">
-        <div id="box_mid">
-            <div id="box_inner"></div>
-            
+    <div id="pagewrap">
+        <div id="box_outside">
+            <div id="box_mid">
+                <div id="box_inner">
+                    <img id="logo_name" src="images/icons/Icopico_Title_Black.png" alt="site name">
+                </div>
+                <img id="shiny_boi" src="images/pets/shinyboi.png" alt="shinyBoi">
+                <button onclick="window.location.href='login.html'">Login</button>
+                <button onclick="window.location.href='signup.html'">Sign</button>
+
+            </div>
         </div>
     </div>
+
 
     <!-- Button that links the user to the petHub page -->
     <button onclick="window.location.href='icopico.html'">Continue</button>
