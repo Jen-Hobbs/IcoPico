@@ -7,7 +7,8 @@ class ShowMenu extends Phaser.Scene {
         this.load.image("buttonTask", 'testImages/buttonTask.png');
         this.load.image('buttonShop', 'testImages/buttonShop.png');
         this.load.image('buttonPethub', 'testImages/buttonPet.png');
-        this.load.image('buttonBag', 'testImages/buttonBag.png')
+        this.load.image('buttonBag', 'testImages/buttonBag.png');
+        
     }
     create(){
         let graphics = this.add.graphics();
@@ -47,9 +48,21 @@ class ShowMenu extends Phaser.Scene {
             this.scene.run('Bag');
             this.scene.bringToTop('Bag');   
             this.scene.sleep('ShowMenu');
-        })
+        });
+        let pic = this.add.sprite(this.scale.width*.95, this.scale.height*.95, 'buttonBag');
+        pic = this.add.sprite(this.scale.width*.95, this.scale.height*.95, 'buttonBag');
+        food(info);
     }
     update(){
 
+    }
+    food(pic){
+        pic.setInteractive();
+        pic.on('pointerhover', ()=>{
+            
+        });
+        pic.on('pointerdown', () => {
+            
+        });
     }
 }
