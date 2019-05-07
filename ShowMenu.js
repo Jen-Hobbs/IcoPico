@@ -49,8 +49,6 @@ class ShowMenu extends Phaser.Scene {
             this.scene.bringToTop('Bag');   
             this.scene.sleep('ShowMenu');
         });
-        let pic = this.add.sprite(this.scale.width*.95, this.scale.height*.95, 'buttonBag');
-        pic = this.add.sprite(this.scale.width*.95, this.scale.height*.95, 'buttonBag');
         
     }
     update(){
