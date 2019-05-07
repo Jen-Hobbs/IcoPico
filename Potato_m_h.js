@@ -1,6 +1,6 @@
-class Shop extends Phaser.Scene {
+class Potato_m_h extends Phaser.Scene {
     constructor(){
-        super({key:"Shop", active:false});
+        super({key:"Potato_m_h", active:false});
     }
     preload(){
         this.load.image("shinyboi", 'testImages/shinyboi.png')
@@ -8,7 +8,7 @@ class Shop extends Phaser.Scene {
     create(){
         //this.add.image(400, 300, 'shinyboi');
         this.add.sprite(this.scale.width/2, this.scale.height/2, 'sky');     
-        this.add.text(this.scale.width/2, this.scale.height/2, "shop");
+        this.add.text(this.scale.width/2, this.scale.height/2, "Potato - Mobile Horizontal");
     }
-    
+    update(){}
 }

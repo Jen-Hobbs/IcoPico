@@ -1,39 +1,67 @@
-var desktopConfig = {
-
-    parent: 'wrapper',
-    scale: {
-        // mode: Phaser.Scale.FIT ,
-        width:800,
-        height:400,
-        type: Phaser.AUTO,
-        autoCenter: Phaser.Scale.autoCenter
-               
-    },
-    scene: [Shop]
-};
-
-var mobileConfig = {
-
-    parent: 'wrapper',
-    scale: {
-        // mode: Phaser.Scale.FIT ,
-        width:800,
-        height:400,
-        type: Phaser.AUTO,
-        autoCenter: Phaser.Scale.autoCenter
-               
-    },
-    scene: [Shop2]
-};
+//run, stop
+var desktopScenes = ["Rock", "Potato"];
+var mobileScenesHorizontal = ["Rock_m_h", "Potato_m_h"];
+var mobileScenesVertical = ["Rock_m_v", "Potato_m_v"]
 
 function switchToDesktopLayout()
 {
-    game.scene.start("Shop");
-    game.scene.stop("Shop2");
+    disableAllMobileHorizontal();
+    disableAllMobileVertical();
+    enableAllDesktop();
 }
 
 function switchToMobileLayout()
 {
-    game.scene.start("Shop2");
-    game.scene.stop("Shop");
+    disableAllDesktop();
+    enableAllMobileVertical();
+}
+
+//Stop Scenes 
+function disableAllDesktop()
+{
+    for (i = 0; i < desktopScenes.length; i++)
+    { 
+        game.scene.stop(desktopScenes[i]);
+    }
+}
+
+function disableAllMobileHorizontal()
+{
+    for (i = 0; i < desktopScenes.length; i++)
+    { 
+        game.scene.stop(mobileScenesHorizontal[i]);
+    }
+}
+
+function disableAllMobileVertical()
+{
+    for (i = 0; i < desktopScenes.length; i++)
+    { 
+        game.scene.stop(mobileScenesVertical[i]);
+    }
+}
+
+//Start scenes
+function enableAllDesktop()
+{
+    for(i = 0; i < desktopScenes.length; i++)
+    {
+        game.scene.run(desktopScenes[i]);
+    }
+}
+
+function enableAllMobileHorizontal()
+{
+    for(i = 0; i < mobileScenesHorizontal.length; i++)
+    {
+        game.scene.run(mobileScenesHorizontal[i]);
+    }
+}
+
+function enableAllMobileVertical()
+{
+    for(i = 0; i < mobileScenesVertical.length; i++)
+    {
+        game.scene.run(mobileScenesVertical[i]);
+    }
 }

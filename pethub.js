@@ -1,4 +1,3 @@
-
 class pethub extends Phaser.Scene{
     constructor(){
         super({key:'Pethub', active: true})
@@ -30,44 +29,15 @@ var config = {
 
     parent: 'wrapper',
     scale: {
-        mode: Phaser.Scale.FIT ,
+        mode: Phaser.Scale.FIT,
         width:800,
         height:400,
         type: Phaser.AUTO,
         autoCenter: Phaser.Scale.autoCenter
-               
     },
-    scene: [pethub, Shop, Shop2, ShowMenu, Task]
-    
+    scene: [Potato, Potato_m_v, Rock, Rock_m_v]
 };
 
 var game = new Phaser.Game(config);
 var background;
 var button;
-
-
-// Game = function()
-// {
-// 	this._construct();
-// }
-
-// Game.prototype = 
-// {
-// 	_game,
-// 	_construct: function()
-// 	{
-// 		this._game = new Phaser.Game(config);
-// 	},
-// 	loadDesktopLayout: function()
-// 	{
-// 		game = new Game(config);
-//     },
-//     loadMobileLayout: function()
-// 	{
-// 		game = new Game(config2);
-// 	}
-// }
-
-// var game = new Game();
-
-//Now you can do this anywhere you want.game.phaserFunction();
