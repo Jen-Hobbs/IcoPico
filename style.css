@@ -1,0 +1,59 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Landing Page */
+
+#pagewrap{
+    height: 100%;
+    width: 100%;
+}
+
+#wrapper {
+     /* min-height: 100%;   */
+    background-color: white;
+}
+
+#box_outside{
+    width: auto;
+    height: 100%;
+    padding-top:7%;
+    padding-bottom:7%;
+
+    background-color: #EBAE9B;
+}
+
+#box_mid{
+    width: 100%;
+    height: 80%;
+    padding-top:7%;
+    /* margin-bottom:7%; */
+    background-color: #FFEB6C;
+}
+
+#box_inner{
+    width: 100%;
+    height: 100px;
+    background-color: #65EAA2;
+}
+
+#box_inner h1{
+    margin: 0;
+}
+
+#logo_name{
+    width: auto;
+    height: 70px;
+}
+
+#shiny_oi{
+    width: 50%;
+    height: auto;
+}
+
+/* Sign In */
+
+
+
+/* Sign Up */
