@@ -45,7 +45,8 @@ class Shop extends Phaser.Scene {
             var pet = this.add.sprite(0,0, pets.pet[i].petName);
             pet.setScale(.1);
             pet.number = i;
-            petSelect.add(this.add.text(0, 100, pets.pet[i].cost));
+            petSelect.add(this.add.sprite(0,50, 'money'));
+            petSelect.add(this.add.text(0, 50, pets.pet[i].cost));
             petSelect.add(pet);
             petSelect.setInteractive();
             petSelect.on('clicked', this.select, this);
