@@ -112,6 +112,13 @@ var config = {
         autoCenter: Phaser.Scale.autoCenter
 
     },
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
     scene: [ShowMenu, Shop, Task, Bag, pethub, PethubOverlay]
 
 };
