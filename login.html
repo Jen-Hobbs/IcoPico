@@ -4,12 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+
+    <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <script src="setup-firebase.js"></script>
+
+    <link rel="stylesheet" href="login_style.css">
+    <link type="text/css" rel="stylesheet" href="firebase_css.css" />
+
+    <title>Login</title>
 </head>
 
 <body>
-    <h1>Login</h1>
+    <div id="pagewrap">
+        <div id="background_colour">
+            <div class="box_green"></div>
+            <div class="box_red"></div>
+
+            <div class="box_yellow"></div>
+
+            <div class="box_red"></div>
+            <div class="box_green"></div>
+        </div>
+
+        <div id="page_info">
+            <img id="petImg" src="images/pets/shinyboi.png" alt="shinyboi" onclick="window.location.href='index.html'">
+
+            <h1 id="login_title">Login</h1>
+            <div class="login_section">
+                <div id="firebaseui-auth-container"></div>
+                <div id="loader">Loading....</div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    </script>
+
+    <script src="login.js"></script>
 </body>
 
 </html>

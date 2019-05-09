@@ -4,14 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <title>Pet Hub</title>
-    <!-- <script src="//cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.js"></script>
-        <script type="text/javascript" src="Shop.js"></script>
-        <script type="text/javascript" src="Task.js"></script>
-        <script type="text/javascript" src="ShowMenu.js"></script>
-        <script type="text/javascript" src="Bag.js"></script>
-        <script type="text/javascript" src="Pethub.js"></script>
-        <script type="text/javascript" src="information.js"></script> -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index_style.css">
+
+    <!-- <script src="jquery-3.4.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 </head>
 
@@ -27,7 +23,7 @@
                 <div id="box_inner">
                     <img id="logo_name" src="images/icons/Icopico_Title_Black.png" alt="site name">
                 </div>
-                <img id="shiny_boi" src="images/pets/shinyboi.png" alt="shinyBoi">
+                <img id="shiny_boi" src="images/pets/shinyboi.png" alt="shinyBoi" onclick="easterEgg()">
                 <button onclick="window.location.href='login.html'">Login</button>
                 <button onclick="window.location.href='signup.html'">Sign</button>
 
@@ -38,5 +34,7 @@
 
     <!-- Button that links the user to the petHub page -->
     <button onclick="window.location.href='icopico.html'">Continue</button>
+
+    <script src="index.js"></script>
 
 </body>
