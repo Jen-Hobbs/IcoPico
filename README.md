@@ -11,9 +11,9 @@ Owner:
 Jennifer Hobbs
 
 Collaborators: 
-Joanna Ho
-Louis-Philippe Rivest Giguere
-Mikhaela Layon
+Joanna Ho,
+Louis-Philippe Rivest Giguere,
+Mikhaela Layon,
 Nicole Jingco
 
 Project URL:
