@@ -22,6 +22,18 @@ class PethubOverlay extends Phaser.Scene {
             console.log('hi');
         }, this);
         this.displayfood();
+        this.task();
+    }
+
+
+    task(){
+        var taskActive;
+        if(newTask == 0){
+            taskActive = this.add.sprite(this.scale.width *.95, this.scale.height *.85, 'whiteCircle');
+        }
+        else{
+            taskActive = this.add.sprite(this.scale.width *.95, this.scale.height *.75, 'yellowCircle');
+        }
     }
     displayfood() {
         
