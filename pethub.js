@@ -2,7 +2,7 @@
 class pethub extends Phaser.Scene {
     constructor() {
         super({ key: 'Pethub', active: true })
-        this.newInput = 0;
+    
     }
     init(data) {
         // console.log('init', data);
@@ -16,17 +16,16 @@ class pethub extends Phaser.Scene {
         }
         this.load.image('arrow', 'images/buttons/Other/arrow.png');
         this.load.image('backPet', 'images/sky.png');
-        this.load.image("menuPet", 'images/buttons/Other/menu1.png');
         this.load.image('blackHeart', 'images/buttons/pet_hub/black_heart.png');
         this.load.image('yellowHeart', 'images/buttons/pet_hub/yellow_heart.png');
         this.load.image('redHeart', 'images/buttons/pet_hub/red_heart.png');
-        this.load.image('whiteCircle', 'images/icons/whiteCircle.png');
-        this.load.image('yellowCircle', 'images/icons/yellowCircle.png');
-        this.load.image('foodButton', 'images/buttons/scene_button/food_Button.png');
+
 
     }
 
     create() {
+
+        this.resetFood = 0;
         this.cameras.main.setBounds(0, 0, 1236 * information.length, 681);
         this.cameras.main.setBackgroundColor('#aaa');
         this.pet = [];
@@ -64,13 +63,7 @@ class pethub extends Phaser.Scene {
                 }
                 cam.centerOn(618 + 1236 * pos, 0);
             });
-            //menu button
-            let menu = this.add.sprite(this.scale.width * .04, this.scale.height * .05, 'menuPet');
-            menu.setInteractive();
-            menu.on('pointerdown', () => {
-                this.scene.run('ShowMenu');
-                this.scene.bringToTop('ShowMenu');
-            });
+            
 
 
 
@@ -79,97 +72,20 @@ class pethub extends Phaser.Scene {
             this.pet[i].add(this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'pet' + i)); //addpet
             this.pet[i].add(arrowR[i]);
             this.pet[i].add(arrowL[i]);
-            this.pet[i].add(menu);
+        
             this.checkHappiness(i, this.pet);
 
         }
-        this.foodUpdate();
     }
     update() {
-        if(this.newInput == 1){
-            this.newInput = 0;
-            for(var i = 0; i < 3; i++){
-                for(var j = 0; j < 3; j++){
-                    // this.pet[i].
-                }
-            }
-        }
 
-    }
-    foodUpdate() {
-        for (var i = 0; i < this.pet.length; i++) {
-            this.displayfood(this.pet[i]);
-            
-        }
-        this.input.on('gameobjectup', function (pointer, gameObject) {
-            gameObject.emit('clicked', gameObject);
-             console.log('hi');
-        }, this);
+
     }
 
 
-    displayfood(pet) {
 
 
 
-        var food = [];
-        let showfood = 0;
-        for (var i = 0; i < player.food.length; i++) {
-            food[i] = this.add.sprite(this.scale.width * (.85 - (i * .10)), this.scale.height * .95, 'whiteCircle');
-            food[i].setInteractive();
-            food[i].name = i;
-
-            food[i].on('clicked', this.location, this);
-
-
-        }
-       
-
-
-
-
-
-        let yellow = this.add.sprite(this.scale.width * .95, this.scale.height * .95, 'yellowCircle');
-        let white = this.add.sprite(this.scale.width * .95, this.scale.height * .95, 'whiteCircle');
-        pet.add(yellow);
-        pet.add(white);
-        pet.add(food);
-        for (var i = 0; i < player.food.length; i++) {
-            pet.sendToBack(food[i]);
-            food[i].disableInteractive();
-        }
-        white.setInteractive();
-
-        white.on('pointerdown', () => {
-            if (showfood == 0) {
-                pet.bringToTop(yellow);
-                for (var i = 0; i < player.food.length; i++) {
-                    pet.bringToTop(food[i]);
-                    food[i].setInteractive();
-                }
-                showfood = 1;
-            }
-            else {
-                showfood = 0;
-                for (var i = 0; i < player.food.length; i++) {
-                    pet.sendToBack(food[i]);
-                    food[i].disableInteractive();
-                }
-                pet.sendToBack(yellow);
-            }
-        })
-        // pet.add(food);
-
-    }
-
-    location(box) {
-        console.log(box.name);
-        // console.log(food);
-        box.off('clicked', location);
-        box.input.enabled = false;
-        box.setVisible(false);
-        
-    }
 
     checkHappiness(i, pet) {
         if (player.happiness[i] < 33) {
@@ -196,7 +112,7 @@ var config = {
         autoCenter: Phaser.Scale.autoCenter
 
     },
-    scene: [ShowMenu, Shop, Task, Bag, pethub]
+    scene: [ShowMenu, Shop, Task, Bag, pethub, PethubOverlay]
 
 };
 
