@@ -37,15 +37,25 @@ class Task extends Phaser.Scene {
 
         for(let i = 0; i < MAX_NUM_TASKS; i++)
         {
+            taskButtons[i] = this.add.container(this.scale.width/2, 150*i + 200);
+            var sprite = this.add.sprite(0,0,'task_new').setScale(0.3);
+            var index = i;
+            var icon = type1;
+            var 
+            taskButtons[i].add([sprite]);
+
           //instantiate new button
           //constructor(scene, x, y, texture, index, icon, type, title, description, isActive, callback)
-          taskButtons[i] = new TaskButton
-            (this, this.scale.width/2, 150*i + 200, 'task_new', i, 3,
-              "Test Title" + i, "This is a really cool description", false, () => this.setSelected());
+        //   taskButtons[i] = new TaskButton
+        //     (this, this.scale.width/2, 150*i + 200,
+        //         ['task_new', i, 3, "Test title" + i, "This is a really cool description", false, () => this.setSelected()])
                 
-          //add button to canvas
-          this.add.existing(taskButtons[i])
-          .setScale(0.3);
+        //     //     'task_new', i, 3,
+        //     //   "Test Title" + i, "This is a really cool description", false, () => this.setSelected());
+                
+        //   //add button to canvas
+        //   this.add.existing(taskButtons[i])
+        //   .setScale(0.3);
         }
     }  
 
