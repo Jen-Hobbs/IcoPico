@@ -3,8 +3,8 @@ class Bag extends Phaser.Scene {
         super({key:"Bag", active:false});
     }
     preload(){
-         this.load.image('backBag', 'testImages/sky.png');
-         this.load.image("menuBag", 'testImages/menu.png');
+         this.load.image('backBag', '../testImages/sky.png');
+         this.load.image("menuBag", '../testImages/menu.png');
     }
     create(){
         this.add.sprite(this.scale.width/2, this.scale.height/2, 'backBag'); 

@@ -5,9 +5,9 @@ class PethubOverlay extends Phaser.Scene {
         });
     }
     preload() {
-        this.load.image("whiteCircle", "images/icons/whiteCircle.png");
-        this.load.image('yellowCircle', 'images/icons/yellowCircle.png');
-        this.load.image("menuPet", 'images/buttons/Other/menu1.png');
+        this.load.image("whiteCircle", "../images/icons/whiteCircle.png");
+        this.load.image('yellowCircle', '../images/icons/yellowCircle.png');
+        this.load.image("menuPet", '../images/buttons/Other/menu1.png');
     }
     create() {
         //menu button

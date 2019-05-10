@@ -3,11 +3,11 @@ class Shop extends Phaser.Scene {
         super({key:"Shop", active:false});
     }
     preload(){
-        this.load.image('backShop', 'images/sky.png');
-        this.load.image("menuShop", 'images/buttons/Other/menu1.png');
-        this.load.image('whiteCircle', 'images/icons/whiteCircle.png');
-        this.load.image('shinyboi', 'images/pets/shinyboi.png');
-        this.load.image('money', 'images/pets/money.png');
+        this.load.image('backShop', '../images/sky.png');
+        this.load.image("menuShop", '../images/buttons/Other/menu1.png');
+        this.load.image('whiteCircle', '../images/icons/whiteCircle.png');
+        this.load.image('shinyboi', '../images/pets/shinyboi.png');
+        this.load.image('money', '../images/pets/money.png');
         
     }
     create(){

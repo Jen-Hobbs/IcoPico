@@ -12,7 +12,7 @@ class pethub extends Phaser.Scene {
     }
     preload() {
         for (var i = 0; i < information.length; i++) {
-            this.load.image('pet' + i, 'images/pets/' + information[i] + '.png');
+            this.load.image('pet' + i, '../images/pets/' + information[i] + '.png');
         }
         this.load.image('arrow', '../images/buttons/Other/arrow.png');
         this.load.image('backPet', '../images/sky.png');
