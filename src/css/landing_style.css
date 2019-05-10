@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
     margin: 0;
+    background-color: #FFD465;
 }
 
 /* Landing Page */
@@ -31,7 +32,7 @@ html, body {
 #box_top {
     background-color: #FFD465;
     width: 100%;
-    height: 45%;
+    height: 35%;
     margin: 0 auto;
 }
 
@@ -53,7 +54,7 @@ html, body {
     background-color: #FFD465;
     width: 100%;
     height: 60%;
-    padding-top: 10%;
+    /* padding-top: 10%; */
 }
 
 #banner_top {
@@ -95,10 +96,10 @@ html, body {
 #box_bottom {
     display: grid;
     width: 100%;
-    height: 55%;
+    height: 30%;
     padding: 0;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 }
 
 #box_mid{
@@ -109,16 +110,24 @@ html, body {
     background-color: #FFEB6C;
 }
 
-#shiny_boi{
-    grid-column-start: 2;
-    grid-column-end: 5;
-    grid-row: 1;
-    width: 100%;
-    height: auto;
-    filter: drop-shadow(10px 10px 15px rgba(0,0,0,0.37));
-}
 
 #play_button {
+    grid-column: 3;
+    grid-row: 1;
+    font-size: 300%;
+    text-align: center;
+    color: white;
+    font-family: 'Pompiere', cursive;
+    line-height: 90px;
+    width: 200px;
+    height: 100px;
+    border-radius: 8%;
+    margin-top:1em;
+    background-color: #FF9999;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.37);
+}
+
+#about_button {
     grid-column: 3;
     grid-row: 2;
     font-size: 300%;
@@ -129,21 +138,49 @@ html, body {
     width: 200px;
     height: 100px;
     border-radius: 8%;
+    margin-top:1em;
+    margin-bottom: 1em;
     background-color: #FF9999;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.37);
 }
 
-#about_button {
-    grid-column: 3;
-    grid-row: 3;
-    font-size: 300%;
-    text-align: center;
-    color: white;
-    font-family: 'Pompiere', cursive;
-    line-height: 90px;
-    width: 200px;
-    height: 100px;
-    border-radius: 8%;
-    background-color: #FF9999;
-    box-shadow: 10px 10px 15px rgba(0,0,0,0.37);
+#pet_div{
+    margin: 0 auto;
+    width: 50%;
 }
+
+#pet_space{
+    width: 100%;
+    height: 100px;
+}
+
+/* Animations */
+#shiny_boi {
+    width: 50%;
+    height: auto;
+    top:40%;
+    position: absolute;
+    filter: drop-shadow(10px 10px 15px rgba(0,0,0,0.37));
+    /* Standard syntax */
+    animation-name: move;
+    animation-duration: 25s;
+    animation-timing-function: linear;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes move {
+    0%   {left:25%; top: 40%;}
+    10%  {left:50%; top: 88%;}
+    20%  {left:-5%; top: 30%;}
+    30%  {left:50%; top:45;}
+    40%  {left:-5%; top: 88%;}
+    50%  {left:30%; top: -5%;}
+    60%  {left:40%; top: 88%;}
+    70%  {left:20%; top: 40%;}
+    80%  {left:10%; top: -5%;}
+    90%  {left:50%; top: 88%;}
+    100% {left:0%; top: 0%;}
+  }
+  

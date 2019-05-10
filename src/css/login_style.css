@@ -28,6 +28,7 @@ body {
 
     #page_info {
         position: absolute;
+        /* top: 6em; */
         top: 0;
         left: 0;
         right: 0;
@@ -59,25 +60,29 @@ body {
     #petImg {
         width: 70%;
         height: auto;
-        cursor: pointer;        
+        cursor: pointer;
+    }
+
+    #icopico_title {
+        display: none;
     }
 }
 
 @media screen and (min-width: 377px) {
-    #petImg{
+    #petImg {
         -webkit-transform: rotate(-20deg);
         width: 40%;
         height: auto;
         top: 3em;
         left: 1%;
         position: absolute;
-        cursor: pointer;        
+        cursor: pointer;
 
     }
 
-    #login_title{
+    #login_title {
         /* float: left; */
-        clear:right;
+        clear: right;
         text-align: center;
         font-size: 5em;
         margin: 0;
@@ -124,10 +129,19 @@ body {
 
     #page_info {
         position: absolute;
-        top: 0;
+        top: 6em;
         left: 0;
         right: 0;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    #icopico_title {
+        width: 4em;
+        height: auto;
+        float: left;
+        margin-top: .5em;
+        margin-left: 2em;
+        cursor: pointer;
     }
 }
