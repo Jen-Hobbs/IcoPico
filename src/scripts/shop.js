@@ -54,6 +54,7 @@ class Shop extends Phaser.Scene {
         // }
         for(var i = 0; i < pets.pet.length; i++){
             var petSelect = this.add.container(this.scale.width*(.2 + (i*.1)), this.scale.height *.75);
+            petSelect.setSize(100, 200);
             petSelect.add(this.add.sprite(0,0, 'whiteCircle'));
             console.log(pets.pet[i].petName);
             var pet = this.add.sprite(0,0, pets.pet[i].petName);
@@ -63,7 +64,7 @@ class Shop extends Phaser.Scene {
             petSelect.add(this.add.text(-15, 65, pets.pet[i].cost).setColor('black'));
             petSelect.add(pet);
             petSelect.setInteractive();
-            petSelect.on('clicked', this.select, this);
+            petSelect.on('clicked', this.select, pet);
         }
 
     }
@@ -83,7 +84,7 @@ class Shop extends Phaser.Scene {
         }
     }
     select(pets){
-        console.log('hi');
+        console.log(pets);
     }
     
     
