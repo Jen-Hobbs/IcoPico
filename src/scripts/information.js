@@ -17,7 +17,7 @@
     };
     var pets = {"pet" : [
         {"petName": "shinyboi", "cost" : 100},
-        {"petName": "money", "cost" : 200}
+        {"petName": "mony", "cost" : 2000}
     ]};
 
     
