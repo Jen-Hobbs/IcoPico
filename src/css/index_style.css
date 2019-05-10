@@ -1,0 +1,91 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Landing Page */
+
+#pagewrap{
+    height: 100%;
+    width: 100%;
+}
+
+#wrapper {
+     /* min-height: 100%;   */
+    background-color: white;
+}
+
+#box_outside{
+    width: auto;
+    height: 100%;
+    padding-top:7%;
+    padding-bottom:7%;
+
+    background-color: #EBAE9B;
+}
+
+#box_mid{
+    width: 100%;
+    height: 80%;
+    padding-top:7%;
+    /* margin-bottom:7%; */
+    background-color: #FFEB6C;
+}
+
+#box_inner{
+    width: 100%;
+    height: 100px;
+    background-color: #65EAA2;
+}
+
+#box_inner h1{
+    margin: 0;
+}
+
+#logo_name{
+    width: auto;
+    height: 70px;
+}
+
+#shiny_boi{
+    width: 50%;
+    height: auto;
+}
+
+  
+/* .speech-bubble {
+    position: relative;
+    background: #00aabb;
+    border-radius: .4em;
+}
+
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 36px solid transparent;
+    border-right-color: #00aabb;
+    border-left: 0;
+    border-bottom: 0;
+    margin-top: -18px;
+    margin-left: -36px;
+} */
+/* 
+
+// Smash ball movement
+@keyframes move {
+    0%   {left:0%; top: 0%;}
+    10%  {left:75%; top: 80%;}
+    20%  {left:-5%; top: 30%;}
+    30%  {left:80%; top: 50%;}
+    40%  {left:-5%; top: 80%;}
+    50%  {left:30%; top: -5%;}
+    60%  {left:40%; top: 80%;}
+    70%  {left:20%; top: 40%;}
+    80%  {left:10%; top: -5%;}
+    90%  {left:60%; top: 80%;}
+    100% {left:0%; top: 0%;}
+  } */
