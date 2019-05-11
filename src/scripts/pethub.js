@@ -119,7 +119,7 @@ var config = {
             debug: false
         }
     },
-    scene: [ShowMenu, Shop, Task, Bag, pethub, PethubOverlay]
+    scene: [ShowMenu, Shop, Task, Bag, Purchase, pethub, PethubOverlay]
 
 };
 

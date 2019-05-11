@@ -3,7 +3,8 @@
     var newTask = 1;
     var player = {
         'happiness' :[20, 60, 70],
-        'food':['foodButton', 'foodButton', 'foodButton']
+        'food':['foodButton', 'foodButton', 'foodButton'],
+        'money' : 300
         // 'pet1' : {
         //     'happiness' : 20
         // },
