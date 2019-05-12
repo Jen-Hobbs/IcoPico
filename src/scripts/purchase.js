@@ -1,59 +1,79 @@
 class Purchase extends Phaser.Scene {
-    constructor(){
-        super({key:"Purchase", active:false});
+    constructor() {
+        super({ key: "Purchase", active: false });
     }
-    init(data){
+    init(data) {
         this.info = data.getData("locate");
         this.type = data.getData("type");
         console.log('init');
     }
-    preload(){
+    preload() {
         this.load.image('backdrop', '../images/icons/purchase_screen.png');
         this.load.image('purchase', '../images/buttons/Other/purchase_button.png');
         this.load.image('x', '../images/buttons/Other/x.png');
-        
-        if(this.type == 'pet'){
+        console.log("preload start");
+
+        if (this.type == 'pet') {
             //if(player.money < pets.pet[this.info].cost){
-                console.log("buy pet");
-                this.load.image('item', '../images/pets/' + this.info.petName + '.png');
+            console.log("buy pet" + this.info.petName);
+            this.load.image(this.info.petName, '../images/pets/' + this.info.petName + '.png');
             // }
             // else{
             //     console.log('not enough');
             //     this.add.text(this.scale.width/2, this.scale.height/2, 'Insufficient Funds');
             // }
         }
-        else{
+        else {
             //this.load.image('item', )
         }
     }
-    create(){
-        console.log(pets.pet[this.info].petName);
-        this.add.sprite(this.scale.width/2, this.scale.height/2, 'backdrop');
-        if(this.type == 'pet'){
-            if(player.money <= this.info.cost){
+    create() {
+        console.log("purchase" + this.info.petName);
+        this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'backdrop');
+        var purchase = this.add.sprite(this.scale.width * .56, this.scale.height * .58, 'purchase');
+        var image = this.add.sprite(this.scale.width / 2, this.scale.height * .48, this.info.petName).setScale(.1);
+        purchase.setInteractive();
+        if (this.type == 'pet') {
+           
+            if (player.money >= this.info.cost) {
+                this.add.text(this.scale.width * .55, this.scale.height * .57, 'Buy').setColor('black');
                 console.log("buy pet");
-                this.add.sprite(this.scale.width/2, this.scale.height*.48, 'item').setScale(.1);
+                purchase.on('pointerdown', () => {
+                    player.money = player.money - this.info.cost;
+                    console.log("money left" + player.money);
+                    information.push(this.info.petName);
+                    console.log("pet added" + information);
+                    image.destroy('purchase');
+                    this.scene.stop('Purchase');
+                    this.scene.run('Shop');
+                });
             }
-            else{
+            else {
                 console.log('not enough');
-                this.add.text(this.scale.width/2, this.scale.height/2, 'Insufficient Funds');
+                var notEnough = this.add.text(this.scale.width *.40, this.scale.height * .45, 'Insufficient Funds', {fontFamily: 'serif', fontSize: 32}).setColor('Black');
+                
+                this.add.text(this.scale.width * .54, this.scale.height * .57, 'Close').setColor('black');
+                purchase.on('pointerdown', () => {
+                    image.destroy('purchase');
+                    this.scene.stop('Purchase');
+                    this.scene.run('Shop');
+                });
             }
         }
-        else{
+        else {
             //this.load.image('item', )
         }
-        var close = this.add.sprite(this.scale.width*.41, this.scale.height*.41, 'x');
+        var close = this.add.sprite(this.scale.width * .41, this.scale.height * .41, 'x');
         close.setInteractive();
-        close.on('pointerdown', ()=>{
+        close.on('pointerdown', () => {
             this.scene.stop('Purchase');
             this.scene.run('Shop');
         });
-        var purchase = this.add.sprite(this.scale.width*.56, this.scale.height*.58, 'purchase');
-        purchase.setInteractive();
-        purchase.on('pointerdown', ()=>{
-            console.log(this.info);
-            console.log(this.type);
-        });
-       
+
+        // purchase.on('pointerdown', ()=>{
+        //     console.log(this.info);
+        //     console.log(this.type);
+        // });
+
     }
 }

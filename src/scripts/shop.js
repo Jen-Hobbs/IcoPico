@@ -7,7 +7,7 @@ class Shop extends Phaser.Scene {
         this.load.image("menuShop", '../images/buttons/Other/menu.png');
         this.load.image('whiteCircle', '../images/icons/whiteCircle.png');
         this.load.image('shinyboi', '../images/pets/shinyboi.png');
-        this.load.image('mony', '../images/pets/money.png');
+        this.load.image('mony', '../images/pets/mony.png');
         this.load.image('money', '../images/icons/money.png')
         
     }
@@ -19,6 +19,7 @@ class Shop extends Phaser.Scene {
         menu2.on('pointerdown', ()=> {
             this.scene.run('ShowMenu');
             this.scene.bringToTop('ShowMenu');
+            var running = ['Shop', 'Purchase'];
         });
         this.input.on('gameobjectup', function (pointer, gameObject) {
             gameObject.emit('clicked', gameObject);
@@ -56,16 +57,15 @@ class Shop extends Phaser.Scene {
             var petSelect = this.add.container(this.scale.width*(.2 + (i*.1)), this.scale.height *.75);
             petSelect.setSize(100, 200);
             petSelect.add(this.add.sprite(0,0, 'whiteCircle'));
-            console.log(pets.pet[i].petName);
             var pet = this.add.sprite(0,0, pets.pet[i].petName);
             pet.setScale(.1);
-            petSelect.setData("locate", pets.pet[i].petName);
+            petSelect.setData("locate", pets.pet[i]);
             petSelect.setData("type", "pet");
             petSelect.add(this.add.sprite(-35,70, 'money'));
             petSelect.add(this.add.text(-15, 65, pets.pet[i].cost).setColor('black'));
             petSelect.add(pet);
             petSelect.setInteractive();
-            console.log("shop " + pets.pet[petSelect.getData("locate")].petName);
+            console.log("shop " + petSelect.getData("locate").petName);
             // petSelect.on('pointerdown',()=>{
             //     console.log(petSelect.getData("locate"));
             // });
