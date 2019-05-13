@@ -24,6 +24,8 @@ class Purchase extends Phaser.Scene {
             // }
         }
         else {
+            console.log(this.info.type);
+            this.load.image(this.info.type, '../images/food/' + this.info.type + '.png');
             //this.load.image('item', )
         }
     }
@@ -31,10 +33,9 @@ class Purchase extends Phaser.Scene {
         console.log("purchase" + this.info.petName);
         this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'backdrop');
         var purchase = this.add.sprite(this.scale.width * .56, this.scale.height * .58, 'purchase');
-        var image = this.add.sprite(this.scale.width / 2, this.scale.height * .48, this.info.petName).setScale(.1);
         purchase.setInteractive();
         if (this.type == 'pet') {
-           
+            var image = this.add.sprite(this.scale.width / 2, this.scale.height * .48, this.info.petName).setScale(.1);
             if (player.money >= this.info.cost) {
                 this.add.text(this.scale.width * .55, this.scale.height * .57, 'Buy').setColor('black');
                 console.log("buy pet");
@@ -62,7 +63,48 @@ class Purchase extends Phaser.Scene {
             }
         }
         else {
-            //this.load.image('item', )
+            var image = this.add.sprite(this.scale.width / 2, this.scale.height * .48, this.info.type);
+            if (player.money >= this.info.cost) {
+                
+                this.add.text(this.scale.width * .55, this.scale.height * .57, 'Buy').setColor('black');
+                console.log("buy food");
+                purchase.on('pointerdown', () => {
+                    player.money = player.money - this.info.cost;
+                    console.log("money left" + player.money);
+                    var check = 0;
+                    for(var i = 0; i < player.food.length; i++){
+                        if(player.food[i].foodType == this.info.type){
+                            player.food[i].amount++;
+                            check++;
+                        }
+                    }
+                    if(check == 0){
+                        var stuff = {};
+                        stuff.foodType = this.info.type;
+                        stuff.amount = 1;
+                        player.food.push(stuff);
+                        
+                        console.log(player.food);
+                    }
+                    //information.push(this.info.petName);
+                    //player.happiness.push(50);
+                    console.log("food added" + player.food);
+                    image.destroy('purchase');
+                    this.scene.stop('Purchase');
+                    this.scene.run('Shop');
+                });
+            }
+            else {
+                console.log('not enough');
+                var notEnough = this.add.text(this.scale.width *.40, this.scale.height * .45, 'Insufficient Funds', {fontFamily: 'serif', fontSize: 32}).setColor('Black');
+                
+                this.add.text(this.scale.width * .54, this.scale.height * .57, 'Close').setColor('black');
+                purchase.on('pointerdown', () => {
+                    image.destroy('purchase');
+                    this.scene.stop('Purchase');
+                    this.scene.run('Shop');
+                });
+            }
         }
         var close = this.add.sprite(this.scale.width * .41, this.scale.height * .41, 'x');
         close.setInteractive();
@@ -77,4 +119,5 @@ class Purchase extends Phaser.Scene {
         // });
 
     }
+    
 }

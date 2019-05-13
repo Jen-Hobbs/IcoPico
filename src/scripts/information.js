@@ -1,11 +1,15 @@
 
     let information = ['shinyboi', 'shinyboi', 'shinyboi'];
+    
     var newTask = 1;
     var player = {
         'happiness' :[20, 60, 70],
         
 
-        'food':[{'foodType': 'icecream' , 'amount' : 2}, {'foodType' : 'mony', 'amount' : 1}],
+        'food':[
+            {'foodType': 'icecream' , 'amount' : 2}, 
+            {'foodType' : 'moni', 'amount' : 1}
+        ],
 
 
         'money' : 300,
@@ -24,6 +28,10 @@
     var pets = {"pet" : [
         {"petName": "shinyboi", "cost" : 100},
         {"petName": "mony", "cost" : 200}
+    ]};
+    let foodTypes = {'food' : [
+        {'type' : 'icecream', 'cost' : 20},
+        {'type' : 'moni', 'cost' : 10}
     ]};
     
 

@@ -10,6 +10,8 @@ class Shop extends Phaser.Scene {
         this.load.image('mony', '../images/pets/mony.png');
         this.load.image('money', '../images/icons/money.png');
         this.load.image('moneyBar', '../images/icons/money_bar.png');
+        this.load.image('moni', '../images/food/moni.png');
+        this.load.image('icecream', '../images/food/icecream.png');
         
     }
     create(){
@@ -82,19 +84,22 @@ class Shop extends Phaser.Scene {
 
     }
     food(){
-        for(var i = 0; i < pets.pet.length; i++){
+        for(var i = 0; i < foodTypes.food.length; i++){
             var foodSelect = this.add.container(this.scale.width*(.2 + (i*.1)), this.scale.height *.35);
             foodSelect.setSize(100, 200);
             foodSelect.add(this.add.sprite(0,0, 'whiteCircle'));
+            var food = this.add.sprite(0,0, foodTypes.food[i].type);
+            food.number = i;
             // console.log(pets.pet[i].petName);
             // var pet = this.add.sprite(0,0, pets.pet[i].petName);
             // pet.setScale(.1);
             // pet.number = i;
             
             foodSelect.add(this.add.sprite(-35,70, 'money'));
-            foodSelect.setData("locate", pets.pet[i]);
+            foodSelect.add(food);
+            foodSelect.setData("locate", foodTypes.food[i]);
             foodSelect.setData("type", "food");
-            foodSelect.add(this.add.text(-15, 65, pets.pet[i].cost).setColor('black'));
+            foodSelect.add(this.add.text(-15, 65, foodTypes.food[i].cost).setColor('black'));
             // foodSelect.add(pet);
             foodSelect.setInteractive();
             foodSelect.on('clicked', this.select, this);
