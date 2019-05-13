@@ -8,6 +8,9 @@ class PethubOverlay extends Phaser.Scene {
         this.load.image("whiteCircle", "../images/buttons/Other/white_circle.png");
         this.load.image('yellowCircle', '../images/buttons/Other/yellow_circle.png');
         this.load.image("menuPet", '../images/buttons/Other/menu.png');
+        for(var i = 0; i < player.food.length; i++){
+            this.load.image(player.food[i].foodType, "../images/food/" + player.food[i].foodType + '.png');
+        }
     }
     create() {
         //menu button
@@ -21,7 +24,7 @@ class PethubOverlay extends Phaser.Scene {
         });
         this.input.on('gameobjectup', function (pointer, gameObject) {
             gameObject.emit('clicked', gameObject);
-            console.log('hi');
+           
         }, this);
         this.displayfood();
         this.task();
@@ -65,17 +68,19 @@ class PethubOverlay extends Phaser.Scene {
             if(showfood == 0){
                 this.yellow = this.add.sprite(this.scale.width * .95, this.scale.height * .90, 'yellowCircle');
                 this.food = [];
+                this.type = [];
                 for (var i = 0; i < player.food.length; i++) {
                     this.food[i] = this.add.sprite(this.scale.width * (.85 - (i * .10)), this.scale.height * .90, 'whiteCircle');
                     this.food[i].setInteractive();
                     this.food[i].name = i;
                
                     this.food[i].on('clicked', this.location, this);
-                    this.food[i].on('pointerup', () => {
-                        console.log("pointer up");
-                    });
+                   
+                    this.type[i] = this.add.sprite(this.scale.width * (.85 - (i * .10)), this.scale.height * .90, player.food[i].foodType);
+
                 }
                 this.foodButtons.add(this.food);
+                this.foodButtons.add(this.type);
                 this.foodButtons.add(this.yellow);
                 showfood = 1;
             }
@@ -83,6 +88,7 @@ class PethubOverlay extends Phaser.Scene {
                 this.foodButtons.remove(this.yellow);
                 showfood = 0;
                 this.foodButtons.remove(this.food);
+                this.foodButtons.remove(this.type);
             }
         });
     }
@@ -92,27 +98,20 @@ class PethubOverlay extends Phaser.Scene {
     location(box) {
         player.food.splice(box.name, 1);
         this.foodButtons.remove(this.food);
+        this.foodButtons.remove(this.type);
         this.food = [];
+        this.type = [];
         for (var i = 0; i < player.food.length; i++) {
             this.food[i] = this.add.sprite(this.scale.width * (.85 - (i * .10)), this.scale.height * .90, 'whiteCircle');
+            this.type[i] = this.add.sprite(this.scale.width * (.85 - (i * .10)), this.scale.height * .90, player.food[i].foodType);
             this.food[i].setInteractive();
             this.food[i].name = i;
-       
             this.food[i].on('clicked', this.location, this);
-            this.food[i].on('pointerup', () => {
-                console.log("pointer up");
-            });
+            console.log('food left on click ' + player.food);
+            
         }
         this.foodButtons.add(this.food);
-        this.resetFood = 1;
-        console.log('hi');
-        console.log(box.name);
-
-
-        // console.log(food);
-        // box.off('clicked', location);
-        // box.input.enabled = false;
-        // box.setVisible(false);
+        this.foodButtons.add(this.type);
 
     }
    

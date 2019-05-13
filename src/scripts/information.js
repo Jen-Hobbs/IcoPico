@@ -3,7 +3,11 @@
     var newTask = 1;
     var player = {
         'happiness' :[20, 60, 70],
-        'food':['foodButton', 'foodButton', 'foodButton'],
+        
+
+        'food':[{'foodType': 'icecream' , 'amount' : 2}, {'foodType' : 'mony', 'amount' : 1}],
+
+
         'money' : 300,
         'items' : []
         // 'pet1' : {
@@ -19,7 +23,7 @@
     };
     var pets = {"pet" : [
         {"petName": "shinyboi", "cost" : 100},
-        {"petName": "mony", "cost" : 2000}
+        {"petName": "mony", "cost" : 200}
     ]};
     
 

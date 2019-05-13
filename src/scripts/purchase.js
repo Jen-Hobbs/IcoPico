@@ -42,6 +42,7 @@ class Purchase extends Phaser.Scene {
                     player.money = player.money - this.info.cost;
                     console.log("money left" + player.money);
                     information.push(this.info.petName);
+                    player.happiness.push(50);
                     console.log("pet added" + information);
                     image.destroy('purchase');
                     this.scene.stop('Purchase');

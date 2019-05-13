@@ -13,7 +13,6 @@ class ShowMenu extends Phaser.Scene {
         this.load.image("buttonTask", '../images/buttons/scene_button/Task_Button.png');
         this.load.image('buttonShop', '../images/buttons/scene_button/Shopping_Button.png');
         this.load.image('buttonPethub', '../images/buttons/scene_button/PetHub_Button.png');
-        this.load.image('buttonBag', '../images/buttons/scene_button/BagHub_Button.png');
         this.load.image('logout', '../images/buttons/scene_button/logout_Button.png');
         
     }
@@ -54,15 +53,8 @@ class ShowMenu extends Phaser.Scene {
             this.scene.bringToTop('Task');  
             this.scene.sleep('ShowMenu'); 
         })
-        let bag =  this.add.sprite(this.scale.width*.04, this.scale.height*.65, 'buttonBag');
-        bag.setInteractive();
-        bag.on('pointerdown', () =>{
-            this.stopScenes();
-            this.scene.run('Bag');
-            this.scene.bringToTop('Bag');   
-            this.scene.sleep('ShowMenu');
-        });
-        let logout = this.add.sprite(this.scale.width*.04, this.scale.height*.8, 'logout');
+        
+        let logout = this.add.sprite(this.scale.width*.04, this.scale.height*.65, 'logout');
     }
     stopScenes(){
         for(var i = 0; i < this.runningScenes.length; i++){

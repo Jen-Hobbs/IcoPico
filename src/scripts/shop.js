@@ -8,7 +8,8 @@ class Shop extends Phaser.Scene {
         this.load.image('whiteCircle', '../images/icons/whiteCircle.png');
         this.load.image('shinyboi', '../images/pets/shinyboi.png');
         this.load.image('mony', '../images/pets/mony.png');
-        this.load.image('money', '../images/icons/money.png')
+        this.load.image('money', '../images/icons/money.png');
+        this.load.image('moneyBar', '../images/icons/money_bar.png');
         
     }
     create(){
@@ -26,6 +27,14 @@ class Shop extends Phaser.Scene {
         }, this);
         this.pets();
         this.food();
+        this.updateMoneyBar();
+    }
+    updateMoneyBar(){
+        
+        this.moneyBar = this.add.sprite(this.scale.width*.75, this.scale.height *.15, 'moneyBar');
+        var money = this.add.text(this.scale.width*.72, this.scale.height *.12, player.money, {fontFamily: 'serif', fontSize: 28}).setColor('black');
+        
+        
     }
     textLayout(){
         var shop = this.add.text(this.scale.width/2, this.scale.height*.10, "Shop", {fontFamily: 'serif', fontSize: 64});
@@ -46,7 +55,6 @@ class Shop extends Phaser.Scene {
     }
     //petnumber = 3 currently only repeating shinyboi
     pets(){
-        var petnumber = 2;
         // for(var i = 0; i < petnumber; i++){
         //     var white = this.add.sprite(this.scale.width*(.3 + (i*.1)), this.scale.height *.4, 'whiteCircle');
         //     white.number = i;

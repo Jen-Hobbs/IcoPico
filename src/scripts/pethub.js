@@ -88,6 +88,7 @@ class pethub extends Phaser.Scene {
 
 
     checkHappiness(i, pet) {
+        console.log(player.happiness[i]);
         if (player.happiness[i] < 33) {
             pet[i].add(this.add.sprite(this.scale.width * .95, this.scale.height * .07, 'blackHeart'));
         }
@@ -119,7 +120,7 @@ var config = {
             debug: false
         }
     },
-    scene: [ShowMenu, Shop, Task, Bag, Purchase, pethub, PethubOverlay]
+    scene: [ShowMenu, Shop, Task, Purchase, pethub, PethubOverlay]
 
 };
 
