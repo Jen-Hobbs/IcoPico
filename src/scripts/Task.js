@@ -1,3 +1,5 @@
+var MAX_NUM_TASKS = 3;
+
 class Task extends Phaser.Scene {
     constructor(){
         super({key:"Task", active:false});
@@ -18,14 +20,16 @@ class Task extends Phaser.Scene {
     }
 
     create() {
-        var MAX_NUM_TASKS = 3;
-        var taskButtons = [];
+        //  If a Game Object is clicked on, this event is fired.
+        //  We can use it to emit the 'clicked' event on the game object itself.
+        this.input.on('gameobjectup', function (pointer, gameObject)
+        {
+            gameObject.emit('clicked', gameObject);
+        }, this);
 
-        var shop = this.add.text(this.scale.width/2, this.scale.height*.10, "", {fontFamily: 'Helvetica', fontSize: 64});
-        shop.setOrigin(0.5);
-        shop.setColor('black');
+        this.taskButtons = [];
 
-        //Text to show up when there are no more tasks
+        //Create "tasks done" text to show up when there are no more tasks
         this.add.text(this.scale.width/2, 200, "All tasks complete. Great job!", {fontFamily: 'Helvetica', fontSize: 25})
           .setOrigin(0.5)
         ;
@@ -38,34 +42,39 @@ class Task extends Phaser.Scene {
             this.scene.bringToTop('ShowMenu');
         });
 
-        //this.add.sprite(this, 100, 100, task_new);
-        //console.log(Tasks_example.tasks[1].type);
-
-
+        //Create dismiss task button
         var dismiss = this.add.sprite(this.scale.width/2, this.scale.height-100, "type1")
           .setScale(0.3)
           .setInteractive({ useHandCursor: true})
           .setVisible(false)
           .on('pointerup', () => {
-            Console.log("dismiss");
+            console.log("dismiss");
           });
-
-          this.scene.sendToBack('type2');
-
+        //send button to back for now until task is selected
+        this.scene.sendToBack('type2');
+        
+        //create task list
         for(let i = 0; i < MAX_NUM_TASKS; i++)
         {
-            taskButtons[i] = this.add.container(this.scale.width/2, 150*i + 200);
-            taskButtons[i].setData('isActive', false);
+            this.taskButtons[i] = this.add.container(this.scale.width/2, 150*i + 200);
+            this.taskButtons[i].setData('isActive', false);
             var sprite = this.add.sprite(0,0,'task_new')
               .setData('index', i)
               .setScale(0.3)
               .setInteractive({ useHandCursor: true })
               .on('clicked', setSelected, this);
+              // var sprite_active = this.add.sprite(0,0,'task_done')
+              // .setData('index', i)
+              // .setScale(0.3)
+              // .setInteractive({ useHandCursor: true })
+              // .on('clicked', setSelected, this);
+              // this.scene.sendToBack('task_done');
             var icon = this.add.sprite(125,5,'type2').setScale(0.7);
             var new_task = this.add.sprite(175,-40,'get_new')
                 .setData('rindex', i)
                 .setScale(1.3)
                 .setInteractive({ useHandCursor: true })
+                //on('event', callback method, scene)
                 .on('clicked', deleteTask, this);
 
             var title = this.add.text(-175,-45,"Test title " + i,
@@ -77,44 +86,74 @@ class Task extends Phaser.Scene {
                 {fontFamily: 'Helvetica', fontSize: 14, wordWrap: {width: 265, useAdvancedWrap:true}})
                 .setColor('black');
 
-            taskButtons[i].add([sprite, icon, new_task, title, description]);
-
-            //  If a Game Object is clicked on, this event is fired.
-            //  We can use it to emit the 'clicked' event on the game object itself.
-            this.input.on('gameobjectup', function (pointer, gameObject)
-            {
-                gameObject.emit('clicked', gameObject);
-            }, this);
+            this.taskButtons[i].add([sprite, icon, new_task, title, description]);
         }//end for 
 
         //callback method for click
         function setSelected (tSprite) {
-          var i = tSprite.getData('index')
-          var newSprite = this.add.sprite(0,0,'task_done')
-            .setData('index', i)
-            .setScale(0.3)
-            .setInteractive({ useHandCursor: true })
-            .on('clicked', setSelected, this);
-          taskButtons[i].replace(sprite,newSprite,[,true]);
-        }
-
-        function deleteTask (rSprite) {
-          var i = rSprite.getData('rindex');
-          taskButtons[i].destroy();
-        }
-        
-        function floatUp(deletedIndex)
-        {
-          for(deletedIndex; i < MAX_NUM_TASKS; deletedIndex++)
-          {
-            taskButtons[deletedIndex] = taskButtons[deletedIndex-1];
+          var i = tSprite.getData('index');
+          //console.log(i);
+          //console.log(this.taskButtons[i].getData('isActive'));
+          if(!(this.taskButtons[i].getData('isActive'))) {
+              this.taskButtons[i].setData('isActive', true);
+              //update sprite
+              //this.scene.bringToTop()
+              console.log(this.taskButtons[i].getData('isActive'));
+          } else {
+            this.taskButtons[i].setData('isActive', false);
+            console.log(this.taskButtons[i].getData('isActive'));
           }
         }
 
+        //callback method for deleteTask
+        function deleteTask (rSprite) {
+          var i = rSprite.getData('rindex');
+          this.taskButtons[i].destroy();
+
+          //shift tasks up in the array
+          for(i; i < MAX_NUM_TASKS; i++)
+          {
+            console.log(i);
+            this.taskButtons[i] = this.taskButtons[i+1];
+          }
+
+          //redraw all tasks
+          var temp = [];
+          temp = this.taskButtons;
+          console.log(temp);
+          //delete old tasklist
+          for(var i = 0; i < MAX_NUM_TASKS; i++)
+          {
+            if(this.taskButtons[i] != null)
+            {
+              this.taskButtons[i].destroy();
+            }
+          }
+          
+          //redraw new tasklist
+          for(var i = 0; i < MAX_NUM_TASKS; i++)
+          {
+            if(temp[i] != null)
+            {
+              //console.log('hi');
+              this.taskButtons[i] = this.add.container(temp[i]);
+            }
+          }
+        }
+        
+        // //make the tasks move up a position if there is a space
+        // function floatUp(deletedIndex)
+        // {
+        //   for(var i = deletedIndex; i < MAX_NUM_TASKS; i++)
+        //   {
+        //     console.log(i);
+        //     this.taskButtons[i] = this.taskButtons[i+1];
+        //   }
+        // }
+
         function refreshTasklist()
         {
-          var temp = [];
-          temp = taskButtons;
+
         }
     }//end create
 
