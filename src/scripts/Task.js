@@ -6,13 +6,13 @@ class Task extends Phaser.Scene {
     preload() {
         //asset preload
         this.cameras.main.setBackgroundColor('#aaa');
-        this.load.image("menuPet", 'images/buttons/Other/menu.png');
-        this.load.image("task_new", 'images/buttons/task_hub/task_new.png');
-        this.load.image("task_done", 'images/buttons/task_hub/task_done.png');
-        this.load.image("type1", 'images/buttons/pet_hub/black_heart.png');
-        this.load.image("type2", 'images/buttons/pet_hub/red_heart.png');
-        this.load.image("type3", 'images/buttons/pet_hub/yellow_heart.png');
-        this.load.image("menuPet", 'images/buttons/Other/menu.png');
+        this.load.image("menuPet", '/src/images/buttons/Other/menu.png');
+        this.load.image("task_new", '/../src/images/buttons/task_hub/task_new.png');
+        this.load.image("task_done", '/src/images/buttons/task_hub/task_done.png');
+        this.load.image("type1", '/src/images/buttons/pet_hub/black_heart.png');
+        this.load.image("type2", '/src/images/buttons/pet_hub/red_heart.png');
+        this.load.image("type3", '/src/images/buttons/pet_hub/yellow_heart.png');
+        this.load.image("menuPet", '/src/images/buttons/Other/menu.png');
         this.cameras.main.setBackgroundColor('#aaa');  
     }
 

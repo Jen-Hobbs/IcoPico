@@ -54,7 +54,6 @@ html, body {
     background-color: #FFD465;
     width: 100%;
     height: 60%;
-    /* padding-top: 10%; */
 }
 
 #banner_top {
@@ -109,7 +108,6 @@ html, body {
     /* margin-bottom:7%; */
     background-color: #FFEB6C;
 }
-
 
 #play_button {
     grid-column: 3;
