@@ -18,9 +18,9 @@ class PethubOverlay extends Phaser.Scene {
         let menu = this.add.sprite(this.scale.width * .04, this.scale.height * .05, 'menuPet');
         menu.setInteractive();
         menu.on('pointerdown', () => {
-            this.runningScenes = ['pethub', 'PethubOverlay'];
+            runningScenes = ['Pethub', 'PethubOverlay'];
 
-            this.scene.run('ShowMenu', this.runningScenes);
+            this.scene.run('ShowMenu', runningScenes);
             this.scene.bringToTop('ShowMenu');
         });
         this.input.on('gameobjectup', function (pointer, gameObject) {

@@ -20,9 +20,10 @@ class Shop extends Phaser.Scene {
         let menu2 = this.add.sprite(this.scale.width*.04, this.scale.height*.05, 'menuShop');  
         menu2.setInteractive();
         menu2.on('pointerdown', ()=> {
-            this.scene.run('ShowMenu');
+            runningScenes = ['Shop', 'Purchase'];
+            console.log('click ' + runningScenes);
+            this.scene.run('ShowMenu', runningScenes);
             this.scene.bringToTop('ShowMenu');
-            var running = ['Shop', 'Purchase'];
         });
         this.input.on('gameobjectup', function (pointer, gameObject) {
             gameObject.emit('clicked', gameObject);

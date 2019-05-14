@@ -6,7 +6,7 @@ class ShowMenu extends Phaser.Scene {
     }
     init(data){
         this.runningScenes = data;
-        console.log(this.runningScenes);
+        console.log("init started data pased in " + this.runningScenes);
     }
     preload(){
         this.load.image("menu", '../images/buttons/other/menu.png');
@@ -22,7 +22,7 @@ class ShowMenu extends Phaser.Scene {
         let menu = this.add.sprite(this.scale.width*.04, this.scale.height*.05, 'menu');
         menu.setInteractive();
         menu.on('pointerdown', () => {
-           this.scene.sleep('ShowMenu');
+           this.scene.stop('ShowMenu');
         })
         let pet = this.add.sprite(this.scale.width*.04, this.scale.height*.2, 'buttonPethub');
         pet.setInteractive();
@@ -33,7 +33,7 @@ class ShowMenu extends Phaser.Scene {
             this.scene.bringToTop("Pethub"); 
             this.scene.run('PethubOverlay');
             this.scene.bringToTop('PethubOverlay');      
-            this.scene.sleep('ShowMenu');      
+            this.scene.stop('ShowMenu');      
         })
         let shop =  this.add.sprite(this.scale.width*.04, this.scale.height*.35, 'buttonShop');
         shop.setInteractive();
@@ -42,7 +42,7 @@ class ShowMenu extends Phaser.Scene {
             this.stopScenes();
             this.scene.run('Shop');
             this.scene.bringToTop('Shop'); 
-            this.scene.sleep('ShowMenu');  
+            this.scene.stop('ShowMenu');  
         })
 
         let task =  this.add.sprite(this.scale.width*.04, this.scale.height*.5, 'buttonTask');
@@ -51,7 +51,7 @@ class ShowMenu extends Phaser.Scene {
             this.stopScenes();
             this.scene.run('Task');
             this.scene.bringToTop('Task');  
-            this.scene.sleep('ShowMenu'); 
+            this.scene.stop('ShowMenu'); 
         })
         
         let logout = this.add.sprite(this.scale.width*.04, this.scale.height*.65, 'logout');
@@ -59,7 +59,7 @@ class ShowMenu extends Phaser.Scene {
     stopScenes(){
         for(var i = 0; i < this.runningScenes.length; i++){
             this.scene.stop(this.runningScenes[i]);
-            console.log(this.runningScenes[i]);
+            console.log("running secenes" + this.runningScenes[i]);
         }
     }
     update(){

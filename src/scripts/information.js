@@ -1,6 +1,6 @@
 
     let information = ['shinyboi', 'shinyboi', 'shinyboi'];
-    
+    var runningScenes = [];
     var newTask = 1;
     var player = {
         'happiness' :[20, 60, 70],
