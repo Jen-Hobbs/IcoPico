@@ -5,7 +5,7 @@
     var player = {
         'happiness' :[20, 60, 70],
         
-
+        'activePet' : 0,
         'food':[
             {'foodType': 'icecream' , 'amount' : 2}, 
             {'foodType' : 'moni', 'amount' : 1}
@@ -34,5 +34,5 @@
         {'type' : 'moni', 'cost' : 10}
     ]};
     
-
+var updateHappiness = 0;
     
