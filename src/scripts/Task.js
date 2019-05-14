@@ -52,7 +52,7 @@ class Task extends Phaser.Scene {
           });
         //send button to back for now until task is selected
         this.scene.sendToBack('type2');
-        
+
         //create task list
         for(let i = 0; i < MAX_NUM_TASKS; i++)
         {
@@ -69,7 +69,7 @@ class Task extends Phaser.Scene {
             //task reward icon
             var icon = this.add.sprite(125,5,'type2').setScale(0.7);
 
-            //refresh button to get new task 
+            //refresh button to get new task
             var new_task = this.add.sprite(175,-40,'get_new')
                 .setData('rindex', i)
                 .setScale(1.3)
@@ -77,7 +77,7 @@ class Task extends Phaser.Scene {
                 //on('event', callback method, scene)
                 .on('clicked', deleteTask, this);
 
-            //task title 
+            //task title
             var title = this.add.text(-175,-45,"Test title " + i,
                 {fontFamily: 'Helvetica', fontSize: 20, wordWrap: {width: 265, useAdvancedWrap:true}})
                 .setColor('black');
@@ -90,72 +90,78 @@ class Task extends Phaser.Scene {
 
             //add all items to taskButton[i] container
             this.taskButtons[i].add([sprite, icon, new_task, title, description]);
-        }//end for 
+        }//end for
 
-        //callback function for click
+        /**
+          * callback function for click
+          **/
         function setSelected (tSprite) {
           var i = tSprite.getData('index');
-          //console.log(i);
-          //console.log(this.taskButtons[i].getData('isActive'));
+
+          // var sprite_active = this.add.sprite(0,0,'task_done')
+          // .setData('index', i)
+          // .setScale(0.3)
+          // .setInteractive({ useHandCursor: true })
+          // .on('clicked', setSelected, this);
+          //
+          // var sprite = this.add.sprite(0,0,'task_new')
+          // .setData('index', i)
+          // .setScale(0.3)
+          // .setInteractive({ useHandCursor: true })
+          // .on('clicked', setSelected, this);
+
           if(!(this.taskButtons[i].getData('isActive'))) {
-            console.log(i);
             this.taskButtons[i].setData('isActive', true);
+            //change background sprite to yellow
 
-            //update sprite
-            //active background sprite (after clicked on)
-            var sprite_active = this.add.sprite(0,0,'task_done')
-            .setData('index', i)
-            .setScale(0.3)
-            .setInteractive({ useHandCursor: true })
-            .on('clicked', setSelected, this);
-
-            this.taskButtons[i].addAt(sprite_active,[, 0]);
+            this.taskButtons[i].addAt(
+              this.add.sprite(0,0,'task_done')
+              .setData('index', i)
+              .setScale(0.3)
+              .setInteractive({ useHandCursor: true })
+              .on('clicked', setSelected, this)
+              ,[, 0]);
             this.taskButtons[i].removeAt(1,[, true]);
-            console.log(this.taskButtons[i].getData('isActive'));
+            //console.log(this.taskButtons[i].getData('isActive'));
           } else {
-            console.log(i);
             this.taskButtons[i].setData('isActive', false);
-            this.taskButtons[i].sendToBack(sprite_active);
-            console.log(this.taskButtons[i].getData('isActive'));
+            this.taskButtons[i].addAt(
+              this.add.sprite(0,0,'task_new')
+              .setData('index', i)
+              .setScale(0.3)
+              .setInteractive({ useHandCursor: true })
+              .on('clicked', setSelected, this)
+              ,[, 0]);
+            this.taskButtons[i].removeAt(1,[, true]);
+            //console.log(this.taskButtons[i].getData('isActive'));
           }
         }
 
-        //callback method for deleteTask
+        /**
+          * callback function for deleteTask
+          **/
         function deleteTask (rSprite) {
           var i = rSprite.getData('rindex');
-          this.taskButtons.remove();
-
+          this.taskButtons.pop(i);
+          console.log("hi");
           //shift tasks up in the array
-          for(i; i < MAX_NUM_TASKS; i++)
-          {
-            console.log(i);
-            this.taskButtons[i] = this.taskButtons[i+1];
-          }
+          // for(i; i < MAX_NUM_TASKS; i++)
+          // {
+          //   console.log(i);
+          //   this.taskButtons[i] = this.taskButtons[i+1];
+          // }
 
-          //redraw all tasks
-          var temp = [];
-          temp = this.taskButtons;
-          console.log(temp);
-          //delete old tasklist
-          for(var i = 0; i < MAX_NUM_TASKS; i++)
-          {
-            if(this.taskButtons[i] != null)
-            {
-              this.taskButtons[i].destroy();
-            }
-          }
-          
           //redraw new tasklist
-          for(var i = 0; i < MAX_NUM_TASKS; i++)
-          {
-            if(temp[i] != null)
-            {
-              //console.log('hi');
-              this.taskButtons[i] = this.add.container(temp[i]);
-            }
-          }
+          // for(var i = 0; i < MAX_NUM_TASKS; i++)
+          // {
+          //   if(temp[i] != null)
+          //   {
+          //     //console.log('hi');
+          //     this.taskButtons[i] = this.add.container(temp[i]);
+          //   }
+          // }
         }
-        
+
         // //make the tasks move up a position if there is a space
         // function floatUp(deletedIndex)
         // {
