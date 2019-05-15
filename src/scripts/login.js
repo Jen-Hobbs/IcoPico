@@ -1,11 +1,13 @@
 firebase.auth().onAuthStateChanged(function (user) {
-    database.ref("userList/" + user.uid).update({
-        "name": user.displayName,
+    database.ref("userlist/" + user.uid).update({
+        "userName": user.displayName,
         "email": user.email
     });
     sessionStorage.setItem("uid", user.uid);
     sessionStorage.setItem("name", user.displayName);
-})
+});
+
+// database.ref("icopico-89023").update({"name" : "nic"});
 
 var uiConfig = {
     callbacks: {
@@ -18,14 +20,19 @@ var uiConfig = {
     },
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',
-    signInSuccessUrl: 'icopico.html',
+    signInSuccessUrl: '../icopico/icopico.html',
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+        // firebase.auth.GithubAuthProvider.PROVIDER_ID
     ],
     // Terms of service url.
-    tosUrl: 'icopico.html',
+    tosUrl: '../icopico/icopico.html',
+
     // Privacy policy url.
-    privacyPolicyUrl: 'icopico.html'
+    privacyPolicyUrl: '../icopico/icopico.html'
 };
 
 // The start method will wait until the DOM is loaded.

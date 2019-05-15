@@ -5,48 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="../css/login_style.css">
+    <link type="text/css" rel="stylesheet" href="../css/firebase_css.css" />
     <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <script src="setup-firebase.js"></script>
+    <script src="../scripts/setup-firebase.js"></script>
 
-    <link rel="stylesheet" href="login_style.css">
-    <link type="text/css" rel="stylesheet" href="firebase_css.css" />
+
 
     <title>Login</title>
 </head>
 
 <body>
+    <script>
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    </script>
+
     <div id="pagewrap">
         <div id="background_colour">
-            <div class="box_green"></div>
+            <div class="box_green">
+                <img src="../images/icons/Icopico_Title_Black.png" alt="icopico_title" id="icopico_title"
+                    onclick="window.location.href='../../index.html'">
+            </div>
             <div class="box_red"></div>
-
             <div class="box_yellow"></div>
-
             <div class="box_red"></div>
             <div class="box_green"></div>
         </div>
 
         <div id="page_info">
-            <img id="petImg" src="images/pets/shinyboi.png" alt="shinyboi" onclick="window.location.href='index.html'">
+            <img id="petImg" src="../images/pets/shinyboi.png" alt="shinyboi">
 
-            <h1 id="login_title">Login</h1>
+            <h1 id="login_title">Play</h1>
             <div class="login_section">
                 <div id="firebaseui-auth-container"></div>
                 <div id="loader">Loading....</div>
+            </div>
+            <div id="login_note_div">
+                <h4 id="login_note">Enter you email in the sign in box. If you do not have an account, it will create
+                    one for you</h3>
             </div>
         </div>
 
 
     </div>
 
-
-
-    <script>
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
-    </script>
-
-    <script src="login.js"></script>
+    <script src="../scripts/login.js"></script>
 </body>
 
 </html>

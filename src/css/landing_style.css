@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
     margin: 0;
+    background-color: #FFD465;
 }
 
 /* Landing Page */
@@ -100,6 +101,7 @@ html, body {
     width: 100%;
     height: auto;
     border-radius: 8%;
+    margin-top:1em;
     background-color: #FF9999;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.37);
 }
@@ -116,6 +118,8 @@ html, body {
     width: 100%;
     height: auto;
     border-radius: 8%;
+    margin-top:1em;
+    margin-bottom: 1em;
     background-color: #FF9999;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.37);
 }

@@ -4,45 +4,40 @@
 <head>
     <meta charset="UTF-8" />
     <title>Pet Hub</title>
-    <!-- <link rel="stylesheet" href="index_style.css"> -->
     <link rel="stylesheet" href="./src/css/landing_style.css">
     <link href="https://fonts.googleapis.com/css?family=Pompiere" rel="stylesheet">
 
-    <!-- <script src="jquery-3.4.0.min.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
 </head>
 
 </html>
 
 <body>
     <!--wrapper div for whole screen-->
-
     <!-- Coloured Divs -->
     <div id="container">
-        <div id="box_outside">    
-            <div id = "box_top">
-                <div id = "banner">
-                    <div id = "banner_top"></div>
-                    <div id = "banner_middle">                  
+        <div id="box_outside">
+            <div id="box_top">
+                <div id="banner">
+                    <div id="banner_top"></div>
+                    <div id="banner_middle">
                         <img id="logo_name" src="./src/images/icons/Icopico_Title_Black.png" alt="site name">
                     </div>
-                    <div id = "banner_bottom"></div>
+                    <div id="banner_bottom"></div>
                 </div>
             </div>
-            <div id = "box_bottom">
-                <img id="shiny_boi" src="./src/images/pets/shinyboi.png" alt="shinyBoi">
-                <button id = "play_button" onclick="window.location.href='login.html'">Play</button>
-                <button id = "about_button" onclick="window.location.href='signup.html'">About</button>    
+
+            <div id="pet_space">
+                <div id="pet_div">
+                    <img id="shiny_boi" src="./src/images/pets/shinyboi.png" alt="shinyBoi">
+                </div>
+            </div>
+
+            <div id="box_bottom">
+                <button id="play_button" onclick="window.location.href='src/login/login.html'">Play</button>
+                <button id="about_button" onclick="window.location.href='src/icopico/icopico.html'">About</button>
             </div>
         </div>
     </div>
-
-
-    <!-- Button that links the user to the petHub page 
-         Removed it for now because this should work as the 'play' button-->
-    <!-- <button onclick="window.location.href='icopico.html'">Continue</button> -->
-
     <script src="./src/index.js"></script>
-
 </body>
