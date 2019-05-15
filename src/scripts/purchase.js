@@ -12,7 +12,7 @@ class Purchase extends Phaser.Scene {
         this.load.image('purchase', '../images/buttons/Other/purchase_button.png');
         this.load.image('x', '../images/buttons/Other/x.png');
         console.log("preload start");
-
+        
         if (this.type == 'pet') {
             //if(player.money < pets.pet[this.info].cost){
             console.log("buy pet" + this.info.petName);

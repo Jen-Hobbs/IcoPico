@@ -24,6 +24,11 @@ class Pethub extends Phaser.Scene {
     }
 
     create() {
+        console.log(this.time.now);
+    // console.log('current date '+ currentDate);
+     var timeNow = new Date('2019-05-14T18:21:00');
+// console.log('time now ' + timeNow);
+     console.log((timeNow.getTime() - player.lastlogin.getTime())/3600000);
         console.log("current pet" + player.activePet);
         this.resetFood = 0;
         this.cameras.main.setBounds(0, 0, 1236 * information.length, 681);
@@ -76,7 +81,9 @@ class Pethub extends Phaser.Scene {
             this.checkHappiness(i, this.pet);
             var cam = this.cameras.main;
             cam.centerOn(618 + 1236 * player.activePet, 0);
+
         }
+        
     }
     update() {
         if(updateHappiness == 1){
@@ -84,10 +91,13 @@ class Pethub extends Phaser.Scene {
             this.checkHappiness(player.activePet, this.pet);
             updateHappiness = 0;
         }
+    
 
     }
-
-
+    dateModifier(){
+        console.log('hi');
+    }
+    
 
 
 
