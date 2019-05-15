@@ -14,6 +14,7 @@ class Task extends Phaser.Scene {
         this.load.image("type1", '../images/buttons/pet_hub/black_heart.png');
         this.load.image("type2", '../images/buttons/pet_hub/red_heart.png');
         this.load.image("type3", '../images/buttons/pet_hub/yellow_heart.png');
+        this.load.image("x", '../images/buttons/Other/x.png');
         this.load.image("menuPet", '../images/buttons/Other/menu.png');
         this.load.image("get_new", '../images/buttons/task_hub/get_new.png');
         this.cameras.main.setBackgroundColor('#aaa');
@@ -46,15 +47,15 @@ class Task extends Phaser.Scene {
         });
 
         //Create dismiss task button
-        var dismiss = this.add.sprite(this.scale.width/2, this.scale.height-100, "type1")
-          .setScale(0.3)
+        var dismiss = this.add.sprite(this.scale.width/2, this.scale.height-80, "x")
+          .setScale(1)
           .setInteractive({ useHandCursor: true})
           .setVisible(false)
           .on('pointerup', () => {
             console.log("dismiss");
           });
         //send button to back for now until task is selected
-        this.scene.sendToBack('type2');
+        //this.scene.sendToBack('type2');
 
         //create task list containers
         for(let i = 0; i < CUR_NUM_TASKS; i++)
@@ -82,7 +83,7 @@ class Task extends Phaser.Scene {
                 .on('clicked', deleteTask, this);
 
             //task reward icon
-            this.icon[i] = this.add.sprite(125,5,task_list.task[i].type).setScale(0.7);
+            this.icon[i] = this.add.sprite(125,5,task_list.task[i].icon).setScale(0.7);
 
             //task title
             this.title[i] = this.add.text(-175,-45,task_list.task[i].title,
@@ -170,7 +171,8 @@ class Task extends Phaser.Scene {
                   .on('clicked', deleteTask, this);
 
               //task reward icon
-              this.icon[i] = this.add.sprite(125,5,task_list.task[i].type).setScale(0.7);
+              //task reward icon
+              this.icon[i] = this.add.sprite(125,5,task_list.task[i].icon).setScale(0.7);
 
               //task title
               this.title[i] = this.add.text(-175,-45,task_list.task[i].title,
@@ -187,5 +189,6 @@ class Task extends Phaser.Scene {
               this.taskButtons[i].add([sprite, new_task, this.icon[i], this.title[i], this.description[i]]);
           }//end for
       }//end deleteTask
+
     }//end create
 }//end Tasks

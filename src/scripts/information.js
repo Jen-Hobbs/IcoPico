@@ -38,6 +38,6 @@
           "id": "3",
           "title": "Take out the recycling",
           "description": "Remember to seperate the plastic from the garbage",
-          "icon": "type2"
+          "icon": "type3"
         }
     ]};
