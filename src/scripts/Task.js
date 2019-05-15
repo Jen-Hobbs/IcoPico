@@ -51,9 +51,7 @@ class Task extends Phaser.Scene {
           .setScale(1)
           .setInteractive({ useHandCursor: true})
           .setVisible(false)
-          .on('pointerup', () => {
-            console.log("dismiss");
-          });
+          .on('clicked', dismiss, this);
         //send button to back for now until task is selected
         //this.scene.sendToBack('type2');
 
@@ -119,6 +117,8 @@ class Task extends Phaser.Scene {
               .on('clicked', setSelected, this)
               ,[, 0]);
             this.taskButtons[i].removeAt(1,[, true]);
+            //show delete button
+            dismiss.setVisible(true);
             //console.log(this.taskButtons[i].getData('isActive'));
           } else {
             this.taskButtons[i].setData('isActive', false);
@@ -130,6 +130,21 @@ class Task extends Phaser.Scene {
               .on('clicked', setSelected, this)
               ,[, 0]);
             this.taskButtons[i].removeAt(1,[, true]);
+
+            //remove close button if nothing is selected
+            var anyActive = false;
+            for(var i = 0; i < this.taskButtons.length;i++)
+            {
+              if(this.taskButtons[i].getData('isActive'))
+              {
+                anyActive = true;
+              }
+            }
+
+            if(!anyActive)
+            {
+              dismiss.setVisible(false);
+            }
           }
         }
 
@@ -190,5 +205,62 @@ class Task extends Phaser.Scene {
           }//end for
       }//end deleteTask
 
+      function dismiss()
+      {
+        for(var i = 0; i < this.taskButtons.length;i++)
+        {
+          if(this.taskButtons[i].getData('isActive'))
+          {
+            task_list.task.splice(i,1);
+            CUR_NUM_TASKS--;
+          }
+        }
+
+        //destroy whole task list
+        for (var i = 0; i < this.taskButtons.length; i++)
+        {
+          this.taskButtons[i].destroy(true);
+        }
+
+        //repopulate task list
+        for(let i = 0; i < CUR_NUM_TASKS; i++)
+        {
+            this.taskButtons[i] = this.add.container(this.scale.width/2, 150*i + 200);
+
+            //background sprite
+            var sprite = this.add.sprite(0,0,'task_new')
+            .setData('index', i)
+            .setScale(0.3)
+            .setInteractive({ useHandCursor: true })
+            .on('clicked', setSelected, this);
+
+            //refresh button to get new task
+            var new_task = this.add.sprite(175,-40,'get_new')
+                .setData('rindex', i)
+                .setScale(1.3)
+                .setInteractive({ useHandCursor: true })
+                //on('event', callback method, scene)
+                .on('clicked', deleteTask, this);
+
+            //task reward icon
+            //task reward icon
+            this.icon[i] = this.add.sprite(125,5,task_list.task[i].icon).setScale(0.7);
+
+            //task title
+            this.title[i] = this.add.text(-175,-45,task_list.task[i].title,
+                {fontFamily: 'Helvetica', fontSize: 20, wordWrap: {width: 265, useAdvancedWrap:true}})
+                .setColor('black');
+
+            //task description
+            this.description[i] = this.add.text(-175, -20,
+              task_list.task[i].description,
+                {fontFamily: 'Helvetica', fontSize: 14, wordWrap: {width: 265, useAdvancedWrap:true}})
+                .setColor('black');
+
+            this.taskButtons[i] = this.add.container(this.scale.width/2, 150*i + 200);
+            this.taskButtons[i].add([sprite, new_task, this.icon[i], this.title[i], this.description[i]]);
+        }//end for
+
+      }
     }//end create
 }//end Tasks
