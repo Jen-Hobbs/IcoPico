@@ -13,5 +13,5 @@ node_modules/
 dist/
 /npm-debug.log
 
-#Others
+#Other
 package-lock.json
