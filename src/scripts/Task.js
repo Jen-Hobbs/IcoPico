@@ -1,4 +1,4 @@
-var MAX_NUM_TASKS = 3;
+var CUR_NUM_TASKS = 3;
 
 class Task extends Phaser.Scene {
     constructor(){
@@ -28,6 +28,9 @@ class Task extends Phaser.Scene {
         }, this);
 
         this.taskButtons = [];
+        this.title = [];
+        this.icon = [];
+        this.description = [];
 
         //Create "tasks done" text to show up when there are no more tasks
         this.add.text(this.scale.width/2, 200, "All tasks complete. Great job!", {fontFamily: 'Helvetica', fontSize: 25})
@@ -53,21 +56,22 @@ class Task extends Phaser.Scene {
         //send button to back for now until task is selected
         this.scene.sendToBack('type2');
 
-        //create task list
-        for(let i = 0; i < MAX_NUM_TASKS; i++)
+        //create task list containers
+        for(let i = 0; i < CUR_NUM_TASKS; i++)
         {
             this.taskButtons[i] = this.add.container(this.scale.width/2, 150*i + 200);
-            this.taskButtons[i].setData('isActive', false);
+        }
 
+        //populate task list
+        for(let i = 0; i < CUR_NUM_TASKS; i++)
+        {
+            this.taskButtons[i] = this.add.container(this.scale.width/2, 150*i + 200);
             //background sprite
             var sprite = this.add.sprite(0,0,'task_new')
             .setData('index', i)
             .setScale(0.3)
             .setInteractive({ useHandCursor: true })
             .on('clicked', setSelected, this);
-
-            //task reward icon
-            var icon = this.add.sprite(125,5,'type2').setScale(0.7);
 
             //refresh button to get new task
             var new_task = this.add.sprite(175,-40,'get_new')
@@ -77,19 +81,22 @@ class Task extends Phaser.Scene {
                 //on('event', callback method, scene)
                 .on('clicked', deleteTask, this);
 
+            //task reward icon
+            this.icon[i] = this.add.sprite(125,5,task_list.task[i].type).setScale(0.7);
+
             //task title
-            var title = this.add.text(-175,-45,"Test title " + i,
+            this.title[i] = this.add.text(-175,-45,task_list.task[i].title,
                 {fontFamily: 'Helvetica', fontSize: 20, wordWrap: {width: 265, useAdvancedWrap:true}})
                 .setColor('black');
 
             //task description
-            var description = this.add.text(-175, -20,
-              "This is a really cool description. The text wraps as it should. I am very happy. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do",
+            this.description[i] = this.add.text(-175, -20,
+              task_list.task[i].description,
                 {fontFamily: 'Helvetica', fontSize: 14, wordWrap: {width: 265, useAdvancedWrap:true}})
                 .setColor('black');
 
             //add all items to taskButton[i] container
-            this.taskButtons[i].add([sprite, icon, new_task, title, description]);
+            this.taskButtons[i].add([sprite, new_task, this.icon[i], this.title[i], this.description[i]]);
         }//end for
 
         /**
@@ -97,23 +104,12 @@ class Task extends Phaser.Scene {
           **/
         function setSelected (tSprite) {
           var i = tSprite.getData('index');
-
-          // var sprite_active = this.add.sprite(0,0,'task_done')
-          // .setData('index', i)
-          // .setScale(0.3)
-          // .setInteractive({ useHandCursor: true })
-          // .on('clicked', setSelected, this);
-          //
-          // var sprite = this.add.sprite(0,0,'task_new')
-          // .setData('index', i)
-          // .setScale(0.3)
-          // .setInteractive({ useHandCursor: true })
-          // .on('clicked', setSelected, this);
-
+          console.log(i);
+          //switch active state
           if(!(this.taskButtons[i].getData('isActive'))) {
             this.taskButtons[i].setData('isActive', true);
-            //change background sprite to yellow
 
+            //flip background sprite to yellow or white
             this.taskButtons[i].addAt(
               this.add.sprite(0,0,'task_done')
               .setData('index', i)
@@ -133,49 +129,63 @@ class Task extends Phaser.Scene {
               .on('clicked', setSelected, this)
               ,[, 0]);
             this.taskButtons[i].removeAt(1,[, true]);
-            //console.log(this.taskButtons[i].getData('isActive'));
           }
         }
 
         /**
-          * callback function for deleteTask
+          * callback function for deleteTask button
           **/
         function deleteTask (rSprite) {
           var i = rSprite.getData('rindex');
-          this.taskButtons.pop(i);
-          console.log("hi");
-          //shift tasks up in the array
-          // for(i; i < MAX_NUM_TASKS; i++)
-          // {
-          //   console.log(i);
-          //   this.taskButtons[i] = this.taskButtons[i+1];
-          // }
+          //delete task from task_list at index
+          task_list.task.splice(i,1);
 
-          //redraw new tasklist
-          // for(var i = 0; i < MAX_NUM_TASKS; i++)
-          // {
-          //   if(temp[i] != null)
-          //   {
-          //     //console.log('hi');
-          //     this.taskButtons[i] = this.add.container(temp[i]);
-          //   }
-          // }
-        }
+          //destroy whole task list
+          for (var i = 0; i < CUR_NUM_TASKS; i++)
+          {
+            this.taskButtons[i].destroy(true);
+          }
 
-        // //make the tasks move up a position if there is a space
-        // function floatUp(deletedIndex)
-        // {
-        //   for(var i = deletedIndex; i < MAX_NUM_TASKS; i++)
-        //   {
-        //     console.log(i);
-        //     this.taskButtons[i] = this.taskButtons[i+1];
-        //   }
-        // }
+          //decrease total number of tasks
+          CUR_NUM_TASKS--;
 
-        function refreshTasklist()
-        {
+          //repopulate task list
+          for(let i = 0; i < CUR_NUM_TASKS; i++)
+          {
+              this.taskButtons[i] = this.add.container(this.scale.width/2, 150*i + 200);
 
-        }
+              //background sprite
+              var sprite = this.add.sprite(0,0,'task_new')
+              .setData('index', i)
+              .setScale(0.3)
+              .setInteractive({ useHandCursor: true })
+              .on('clicked', setSelected, this);
+
+              //refresh button to get new task
+              var new_task = this.add.sprite(175,-40,'get_new')
+                  .setData('rindex', i)
+                  .setScale(1.3)
+                  .setInteractive({ useHandCursor: true })
+                  //on('event', callback method, scene)
+                  .on('clicked', deleteTask, this);
+
+              //task reward icon
+              this.icon[i] = this.add.sprite(125,5,task_list.task[i].type).setScale(0.7);
+
+              //task title
+              this.title[i] = this.add.text(-175,-45,task_list.task[i].title,
+                  {fontFamily: 'Helvetica', fontSize: 20, wordWrap: {width: 265, useAdvancedWrap:true}})
+                  .setColor('black');
+
+              //task description
+              this.description[i] = this.add.text(-175, -20,
+                task_list.task[i].description,
+                  {fontFamily: 'Helvetica', fontSize: 14, wordWrap: {width: 265, useAdvancedWrap:true}})
+                  .setColor('black');
+
+              this.taskButtons[i] = this.add.container(this.scale.width/2, 150*i + 200);
+              this.taskButtons[i].add([sprite, new_task, this.icon[i], this.title[i], this.description[i]]);
+          }//end for
+      }//end deleteTask
     }//end create
-
-}
+}//end Tasks
