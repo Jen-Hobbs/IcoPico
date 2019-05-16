@@ -3,7 +3,7 @@
     var runningScenes = [];
     var newTask = 1;
     
-    let currentDate = new Date('2019-05-15T13:41:00'); //last login sample data
+    let currentDate = new Date('2019-05-14T13:41:00'); //last login sample data
     var player = {
         'happiness' :[20, 60, 70],
         
