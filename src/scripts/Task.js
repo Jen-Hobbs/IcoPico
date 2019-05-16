@@ -11,10 +11,10 @@ class Task extends Phaser.Scene {
         this.load.image("menuPet", '../images/buttons/Other/menu.png');
         this.load.image("task_new", '../images/buttons/task_hub/task_new.png');
         this.load.image("task_done", '../images/buttons/task_hub/task_done.png');
-        this.load.image("type1", '../images/buttons/task_hub/icecream.png');
-        this.load.image("type2", '../images/buttons/task_hub/carrot.png');
-        this.load.image("type3", '../images/buttons/task_hub/donut.png');
-        this.load.image("type3", '../images/buttons/task_hub/money.png');
+        this.load.image("type1", '../images/icons/money.png');
+        this.load.image("type2", '../images/food/carrot.png');
+        this.load.image("type3", '../images/food/donut.png');
+        this.load.image("type4", '../images/food/popsicle.png');
         this.load.image("x", '../images/buttons/Other/x.png');
         this.load.image("menuPet", '../images/buttons/Other/menu.png');
         this.load.image("get_new", '../images/buttons/task_hub/get_new.png');
@@ -82,7 +82,7 @@ class Task extends Phaser.Scene {
                 .on('clicked', deleteTask, this);
 
             //task reward icon
-            this.icon[i] = this.add.sprite(127,0,task_list.task[i].icon).setScale(0.3);
+            this.icon[i] = this.add.sprite(125,0,task_list.task[i].icon).setScale(0.7);
 
             //task title
             this.title[i] = this.add.text(-175,-45,task_list.task[i].title,
