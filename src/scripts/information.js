@@ -30,10 +30,10 @@
     };
 var playerPets = {'pet' : [
     {'currentHappiness' : 20,
-    'currentHunger' : 40},
+    'currentHunger' : 100},
     {'currentHappiness' : 60,
     'currentHunger' : 40},
-    {'currentHappiness' : 70,
+    {'currentHappiness' : 100,
     'currentHunger' : 40}
 ] 
 }

@@ -3,8 +3,8 @@ var config = {
     parent: 'wrapper',
     scale: {
         mode: Phaser.Scale.FIT,
-        width: 1236,
-        height: 681,
+        width: 800,
+        height: 600,
         type: Phaser.AUTO,
         autoCenter: Phaser.Scale.autoCenter
 
