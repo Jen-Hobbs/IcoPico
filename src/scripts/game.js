@@ -1,3 +1,7 @@
+/**
+ * Create Game
+ *
+**/
 var config = {
 
     parent: 'wrapper',
@@ -17,9 +21,11 @@ var config = {
         }
     },
     scene: [ShowMenu, Shop, Task, Purchase, Pethub, PethubOverlay, Time]
-    
+
 };
 
 var game = new Phaser.Game(config);
 var player;
 var display;
+
+console.log("game is loaded");
