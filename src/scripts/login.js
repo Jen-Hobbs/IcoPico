@@ -1,18 +1,43 @@
+var currentUserEmail = 'sample1@gmail.com';
+var playerInfo;
+
+$.ajax({
+  //console.log("starting ajax call")
+  url: "/getinitialinfo/"+currentUserEmail,
+  dataType: "json",
+  port: "8000",
+  type: "GET",
+  success: function(data) {
+    // console.log("Ajax call worked");
+    playerInfo = JSON.parse(data);
+  },
+  error: function(jqXHR, textStatus, errorThrown) {
+    console.log("ERROR:", jqXHR, textStatus, errorThrown);
+  }
+  // console.log("Ajax call failed");
+});
+
 firebase.auth().onAuthStateChanged(function (user) {
     database.ref("userlist/" + user.uid).update({
         "userName": user.displayName,
         "email": user.email
     });
+    currentUserEmail = user.email;
     sessionStorage.setItem("uid", user.uid);
     sessionStorage.setItem("name", user.displayName);
+
+
 });
 
+console.log(currentUserEmail);
 // database.ref("icopico-89023").update({"name" : "nic"});
 
 var uiConfig = {
     callbacks: {
         signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-            return true;
+            window.alert(currentUserEmail);
+
+            //PUT QUERY FOR DATABASE HERE
         },
         uiShown: function () {
             document.getElementById('loader').style.display = 'none';
