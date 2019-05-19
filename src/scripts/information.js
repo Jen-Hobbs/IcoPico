@@ -3,14 +3,13 @@
     var runningScenes = [];
     var newTask = 1;
     
-    let currentDate = new Date('2019-05-15T13:41:00'); //last login sample data
+    let currentDate = new Date('2019-05-14T13:41:00'); //last login sample data
     var player = {
-        'happiness' :[20, 60, 70],
+        // 'happiness' :[20, 60, 70],
         
         'activePet' : 0,
         'food':[
-            {'foodType': 'icecream' , 'amount' : 2}, 
-            {'foodType' : 'moni', 'amount' : 1}
+            {'foodType': 'carrot' , 'amount' : 2}
         ],
 
 
@@ -30,10 +29,10 @@
     };
 var playerPets = {'pet' : [
     {'currentHappiness' : 20,
-    'currentHunger' : 40},
+    'currentHunger' : 100},
     {'currentHappiness' : 60,
     'currentHunger' : 40},
-    {'currentHappiness' : 70,
+    {'currentHappiness' : 100,
     'currentHunger' : 40}
 ] 
 }
@@ -46,7 +45,7 @@ var playerPets = {'pet' : [
         {'type' : 'moni', 'cost' : 10}
     ]};
     
-var updateHappiness = 0;
+var updateHunger = 0; //used when we feed pet
 
     var task_list = {"task" : [
         {

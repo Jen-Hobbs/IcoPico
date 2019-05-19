@@ -17,7 +17,7 @@ class Shop extends Phaser.Scene {
     create(){
         var test = this.add.sprite(this.scale.width/2, this.scale.height/2, 'backShop');     
         this.textLayout();
-        let menu2 = this.add.sprite(this.scale.width*.04, this.scale.height*.05, 'menuShop');  
+        let menu2 = this.add.sprite(this.scale.width*.06, this.scale.height*.06, 'menuShop');  
         menu2.setInteractive();
         menu2.on('pointerdown', ()=> {
             runningScenes = ['Shop', 'Purchase'];
@@ -43,7 +43,7 @@ class Shop extends Phaser.Scene {
         var shop = this.add.text(this.scale.width/2, this.scale.height*.10, "Shop", {fontFamily: 'serif', fontSize: 64});
         shop.setOrigin(0.5);
         shop.setColor('black');
-        let menu2 = this.add.sprite(this.scale.width*.04, this.scale.height*.05, 'menuShop');  
+        // let menu2 = this.add.sprite(this.scale.width*.04, this.scale.height*.05, 'menuShop');  
         var food = this.add.text(this.scale.width/2, this.scale.height*.2, "Food", {fontFamily: 'serif', fontSize: 32});
         food.setOrigin(0.5);
         food.setColor('black');
