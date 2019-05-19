@@ -5,12 +5,11 @@
     
     let currentDate = new Date('2019-05-14T13:41:00'); //last login sample data
     var player = {
-        'happiness' :[20, 60, 70],
+        // 'happiness' :[20, 60, 70],
         
         'activePet' : 0,
         'food':[
-            {'foodType': 'icecream' , 'amount' : 2}, 
-            {'foodType' : 'moni', 'amount' : 1}
+            {'foodType': 'carrot' , 'amount' : 2}
         ],
 
 

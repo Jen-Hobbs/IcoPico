@@ -19,12 +19,12 @@ class ShowMenu extends Phaser.Scene {
     create(){
         // let graphics = this.add.graphics();
         // graphics.fillStyle(0X38a081,.8).fillRect(0,0,100, this.scale.height);
-        let menu = this.add.sprite(this.scale.width*.04, this.scale.height*.05, 'menu');
+        let menu = this.add.sprite(this.scale.width*.06, this.scale.height*.06, 'menu');
         menu.setInteractive();
         menu.on('pointerdown', () => {
            this.scene.stop('ShowMenu');
         })
-        let pet = this.add.sprite(this.scale.width*.04, this.scale.height*.2, 'buttonPethub');
+        let pet = this.add.sprite(this.scale.width*.06, this.scale.height*.21, 'buttonPethub');
         pet.setInteractive();
         pet.on('pointerdown', () =>{
             console.log('pet');
@@ -35,7 +35,7 @@ class ShowMenu extends Phaser.Scene {
             this.scene.bringToTop('PethubOverlay');      
             this.scene.stop('ShowMenu');      
         })
-        let shop =  this.add.sprite(this.scale.width*.04, this.scale.height*.35, 'buttonShop');
+        let shop =  this.add.sprite(this.scale.width*.06, this.scale.height*.36, 'buttonShop');
         shop.setInteractive();
         shop.on('pointerdown', () =>{
             console.log('shop');
@@ -45,7 +45,7 @@ class ShowMenu extends Phaser.Scene {
             this.scene.stop('ShowMenu');  
         })
 
-        let task =  this.add.sprite(this.scale.width*.04, this.scale.height*.5, 'buttonTask');
+        let task =  this.add.sprite(this.scale.width*.06, this.scale.height*.51, 'buttonTask');
         task.setInteractive();
         task.on('pointerdown', () =>{
             this.stopScenes();
@@ -54,7 +54,7 @@ class ShowMenu extends Phaser.Scene {
             this.scene.stop('ShowMenu'); 
         })
         
-        let logout = this.add.sprite(this.scale.width*.04, this.scale.height*.65, 'logout');
+        let logout = this.add.sprite(this.scale.width*.06, this.scale.height*.66, 'logout');
     }
     stopScenes(){
         for(var i = 0; i < this.runningScenes.length; i++){

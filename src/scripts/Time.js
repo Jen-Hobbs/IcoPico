@@ -35,7 +35,7 @@ class Time extends Phaser.Scene {
            console.log("old" + playerPets.pet[i].currentHunger);
            playerPets.pet[i].currentHappiness -= this.changedTime;
            playerPets.pet[i].currentHunger -= this.changedTime;
-           player.happiness[i] -= this.changedTime; // old version changing happiness
+        //    player.happiness[i] -= this.changedTime; // old version changing happiness
            if(playerPets.pet[i].currentHappiness < 0){
             playerPets.pet[i].currentHappiness = 0;
            }
