@@ -13,7 +13,7 @@
         ],
 
 
-        'money' : 30,
+        'money' : 300,
         'items' : [],
         // 'pet1' : {
         //     'happiness' : 20
@@ -37,12 +37,12 @@ var playerPets = {'pet' : [
 ] 
 }
     var pets = {"pet" : [
-        {"petName": "shinyboi", "cost" : 100}
+        {"petName": "shinyboi", "cost" : 100},
+        {"petName": "mony", "cost" : 200}
     ]};
     let foodTypes = {'food' : [
         {'type' : 'icecream', 'cost' : 20},
-        {'type' : 'carrot', 'cost' : 10},
-        {'type' : 'donut', 'cost' : 30}
+        {'type' : 'moni', 'cost' : 10}
     ]};
     
 var updateHunger = 0; //used when we feed pet
