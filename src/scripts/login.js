@@ -1,5 +1,3 @@
-//var currentUserEmail = 'sample1@gmail.com';
-
 firebase.auth().onAuthStateChanged(function (user) {
     database.ref("userlist/" + user.uid).update({
         "userName": user.displayName,
@@ -7,19 +5,14 @@ firebase.auth().onAuthStateChanged(function (user) {
     });
     sessionStorage.setItem("uid", user.uid);
     sessionStorage.setItem("name", user.displayName);
-    sessionStorage.setItem("currentUserEmail", user.email);
-
-    getPlayerInfo(sessionStorage.getItem("currentUserEmail", user.email));
-    // console.log(sessionStorage.getItem("currentUserEmail"));
 });
+
 // database.ref("icopico-89023").update({"name" : "nic"});
 
 var uiConfig = {
     callbacks: {
         signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-            // window.alert(currentUserEmail);
-
-            //PUT QUERY FOR DATABASE HERE
+            return true;
         },
         uiShown: function () {
             document.getElementById('loader').style.display = 'none';
