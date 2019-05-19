@@ -46,7 +46,7 @@ var playerPets = {'pet' : [
         {'type' : 'moni', 'cost' : 10}
     ]};
     
-var updateHappiness = 0;
+var updateHunger = 0; //used when we feed pet
 
     var task_list = {"task" : [
         {
