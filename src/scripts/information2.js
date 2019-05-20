@@ -41,6 +41,17 @@ var inventoryInfo;
  **/
 var taskListInfo;
 
+initGameInfo();
+function initGameInfo() {
+  var parameters = new URLSearchParams(window.location.search);
+  playerEmail = parameters.get('email');
+  getPlayerInfo(playerEmail);
+  getPlayerPet();
+  getInventory();
+  getTaskList();
+  console.log(playerInfo);
+}
+
 function getPlayerInfo(email)
 {
   //Ajax call to get info from player table
