@@ -1,4 +1,4 @@
-//var currentUserEmail = 'sample1@gmail.com';
+var currentUserEmail;
 
 firebase.auth().onAuthStateChanged(function (user) {
     database.ref("userlist/" + user.uid).update({
@@ -7,22 +7,27 @@ firebase.auth().onAuthStateChanged(function (user) {
     });
     sessionStorage.setItem("uid", user.uid);
     sessionStorage.setItem("name", user.displayName);
-    sessionStorage.setItem("currentUserEmail", user.email);
-
-    getPlayerInfo(sessionStorage.getItem("currentUserEmail", user.email));
-    // console.log(sessionStorage.getItem("currentUserEmail"));
+    sessionStorage.setItem("email", user.email);
 });
+
 // database.ref("icopico-89023").update({"name" : "nic"});
 
 var uiConfig = {
     callbacks: {
         signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-            // window.alert(currentUserEmail);
-
-            //PUT QUERY FOR DATABASE HERE
+          getPlayerInfo(sessionStorage.getItem("email"));
+          getPlayerPet();
+          getInventory();
+          getTaskList();
+          return true;
         },
         uiShown: function () {
             document.getElementById('loader').style.display = 'none';
+        },
+        getPlayerInfo: function() {
+          //Ajax call to get info from player table
+          console.log('hi');
+
         }
     },
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
@@ -43,4 +48,4 @@ var uiConfig = {
 };
 
 // The start method will wait until the DOM is loaded.
-ui.start('#firebaseui-auth-container', uiConfig);
+ui.start('#firebaseui-auth-container', uiConfig, getPlayerInfo);
