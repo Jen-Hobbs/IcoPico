@@ -31,16 +31,28 @@
 var playerTasks = {'task' :[
     {'taskIDa': 1},
     {'taskIDb': 2},
-    {'taskIDc': 3}
+    
 ]};
 
 var playerPets = {'pet' : [
     {'currentHappiness' : 20,
-    'currentHunger' : 100},
+    'currentHunger' : 100,
+    'petID' : 1,
+    'recycling': 0,
+    'utility' : 0,
+    'health' : 0},
     {'currentHappiness' : 60,
-    'currentHunger' : 40},
+    'currentHunger' : 40,
+    'petID' : 1,
+    'recycling': 0,
+    'utility' : 0,
+    'health' : 0},
     {'currentHappiness' : 100,
-    'currentHunger' : 40}
+    'currentHunger' : 40,
+    'petID' : 1,
+    'recycling': 0,
+    'utility' : 0,
+    'health' : 0}
 ] 
 }
     var pets = {"pet" : [
@@ -59,60 +71,70 @@ var updateHunger = 0; //used when we feed pet
           "id": "1",
           "title": "Around the World",
           "description" : "Ride your bike around town",
+          'evolutionType' : 'health',
           "icon": "type1"
         },
         {
           "id": "2",
           "title": "Turn off the lights",
           "description" : "Turn off the lights when you leave the house",
+          'evolutionType' : 'utility',
           "icon": "type2"
         },
         {
           "id": "3",
           "title": "Take out the recycling",
           "description": "Remember to separate the plastic from the garbage",
+          'evolutionType' : 'recycling',
           "icon": "type3"
         },
         {
             "id": "4",
             "title": "Eco Grocery Shopping",
             "description": "Take the bus, walk, or bike to go grocery shopping",
+            'evolutionType' : 'recycling',
             "icon": "type4"
           },
           {
             "id": "5",
             "title": "Transit to Work",
             "description": "Take the bus, walk, or bike to work",
+            'evolutionType' : 'health',
             "icon": "type5"
           },
           {
             "id": "6",
             "title": "Reusable Bags",
             "description": "For the next week use reusable bags instead of plastic",
+            'evolutionType' : 'recycling',
             "icon": "type5"
           },
           {
             "id": "7",
             "title": "Reusable Water Bottle",
             "description": "Use a reussable waterbottle instead of plastic",
+            'evolutionType' : 'recycling',
             "icon": "type3"
           },
           {
             "id": "8",
             "title": "Thermos",
             "description": "Use a Thermos to buy coffee/tea instead of a disposible cup or make your own",
+            'evolutionType' : 'recycling',
             "icon": "type3"
           },
           {
             "id": "9",
             "title": "Turn off the tap",
             "description": "Turn off the water when brushing your teeth",
+            'evolutionType' : 'utility',
             "icon": "type2"
           },
           {
             "id": "10",
             "title": "Turn off the shower",
             "description": "Turn off the water when washing your hair",
+            'evolutionType' : 'utility',
             "icon": "type1"
           },
     ]};
