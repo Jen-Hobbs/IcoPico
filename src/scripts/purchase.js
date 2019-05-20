@@ -1,3 +1,5 @@
+
+
 class Purchase extends Phaser.Scene {
     constructor() {
         super({ key: "Purchase", active: false });
@@ -36,15 +38,34 @@ class Purchase extends Phaser.Scene {
         purchase.setInteractive();
         if (this.type == 'pet') {
             var image = this.add.sprite(this.scale.width / 2, this.scale.height * .48, this.info.petName).setScale(.2);
-            if (player.money >= this.info.cost) {
+            if (playerInfo[0].currency >= this.info.cost) {
                 this.add.text(this.scale.width * .58, this.scale.height * .58, 'Buy').setColor('black');
                 console.log("buy pet");
                 purchase.on('pointerdown', () => {
-                    player.money = player.money - this.info.cost;
-                    console.log("money left" + player.money);
-                    information.push(this.info.petName);
-                    player.happiness.push(50);
-                    console.log("pet added" + information);
+                    playerInfo[0].currency = playerInfo[0].currency - this.info.cost;
+                    console.log("money left" + playerInfo[0].currency);
+                    console.log("what is this" + this.info.petName);
+                    var newPet = new Object();
+                    //missing playerPetID
+                    //no way to set petname
+                    
+                    for(var i =0; i < pets.pet.length; i++){
+                        if(pets.pet[i].petName == this.info.petName){
+                            newPet.petID = i;
+                            console.log('pet location and name' + newPet.petID + this.info.petName);
+                        }
+                    }
+                    newPet.currentHappiness = 50;
+                    newPet.currentHunger = 50;
+                    newPet.petName = 'empty';
+                    newPet.playerID = playerInfo[0];
+                    newPet.totalHappiness = 0;
+                    newPet.totalHunger = 0;
+                    newPet.recycling = 0;
+                    newPet.utility = 0;
+                    newPet.health = 0;
+                    playerPetInfo.push(newPet);
+                    console.log("pet added" + playerPetInfo);
                     image.destroy('purchase');
                     this.scene.stop('Purchase');
                     this.scene.run('Shop');
@@ -64,31 +85,36 @@ class Purchase extends Phaser.Scene {
         }
         else {
             var image = this.add.sprite(this.scale.width / 2, this.scale.height * .48, this.info.type).setScale(.8);
-            if (player.money >= this.info.cost) {
+            if (playerInfo[0].currency >= this.info.cost) {
                 
                 this.add.text(this.scale.width * .58, this.scale.height * .58, 'Buy').setColor('black');
                 console.log("buy food");
                 purchase.on('pointerdown', () => {
-                    player.money = player.money - this.info.cost;
-                    console.log("money left" + player.money);
+                    playerInfo[0].currency = playerInfo[0].currency - this.info.cost;
+                    console.log("money left" + playerInfo[0].currency);
                     var check = 0;
-                    for(var i = 0; i < player.food.length; i++){
-                        if(player.food[i].foodType == this.info.type){
-                            player.food[i].amount++;
+                    for(var i = 0; i < inventoryInfo.length; i++){
+                        if(foodTypes.food[inventoryInfo[i].itemID].type == this.info.type){
+                            inventoryInfo[i].itemQty++;
                             check++;
                         }
                     }
                     if(check == 0){
                         var stuff = {};
-                        stuff.foodType = this.info.type;
-                        stuff.amount = 1;
-                        player.food.push(stuff);
+                        for(var i =0; i < foodTypes.food.length; i++){
+                            if(foodTypes.food[i].type == this.info.type){
+                                stuff.itemID = i;
+                            }
+                        }
+                        stuff.itemQty = 1;
+                        stuff.playerID = playerInfo[0].playerID;
+                        //missing inventory id
+                        inventoryInfo.push(stuff);
                         
-                        console.log(player.food);
+                        console.log(inventoryInfo);
                     }
                     //information.push(this.info.petName);
                     //player.happiness.push(50);
-                    console.log("food added" + player.food);
                     image.destroy('purchase');
                     this.scene.stop('Purchase');
                     this.scene.run('Shop');

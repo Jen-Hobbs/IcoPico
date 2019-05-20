@@ -15,8 +15,9 @@ class Time extends Phaser.Scene {
     create() {
 
         this.updateLastLogin();
+        this.setTaskList();
         this.updateTasks();
-        this.updateEmotions();
+        this.updateEmotions(); 
         this.evolution();
     }
     /**
@@ -25,61 +26,77 @@ class Time extends Phaser.Scene {
     updateLastLogin() {
         this.timeCurrent = new Date();
         console.log("current time " + this.timeCurrent.getDate());
-        console.log('last login ' + player.lastlogin.getDate());
-        this.changedTime = (this.timeCurrent.getTime() - player.lastlogin.getTime()) / 10800000;
+        console.log('last login ' + lastLogin.getDate());
+        this.changedTime = (this.timeCurrent.getTime() - lastLogin.getTime()) / 10800000;
     }
     /**
      * updates the hunger and happiness of the pet in relation to 3 hours from last login to current updates last login time
      */
     updateEmotions() {
-        for (var i = 0; i < playerPets.pet.length; i++) {
-            console.log("old" + playerPets.pet[i].currentHappiness);
-            console.log("old" + playerPets.pet[i].currentHunger);
-            playerPets.pet[i].currentHappiness -= this.changedTime;
-            playerPets.pet[i].currentHunger -= this.changedTime;
+        for (var i = 0; i < playerPetInfo.length; i++) {
+            console.log("old" + playerPetInfo[i].currentHappiness);
+            console.log("old" + playerPetInfo[i].currentHunger);
+            playerPetInfo[i].currentHappiness -= this.changedTime;
+            playerPetInfo[i].currentHunger -= this.changedTime;
             //    player.happiness[i] -= this.changedTime; // old version changing happiness
-            if (playerPets.pet[i].currentHappiness < 0) {
-                playerPets.pet[i].currentHappiness = 0;
+            if (playerPetInfo[i].currentHappiness < 0) {
+                playerPetInfo[i].currentHappiness = 0;
             }
-            if (playerPets.pet[i].currentHunger < 0) {
-                playerPets.pet[i].currentHunger = 0;
+            if (playerPetInfo[i].currentHunger < 0) {
+                playerPetInfo[i].currentHunger = 0;
             }
-            console.log('new' + playerPets.pet[i].currentHappiness);
-            console.log("new" + playerPets.pet[i].currentHunger);
+            console.log('new' + playerPetInfo[i].currentHappiness);
+            console.log("new" + playerPetInfo[i].currentHunger);
         }
-        player.lastlogin = this.timeCurrent;
-        this.databaseUpdate();
+        lastLogin = this.timeCurrent;
     }
-    //add query here to update database of last login, and pets current Happiness current hunger
-    databaseUpdate() {
-
+    /**
+     * change tasklist to array
+     */
+    setTaskList(){
+        if(tasklistInfo[0].taskIDa != 0){
+            console.log('a added');
+            playerTasks.push(tasklistInfo[0].taskIDa);
+        }
+        if(tasklistInfo[0].taskIDb != 0){
+            console.log('b added');
+            playerTasks.push(tasklistInfo[0].taskIDa);
+        }
+        if(tasklistInfo[0].taskIDc != 0){
+            console.log('c added' + tasklistInfo[0].taskIDc);
+            playerTasks.push(tasklistInfo[0].taskIDa);
+        }
     }
     /**
      * update tasks to 3 if last login before midnight
      */
     updateTasks() {
 
-        if (this.timeCurrent.getDate() != player.lastlogin.getDate()
-            || this.timeCurrent.getMonth() != player.lastlogin.getMonth()
-            || this.timeCurrent.getFullYear() != player.lastlogin.getFullYear()) {
-            while (playerTasks.task.length != 3) {
+        if (this.timeCurrent.getDate() != lastLogin.getDate()
+            || this.timeCurrent.getMonth() != lastLogin.getMonth()
+            || this.timeCurrent.getFullYear() != lastLogin.getFullYear()) {
+            while (playerTasks.length != 3) {
                 newTask = 1;
-                playerTasks.task[playerTasks.task.length] = Math.floor(Math.random() * (+10 - +1)) + +1;
-                console.log("random value" + playerTasks.task[playerTasks.task.length - 1]);
+                playerTasks[playerTasks.length] = Math.floor(Math.random() * (+10 - +1)) + +1;
+                console.log("random value" + playerTasks[playerTasks.length - 1]);
             }
         }
     }
+    /**
+     * chance of evolving pet
+     * need to save evolution
+     */
     evolution() {
-        for (var i = 0; i < playerPets.pet.length; i++) {
-            if (playerPets.pet[i].petID <= 3) {
-                if (playerPets.pet[i].recycling > 10 && Math.random() > 0.7) {
-                    playerPets.pet[i].petID += 3;
+        for (var i = 0; i < playerPetInfo.length; i++) {
+            if (playerPetInfo[i].petID <= 3) {
+                if (playerPetInfo[i].recycling > 10 && Math.random() > 0.7) {
+                    playerPetInfo[i].petID += 3;
                 }
-                if (playerPets.pet[i].recycling > 10 && Math.random() > 0.7) {
-                    playerPets.pet[i].petID += 6;
+                if (playerPetInfo[i].utility > 10 && Math.random() > 0.7) {
+                    playerPetInfo[i].petID += 6;
                 }
-                if (playerPets.pet[i].recycling > 10 && Math.random() > 0.7) {
-                    playerPets.pet[i].petID += 9;
+                if (playerPetInfo[i].health > 10 && Math.random() > 0.7) {
+                    playerPetInfo[i].petID += 9;
                 }
             }
         }

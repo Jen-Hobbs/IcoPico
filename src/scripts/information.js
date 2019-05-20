@@ -1,60 +1,56 @@
 
-    let information = ['shinyboi', 'shinyboi', 'shinyboi'];
-    var runningScenes = [];
-    var newTask = 0;
+var updateHunger = 0; //used when we feed pet
+var runningScenes = [];
+var newTask = 0;
+    // let information = ['shinyboi', 'shinyboi', 'shinyboi'];
     
-    let currentDate = new Date('2019-05-18T13:41:00'); //last login sample data
-    var player = {
-        // 'happiness' :[20, 60, 70],
+    // var player = {
+    //     // 'happiness' :[20, 60, 70],
         
-        'activePet' : 0,
-        'food':[
-            {'foodType': 'carrot' , 'amount' : 2}
-        ],
+    //     'activePet' : 0,
+    //     'food':[
+    //         {'foodType': 'carrot' , 'amount' : 2}
+    //     ],
 
 
-        'money' : 30,
-        'items' : [],
-        // 'pet1' : {
-        //     'happiness' : 20
-        // },
-        // 'pet2' : {
-        //     'happiness' : 60
-        // },
-        // 'pet3' : {
-        //     'happiness' : 70
-        // }
+    //     'money' : 30,
+    //     'items' : [],
+    //     // 'pet1' : {
+    //     //     'happiness' : 20
+    //     // },
+    //     // 'pet2' : {
+    //     //     'happiness' : 60
+    //     // },
+    //     // 'pet3' : {
+    //     //     'happiness' : 70
+    //     // }
 
-        'lastlogin' : currentDate
-    };
+    //     'lastlogin' : currentDate
+    // };
 
-var playerTasks = {'task' :[
-    {'taskIDa': 1},
-    {'taskIDb': 2},
-    
-]};
+var playerTasks = [];
 
-var playerPets = {'pet' : [
-    {'currentHappiness' : 20,
-    'currentHunger' : 100,
-    'petID' : 1,
-    'recycling': 0,
-    'utility' : 0,
-    'health' : 0},
-    {'currentHappiness' : 60,
-    'currentHunger' : 40,
-    'petID' : 1,
-    'recycling': 0,
-    'utility' : 0,
-    'health' : 0},
-    {'currentHappiness' : 100,
-    'currentHunger' : 40,
-    'petID' : 1,
-    'recycling': 0,
-    'utility' : 0,
-    'health' : 0}
-] 
-}
+// var playerPets = {'pet' : [
+//     {'currentHappiness' : 20,
+//     'currentHunger' : 100,
+//     'petID' : 1,
+//     'recycling': 0,
+//     'utility' : 0,
+//     'health' : 0},
+//     {'currentHappiness' : 60,
+//     'currentHunger' : 40,
+//     'petID' : 1,
+//     'recycling': 0,
+//     'utility' : 0,
+//     'health' : 0},
+//     {'currentHappiness' : 100,
+//     'currentHunger' : 40,
+//     'petID' : 1,
+//     'recycling': 0,
+//     'utility' : 0,
+//     'health' : 0}
+// ] 
+// }
     var pets = {"pet" : [
         {"petName": "shinyboi", "cost" : 100}
     ]};
@@ -64,8 +60,6 @@ var playerPets = {'pet' : [
         {'type' : 'donut', 'cost' : 30}
     ]};
     
-var updateHunger = 0; //used when we feed pet
-
     var task_list = {"task" : [
         {
           "id": "1",
