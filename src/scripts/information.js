@@ -52,7 +52,13 @@ var playerTasks = [];
 // ] 
 // }
     var pets = {"pet" : [
-        {"petName": "shinyboi", "cost" : 100}
+        {"petName": "shinyboi", "cost" : 100},
+        {"petName": "dogboi", "cost" : 100},
+        {"petName": "octoboi", "cost" : 100},
+        {"petName": "fluffboi"},
+        {"petName": "jellyboi"},
+        {"petName": "potatoboi"},
+        {"petName": "sushiboi"}
     ]};
     let foodTypes = {'food' : [
         {'type' : 'icecream', 'cost' : 20},

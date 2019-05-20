@@ -7,7 +7,7 @@ class Shop extends Phaser.Scene {
         this.load.image("menuShop", '../images/buttons/Other/menu.png');
         this.load.image('whiteCircle', '../images/icons/whiteCircle.png');
         // this.load.image('shinyboi', '../images/pets/shinyboi.png');
-        for(var i = 0; i <  pets.pet.length; i++){
+        for(var i = 0; i <  3; i++){
             this.load.image(pets.pet[i].petName, '../images/pets/' + pets.pet[i].petName + '.png');
         }
         this.load.image('money', '../images/icons/money.png');
@@ -69,7 +69,7 @@ class Shop extends Phaser.Scene {
         //     white.setInteractive();
         //     white.on('clicked', this.select, this);
         // }
-        for(var i = 0; i < pets.pet.length; i++){
+        for(var i = 0; i < 3; i++){
             var petSelect = this.add.container(this.scale.width*(.2 + (i*.15)), this.scale.height *.75);
             petSelect.setSize(100, 200);
             petSelect.add(this.add.sprite(0,0, 'whiteCircle'));

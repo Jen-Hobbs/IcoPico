@@ -6,7 +6,21 @@ var playerInfo = [{
   accountEmail: "something"
 }]
 
-var playerPetInfo = [{
+var playerPetInfo = [
+  {
+    currentHappiness: 30,
+    currentHunger: 50,
+    petID: 2,
+    petName: "petA",
+    playerID: 1,
+    playerPetID: 1,
+    totalHappiness: 0,
+    totalHunger: 0,
+    recycling: 0,
+    utility: 0,
+    health: 0
+  
+  },{
   currentHappiness: 30,
   currentHunger: 50,
   petID: 0,
@@ -20,9 +34,37 @@ var playerPetInfo = [{
   health: 0
 
 },
+{
+  currentHappiness: 30,
+  currentHunger: 50,
+  petID: 1,
+  petName: "petA",
+  playerID: 1,
+  playerPetID: 1,
+  totalHappiness: 0,
+  totalHunger: 0,
+  recycling: 0,
+  utility: 0,
+  health: 0
+
+},
+{
+  currentHappiness: 30,
+  currentHunger: 50,
+  petID: 4,
+  petName: "petA",
+  playerID: 1,
+  playerPetID: 1,
+  totalHappiness: 0,
+  totalHunger: 0,
+  recycling: 0,
+  utility: 0,
+  health: 0
+
+},
 {  currentHappiness: 30,
   currentHunger: 100,
-  petID: 0,
+  petID: 5,
   petName: "petA",
   playerID: 1,
   playerPetID: 1,
