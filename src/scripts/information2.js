@@ -39,9 +39,9 @@ var inventoryInfo;
     taskIDc: 3
     taskListID: 1 }
  **/
-var tasklistInfo;
+var taskListInfo;
 
-function getPlayerInfo(email, _callback)
+function getPlayerInfo(email)
 {
   //Ajax call to get info from player table
   $.ajax({
@@ -124,3 +124,25 @@ function getTaskList()
       }
     });
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// function updateAttribute(table, attribute, listLevel, newValue _callback)
+// {
+//   //Ajax call to get info from TaskList table
+//   $.ajax({
+//     url: "/gettasklistinfo/" + "'" + playerID + "'",
+//     dataType: "json",
+//     port: "8000",
+//     type: "GET",
+//     async: false,
+//     success: function(data) {
+//       //playerInfo = JSON.parse(data);
+//       //data[0] because there will always only be 1 tasklist per email
+//       taskListInfo = data[0];
+//       console.log(taskListInfo);
+//     },
+//     error: function(jqXHR, textStatus, errorThrown) {
+//       console.log("ERROR:", jqXHR, textStatus, errorThrown);
+//     }
+//   });
+// }

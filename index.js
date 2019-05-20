@@ -99,10 +99,18 @@ app.get('/gettasklistinfo/:id', (req, res) => {
     });
 });
 
-// app.listen('8080', () => {
-//     console.log('Server started on port 8080');
-// })
-
+//Update attribute in databse table
+app.get('/gettasklistinfo/:table:attribute:listlevel:id', (req, res) => {
+    //let sql = `SELECT * FROM ${req.params.table} WHERE playerID = ${req.params.attribute}`;
+    let sql = `UPDATE ${req.params.attribute} FROM ${req.params.table} WHERE playerID`
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
 var server = app.listen(8080, function(){
     var port = server.address().port;
     console.log("Server started at http://localhost:%s", port);
