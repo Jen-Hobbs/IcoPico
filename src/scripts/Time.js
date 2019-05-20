@@ -15,16 +15,17 @@ class Time extends Phaser.Scene {
     create(){
 
         this.updateLastLogin();
+        this.updateTasks();
+        this.updateEmotions();
     }
     /**
      * sets changed time for happiness/hunger change in comparison to last login and current time to the nearest 3rd hour
      */
     updateLastLogin(){
         this.timeCurrent = new Date();
+        console.log("current time " + this.timeCurrent.getDate());
+        console.log('last login ' + player.lastlogin.getDate());
         this.changedTime = (this.timeCurrent.getTime() - player.lastlogin.getTime())/10800000;
-        this.updateEmotions();
-        
-
     }
     /**
      * updates the hunger and happiness of the pet in relation to 3 hours from last login to current updates last login time
@@ -51,5 +52,20 @@ class Time extends Phaser.Scene {
     //add query here to update database of last login, and pets current Happiness current hunger
     databaseUpdate(){
 
+    }
+    /**
+     * update tasks to 3 if last login before midnight
+     */
+    updateTasks(){
+        
+        if(this.timeCurrent.getDate() != player.lastlogin.getDate() 
+        || this.timeCurrent.getMonth() != player.lastlogin.getMonth() 
+        || this.timeCurrent.getFullYear() != player.lastlogin.getFullYear()){       
+            while(playerTasks.task.length != 3){
+                newTask = 1;
+                playerTasks.task[playerTasks.task.length] =Math.floor(Math.random() * (+10 - +1)) + +1; 
+                console.log("random value" + playerTasks.task[playerTasks.task.length-1]);
+            }
+        }
     }
 }

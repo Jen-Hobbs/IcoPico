@@ -1,9 +1,9 @@
 
     let information = ['shinyboi', 'shinyboi', 'shinyboi'];
     var runningScenes = [];
-    var newTask = 1;
+    var newTask = 0;
     
-    let currentDate = new Date('2019-05-14T13:41:00'); //last login sample data
+    let currentDate = new Date('2019-05-18T13:41:00'); //last login sample data
     var player = {
         // 'happiness' :[20, 60, 70],
         
@@ -27,6 +27,13 @@
 
         'lastlogin' : currentDate
     };
+
+var playerTasks = {'task' :[
+    {'taskIDa': 1},
+    {'taskIDb': 2},
+    {'taskIDc': 3}
+]};
+
 var playerPets = {'pet' : [
     {'currentHappiness' : 20,
     'currentHunger' : 100},
@@ -65,7 +72,49 @@ var updateHunger = 0; //used when we feed pet
           "title": "Take out the recycling",
           "description": "Remember to separate the plastic from the garbage",
           "icon": "type3"
-        }
+        },
+        {
+            "id": "4",
+            "title": "Eco Grocery Shopping",
+            "description": "Take the bus, walk, or bike to go grocery shopping",
+            "icon": "type4"
+          },
+          {
+            "id": "5",
+            "title": "Transit to Work",
+            "description": "Take the bus, walk, or bike to work",
+            "icon": "type5"
+          },
+          {
+            "id": "6",
+            "title": "Reusable Bags",
+            "description": "For the next week use reusable bags instead of plastic",
+            "icon": "type5"
+          },
+          {
+            "id": "7",
+            "title": "Reusable Water Bottle",
+            "description": "Use a reussable waterbottle instead of plastic",
+            "icon": "type3"
+          },
+          {
+            "id": "8",
+            "title": "Thermos",
+            "description": "Use a Thermos to buy coffee/tea instead of a disposible cup or make your own",
+            "icon": "type3"
+          },
+          {
+            "id": "9",
+            "title": "Turn off the tap",
+            "description": "Turn off the water when brushing your teeth",
+            "icon": "type2"
+          },
+          {
+            "id": "10",
+            "title": "Turn off the shower",
+            "description": "Turn off the water when washing your hair",
+            "icon": "type1"
+          },
     ]};
 
 // console.log('current date '+ currentDate);
