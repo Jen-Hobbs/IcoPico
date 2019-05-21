@@ -22,7 +22,7 @@ var playerPetInfo = [
 
 },
 {
-  currentHappiness: 60,
+  currentHappiness: 30,
   currentHunger: 50,
   petID: 4,
   petName: "petA",
@@ -77,12 +77,12 @@ var inventoryInfo =
 
 var tasklistInfo = [{
   playerID: 1,
-  taskIDa: 1,
-  taskIDb: 2,
-  taskIDc: 4,
+  taskIDa: null,
+  taskIDb: null,
+  taskIDc: null,
   taskListID: 1
 }];
-let currentDate = new Date(); //last login sample data
+let currentDate = new Date('2019-05-17T13:00:00.000Z'); //last login sample data
 
 var lastLogin = currentDate;
 

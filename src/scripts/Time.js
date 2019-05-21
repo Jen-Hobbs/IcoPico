@@ -13,13 +13,12 @@ class Time extends Phaser.Scene {
      * updates last time user logged in on create
      */
     create() {
-        console.log('player tasks length' + playerTasks.length);
+
         this.updateLastLogin();
         this.setTaskList();
         this.updateTasks();
         this.updateEmotions(); 
         this.evolution();
-        console.log('player tasks length' + playerTasks.length);
     }
     /**
      * sets changed time for happiness/hunger change in comparison to last login and current time to the nearest 3rd hour
