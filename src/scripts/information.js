@@ -25,6 +25,7 @@ var newTask = 0;
     //     //     'happiness' : 70
     //     // }
 
+
     //     'lastlogin' : currentDate
     // };
 
@@ -59,11 +60,11 @@ var playerTasks = [];
         {"petName": "jellyboi"},
         {"petName": "potatoboi"},
         {"petName": "sushiboi"}
+
     ]};
     let foodTypes = {'food' : [
         {'type' : 'icecream', 'cost' : 20},
-        {'type' : 'carrot', 'cost' : 10},
-        {'type' : 'donut', 'cost' : 30}
+        {'type' : 'moni', 'cost' : 10}
     ]};
     
     var task_list = {"task" : [
