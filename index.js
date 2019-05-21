@@ -53,7 +53,7 @@ app.get('/getinitialinfo/:id', (req, res) => {
 
 //get lastlogin from Account table
 app.get('/getlastlogin/:id', (req, res) => {
-    let sql = `SELECT * FROM Account WHERE email = ${req.params.id}`;
+    let sql = `SELECT lastLogin FROM Account WHERE email = ${req.params.id}`;
     let query = db.query(sql, (err, result) => {
         if (err) {
             return console.log('error: ' + err.message);
