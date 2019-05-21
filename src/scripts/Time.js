@@ -40,6 +40,9 @@ class Time extends Phaser.Scene {
             console.log("old" + playerPetInfo[i].currentHunger);
             playerPetInfo[i].currentHappiness -= this.changedTime;
             playerPetInfo[i].currentHunger -= this.changedTime;
+            //
+            //happiness hunger updated
+            //
             //    player.happiness[i] -= this.changedTime; // old version changing happiness
             if (playerPetInfo[i].currentHappiness < 0) {
                 playerPetInfo[i].currentHappiness = 0;
@@ -51,6 +54,7 @@ class Time extends Phaser.Scene {
             console.log("new" + playerPetInfo[i].currentHunger);
         }
         lastLogin = this.timeCurrent;
+        
     }
     /**
      * change tasklist to array
@@ -102,6 +106,11 @@ class Time extends Phaser.Scene {
                     playerPetInfo[i].petID += 9;
                 }
             }
+        
         }
+        //
+        //evolution updated
+        //
+        //
     }
 }
