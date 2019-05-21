@@ -1,7 +1,7 @@
 /** OTHERS
   lastLogin: datetime;
 **/
-//var lastLogin;
+var lastLogin;
 
 /** PLAYER TABLE JSON FORMAT
  *{ playerID:,

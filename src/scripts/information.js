@@ -51,9 +51,9 @@ var playerTasks = [];
 //     'health' : 0}
 // ] 
 // }
-let currentDate = new Date(); //last login sample data
+// let currentDate = new Date(); //last login sample data
 
-var lastLogin = currentDate;
+// var lastLogin = currentDate;
     var pets = {"pet" : [
         {"petName": "shinyboi", "cost" : 100},
         {"petName": "dogboi", "cost" : 100},
