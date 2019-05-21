@@ -6,6 +6,14 @@ class Task extends Phaser.Scene {
   }
 
   preload() {
+    //emitter presets
+    var emitter = new Phaser.Events.EventEmitter()
+      .on("taskList", updateTaskList)
+      .on("inventory", updateInventory)
+      .on("currency", updateCurrency)
+      .on("happiness", updateCurrentHappiness)
+      .on("hunger", updateCurrentHunger);
+
     //asset preload
     this.cameras.main.setBackgroundColor('#FF9999');
     this.load.image("menuPet", '../images/buttons/Other/menu.png');
@@ -294,7 +302,7 @@ class Task extends Phaser.Scene {
         playerPetInfo[n].currentHappiness += 30;
 
       }
-      
+
     }
     //update evolution
     if(task_list.task[playerTasks[i]].evolutionType == 'health'){
@@ -312,7 +320,7 @@ class Task extends Phaser.Scene {
   }
   /**
    * add food to inventory
-   * @param  name food type 
+   * @param  name food type
    */
   addFood(name){
     var check = 0;

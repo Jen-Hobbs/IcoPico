@@ -7,6 +7,14 @@ class Time extends Phaser.Scene {
      * timer to update last login to database every 10 min
      */
     preload() {
+      //emitter presets
+      var emitter = new Phaser.Events.EventEmitter()
+        .on("taskList", updateTaskList)
+        .on("inventory", updateInventory)
+        .on("currency", updateCurrency)
+        .on("happiness", updateCurrentHappiness)
+        .on("hunger", updateCurrentHunger);
+        
         this.timer = this.time.addEvent({ delay: 600000, callback: this.updateLastLogin, callbackScope: this, loop: true });
     }
     /**
@@ -17,7 +25,7 @@ class Time extends Phaser.Scene {
         this.updateLastLogin();
         this.setTaskList();
         this.updateTasks();
-        this.updateEmotions(); 
+        this.updateEmotions();
         this.evolution();
         updateTaskList();
         console.log('player tasks length' + playerTasks.length);
@@ -55,7 +63,7 @@ class Time extends Phaser.Scene {
             console.log("new" + playerPetInfo[i].currentHunger);
         }
         this.time = this.timeCurrent;
-        
+
     }
     /**
      * change tasklist to array
@@ -107,7 +115,7 @@ class Time extends Phaser.Scene {
                     playerPetInfo[i].petID += 9;
                 }
             }
-        
+
         }
         //
         //evolution updated
