@@ -163,7 +163,7 @@ app.get('/updatecurrenthappiness/:id/:petID/:newHappiness', (req, res) => {
         if (err) {
             return console.log('error: ' + err.message);
         }
-        console.log(JSON.parse(JSON.stringify(result)));
+        //console.log(JSON.parse(JSON.stringify(result)));
         res.send(JSON.stringify(result));
     });
 });
