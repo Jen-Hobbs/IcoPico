@@ -1,460 +1,262 @@
-html, body {
-    height: 100%;
+@import url('https://fonts.googleapis.com/css?family=Pompiere&display=swap');
+
+html,
+body {
+    width: 100%;
     margin: 0;
     background-color: #FFD465;
 }
 
-/* Landing Page */
-
-#container{
-    height: 100%;
-    width: 100%;
-    background-color: #FFD465;
+#box_div {
+    filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.37));
 }
 
-#wrapper {
-     /* min-height: 100%;   */
-    background-color: white;
-}
-
-#box_outside{
-    width: auto;
-    height: 100%;
-    padding-top:7%;
-    padding-bottom:7%;
-    background-color: #FFD465;
-}
-
-#box_top {
-    background-color: #FFD465;
-    width: 100%;
-    height: 30%;
-}
-
-#banner {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    width: 100%;
-    height: 90%;
-    box-shadow: 0px 10px 15px rgba(0,0,0,0.37);
-}
-
-#banner_top {
-    grid-row: 1;
-    background-color: #65EAA2;
-    width: 100%;
-}
-
-#banner_middle {
-    grid-row: 2;
+#banner_pink {
     background-color: #FF9999;
-    width: 100%;
-    height: auto;
 }
 
-#banner_bottom {
-    grid-row: 3;
-    background-color: #65EAA2;
-    width: 100%;
-    height: auto;
-}
-
-#title_logo{
-    position: absolute;
-    width: 55%;
-    height: auto;
-    margin-top: -5%;
-    margin-left: 27%;
-    filter: drop-shadow(5px 5px 15px rgba(0,0,0,0.37));
-}
-
-#shiny_boi{
-    position: absolute;
-    width: 70%;
-    height: auto;
-    margin-top: 5%;
-    margin-left: 15%;
-    filter: drop-shadow(10px 10px 15px rgba(0,0,0,0.37));
-}
-
-#box_bot {
-    display: grid;
-    margin-top: 50%;
-    padding-top: 5%;
-    width: 100%;
-    height: 20%;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-row-gap: 20%; 
-    background-color: #FFD465;
-}
-.buttons{
-    text-align: center;
-    color: white;
-    font-size: 80px;
-    font-family: 'Pompiere', cursive;
-    width: 100%;
-    height: auto;
-    border-radius: 8%;
-    padding:.5em,  8em, .5em, 3em;
-    background-color: #FF9999;
-    box-shadow: 10px 10px 15px rgba(0,0,0,0.37);
-}
-/* #play_button {
-    grid-column: 2;
-    grid-row: 1;
-    font-size: 300%;
-    text-align: center;
-    color: white;
-    font-size: 80px;
-    font-family: 'Pompiere', cursive;
-    width: 100%;
-    height: auto;
-    border-radius: 8%;
-    margin-top:1em;
-    background-color: #FF9999;
-    box-shadow: 10px 10px 15px rgba(0,0,0,0.37);
-}
-
-#about_button {
-    grid-column: 2;
-    grid-row: 2;
-    font-size: 300%;
-    text-align: center;
-    color: white;
-    font-size: 80px;
-    font-family: 'Pompiere', cursive;
-    line-height: 90px;
-    width: 100%;
-    height: auto;
-    border-radius: 8%;
-    margin-top:1em;
-    margin-bottom: 1em;
-    background-color: #FF9999;
-    box-shadow: 10px 10px 15px rgba(0,0,0,0.37);
-} */
-
-/*
-CSS Media query layout for mobile
-*/ 
-@media only screen and (min-width: 320px) {
-
-    #box_outside{
-        width: auto;
-        height: 100%;
-        padding-top:7%;
-        padding-bottom:7%;
-    }
-    
-    #box_top {
-        width: 100%;
-        height: 30%;
-    }
-    
-    #banner {
-        width: 100%;
-        height: 90%;
-    }
-    
-    #banner_top {
-        width: 100%;
-    }
-    
-    #banner_middle {
-        width: 100%;
+/* Mobile View --------------------------------------------------------------*/
+@media (min-width: 0px) and (max-width: 767px) {
+    #title_logo {
+        position: absolute;
+        width: 12em;
         height: auto;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: .5em;
+        filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
     }
-    
-    #banner_bottom {
+
+    /* Banner */
+    #banner_div {
+        margin-top: 3em;
+    }
+
+    .banner {
         width: 100%;
-        height: auto;
+        height: 50px;
+        background-color: #65EAA2;
     }
-    
-    #title_logo{
-        width: 55%;
+
+    #shiny_boi {
+        position: absolute;
+        width: 20em;
         height: auto;
-        margin-top: -5%;
-        margin-left: 27%;
+        margin: auto;
+        top: 15em;
+        left: 0;
+        right: 0;
+        filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.37));
     }
-    
-    #shiny_boi{
-        width: 70%;
-        height: auto;
-        margin-top: 5%;
-        margin-left: 15%;
-    }
-    
+
     #box_bot {
-        margin-top: 50%;
-        padding-top: 5%;
-        width: 100%;
-        height: 20%;
-        grid-row-gap: 20%; 
+        width: fit-content;
+        margin: 0 auto;
+        padding-top: 15em;
     }
-    
-    #play_button {
-        font-size: 300%;
-        font-size: 80px;
-        width: 100%;
+
+    .buttons {
+        text-align: center;
+        color: white;
+        font-size: 3em;
+        font-family: 'Pompiere', cursive;
+        width: 5em;
         height: auto;
+        border-radius: 10px;
+        padding: 10px, 20px, 10px, 20px;
+        background-color: #FF9999;
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.37);
     }
-    
+
     #about_button {
-        font-size: 300%;
-        font-size: 80px;
-        line-height: 90px;
-        width: 100%;
-        height: auto;
+        margin-top: .5em;
+    }
+
+     @keyframes move {
+        0% {left: 5%;top: 37%;}        
+        10% {left: 14.7%;top: 74%;}        
+        20% {left: -5%;top: 0%;}        
+        30% {left: -15%;top: 74%;}        
+        40% {left: 14%;top: 30%;}        
+        50% {left: -20%;top: 0%;}        
+        60% {left: 14.57%;top: 55%;}        
+        70% {left: -15%;top: 40%;}        
+        80% {left: 14.7%;top: 0%;}        
+        90% {left: -15%;top: 40%;}        
+        100% {left: 0%;top: 0%;}        
     }
 }
 
-/*
-CSS Media query layout for tablets
-*/
-@media only screen and (min-width: 760px) {
-    #box_outside{
-        width: auto;
-        height: 100%;
-        padding-top:7%;
-        padding-bottom:7%;
-    }
-    
-    #box_top {
-        width: 100%;
-        height: 20%;
-    }
-    
-    /* #banner {
-        width: 100%;
-        height: 90%;
-    }
-    
-    #banner_top {
-        width: 100%;
-    }
-    
-    #banner_middle {
-        width: 100%;
+/* Tablet View --------------------------------------------------------------*/
+@media (min-width: 767px) and (max-width: 1240px) {
+    #title_logo {
+        position: absolute;
+        width: 15em;
         height: auto;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: .5em;
+        filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
     }
-    
-    #banner_bottom {
-        width: 100%;
-        height: auto;
-    } */
-    
-    #title_logo{
-        width: 32%;
-        height: auto;
-        margin-top: -5%;
-        margin-left: 37%;
-    }
-    
-    #shiny_boi{
-        width: 67%;
-        height: auto;
-        margin-top: 16%;
-        margin-left: 16%;
-    }
-    
-    #box_bot {
-        margin-top: 50%;
-        margin-left: 4%;
-        padding-top: 5%;
-        width: 100%;
-        height: 20%;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        grid-row-gap: 20%; 
-        grid-column-gap: 5%;
-    }
-    
-    #play_button {
-        grid-column: 1;
-        grid-row: 2;
-        font-size: 300%;
-        font-size: 80px;
-        width: 80%;
-        height: auto;
-    }
-    
-    #about_button {
-        grid-column: 2;
-        grid-row: 2;
-        font-size: 300%;
-        font-size: 80px;
-        line-height: 90px;
-        width: 80%;
-        height: auto;
-    }
-}
 
-/*
-CSS Media query layout for laptops
-*/ 
-@media only screen and (min-width: 1020px) {
-    #box_outside{
-        width: auto;
-        height: 100%;
-        padding-top:7%;
-        padding-bottom:7%;
+    /* Banner */
+    #banner_div {
+        margin-top: 3em;
     }
-    
-    #box_top {
-        width: 100%;
-        height: 20%;
-    }
-    
-    #banner {
-        width: 100%;
-        height: 90%;
-    }
-    
-    /* #banner_top {
-        width: 100%;
-    }
-    
-    #banner_middle {
-        width: 100%;
-        height: auto;
-    }
-    
-    #banner_bottom {
-        width: 100%;
-        height: auto;
-    } */
-    
-    #title_logo{
-        width: 23%;
-        height: auto;
-        margin-top: -5%;
-        margin-left: 42%;
-    }
-    
-    #shiny_boi{
-        width: 42%;
-        height: auto;
-        margin-top: 10%;
-        margin-left: 5%;
-    }
-    
-    #box_bot {
-        margin-top: 3%;
-        padding-top: 6%;
-        width: 55%;
-        margin-left: 44%; 
-        height: 12%;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        grid-row-gap: 20%; 
 
+    .banner {
+        width: 100%;
+        height: 65px;
+        background-color: #65EAA2;
     }
-    
-    #play_button {
-        grid-column: 2;
-        grid-row: 1;
-        font-size: 300%;
+
+    #shiny_boi {
+        position: absolute;
+        width: 30em;
+        height: auto;
+        margin: auto;
+        margin-top: 3em;
+        margin-left:-5em;
+        filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.37));
+    }
+
+    #box_bot {
+        width: auto;
+        float: right;
+        padding-top: 6em;
+        padding-left: 2em;
+    }
+
+    .buttons {
         text-align: center;
         color: white;
         font-size: 80px;
         font-family: 'Pompiere', cursive;
-        width: 100%;
+        width: 3em;
         height: auto;
-        border-radius: 8%;
+        border-radius: 25px;
         background-color: #FF9999;
-        box-shadow: 10px 10px 15px rgba(0,0,0,0.37);
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.37);
+        padding: 0;
     }
 
     #about_button {
-        grid-column: 2;
-        grid-row: 2;
-        font-size: 300%;
+        margin-top: .5em;
+    }
+
+    #box_tablet_view {
+        width: 42em;
+        height: 25em;
+        margin: 0 auto;
+    }
+
+    @keyframes move {
+        0% {left: 23%;top: 30%;}        
+        10% {left: 60.6%;top: -7%;}        
+        20% {left: 7%;top: 60%;}        
+        30% {left: 60.6%;top: 45%;}        
+        40% {left: 7%;top: 10%;}        
+        50% {left: 60.6%;top: 0%;}        
+        60% {left: 30%;top: -7%;}        
+        70% {left: 60.6%;top: 30%;}        
+        80% {left:7%;top: 0%;}        
+        90% {left: 60.6%;top: 60%;}        
+        100% {left: 7%;top: 30%;}        
+    }
+}
+
+
+
+/* Desktop View --------------------------------------------------------------*/
+@media (min-width: 1240px) {
+    #title_logo {
+        position: absolute;
+        width: 15em;
+        height: auto;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: .5em;
+        filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
+    }
+
+    /* Banner */
+    #banner_div {
+        margin-top: 3em;
+    }
+
+    .banner {
+        width: 100%;
+        height: 65px;
+        background-color: #65EAA2;
+    }
+
+    #shiny_boi {
+        position: absolute;
+        width: 45em;
+        height: auto;
+        margin: auto;
+        margin-top: 0em;
+        margin-left:-8em;
+        filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.37));
+    }
+
+    #box_bot {
+        width: auto;
+        float: right;
+        padding-top: 6em;
+        padding-left: 4em;
+    }
+
+    .buttons {
         text-align: center;
         color: white;
         font-size: 80px;
         font-family: 'Pompiere', cursive;
-        line-height: 90px;
-        width: 100%;
+        width: 4em;
         height: auto;
-        border-radius: 8%;
+        border-radius: 25px;
         background-color: #FF9999;
-        box-shadow: 10px 10px 15px rgba(0,0,0,0.37);
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.37);
+        padding: 0;
+    }
+
+    #about_button {
+        margin-top: .5em;
+    }
+
+    #box_tablet_view {
+        width: 60em;
+        height: 25em;
+        margin: 0 auto;
+        margin-top: 5em;
+    }
+
+    @keyframes move {
+        0% {left: 23%;top: 30%;}        
+        10% {left: 53%;top: -7%;}        
+        20% {left: 7%;top: 50%;}        
+        30% {left: 53%;top: 45%;}        
+        40% {left: 7%;top: 10%;}        
+        50% {left: 53%;top: 0%;}        
+        60% {left: 30%;top: -7%;}        
+        70% {left: 53%;top: 30%;}        
+        80% {left:7%;top: 0%;}        
+        90% {left: 53%;top: 50%;}        
+        100% {left: 7%;top: 30%;}        
     }
 }
 
-/*
-CSS Media query layout for desktop
-*/ 
-@media only screen and (min-width: 1280px) {
-    #box_outside{
-        width: auto;
-        height: 100%;
-        padding-top:5%;
-        padding-bottom:7%;
-    }
-    
-    #box_top {
-        width: 100%;
-        height: 20%;
-    }
-    
-    #banner {
-        width: 100%;
-        height: 90%;
-    }
-    
-    /* #banner_top {
-        width: 100%;
-    }
-    
-    #banner_middle {
-        width: 100%;
-        height: auto;
-    }
-    
-    #banner_bottom {
-        width: 100%;
-        height: auto;
-    } */
-    
-    #title_logo{
-        width: 15%;
-        height: auto;
-        margin-top: -4%;
-        margin-left: 42%;
-    }
-    
-    #shiny_boi{
-        width: 38%;
-        height: auto;
-        margin-top: 7%;
-        margin-left: 7%;
-    }
-    
-    #box_bot {
-        margin-top: 5%;
-        padding-top: 4%;
-        width: 55%;
-        margin-left: 42%; 
-        height: 12%;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        grid-row-gap: 70%; 
-    }
-    
-    /* #play_button {
-        font-size: 300%;
-        font-size: 80px;
-        width: 100%;
-        height: auto;
-    }
-    
-    #about_button {
-        font-size: 300%;
-        font-size: 80px;
-        line-height: 90px;
-        width: 100%;
-        height: auto;
-    } */
+/* Animations */
+/* Pet will start moving after 5 min */
+.animate {
+    animation-name: move;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-delay: 300s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
+

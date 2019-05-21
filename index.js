@@ -31,6 +31,7 @@ app.use('/scripts', express.static(__dirname + '/src/scripts'));
 app.use('/images', express.static(__dirname + '/src/images'));
 app.use('login.html', express.static('/src/login/login.html'));
 app.use('icopico.html', express.static('/src/icopico/icopico.html'));
+app.use('icopico.html', express.static('/src/icopicoPet/icopico.html'));
 
 ///////////////////////////////////////////////////////////////////////////////
 //GETTING FROM DATABASE
