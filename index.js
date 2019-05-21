@@ -36,7 +36,8 @@ app.use('icopico.html', express.static('/src/icopico/icopico.html'));
 
 
 
-/***** GETTING PLAYER'S INITIAL DATA (assuming they already exist) */
+/***** GETTING PLAYER'S INITIAL DATA (assuming they already exist) 
+******/
 
 // Gets player info
 app.get('/getinitialinfo/:id', (req, res) => {
@@ -101,8 +102,8 @@ app.get('/gettasklist/:id', (req, res) => {
 });
 
 
-/***** UPDATING PLAYER'S EXISTING DATA (assuming they already exist) */
-
+/***** UPDATING PLAYER'S EXISTING DATA (assuming they already exist) 
+******/
 // Updates TaskList info
 app.get('/updatetasklist/:id/:taskIDa/:taskIDb/:taskIDc', (req, res) => {
 
@@ -116,9 +117,6 @@ app.get('/updatetasklist/:id/:taskIDa/:taskIDb/:taskIDc', (req, res) => {
             return console.log('error: ' + err.message);
         }
         console.log('update TaskList success');
-        //console.log(req.body);
-        //console.log(JSON.parse(JSON.stringify(result)));
-        //res.send(JSON.stringify(result));
     });
 
     let sqlB = `SELECT * FROM TaskList WHERE playerID = ${req.params.id}`;
@@ -210,7 +208,51 @@ app.get('/insertinventory/:id/:itemID', (req, res) => {
     });
 });
 
-/***** CREATING PLAYER DATA FOR A NEW PLAYER */
+// update currency
+app.get('/updatecurrency/:id/:newCurrency', (req, res) => {
+
+    let sql = `UPDATE Player SET currency = ${req.params.newCurrency} WHERE playerID = ${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+// update happiness
+app.get('/updatecurrenthappiness/:id/:petID/:newHappiness', (req, res) => {
+    let sql = `UPDATE PlayerPet SET currentHappiness = ${req.params.newHappiness}
+    WHERE PlayerPet.playerID = ${req.params.id} AND petID = ${req.params.petID}`;
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+// update hunger
+app.get('/updatecurrenthappiness/:id/:petID/:newHappiness', (req, res) => {
+    let sql = `UPDATE PlayerPet SET currentHunger = ${req.params.newHunger}
+    WHERE PlayerPet.playerID = ${req.params.id} AND petID = ${req.params.petID}`;
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+app.get('/updateactivepet/:id/:petID', (req, res) => {
+    let sql = `UPDATE Player`
+});
+
+/***** CREATING PLAYER DATA FOR A NEW PLAYER
+******/
 
 // Creates a row in the Account table 
 app.get('/createaccount/:email', (req, res) => {
@@ -228,7 +270,8 @@ app.get('/createaccount/:email', (req, res) => {
 
 // Creates a row in the Player table
 app.get('/createplayer/:email', (req, res) => {
-    let sql = `INSERT INTO Player(accountEmail) VALUES(${req.params.email})`;
+    let sql = `INSERT INTO Player(accountEmail, activePet, activeItem)
+    VALUES(${req.params.email}, 1, 1)`;
     let query = db.query(sql, (err, result) => {
         if (err) {
             return console.log('error: ' + err.message);
@@ -270,6 +313,7 @@ app.get('/createplayerpet/:id', (req, res) => {
     });
 });
 
+// Creates a row in the TaskList table, and sets default tasks 
 app.get('/createtasklist/:id', (req, res) => {
     let sql = `INSERT INTO TaskList(playerID, taskIDa, taskIDb, taskIDc)
     VALUES(${req.params.id}, 1, 2, 3)`;
@@ -283,10 +327,6 @@ app.get('/createtasklist/:id', (req, res) => {
     });
 
 });
-
-// app.listen('8080', () => {
-//     console.log('Server started on port 8080');
-// })
 
 var server = app.listen(8080, function(){
     var port = server.address().port;

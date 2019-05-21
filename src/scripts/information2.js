@@ -157,7 +157,8 @@ function getTaskList()
     });
 }
 
-/************* UPDATE AJAX CALLS */
+/************* UPDATE AJAX CALLS
+**************/
 
 // Updates info in the TaskList table 
 function updateTaskList(newIDa, newIDb, newIDc) {
@@ -248,6 +249,66 @@ function updateInventory(itemID, updatedQty) {
 			}
 		});
 	}
+}
+
+//update currency (money)
+function updateCurrency(newCurrency)
+{
+  //Ajax call to update currency
+  $.ajax({
+    url: "/updatecurrency/" + playerID + "/" + newCurrency,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 tasklist per email
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+}
+
+//update currentHappiness
+function updateCurrentHappiness(petID, newHappiness)
+{
+  //Ajax call to update currency
+  $.ajax({
+    url: "/updatecurrenthappiness/" + playerID + "/" + petID + "/" + newHappiness,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 tasklist per email
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+}
+
+//update currentHunger
+function updateCurrentHunger(petID, newHunger)
+{
+  //Ajax call to update currency
+  $.ajax({
+    url: "/updatecurrenthappiness/" + playerID + "/" + petID + "/" + newHunger,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 tasklist per email
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
 }
 
 /***** CREATING DEFAULTS for a new player */
