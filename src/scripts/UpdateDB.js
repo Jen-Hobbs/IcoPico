@@ -62,4 +62,4 @@ class UpdateDB extends Phaser.Scene {
 //           console.log('error');
 //         }
 //     });
-}
+//}
