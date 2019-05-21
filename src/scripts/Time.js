@@ -28,8 +28,9 @@ class Time extends Phaser.Scene {
     updateLastLogin() {
         this.timeCurrent = new Date();
         console.log("current time " + this.timeCurrent.getDate());
-        console.log('last login ' + lastLogin);
-        this.changedTime = (this.timeCurrent.getTime() - lastLogin.getTime()) / 10800000;
+        console.log('last login ' + lastLogin.lastLogin);
+        this.time = new Date(lastLogin.lastLogin);
+        this.changedTime = (this.timeCurrent.getTime() - this.time.getTime()) / 10800000;
     }
     /**
      * updates the hunger and happiness of the pet in relation to 3 hours from last login to current updates last login time
@@ -53,7 +54,7 @@ class Time extends Phaser.Scene {
             console.log('new' + playerPetInfo[i].currentHappiness);
             console.log("new" + playerPetInfo[i].currentHunger);
         }
-        lastLogin = this.timeCurrent;
+        this.time = this.timeCurrent;
         
     }
     /**
@@ -79,9 +80,9 @@ class Time extends Phaser.Scene {
      */
     updateTasks() {
 
-        if (this.timeCurrent.getDate() != lastLogin.getDate()
-            || this.timeCurrent.getMonth() != lastLogin.getMonth()
-            || this.timeCurrent.getFullYear() != lastLogin.getFullYear()) {
+        if (this.timeCurrent.getDate() != this.time.getDate()
+            || this.timeCurrent.getMonth() != this.time.getMonth()
+            || this.timeCurrent.getFullYear() != this.time.getFullYear()) {
             while (playerTasks.length != 3) {
                 newTask = 1;
                 playerTasks[playerTasks.length] = Math.floor(Math.random() * (+10 - +1)) + +1;
