@@ -32,6 +32,10 @@ app.use('/images', express.static(__dirname + '/src/images'));
 app.use('login.html', express.static('/src/login/login.html'));
 app.use('icopico.html', express.static('/src/icopico/icopico.html'));
 
+///////////////////////////////////////////////////////////////////////////////
+//GETTING FROM DATABASE
+
+//get info from Player table
 app.get('/getinitialinfo/:id', (req, res) => {
     let sql = `SELECT * FROM Player WHERE accountEmail = ${req.params.id}`;
     let query = db.query(sql, (err, result) => {
@@ -112,6 +116,8 @@ app.get('/gettasklistinfo/:id', (req, res) => {
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+//UPDATING TO DATABASE
+
 //Update tasklist
 app.get('/updatetasklist/:id/:taskIDa/:taskIDb/:taskIDc', (req, res) => {
 
@@ -124,10 +130,7 @@ app.get('/updatetasklist/:id/:taskIDa/:taskIDb/:taskIDc', (req, res) => {
         if (err) {
             return console.log('error: ' + err.message);
         }
-        console.log('update success');
-        //console.log(req.body);
-        //console.log(JSON.parse(JSON.stringify(result)));
-        //res.send(JSON.stringify(result));
+        console.log('update TaskList success');
     });
 
     let sqlB = `SELECT * FROM TaskList WHERE playerID = ${req.params.id}`;
@@ -140,8 +143,57 @@ app.get('/updatetasklist/:id/:taskIDa/:taskIDb/:taskIDc', (req, res) => {
         console.log(JSON.parse(JSON.stringify(result)));
         res.send(JSON.stringify(result));
     });
+
+// Updates the Inventory table (adding/decreasing the quantity of an object)
+app.get('/updateinventory/:id/:itemID/:updatedQty', (req, res) => {
+
+    // updating the player's inventory
+    let sqlA = `UPDATE Inventory SET itemQty = ${req.params.updatedQty}
+    WHERE playerID = ${req.params.id} AND itemID = ${req.params.itemID}`;
+    //let data = [1, 2, 3];
+
+    let queryA = db.query(sqlA, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('update Inventory success');
+    });
+
+    let sqlB = `SELECT * FROM Inventory WHERE playerID = ${req.params.id}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
 });
 
+// Deletes a row from the Inventory table
+app.get('/deleteinventory/:id/:itemID', (req, res) => {
+
+    // deleting row from the player's inventory
+    let sqlA = `DELETE FROM Inventory WHERE
+     playerID = ${req.params.id} AND itemID = ${req.params.itemID}`;
+
+    let queryA = db.query(sqlA, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('delete Inventory success');
+    });
+
+    let sqlB = `SELECT * FROM Inventory WHERE playerID = ${req.params.id}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+});
 //update currency
 app.get('/updatecurrency/:id/:newCurrency', (req, res) => {
 

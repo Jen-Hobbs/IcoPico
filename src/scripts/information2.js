@@ -46,7 +46,11 @@ var inventoryInfo;
  **/
 var taskListInfo;
 
+////////////////////////////////////////////////////////////////////////////////
 initGameInfo();
+
+////////////////////////////////////////////////////////////////////////////////
+//GETTING FROM database
 
 function initGameInfo() {
   var parameters = new URLSearchParams(window.location.search);
@@ -161,6 +165,8 @@ function getTaskList()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+//UPDATING TO DATABASE
+
 //update tasklist
 function updateTaskList(newIDa, newIDb, newIDc) {
 
@@ -183,6 +189,50 @@ function updateTaskList(newIDa, newIDb, newIDc) {
           console.log('error');
         }
     });
+}
+
+// Updates/deletes info in the Inventory table
+function updateInventory(itemID, updatedQty) {
+
+	// if updatedQty is not 0, just update existing row in database
+	if (updatedQty != 0) {
+		$.ajax({
+			url: "/updateinventory/" + playerID + "/"
+			 + itemID  + "/" + updatedQty,
+			dataType: "json",
+			//contentType: 'application/json',
+			type: "GET",
+			port: "8000",
+			async: false,
+			success: function(data) {
+				inventoryInfo = data;
+				console.log(inventoryInfo);
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+			  //console.log("ERROR:", jqXHR, textStatus, errorThrown);
+			  console.log('error');
+			}
+		});
+
+	// if updatedQty is 0, we need to delete the row from database
+	} else {
+		$.ajax({
+			url: "/deleteinventory/" + playerID + "/" + itemID,
+			dataType: "json",
+			//contentType: 'application/json',
+			type: "GET",
+			port: "8000",
+			async: false,
+			success: function(data) {
+				inventoryInfo = data;
+				console.log(inventoryInfo);
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+			  //console.log("ERROR:", jqXHR, textStatus, errorThrown);
+			  console.log('error');
+			}
+		});
+	}
 }
 
 //update currency (money)
