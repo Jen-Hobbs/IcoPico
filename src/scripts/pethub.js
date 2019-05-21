@@ -8,10 +8,11 @@ class Pethub extends Phaser.Scene {
         // console.log('init', data);
         // this.greetings = data.hi;
         // this.check = 0;
+
     }
     preload() {
-        for (var i = 0; i < playerPetInfo.length; i++) {
-            this.load.image('pet' + i, '../images/pets/' + pets.pet[playerPetInfo[i].petID].petName + '.png');
+        for (var i = 0; i < information.length; i++) {
+            this.load.image('pet' + i, '../images/pets/' + information[i] + '.png');
         }
         this.load.image('arrow', '../images/buttons/Other/arrow.png');
         this.load.image('backPet', '../images/Sad_Appartment.png');
@@ -29,16 +30,21 @@ class Pethub extends Phaser.Scene {
      * sets up camera for multiple pets using arrows on screen to move between pets
      */
     create() {
-        console.log("current pet" + playerInfo.activePet);
+      //emitters
+        var emitter = new Phaser.Events.EventEmitter()
+            //.on("updateActivePet", clickTaskUpdate)
+      //   .emit("updateActivePet", int);
+
+        console.log("current pet" + player.activePet);
         this.resetFood = 0;
-        this.cameras.main.setBounds(0, 0, 800 * playerPetInfo.length, 400);
+        this.cameras.main.setBounds(0, 0, 800 * information.length, 400);
         this.cameras.main.setBackgroundColor('#aaa');
         this.pet = [];
         var arrowR = [];
         var arrowL = [];
 
         //create container for all information about pet and Flip between pets
-        for (var i = 0; i < playerPetInfo.length; i++) {
+        for (var i = 0; i < information.length; i++) {
 
 
             //right arrow
@@ -46,14 +52,14 @@ class Pethub extends Phaser.Scene {
             arrowR[i].setInteractive();
             arrowR[i].on('pointerdown', () => {
                 var cam = this.cameras.main;
-                if (playerInfo.activePet < playerPetInfo.length - 1) {
-                    playerInfo.activePet++;
-                    console.log(playerInfo.activePet);
+                if (player.activePet < information.length - 1) {
+                    player.activePet++;
                 }
                 else {
-                    playerInfo.activePet = 0;
+                    player.activePet = 0;
                 }
-                cam.centerOn(400 + 800 * playerInfo.activePet, 0);
+
+                cam.centerOn(400 + 800 * player.activePet, 0);
             });
             //left arrow
             arrowL[i] = this.add.sprite(this.scale.width * 0.04, this.scale.height / 2, 'arrow');
@@ -61,14 +67,13 @@ class Pethub extends Phaser.Scene {
             arrowL[i].setInteractive();
             arrowL[i].on('pointerdown', () => {
                 var cam = this.cameras.main;
-                if (playerInfo.activePet == 0) {
-                    playerInfo.activePet = playerPetInfo.length - 1;
+                if (player.activePet == 0) {
+                    player.activePet = information.length - 1;
                 }
                 else {
-                    console.log(playerInfo.activePet);
-                    playerInfo.activePet--;
+                    player.activePet--;
                 }
-                cam.centerOn(400 + 800 * playerInfo.activePet, 0);
+                cam.centerOn(400 + 800 * player.activePet, 0);
             });
 
 
@@ -83,7 +88,7 @@ class Pethub extends Phaser.Scene {
             this.checkHunger(i, this.pet);
             this.checkHappiness(i, this.pet);
             var cam = this.cameras.main;
-            cam.centerOn(400 + 800 * playerInfo.activePet, 0);
+            cam.centerOn(400 + 800 * player.activePet, 0);
 
         }
 
@@ -94,11 +99,11 @@ class Pethub extends Phaser.Scene {
     update() {
         //update hunger
         if(updateHunger == 1){
-            console.log("hi" + this.pet[playerInfo.activePet].getIndexList());
+            console.log("hi" + this.pet[player.activePet].getIndexList());
             //console.log(this.hungerBubble);
-            this.pet[playerInfo.activePet].remove(this.hungerBubble[playerInfo.activePet]);
-            this.pet[playerInfo.activePet].remove(this.hunger[playerInfo.activePet]);
-            this.checkHunger(playerInfo.activePet, this.pet);
+            this.pet[player.activePet].remove(this.hungerBubble[player.activePet]);
+            this.pet[player.activePet].remove(this.hunger[player.activePet]);
+            this.checkHunger(player.activePet, this.pet);
 
             updateHunger = 0;
         }
@@ -113,13 +118,13 @@ class Pethub extends Phaser.Scene {
      */
     checkHappiness(i, pet) {
         //console.log(playerPets.pet[i].currentHappiness);
-        if (playerPetInfo[i].currentHappiness < 33) {
+        if (playerPets.pet[i].currentHappiness < 33) {
             this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true);
             this.sad[i] = this.add.sprite(this.scale.width*.29, this.scale.height *.37, 'sad');
             pet[i].add(this.sadBubble[i]);
             pet[i].add(this.sad[i]);
         }
-        else if (playerPetInfo.currentHappiness < 66) {
+        else if (playerPets.pet[i].currentHappiness < 66) {
             this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true);
             this.sad[i] = this.add.sprite(this.scale.width*.29, this.scale.height *.37, 'sad');
             pet[i].add(this.sadBubble[i]);
@@ -137,13 +142,13 @@ class Pethub extends Phaser.Scene {
         //console.log(playerPets.pet[i].currentHappiness);
 
 
-        if (playerPetInfo[i].currentHunger < 33) {
+        if (playerPets.pet[i].currentHunger < 33) {
             this.hungerBubble[i] = this.add.sprite(this.scale.width*.73, this.scale.height *.35, 'thought');
             this.hunger[i] = this.add.sprite(this.scale.width*.71, this.scale.height *.27, 'hungry');
             pet[i].add(this.hungerBubble[i]);
             pet[i].add(this.hunger[i]);
         }
-        else if (playerPetInfo[i].currentHunger < 66) {
+        else if (playerPets.pet[i].currentHunger < 66) {
             this.hungerBubble[i] = this.add.sprite(this.scale.width*.73, this.scale.height *.35, 'thought');
             this.hunger[i] = this.add.sprite(this.scale.width*.71, this.scale.height *.27, 'hungry');
             pet[i].add(this.hungerBubble[i]);
