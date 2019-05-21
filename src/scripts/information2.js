@@ -47,6 +47,7 @@ var inventoryInfo;
 var taskListInfo;
 
 initGameInfo();
+
 function initGameInfo() {
   var parameters = new URLSearchParams(window.location.search);
   playerEmail = parameters.get('email');
@@ -54,10 +55,11 @@ function initGameInfo() {
   getPlayerPet();
   getInventory();
   getTaskList();
+  getLastLogin(playerEmail);
   console.log(playerInfo);
 }
 
-function getlastLogin(email)
+function getLastLogin(email)
 {
   //Ajax call to get lastLogin from  table
   $.ajax({
@@ -163,23 +165,22 @@ function getTaskList()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// function updateAttribute(table, attribute, listLevel, newValue _callback)
-// {
-//   //Ajax call to get info from TaskList table
-//   $.ajax({
-//     url: "/gettasklistinfo/" + "'" + playerID + "'",
-//     dataType: "json",
-//     port: "8000",
-//     type: "GET",
-//     async: false,
-//     success: function(data) {
-//       //playerInfo = JSON.parse(data);
-//       //data[0] because there will always only be 1 tasklist per email
-//       taskListInfo = data[0];
-//       console.log(taskListInfo);
-//     },
-//     error: function(jqXHR, textStatus, errorThrown) {
-//       console.log("ERROR:", jqXHR, textStatus, errorThrown);
-//     }
-//   });
-// }
+function updateCurrency(newCurrency)
+{
+  //Ajax call to update currency
+  $.ajax({
+    url: "/updatecurrency/" + playerID + "/" + newCurrency,
+    dataType: "json",
+    port: "8000",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 tasklist per email
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+}
