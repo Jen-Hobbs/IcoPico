@@ -202,7 +202,6 @@ function updateInventory(itemID, updatedQty) {
 			dataType: "json",
 			//contentType: 'application/json',
 			type: "GET",
-			port: "8000",
 			async: false,
 			success: function(data) {
 				inventoryInfo = data;

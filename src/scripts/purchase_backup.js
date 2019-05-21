@@ -1,5 +1,3 @@
-
-
 class Purchase extends Phaser.Scene {
     constructor() {
         super({ key: "Purchase", active: false });
@@ -74,6 +72,7 @@ class Purchase extends Phaser.Scene {
                     newPet.utility = 0;
                     newPet.health = 0;
                     playerPetInfo.push(newPet);
+//***need to emit new pet to database
                     console.log("pet added" + playerPetInfo);
                     image.destroy('purchase');
                     this.scene.stop('Purchase');
@@ -100,6 +99,8 @@ class Purchase extends Phaser.Scene {
                 console.log("buy food");
                 purchase.on('pointerdown', () => {
                     playerInfo.currency = playerInfo.currency - this.info.cost;
+                    //emit money
+                    emitter.emit("currency", playerInfo.currency);
                     console.log("money left" + playerInfo.currency);
                     var check = 0;
                     for(var i = 0; i < inventoryInfo.length; i++){
@@ -110,18 +111,23 @@ class Purchase extends Phaser.Scene {
                     }
                     if(check == 0){
                         var stuff = {};
-                        for(var i =0; i < foodTypes.food.length; i++){
+                        for(var i = 0; i < foodTypes.food.length; i++){
                             if(foodTypes.food[i].type == this.info.type){
                                 stuff.itemID = i;
                             }
                         }
                         stuff.itemQty = 1;
                         stuff.playerID = playerInfo.playerID;
+
+
                         //missing inventory id
                         inventoryInfo.push(stuff);
 
                         console.log(inventoryInfo);
                     }
+                    //emit inventory
+                    emitter.emit("inventory", inventoryInfo.itemID, inventoryInfo.itemQty);
+
                     //information.push(this.info.petName);
                     //player.happiness.push(50);
                     image.destroy('purchase');
