@@ -10,7 +10,7 @@ class Pethub extends Phaser.Scene {
 
     }
     preload() {
-      
+
         var emitter = new Phaser.Events.EventEmitter()
           .on("taskList", updateTaskList)
           .on("inventory", updateInventory)
