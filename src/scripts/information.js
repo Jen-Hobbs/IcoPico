@@ -3,10 +3,10 @@ var updateHunger = 0; //used when we feed pet
 var runningScenes = [];
 var newTask = 0;
     // let information = ['shinyboi', 'shinyboi', 'shinyboi'];
-
+    
     // var player = {
     //     // 'happiness' :[20, 60, 70],
-
+        
     //     'activePet' : 0,
     //     'food':[
     //         {'foodType': 'carrot' , 'amount' : 2}
@@ -49,8 +49,11 @@ var playerTasks = [];
 //     'recycling': 0,
 //     'utility' : 0,
 //     'health' : 0}
-// ]
+// ] 
 // }
+let currentDate = new Date(); //last login sample data
+
+var lastLogin = currentDate;
     var pets = {"pet" : [
         {"petName": "shinyboi", "cost" : 100},
         {"petName": "dogboi", "cost" : 100},
@@ -62,9 +65,10 @@ var playerTasks = [];
     ]};
     let foodTypes = {'food' : [
         {'type' : 'icecream', 'cost' : 20},
-        {'type' : 'moni', 'cost' : 10}
+        {'type' : 'carrot', 'cost' : 10},
+        {'type' : 'donut', 'cost' : 30}
     ]};
-
+    
     var task_list = {"task" : [
         {
           "id": "0",
@@ -139,28 +143,28 @@ var playerTasks = [];
     ]};
     function updateTaskList(){
       if(playerTasks[0] != null){
-        tasklistInfo.taskIDa =playerTasks[0];
-        console.log("task id a " + tasklistInfo.taskIDa);
+        taskListInfo.taskIDa =playerTasks[0];
+        console.log("task id a " + taskListInfo.taskIDa);
       }
       else{
-        tasklistInfo.taskIDa = null;
-        console.log("task id a " + tasklistInfo.taskIDa);
+        taskListInfo.taskIDa = null;
+        console.log("task id a " + taskListInfo.taskIDa);
       }
       if(playerTasks[1] != null){
-        tasklistInfo.taskIDb =playerTasks[1];
-        console.log("task id b " + tasklistInfo.taskIDb);
+        taskListInfo.taskIDb =playerTasks[1];
+        console.log("task id b " + taskListInfo.taskIDb);
       }
       else{
-        tasklistInfo.taskIDb = null;
-        console.log("task id b " + tasklistInfo.taskIDb);
+        taskListInfo.taskIDb = null;
+        console.log("task id b " + taskListInfo.taskIDb);
       }
       if(playerTasks[2] != null){
-        tasklistInfo.taskIDc =playerTasks[2];
-        console.log("task id c " + tasklistInfo.taskIDc);
+        taskListInfo.taskIDc =playerTasks[2];
+        console.log("task id c " + taskListInfo.taskIDc);
       }
       else{
-        tasklistInfo.taskIDc = null;
-        console.log("task id c " + tasklistInfo.taskIDc);
+        taskListInfo.taskIDc = null;
+        console.log("task id c " + taskListInfo.taskIDc);
       }
     }
 

@@ -11,6 +11,7 @@ class PethubOverlay extends Phaser.Scene {
         this.load.image("task", '../images/buttons/pet_hub/task.png');
         this.load.image('food', '../images/food/donut.png');
         for (var i = 0; i < inventoryInfo.length; i++) {
+            console.log('check' + inventoryInfo[i].itemQty);
             this.load.image('food' + inventoryInfo[i].itemID, "../images/food/" + foodTypes.food[inventoryInfo[i].itemID].type + '.png');
         };
     }

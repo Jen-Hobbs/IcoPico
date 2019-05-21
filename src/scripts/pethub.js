@@ -2,7 +2,7 @@
 class Pethub extends Phaser.Scene {
     constructor() {
         super({ key: 'Pethub', active: true })
-
+    
     }
     init(data) {
         // console.log('init', data);
@@ -29,8 +29,8 @@ class Pethub extends Phaser.Scene {
      * create positioning of pet
      * sets up camera for multiple pets using arrows on screen to move between pets
      */
-    create() {
-        console.log("current pet" + playerInfo[0].activePet);
+    create() {   
+        console.log("active pet" + playerInfo.activePet);
         this.resetFood = 0;
         this.cameras.main.setBounds(0, 0, 800 * playerPetInfo.length, 400);
         this.cameras.main.setBackgroundColor('#aaa');
@@ -40,21 +40,21 @@ class Pethub extends Phaser.Scene {
 
         //create container for all information about pet and Flip between pets
         for (var i = 0; i < playerPetInfo.length; i++) {
-
+           
 
             //right arrow
             arrowR[i] = this.add.sprite(this.scale.width * 0.95, this.scale.height / 2, 'arrow');
             arrowR[i].setInteractive();
             arrowR[i].on('pointerdown', () => {
                 var cam = this.cameras.main;
-                if (playerInfo[0].activePet < playerPetInfo.length - 1) {
-                    playerInfo[0].activePet++;
-                    console.log(playerInfo[0].activePet);
+                if (playerInfo.activePet < playerPetInfo.length - 1) {
+                    playerInfo.activePet++;
+                    console.log(playerInfo.activePet);
                 }
                 else {
-                    playerInfo[0].activePet = 0;
+                    playerInfo.activePet = 0;
                 }
-                cam.centerOn(400 + 800 * playerInfo[0].activePet, 0);
+                cam.centerOn(400 + 800 * playerInfo.activePet, 0);
             });
             //left arrow
             arrowL[i] = this.add.sprite(this.scale.width * 0.04, this.scale.height / 2, 'arrow');
@@ -62,16 +62,16 @@ class Pethub extends Phaser.Scene {
             arrowL[i].setInteractive();
             arrowL[i].on('pointerdown', () => {
                 var cam = this.cameras.main;
-                if (playerInfo[0].activePet == 0) {
-                    playerInfo[0].activePet = playerPetInfo.length - 1;
+                if (playerInfo.activePet == 0) {
+                    playerInfo.activePet = playerPetInfo.length - 1;
                 }
                 else {
-                    console.log(playerInfo[0].activePet);
-                    playerInfo[0].activePet--;
+                    console.log(playerInfo.activePet);
+                    playerInfo.activePet--;
                 }
-                cam.centerOn(400 + 800 * playerInfo[0].activePet, 0);
+                cam.centerOn(400 + 800 * playerInfo.activePet, 0);
             });
-
+            
 
 
 
@@ -80,14 +80,14 @@ class Pethub extends Phaser.Scene {
             this.pet[i].add(this.add.sprite(this.scale.width / 2, this.scale.height *.97, 'pet' + i).setOrigin(0.5,1)); //addpet
             this.pet[i].add(arrowR[i]);
             this.pet[i].add(arrowL[i]);
-
+            
             this.checkHunger(i, this.pet);
             this.checkHappiness(i, this.pet);
             var cam = this.cameras.main;
-            cam.centerOn(400 + 800 * playerInfo[0].activePet, 0);
+            cam.centerOn(400 + 800 * playerInfo.activePet, 0);
 
         }
-
+        
     }
     /**
      * update status of pet
@@ -95,22 +95,22 @@ class Pethub extends Phaser.Scene {
     update() {
         //update hunger
         if(updateHunger == 1){
-            console.log("hi" + this.pet[playerInfo[0].activePet].getIndexList());
+            console.log("hi" + this.pet[playerInfo.activePet].getIndexList());
             //console.log(this.hungerBubble);
-            this.pet[playerInfo[0].activePet].remove(this.hungerBubble[playerInfo[0].activePet]);
-            this.pet[playerInfo[0].activePet].remove(this.hunger[playerInfo[0].activePet]);
-            this.checkHunger(playerInfo[0].activePet, this.pet);
-
+            this.pet[playerInfo.activePet].remove(this.hungerBubble[playerInfo.activePet]);
+            this.pet[playerInfo.activePet].remove(this.hunger[playerInfo.activePet]);
+            this.checkHunger(playerInfo.activePet, this.pet);
+            
             updateHunger = 0;
         }
         //for happiness from tasks
-
+    
 
     }
     /**
      * check happiness of the pet and create thought bubble corrisponding status
-     * @param {pet number} i
-     * @param {pet object} pet
+     * @param {pet number} i 
+     * @param {pet object} pet 
      */
     checkHappiness(i, pet) {
         //console.log(playerPets.pet[i].currentHappiness);
@@ -126,18 +126,18 @@ class Pethub extends Phaser.Scene {
             pet[i].add(this.sadBubble[i]);
             pet[i].add(this.sad[i]);
         }
-
-
+        
+        
     }
     /**
      * check hunger of the pet and create thought bubble corrisponding status
-     * @param {pet number} i
-     * @param {pet object} pet
+     * @param {pet number} i 
+     * @param {pet object} pet 
      */
     checkHunger(i, pet){
         //console.log(playerPets.pet[i].currentHappiness);
-
-
+        
+       
         if (playerPetInfo[i].currentHunger < 33) {
             this.hungerBubble[i] = this.add.sprite(this.scale.width*.73, this.scale.height *.35, 'thought');
             this.hunger[i] = this.add.sprite(this.scale.width*.71, this.scale.height *.27, 'hungry');
@@ -153,3 +153,4 @@ class Pethub extends Phaser.Scene {
 
     }
 }
+
