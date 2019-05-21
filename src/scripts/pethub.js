@@ -1,8 +1,10 @@
-
 class pethub extends Phaser.Scene {
     constructor() {
-        super({ key: 'Pethub', active: true })
-    
+        super({
+            key: 'Pethub',
+            active: true
+        })
+
     }
     init(data) {
         // console.log('init', data);
@@ -43,8 +45,7 @@ class pethub extends Phaser.Scene {
                 var cam = this.cameras.main;
                 if (pos < information.length - 1) {
                     pos++;
-                }
-                else {
+                } else {
                     pos = 0;
                 }
                 cam.centerOn(618 + 1236 * pos, 0);
@@ -57,13 +58,12 @@ class pethub extends Phaser.Scene {
                 var cam = this.cameras.main;
                 if (pos == 0) {
                     pos = information.length - 1;
-                }
-                else {
+                } else {
                     pos--;
                 }
                 cam.centerOn(618 + 1236 * pos, 0);
             });
-            
+
 
 
 
@@ -72,7 +72,7 @@ class pethub extends Phaser.Scene {
             this.pet[i].add(this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'pet' + i)); //addpet
             this.pet[i].add(arrowR[i]);
             this.pet[i].add(arrowL[i]);
-        
+
             this.checkHappiness(i, this.pet);
 
         }
@@ -90,11 +90,9 @@ class pethub extends Phaser.Scene {
     checkHappiness(i, pet) {
         if (player.happiness[i] < 33) {
             pet[i].add(this.add.sprite(this.scale.width * .95, this.scale.height * .07, 'blackHeart'));
-        }
-        else if (player.happiness[i] < 66) {
+        } else if (player.happiness[i] < 66) {
             pet[i].add(this.add.sprite(this.scale.width * .95, this.scale.height * .07, 'yellowHeart'));
-        }
-        else {
+        } else {
             pet[i].add(this.add.sprite(this.scale.width * .95, this.scale.height * .07, 'redHeart'));
         }
     }
@@ -102,26 +100,29 @@ class pethub extends Phaser.Scene {
 
 let petNumber = 3;
 var config = {
-
-    parent: 'wrapper',
     scale: {
         mode: Phaser.Scale.FIT,
+        parent: 'wrapper',
         width: 1236,
         height: 681,
         type: Phaser.AUTO,
-        autoCenter: Phaser.Scale.autoCenter
+        // autoCenter: Phaser.Scale.autoCenter
 
     },
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
+            gravity: {
+                y: 300
+            },
             debug: false
         }
     },
     scene: [ShowMenu, Shop, Task, Bag, pethub, PethubOverlay]
 
 };
+
+
 
 var game = new Phaser.Game(config);
 var player;

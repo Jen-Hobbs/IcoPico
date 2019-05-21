@@ -19,4 +19,4 @@ npm start
 
 leave the cmd open 
 
-it should refresh properly in the browser now
+it should refresh properly in the browser now		
