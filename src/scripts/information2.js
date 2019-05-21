@@ -1,7 +1,7 @@
 /** OTHERS
   lastLogin: datetime;
 **/
-var lastLogin;
+//var lastLogin;
 
 /** PLAYER TABLE JSON FORMAT
  *{ playerID:,
@@ -54,6 +54,7 @@ function initGameInfo() {
   getPlayerPet();
   getInventory();
   getTaskList();
+  getlastLogin();
   console.log(playerInfo);
 }
 
@@ -70,7 +71,7 @@ function getlastLogin(email)
       //playerInfo = JSON.parse(data);
       //data[0] because there will always only be 1 playerInfo per email
       lastLogin = data;
-      console.log(lastLogin);
+      console.log("lastlogin" + lastLogin);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);

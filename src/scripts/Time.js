@@ -28,7 +28,7 @@ class Time extends Phaser.Scene {
     updateLastLogin() {
         this.timeCurrent = new Date();
         console.log("current time " + this.timeCurrent.getDate());
-        console.log('last login ' + lastLogin.getDate());
+        console.log('last login ' + lastLogin);
         this.changedTime = (this.timeCurrent.getTime() - lastLogin.getTime()) / 10800000;
     }
     /**
