@@ -111,6 +111,37 @@ app.get('/gettasklistinfo/:table:attribute:listlevel:id', (req, res) => {
         res.send(JSON.stringify(result));
     });
 });
+
+app.get('/updatetasklist/:id/:taskIDa/:taskIDb/:taskIDc', (req, res) => {
+
+    let sqlA = `UPDATE TaskList SET taskIDa = ${req.params.taskIDa}, taskIDb = ${req.params.taskIDb},
+        taskIDc = ${req.params.taskIDc} WHERE playerID = ${req.params.id}`;
+    //let data = [1, 2, 3];
+    req.body
+
+    let queryA = db.query(sqlA, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('update success');
+        //console.log(req.body);
+        //console.log(JSON.parse(JSON.stringify(result)));
+        //res.send(JSON.stringify(result));
+    });
+
+    let sqlB = `SELECT * FROM TaskList WHERE playerID = ${req.params.id}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        //res.setHeader('Content-Type', 'application/json');
+        console.log("Stuff sent to server", req.body);
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+
+});
+
 var server = app.listen(8080, function(){
     var port = server.address().port;
     console.log("Server started at http://localhost:%s", port);

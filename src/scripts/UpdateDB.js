@@ -4,7 +4,6 @@ class UpdateDB extends Phaser.Scene {
   }
 
   preload() {
-
   }
 
   create() {
@@ -39,4 +38,28 @@ class UpdateDB extends Phaser.Scene {
     // }
 
   }
+}
+
+// function updateTaskList(newIDa, newIDb, newIDc) {
+//
+//     //console.log("updating TaskList using this data:", data);
+//
+//     //Ajax call to update info in TaskList table
+//     $.ajax({
+//         url: "/updatetasklist/" + playerID + "/" + newIDa
+//         + "/" + newIDb + "/" + newIDc,
+//         dataType: "json", // for updating the player's tasklist
+//         //contentType: 'application/json',
+//         type: "GET",
+//         port: "8000",
+//         async: false,
+//         success: function(data) {
+//             taskListInfo = data[0];
+//             console.log(taskListInfo);
+//         },
+//         error: function(jqXHR, textStatus, errorThrown) {
+//           //console.log("ERROR:", jqXHR, textStatus, errorThrown);
+//           console.log('error');
+//         }
+//     });
 }
