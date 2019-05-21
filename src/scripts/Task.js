@@ -156,6 +156,7 @@ class Task extends Phaser.Scene {
 
       //delete task from task_list at index
       playerTasks.splice(i, 1);
+      updateTaskList();
 
       //destroy whole task list
       for (var i = 0; i < CUR_NUM_TASKS; i++) {
@@ -218,6 +219,7 @@ class Task extends Phaser.Scene {
       for (var i = 0; i < this.taskButtons.length; i++) {
         if (this.taskButtons[i].getData('isActive')) {
           playerTasks.splice(i, 1);
+          updateTaskList();
           CUR_NUM_TASKS--;
         }
       }

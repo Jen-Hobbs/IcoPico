@@ -19,6 +19,7 @@ class Time extends Phaser.Scene {
         this.updateTasks();
         this.updateEmotions(); 
         this.evolution();
+        updateTaskList();
         console.log('player tasks length' + playerTasks.length);
     }
     /**

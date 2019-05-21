@@ -138,6 +138,32 @@ var playerTasks = [];
             "icon": "type1"
           },
     ]};
+    function updateTaskList(){
+      if(playerTasks[0] != null){
+        tasklistInfo.taskIDa =playerTasks[0];
+        console.log("task id a " + tasklistInfo.taskIDa);
+      }
+      else{
+        tasklistInfo.taskIDa = null;
+        console.log("task id a " + tasklistInfo.taskIDa);
+      }
+      if(playerTasks[1] != null){
+        tasklistInfo.taskIDb =playerTasks[1];
+        console.log("task id b " + tasklistInfo.taskIDb);
+      }
+      else{
+        tasklistInfo.taskIDb = null;
+        console.log("task id b " + tasklistInfo.taskIDb);
+      }
+      if(playerTasks[2] != null){
+        tasklistInfo.taskIDc =playerTasks[2];
+        console.log("task id c " + tasklistInfo.taskIDc);
+      }
+      else{
+        tasklistInfo.taskIDc = null;
+        console.log("task id c " + tasklistInfo.taskIDc);
+      }
+    }
 
 // console.log('current date '+ currentDate);
 // var timeNow = new Date('2019-05-14T18:21:00');
