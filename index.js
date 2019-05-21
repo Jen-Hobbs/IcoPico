@@ -212,7 +212,7 @@ app.get('/insertinventory/:id/:itemID', (req, res) => {
 
 /***** CREATING PLAYER DATA FOR A NEW PLAYER */
 
-// Creates a row in the Account table and gets back log-in value
+// Creates a row in the Account table 
 app.get('/createaccount/:email', (req, res) => {
 
     let sql =  `INSERT INTO Account(email) VALUES(${req.params.email})`;
@@ -226,7 +226,7 @@ app.get('/createaccount/:email', (req, res) => {
     });
 });
 
-// Creates a row in the Player table and gets back playerInfo
+// Creates a row in the Player table
 app.get('/createplayer/:email', (req, res) => {
     let sql = `INSERT INTO Player(accountEmail) VALUES(${req.params.email})`;
     let query = db.query(sql, (err, result) => {
@@ -239,7 +239,7 @@ app.get('/createplayer/:email', (req, res) => {
     });
 });
 
-// Creates a row in the Inventory table and gets back inventoryInfo
+// Creates a row in the Inventory table
 // This is different from /insertinventory/ request,
 // because a default item is given whenever a new player signs up 
 // playerID is needed for this query
@@ -256,9 +256,33 @@ app.get('/createinventory/:id', (req, res) => {
     });
 });
 
+// Creates a row in the PlayerPet table, and sets a default pet
 app.get('/createplayerpet/:id', (req, res) => {
-    let sqlA = `INSERT INTO PlayerPet(petID, playerID)`
-})
+    let sql = `INSERT INTO PlayerPet(playerID, petID)
+    VALUES(${req.params.id}, 1)`;
+    let query = db.query(sql, (err, result) => {
+        if (err) { 
+            return console.log('error: ' + err.message);
+        }
+        console.log('creating a new PlayerPet row success');
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+app.get('/createtasklist/:id', (req, res) => {
+    let sql = `INSERT INTO TaskList(playerID, taskIDa, taskIDb, taskIDc)
+    VALUES(${req.params.id}, 1, 2, 3)`;
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('creating a new TaskList row success');
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+
+});
 
 // app.listen('8080', () => {
 //     console.log('Server started on port 8080');
