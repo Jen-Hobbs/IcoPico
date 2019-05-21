@@ -134,8 +134,10 @@ class PethubOverlay extends Phaser.Scene {
             this.amount[i].alpha = .8;
         }
         this.foodButtons.add(this.amount);
-        playerPetInfo[playerInfo[0].activePet].currentHunger += 30;
-        console.log('new pet hunger' + playerPetInfo[playerInfo[0].activePet].currentHunger);
+        console.log(playerInfo.activePet);
+        console.log(playerPetInfo[playerInfo.activePet]);
+        playerPetInfo[playerInfo.activePet].currentHunger += 30;
+        console.log('new pet hunger' + playerPetInfo[playerInfo.activePet].currentHunger);
         updateHunger = 1;
         console.log('check hunger ' + updateHunger);
     }
