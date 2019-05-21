@@ -8,7 +8,6 @@ firebase.auth().onAuthStateChanged(function (user) {
     sessionStorage.setItem("uid", user.uid);
     sessionStorage.setItem("name", user.displayName);
     sessionStorage.setItem("email", user.email);
-    currentUserEmail = user.email;
 });
 
 // database.ref("icopico-89023").update({"name" : "nic"});
@@ -16,20 +15,15 @@ firebase.auth().onAuthStateChanged(function (user) {
 var uiConfig = {
     callbacks: {
         signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-            getPlayerInfo(currentUserEmail);
-            getPlayerPet();
-            getInventory();
-            getTaskList();
-            return true;
-            //getPlayerInfo((sessionStorage.getItem("email")) => return false);
+          return true;
         },
         uiShown: function () {
             document.getElementById('loader').style.display = 'none';
-        },
+        }
     },
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',
-    signInSuccessUrl: '../icopico/icopico.html',
+    signInSuccessUrl: '../icopico/icopico.html?email=' + sessionStorage.getItem("email"),
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
