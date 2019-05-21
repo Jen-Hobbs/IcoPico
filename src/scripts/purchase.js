@@ -34,14 +34,12 @@ class Purchase extends Phaser.Scene {
     create() {
         console.log("purchase" + this.info.petName);
         this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'backdrop');
-        var purchase = this.add.sprite(this.scale.width * .56, this.scale.height * .58, 'purchase');
+        var purchase = this.add.sprite(this.scale.width * .60, this.scale.height * .59, 'purchase');
         purchase.setInteractive();
         if (this.type == 'pet') {
-
             var image = this.add.sprite(this.scale.width / 2, this.scale.height * .48, this.info.petName).setScale(.2);
             if (playerInfo[0].currency >= this.info.cost) {
                 this.add.text(this.scale.width * .58, this.scale.height * .58, 'Buy').setColor('black');
-
                 console.log("buy pet");
                 purchase.on('pointerdown', () => {
                     playerInfo[0].currency = playerInfo[0].currency - this.info.cost;
@@ -75,9 +73,9 @@ class Purchase extends Phaser.Scene {
             }
             else {
                 console.log('not enough');
-                var notEnough = this.add.text(this.scale.width *.40, this.scale.height * .45, 'Insufficient Funds', {fontFamily: 'serif', fontSize: 32}).setColor('Black');
+                var notEnough = this.add.text(this.scale.width *.36, this.scale.height * .45, 'Insufficient Funds', {fontFamily: 'serif', fontSize: 32}).setColor('Black');
                 
-                this.add.text(this.scale.width * .54, this.scale.height * .57, 'Close').setColor('black');
+                this.add.text(this.scale.width * .57, this.scale.height * .58, 'Close').setColor('black');
                 purchase.on('pointerdown', () => {
                     image.destroy('purchase');
                     this.scene.stop('Purchase');
@@ -86,11 +84,10 @@ class Purchase extends Phaser.Scene {
             }
         }
         else {
-
             var image = this.add.sprite(this.scale.width / 2, this.scale.height * .48, this.info.type).setScale(.8);
             if (playerInfo[0].currency >= this.info.cost) {
                 
-                this.add.text(this.scale.width * .55, this.scale.height * .57, 'Buy').setColor('black');
+                this.add.text(this.scale.width * .58, this.scale.height * .58, 'Buy').setColor('black');
                 console.log("buy food");
                 purchase.on('pointerdown', () => {
                     playerInfo[0].currency = playerInfo[0].currency - this.info.cost;
@@ -125,9 +122,9 @@ class Purchase extends Phaser.Scene {
             }
             else {
                 console.log('not enough');
-                var notEnough = this.add.text(this.scale.width *.40, this.scale.height * .45, 'Insufficient Funds', {fontFamily: 'serif', fontSize: 32}).setColor('Black');
+                var notEnough = this.add.text(this.scale.width *.36, this.scale.height * .45, 'Insufficient Funds', {fontFamily: 'serif', fontSize: 32}).setColor('Black');
                 
-                this.add.text(this.scale.width * .54, this.scale.height * .57, 'Close').setColor('black');
+                this.add.text(this.scale.width * .57, this.scale.height * .58, 'Close').setColor('black');
                 purchase.on('pointerdown', () => {
                     image.destroy('purchase');
                     this.scene.stop('Purchase');
@@ -135,9 +132,9 @@ class Purchase extends Phaser.Scene {
                 });
             }
         }
-        var close = this.add.sprite(this.scale.width * .41, this.scale.height * .41, 'x');
+        var close = this.add.sprite(this.scale.width * .36, this.scale.height * .40, 'x');
         close.setInteractive();
-        close.on('pointerdown', () => {
+        close.on('pointerup', () => {
             this.scene.stop('Purchase');
             this.scene.run('Shop');
         });
