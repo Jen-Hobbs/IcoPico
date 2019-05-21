@@ -1,3 +1,8 @@
+/** OTHERS
+  lastLogin: datetime;
+**/
+var lastLogin;
+
 /** PLAYER TABLE JSON FORMAT
  *{ playerID:,
  *    currency:,
@@ -50,6 +55,27 @@ function initGameInfo() {
   getInventory();
   getTaskList();
   console.log(playerInfo);
+}
+
+function getlastLogin(email)
+{
+  //Ajax call to get lastLogin from  table
+  $.ajax({
+    url: "/getlastlogin/" + "'" + email + "'",
+    dataType: "json",
+    port: "8000",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 playerInfo per email
+      lastLogin = data;
+      console.log(lastLogin);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
 }
 
 function getPlayerInfo(email)

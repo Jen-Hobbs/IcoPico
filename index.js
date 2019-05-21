@@ -47,6 +47,18 @@ app.get('/getinitialinfo/:id', (req, res) => {
     });
 });
 
+//get lastlogin from Account table
+app.get('/getlastlogin/:id', (req, res) => {
+    let sql = `SELECT lastLogin FROM Account WHERE email = ${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
 //get info from Player table
 app.get('/getinitialinfo/:id', (req, res) => {
     let sql = `SELECT * FROM Player WHERE accountEmail = ${req.params.id}`;
@@ -99,19 +111,8 @@ app.get('/gettasklistinfo/:id', (req, res) => {
     });
 });
 
-//Update attribute in databse table
-app.get('/gettasklistinfo/:table:attribute:listlevel:id', (req, res) => {
-    //let sql = `SELECT * FROM ${req.params.table} WHERE playerID = ${req.params.attribute}`;
-    let sql = `UPDATE ${req.params.attribute} FROM ${req.params.table} WHERE playerID`
-    let query = db.query(sql, (err, result) => {
-        if (err) {
-            return console.log('error: ' + err.message);
-        }
-        console.log(JSON.parse(JSON.stringify(result)));
-        res.send(JSON.stringify(result));
-    });
-});
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//Update tasklist
 app.get('/updatetasklist/:id/:taskIDa/:taskIDb/:taskIDc', (req, res) => {
 
     let sqlA = `UPDATE TaskList SET taskIDa = ${req.params.taskIDa}, taskIDb = ${req.params.taskIDb},
@@ -139,7 +140,36 @@ app.get('/updatetasklist/:id/:taskIDa/:taskIDb/:taskIDc', (req, res) => {
         console.log(JSON.parse(JSON.stringify(result)));
         res.send(JSON.stringify(result));
     });
+});
 
+//update currency
+app.get('/updatecurrency/:id/:newCurrency', (req, res) => {
+
+    let sqlA = `UPDATE TaskList SET taskIDa = ${req.params.taskIDa}, taskIDb = ${req.params.taskIDb},
+        taskIDc = ${req.params.taskIDc} WHERE playerID = ${req.params.id}`;
+    //let data = [1, 2, 3];
+    req.body
+
+    let queryA = db.query(sqlA, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('update success');
+        //console.log(req.body);
+        //console.log(JSON.parse(JSON.stringify(result)));
+        //res.send(JSON.stringify(result));
+    });
+
+    let sqlB = `SELECT * FROM TaskList WHERE playerID = ${req.params.id}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        //res.setHeader('Content-Type', 'application/json');
+        console.log("Stuff sent to server", req.body);
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
 });
 
 var server = app.listen(8080, function(){
