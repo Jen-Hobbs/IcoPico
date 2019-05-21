@@ -65,13 +65,13 @@ function getLastLogin(email)
   $.ajax({
     url: "/getlastlogin/" + "'" + email + "'",
     dataType: "json",
-    port: "8000",
     type: "GET",
     async: false,
     success: function(data) {
       //playerInfo = JSON.parse(data);
       //data[0] because there will always only be 1 playerInfo per email
-      lastLogin = data;
+      lastLogin = data[0];
+      console.log("lastLogin");
       console.log(lastLogin);
     },
     error: function(jqXHR, textStatus, errorThrown) {
@@ -86,7 +86,6 @@ function getPlayerInfo(email)
   $.ajax({
     url: "/getinitialinfo/" + "'" + email + "'",
     dataType: "json",
-    port: "8000",
     type: "GET",
     async: false,
     success: function(data) {
@@ -109,7 +108,6 @@ function getPlayerPet()
   $.ajax({
     url: "/getplayerpetinfo/" + "'" + playerID + "'",
     dataType: "json",
-    port: "8000",
     type: "GET",
     async: false,
     success: function(data) {
@@ -129,7 +127,6 @@ function getInventory()
     $.ajax({
       url: "/getinventoryinfo/" + "'" + playerID + "'",
       dataType: "json",
-      port: "8000",
       type: "GET",
       async: false,
       success: function(data) {
@@ -149,7 +146,6 @@ function getTaskList()
     $.ajax({
       url: "/gettasklistinfo/" + "'" + playerID + "'",
       dataType: "json",
-      port: "8000",
       type: "GET",
       async: false,
       success: function(data) {
@@ -165,13 +161,57 @@ function getTaskList()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+//update tasklist
+function updateTaskList(newIDa, newIDb, newIDc) {
+
+    //console.log("updating TaskList using this data:", data);
+
+    //Ajax call to update info in TaskList table
+    $.ajax({
+        url: "/updatetasklist/" + playerID + "/" + newIDa
+        + "/" + newIDb + "/" + newIDc,
+        dataType: "json", // for updating the player's tasklist
+        //contentType: 'application/json',
+        type: "GET",
+        async: false,
+        success: function(data) {
+            taskListInfo = data[0];
+            console.log(taskListInfo);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          //console.log("ERROR:", jqXHR, textStatus, errorThrown);
+          console.log('error');
+        }
+    });
+}
+
+//update currency (money)
 function updateCurrency(newCurrency)
 {
   //Ajax call to update currency
   $.ajax({
     url: "/updatecurrency/" + playerID + "/" + newCurrency,
     dataType: "json",
-    port: "8000",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 tasklist per email
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+}
+
+//update currentHappiness
+function updateCurrentHappiness(petID, newHappiness)
+{
+  //Ajax call to update currency
+  $.ajax({
+    url: "/updatecurrenthappiness/" + playerID + "/" + petID + "/" + newHappiness,
+    dataType: "json",
     type: "GET",
     async: false,
     success: function(data) {
