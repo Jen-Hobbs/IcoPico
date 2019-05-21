@@ -215,42 +215,26 @@ app.get('/insertinventory/:id/:itemID', (req, res) => {
 // Creates a row in the Account table and gets back log-in value
 app.get('/createaccount/:email', (req, res) => {
 
-    let sqlA =  `INSERT INTO Account(email) VALUES(${req.params.email})`;
-    let queryA = db.query(sqlA, (err, result) => {
+    let sql =  `INSERT INTO Account(email) VALUES(${req.params.email})`;
+    let query = db.query(sql, (err, result) => {
         if (err) {
             return console.log('error: ' + err.message);
         }
         console.log('creating a new Account row success');
-    });
-
-    let sqlB = `SELECT lastLogin FROM Account WHERE email = ${req.params.email}`;
-    let queryB = db.query(sqlB, (err, result) => {
-        if (err) {
-            return console.log('error: ' + err.message);
-        }
-        console.log(JSON.parse(JSON.stringify(result)));
+        //console.log(JSON.parse(JSON.stringify(result)));
         res.send(JSON.stringify(result));
-
     });
 });
 
 // Creates a row in the Player table and gets back playerInfo
 app.get('/createplayer/:email', (req, res) => {
-    let sqlA = `INSERT INTO Player(accountEmail) VALUES(${req.params.email})`;
-    let queryA = db.query(sqlA, (err, result) => {
+    let sql = `INSERT INTO Player(accountEmail) VALUES(${req.params.email})`;
+    let query = db.query(sql, (err, result) => {
         if (err) {
             return console.log('error: ' + err.message);
         }
         console.log('creating a new Player row success');
-    });
-
-    let sqlB = `SELECT * FROM Player 
-    WHERE accountEmail = ${req.params.email}`;
-    let queryB = db.query(sqlB, (err, result) => {
-        if (err) {
-            return console.log('error: ' + err.message);
-        }
-        console.log(JSON.parse(JSON.stringify(result)));
+        //console.log(JSON.parse(JSON.stringify(result)));
         res.send(JSON.stringify(result));
     });
 });
@@ -258,27 +242,23 @@ app.get('/createplayer/:email', (req, res) => {
 // Creates a row in the Inventory table and gets back inventoryInfo
 // This is different from /insertinventory/ request,
 // because a default item is given whenever a new player signs up 
+// playerID is needed for this query
 app.get('/createinventory/:id', (req, res) => {
-    let sqlA = `INSERT INTO Inventory(playerID, itemID, itemQty)
+    let sql = `INSERT INTO Inventory(playerID, itemID, itemQty)
      VALUES(${req.params.id}, 1, 1)`;
-    let queryA = db.query(sqlA, (err, result) => {
+    let query = db.query(sql, (err, result) => {
         if (err) {
             return console.log('error: ' + err.message);
         }
         console.log('creating a new Inventory row success');
-    });
-
-    let sqlB = `SELECT * FROM Inventory 
-    WHERE playerID = ${req.params.id}`;
-    let queryB = db.query(sqlB, (err, result) => {
-        if (err) {
-            return console.log('error: ' + err.message);
-        }
-        console.log(JSON.parse(JSON.stringify(result)));
+        //console.log(JSON.parse(JSON.stringify(result)));
         res.send(JSON.stringify(result));
     });
 });
 
+app.get('/createplayerpet/:id', (req, res) => {
+    let sqlA = `INSERT INTO PlayerPet(petID, playerID)`
+})
 
 // app.listen('8080', () => {
 //     console.log('Server started on port 8080');
