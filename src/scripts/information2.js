@@ -224,3 +224,23 @@ function updateCurrentHappiness(petID, newHappiness)
     }
   });
 }
+
+//update currentHunger
+function updateCurrentHunger(petID, newHunger)
+{
+  //Ajax call to update currency
+  $.ajax({
+    url: "/updatecurrenthappiness/" + playerID + "/" + petID + "/" + newHunger,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 tasklist per email
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+}

@@ -168,6 +168,19 @@ app.get('/updatecurrenthappiness/:id/:petID/:newHappiness', (req, res) => {
     });
 });
 
+//update hunger
+app.get('/updatecurrenthappiness/:id/:petID/:newHappiness', (req, res) => {
+    let sqlB = `UPDATE PlayerPet SET currentHunger = ${req.params.newHunger}
+    WHERE PlayerPet.playerID = ${req.params.id} AND petID = ${req.params.petID}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
 var server = app.listen(8080, function(){
     var port = server.address().port;
     console.log("Server started at http://localhost:%s", port);
