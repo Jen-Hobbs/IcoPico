@@ -49,6 +49,7 @@ class Pethub extends Phaser.Scene {
                 var cam = this.cameras.main;
                 if (playerInfo[0].activePet < playerPetInfo.length - 1) {
                     playerInfo[0].activePet++;
+                    console.log(playerInfo[0].activePet);
                 }
                 else {
                     playerInfo[0].activePet = 0;
@@ -62,9 +63,10 @@ class Pethub extends Phaser.Scene {
             arrowL[i].on('pointerdown', () => {
                 var cam = this.cameras.main;
                 if (playerInfo[0].activePet == 0) {
-                    playerInfo.activePet = playerPetInfo.length - 1;
+                    playerInfo[0].activePet = playerPetInfo.length - 1;
                 }
                 else {
+                    console.log(playerInfo[0].activePet);
                     playerInfo[0].activePet--;
                 }
                 cam.centerOn(400 + 800 * playerInfo[0].activePet, 0);

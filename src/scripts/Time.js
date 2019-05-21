@@ -54,17 +54,17 @@ class Time extends Phaser.Scene {
      * change tasklist to array
      */
     setTaskList(){
-        if(tasklistInfo[0].taskIDa != 0){
+        if(tasklistInfo[0].taskIDa != null){
             console.log('a added');
             playerTasks.push(tasklistInfo[0].taskIDa);
         }
-        if(tasklistInfo[0].taskIDb != 0){
+        if(tasklistInfo[0].taskIDb != null){
             console.log('b added');
-            playerTasks.push(tasklistInfo[0].taskIDa);
+            playerTasks.push(tasklistInfo[0].taskIDb);
         }
-        if(tasklistInfo[0].taskIDc != 0){
+        if(tasklistInfo[0].taskIDc != null){
             console.log('c added' + tasklistInfo[0].taskIDc);
-            playerTasks.push(tasklistInfo[0].taskIDa);
+            playerTasks.push(tasklistInfo[0].taskIDc);
         }
     }
     /**

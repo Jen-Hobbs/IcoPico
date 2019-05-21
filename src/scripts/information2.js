@@ -8,35 +8,8 @@ var playerInfo = [{
 
 var playerPetInfo = [
   {
-    currentHappiness: 30,
-    currentHunger: 50,
-    petID: 2,
-    petName: "petA",
-    playerID: 1,
-    playerPetID: 1,
-    totalHappiness: 0,
-    totalHunger: 0,
-    recycling: 0,
-    utility: 0,
-    health: 0
-  
-  },{
-  currentHappiness: 30,
-  currentHunger: 50,
-  petID: 0,
-  petName: "petA",
-  playerID: 1,
-  playerPetID: 1,
-  totalHappiness: 0,
-  totalHunger: 0,
-  recycling: 0,
-  utility: 0,
-  health: 0
-
-},
-{
-  currentHappiness: 30,
-  currentHunger: 50,
+  currentHappiness: 100,
+  currentHunger: 0,
   petID: 1,
   petName: "petA",
   playerID: 1,
@@ -72,7 +45,21 @@ var playerPetInfo = [
   totalHunger: 0,
   recycling: 0,
   utility: 0,
-  health: 0}]
+  health: 0},
+  {
+    currentHappiness: 30,
+    currentHunger: 50,
+    petID: 6,
+    petName: "petA",
+    playerID: 1,
+    playerPetID: 1,
+    totalHappiness: 0,
+    totalHunger: 0,
+    recycling: 0,
+    utility: 0,
+    health: 0
+  
+  }]
 
 var inventoryInfo =
   [{
@@ -90,9 +77,9 @@ var inventoryInfo =
 
 var tasklistInfo = [{
   playerID: 1,
-  taskIDa: 1,
-  taskIDb: 2,
-  taskIDc: 0,
+  taskIDa: null,
+  taskIDb: null,
+  taskIDc: null,
   taskListID: 1
 }];
 let currentDate = new Date('2019-05-17T13:00:00.000Z'); //last login sample data
