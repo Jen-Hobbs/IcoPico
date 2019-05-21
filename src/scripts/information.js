@@ -61,7 +61,14 @@ var lastLogin = currentDate;
         {"petName": "fluffboi"},
         {"petName": "jellyboi"},
         {"petName": "potatoboi"},
-        {"petName": "sushiboi"}
+        {"petName": "sushiboi"},
+        {"petName": "eggboi"},
+        {"petName": "legboi"},
+        {"petName": "longboi"},
+        {"petName": "muscleboi"},
+        {"petName": "planteyboi"},
+        {"petName": "squidboi"},
+        {"petName": "whaleboi"}
     ]};
     let foodTypes = {'food' : [
         {'type' : 'icecream', 'cost' : 20},
