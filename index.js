@@ -49,7 +49,7 @@ app.get('/getinitialinfo/:id', (req, res) => {
 
 //get lastlogin from Account table
 app.get('/getlastlogin/:id', (req, res) => {
-    let sql = `SELECT lastLogin FROM Account WHERE email = ${req.params.id}`;
+    let sql = `SELECT * FROM Account WHERE email = ${req.params.id}`;
     let query = db.query(sql, (err, result) => {
         if (err) {
             return console.log('error: ' + err.message);
@@ -146,6 +146,19 @@ app.get('/updatetasklist/:id/:taskIDa/:taskIDb/:taskIDc', (req, res) => {
 app.get('/updatecurrency/:id/:newCurrency', (req, res) => {
 
     let sqlB = `UPDATE Player SET currency = ${req.params.newCurrency} WHERE playerID = ${req.params.id}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+//update happiness
+app.get('/updatecurrenthappiness/:id/:petID/:newHappiness', (req, res) => {
+    let sqlB = `UPDATE PlayerPet SET currentHappiness = ${req.params.newHappiness}
+    WHERE PlayerPet.playerID = ${req.params.id} AND petID = ${req.params.petID}`;
     let queryB = db.query(sqlB, (err, result) => {
         if (err) {
             return console.log('error: ' + err.message);
