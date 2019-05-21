@@ -213,12 +213,14 @@ class Task extends Phaser.Scene {
       for (var i = 0; i < this.taskButtons.length; i++) {
         if (this.taskButtons[i].getData('isActive')) {
           this.addItems(i)
-
+        }
+      }
+      for (var i = 0; i < this.taskButtons.length; i++) {
+        if (this.taskButtons[i].getData('isActive')) {
           playerTasks.splice(i, 1);
           CUR_NUM_TASKS--;
         }
       }
-
       //destroy whole task list
       for (var i = 0; i < this.taskButtons.length; i++) {
         this.taskButtons[i].destroy(true);
@@ -269,6 +271,7 @@ class Task extends Phaser.Scene {
    * @param {*} i task selected
    */
   addItems(i) {
+    //update task competion
     if (task_list.task[playerTasks[i]].icon == 'type1') {
       this.addFood('icecream');
       console.log('icecream');
@@ -291,22 +294,19 @@ class Task extends Phaser.Scene {
       }
       
     }
-    // console.log(playerTasks);
-    // console.log(i);
-    // console.log(playerTasks[i]);
-    // console.log(task_list.task[playerTasks[i]].evolutionType);
-    // if(task_list.task[playerTasks[i]].evolutionType == 'health'){
-    //   playerPetInfo[playerInfo.activePet].health++;
-    //   console.log('health' + playerPetInfo[playerInfo.activePet].health);
-    // }
-    // else if(task_list.task[playerTasks[i]].evolutionType == 'utility'){
-    //   playerPetInfo[playerInfo.activePet].utility++;
-    //   console.log('health' + playerPetInfo[playerInfo.activePet].utility);
-    // }
-    // else if(task_list.task[playerTasks[i]].evolutionType == 'recycling'){
-    //   playerPetInfo[playerInfo.activePet].recycling++;
-    //   console.log('health' + playerPetInfo[playerInfo.activePet].recycling);
-    // }
+    //update evolution
+    if(task_list.task[playerTasks[i]].evolutionType == 'health'){
+      playerPetInfo[playerInfo[0].activePet].health++;
+      console.log('health' + playerPetInfo[playerInfo[0].activePet].health);
+    }
+    else if(task_list.task[playerTasks[i]].evolutionType == 'utility'){
+      playerPetInfo[playerInfo[0].activePet].utility++;
+      console.log('utility' + playerPetInfo[playerInfo[0].activePet].utility);
+    }
+    else if(task_list.task[playerTasks[i]].evolutionType == 'recycling'){
+      playerPetInfo[playerInfo[0].activePet].recycling++;
+      console.log('recycling' + playerPetInfo[playerInfo[0].activePet].recycling);
+    }
   }
   /**
    * add food to inventory
