@@ -6,8 +6,11 @@ class Shop extends Phaser.Scene {
         this.load.image('backShop', '../images/sky.png');
         this.load.image("menuShop", '../images/buttons/Other/menu.png');
         this.load.image('whiteCircle', '../images/icons/whiteCircle.png');
-        this.load.image('shinyboi', '../images/pets/shinyboi.png');
-        this.load.image('mony', '../images/pets/mony.png');
+
+        // this.load.image('shinyboi', '../images/pets/shinyboi.png');
+        for(var i = 0; i <  3; i++){
+            this.load.image(pets.pet[i].petName, '../images/pets/' + pets.pet[i].petName + '.png');
+        }
         this.load.image('money', '../images/icons/money.png');
         this.load.image('moneyBar', '../images/icons/money_bar.png');
         this.load.image('moni', '../images/food/moni.png');
@@ -34,10 +37,8 @@ class Shop extends Phaser.Scene {
     }
     updateMoneyBar(){
         
-        this.moneyBar = this.add.sprite(this.scale.width*.75, this.scale.height *.15, 'moneyBar');
-        var money = this.add.text(this.scale.width*.72, this.scale.height *.12, player.money, {fontFamily: 'serif', fontSize: 28}).setColor('black');
-        
-        
+        this.moneyBar = this.add.sprite(this.scale.width, this.scale.height *.10, 'moneyBar').setOrigin(1,0);
+        var money = this.add.text(this.scale.width*.82, this.scale.height *.123, playerInfo[0].currency, {fontFamily: 'serif', fontSize: 28}).setColor('black');  
     }
     textLayout(){
         var shop = this.add.text(this.scale.width/2, this.scale.height*.10, "Shop", {fontFamily: 'serif', fontSize: 64});
@@ -64,8 +65,8 @@ class Shop extends Phaser.Scene {
         //     white.setInteractive();
         //     white.on('clicked', this.select, this);
         // }
-        for(var i = 0; i < pets.pet.length; i++){
-            var petSelect = this.add.container(this.scale.width*(.2 + (i*.1)), this.scale.height *.75);
+        for(var i = 0; i < 3; i++){
+            var petSelect = this.add.container(this.scale.width*(.2 + (i*.15)), this.scale.height *.75);
             petSelect.setSize(100, 200);
             petSelect.add(this.add.sprite(0,0, 'whiteCircle'));
             var pet = this.add.sprite(0,0, pets.pet[i].petName);
