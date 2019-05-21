@@ -26,7 +26,12 @@ class pethub extends Phaser.Scene {
     }
 
     create() {
-
+        console.log(this.time.now);
+    // console.log('current date '+ currentDate);
+     var timeNow = new Date('2019-05-14T18:21:00');
+// console.log('time now ' + timeNow);
+     console.log((timeNow.getTime() - player.lastlogin.getTime())/3600000);
+        console.log("current pet" + player.activePet);
         this.resetFood = 0;
         this.cameras.main.setBounds(0, 0, 1236 * information.length, 681);
         this.cameras.main.setBackgroundColor('#aaa');
@@ -36,19 +41,20 @@ class pethub extends Phaser.Scene {
 
         //create container for all information about pet and Flip between pets
         for (var i = 0; i < information.length; i++) {
-            var pos = 0;
+           
 
             //right arrow
             arrowR[i] = this.add.sprite(this.scale.width * 0.95, this.scale.height / 2, 'arrow');
             arrowR[i].setInteractive();
             arrowR[i].on('pointerdown', () => {
                 var cam = this.cameras.main;
-                if (pos < information.length - 1) {
-                    pos++;
-                } else {
-                    pos = 0;
+                if (player.activePet < information.length - 1) {
+                    player.activePet++;
                 }
-                cam.centerOn(618 + 1236 * pos, 0);
+                else {
+                    player.activePet = 0;
+                }
+                cam.centerOn(618 + 1236 * player.activePet, 0);
             });
             //left arrow
             arrowL[i] = this.add.sprite(this.scale.width * 0.04, this.scale.height / 2, 'arrow');
@@ -56,12 +62,13 @@ class pethub extends Phaser.Scene {
             arrowL[i].setInteractive();
             arrowL[i].on('pointerdown', () => {
                 var cam = this.cameras.main;
-                if (pos == 0) {
-                    pos = information.length - 1;
-                } else {
-                    pos--;
+                if (player.activePet == 0) {
+                    player.activePet = information.length - 1;
                 }
-                cam.centerOn(618 + 1236 * pos, 0);
+                else {
+                    player.activePet--;
+                }
+                cam.centerOn(618 + 1236 * player.activePet, 0);
             });
 
 
@@ -74,20 +81,32 @@ class pethub extends Phaser.Scene {
             this.pet[i].add(arrowL[i]);
 
             this.checkHappiness(i, this.pet);
+            var cam = this.cameras.main;
+            cam.centerOn(618 + 1236 * player.activePet, 0);
 
         }
+        
     }
     update() {
-
+        if(updateHappiness == 1){
+            this.pet[player.activePet].remove(this.heart);
+            this.checkHappiness(player.activePet, this.pet);
+            updateHappiness = 0;
+        }
+    
 
     }
-
-
+    dateModifier(){
+        console.log('hi');
+    }
+    
 
 
 
 
     checkHappiness(i, pet) {
+        console.log(player.happiness[i]);
+        this.heart;
         if (player.happiness[i] < 33) {
             pet[i].add(this.add.sprite(this.scale.width * .95, this.scale.height * .07, 'blackHeart'));
         } else if (player.happiness[i] < 66) {
@@ -95,6 +114,7 @@ class pethub extends Phaser.Scene {
         } else {
             pet[i].add(this.add.sprite(this.scale.width * .95, this.scale.height * .07, 'redHeart'));
         }
+        pet[i].add(this.heart);
     }
 }
 
@@ -118,7 +138,7 @@ var config = {
             debug: false
         }
     },
-    scene: [ShowMenu, Shop, Task, Bag, pethub, PethubOverlay]
+    scene: [ShowMenu, Shop, Task, pethub, PethubOverlay]
 
 };
 
