@@ -1,9 +1,6 @@
-class pethub extends Phaser.Scene {
+class Pethub extends Phaser.Scene {
     constructor() {
-        super({
-            key: 'Pethub',
-            active: true
-        })
+        super({ key: 'Pethub', active: true })
 
     }
     init(data) {
@@ -13,48 +10,59 @@ class pethub extends Phaser.Scene {
 
     }
     preload() {
-        for (var i = 0; i < information.length; i++) {
-            this.load.image('pet' + i, '../images/pets/' + information[i] + '.png');
+
+        var emitter = new Phaser.Events.EventEmitter()
+          .on("taskList", updateTaskList)
+          .on("inventory", updateInventory)
+          .on("currency", updateCurrency)
+          .on("happiness", updateCurrentHappiness)
+          .on("hunger", updateCurrentHunger);
+          //.emit("sampleAjax", "sample1@gmail.com");
+
+        for (var i = 0; i < playerPetInfo.length; i++) {
+            this.load.image('pet' + i, '../images/pets/' + pets.pet[playerPetInfo[i].petID].petName + '.png');
         }
         this.load.image('arrow', '../images/buttons/Other/arrow.png');
-        this.load.image('backPet', '../images/sky.png');
-        this.load.image('blackHeart', '../images/buttons/pet_hub/black_heart.png');
-        this.load.image('yellowHeart', '../images/buttons/pet_hub/yellow_heart.png');
-        this.load.image('redHeart', '../images/buttons/pet_hub/red_heart.png');
-
+        this.load.image('backPet', '../images/Sad_Appartment.png');
+        this.load.image('sad', '../images/buttons/pet_hub/sad.png');
+        this.load.image('thought', '../images/icons/4th_bubble.png');
+        this.load.image('hungry', '../images/buttons/pet_hub/hungry.png');
+        this.hunger = [];
+        this.hungerBubble = [];
+        this.sad = [];
+        this.sadBubble = [];
 
     }
-
+    /**
+     * create positioning of pet
+     * sets up camera for multiple pets using arrows on screen to move between pets
+     */
     create() {
-        console.log(this.time.now);
-    // console.log('current date '+ currentDate);
-     var timeNow = new Date('2019-05-14T18:21:00');
-// console.log('time now ' + timeNow);
-     console.log((timeNow.getTime() - player.lastlogin.getTime())/3600000);
-        console.log("current pet" + player.activePet);
+        console.log("active pet" + playerInfo.activePet);
         this.resetFood = 0;
-        this.cameras.main.setBounds(0, 0, 1236 * information.length, 681);
+        this.cameras.main.setBounds(0, 0, 800 * playerPetInfo.length, 400);
         this.cameras.main.setBackgroundColor('#aaa');
         this.pet = [];
         var arrowR = [];
         var arrowL = [];
 
         //create container for all information about pet and Flip between pets
-        for (var i = 0; i < information.length; i++) {
-           
+        for (var i = 0; i < playerPetInfo.length; i++) {
+
 
             //right arrow
             arrowR[i] = this.add.sprite(this.scale.width * 0.95, this.scale.height / 2, 'arrow');
             arrowR[i].setInteractive();
             arrowR[i].on('pointerdown', () => {
                 var cam = this.cameras.main;
-                if (player.activePet < information.length - 1) {
-                    player.activePet++;
+                if (playerInfo.activePet < playerPetInfo.length - 1) {
+                    playerInfo.activePet++;
+                    console.log(playerInfo.activePet);
                 }
                 else {
-                    player.activePet = 0;
+                    playerInfo.activePet = 0;
                 }
-                cam.centerOn(618 + 1236 * player.activePet, 0);
+                cam.centerOn(400 + 800 * playerInfo.activePet, 0);
             });
             //left arrow
             arrowL[i] = this.add.sprite(this.scale.width * 0.04, this.scale.height / 2, 'arrow');
@@ -62,88 +70,94 @@ class pethub extends Phaser.Scene {
             arrowL[i].setInteractive();
             arrowL[i].on('pointerdown', () => {
                 var cam = this.cameras.main;
-                if (player.activePet == 0) {
-                    player.activePet = information.length - 1;
+                if (playerInfo.activePet == 0) {
+                    playerInfo.activePet = playerPetInfo.length - 1;
                 }
                 else {
-                    player.activePet--;
+                    console.log(playerInfo.activePet);
+                    playerInfo.activePet--;
                 }
-                cam.centerOn(618 + 1236 * player.activePet, 0);
+                cam.centerOn(400 + 800 * playerInfo.activePet, 0);
             });
 
 
 
 
-            this.pet[i] = this.add.container(i * 1236, 0);
+            this.pet[i] = this.add.container(i * 800, 0);
             this.pet[i].add(this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'backPet')); //background
-            this.pet[i].add(this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'pet' + i)); //addpet
+            this.pet[i].add(this.add.sprite(this.scale.width / 2, this.scale.height *.97, 'pet' + i).setOrigin(0.5,1)); //addpet
             this.pet[i].add(arrowR[i]);
             this.pet[i].add(arrowL[i]);
 
+            this.checkHunger(i, this.pet);
             this.checkHappiness(i, this.pet);
             var cam = this.cameras.main;
-            cam.centerOn(618 + 1236 * player.activePet, 0);
+            cam.centerOn(400 + 800 * playerInfo.activePet, 0);
 
         }
-        
+
     }
+    /**
+     * update status of pet
+     */
     update() {
-        if(updateHappiness == 1){
-            this.pet[player.activePet].remove(this.heart);
-            this.checkHappiness(player.activePet, this.pet);
-            updateHappiness = 0;
+        //update hunger
+        if(updateHunger == 1){
+            console.log("hi" + this.pet[playerInfo.activePet].getIndexList());
+            //console.log(this.hungerBubble);
+            this.pet[playerInfo.activePet].remove(this.hungerBubble[playerInfo.activePet]);
+            this.pet[playerInfo.activePet].remove(this.hunger[playerInfo.activePet]);
+            this.checkHunger(playerInfo.activePet, this.pet);
+
+            updateHunger = 0;
         }
-    
+        //for happiness from tasks
+
 
     }
-    dateModifier(){
-        console.log('hi');
-    }
-    
-
-
-
-
+    /**
+     * check happiness of the pet and create thought bubble corrisponding status
+     * @param {pet number} i
+     * @param {pet object} pet
+     */
     checkHappiness(i, pet) {
-        console.log(player.happiness[i]);
-        this.heart;
-        if (player.happiness[i] < 33) {
-            pet[i].add(this.add.sprite(this.scale.width * .95, this.scale.height * .07, 'blackHeart'));
-        } else if (player.happiness[i] < 66) {
-            pet[i].add(this.add.sprite(this.scale.width * .95, this.scale.height * .07, 'yellowHeart'));
-        } else {
-            pet[i].add(this.add.sprite(this.scale.width * .95, this.scale.height * .07, 'redHeart'));
+        //console.log(playerPets.pet[i].currentHappiness);
+        if (playerPetInfo[i].currentHappiness < 33) {
+            this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true);
+            this.sad[i] = this.add.sprite(this.scale.width*.29, this.scale.height *.37, 'sad');
+            pet[i].add(this.sadBubble[i]);
+            pet[i].add(this.sad[i]);
         }
-        pet[i].add(this.heart);
+        else if (playerPetInfo.currentHappiness < 66) {
+            this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true);
+            this.sad[i] = this.add.sprite(this.scale.width*.29, this.scale.height *.37, 'sad');
+            pet[i].add(this.sadBubble[i]);
+            pet[i].add(this.sad[i]);
+        }
+
+
+    }
+    /**
+     * check hunger of the pet and create thought bubble corrisponding status
+     * @param {pet number} i
+     * @param {pet object} pet
+     */
+    checkHunger(i, pet){
+        //console.log(playerPets.pet[i].currentHappiness);
+
+
+        if (playerPetInfo[i].currentHunger < 33) {
+            this.hungerBubble[i] = this.add.sprite(this.scale.width*.73, this.scale.height *.35, 'thought');
+            this.hunger[i] = this.add.sprite(this.scale.width*.71, this.scale.height *.27, 'hungry');
+            pet[i].add(this.hungerBubble[i]);
+            pet[i].add(this.hunger[i]);
+        }
+        else if (playerPetInfo[i].currentHunger < 66) {
+            this.hungerBubble[i] = this.add.sprite(this.scale.width*.73, this.scale.height *.35, 'thought');
+            this.hunger[i] = this.add.sprite(this.scale.width*.71, this.scale.height *.27, 'hungry');
+            pet[i].add(this.hungerBubble[i]);
+            pet[i].add(this.hunger[i]);
+        }
+
     }
 }
-
-let petNumber = 3;
-var config = {
-    scale: {
-        mode: Phaser.Scale.FIT,
-        parent: 'wrapper',
-        width: 1236,
-        height: 681,
-        type: Phaser.AUTO,
-        // autoCenter: Phaser.Scale.autoCenter
-
-    },
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: {
-                y: 300
-            },
-            debug: false
-        }
-    },
-    scene: [ShowMenu, Shop, Task, pethub, PethubOverlay]
-
-};
-
-
-
-var game = new Phaser.Game(config);
-var player;
-var display;

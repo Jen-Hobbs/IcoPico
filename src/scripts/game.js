@@ -3,8 +3,8 @@ var config = {
     parent: 'wrapper',
     scale: {
         mode: Phaser.Scale.FIT,
-        width: 1236,
-        height: 681,
+        width: 800,
+        height: 600,
         type: Phaser.AUTO,
         autoCenter: Phaser.Scale.autoCenter
 
@@ -16,8 +16,8 @@ var config = {
             debug: false
         }
     },
-    scene: [ShowMenu, Shop, Task, Purchase, PethubOverlay, Time]
-    
+    scene: [ShowMenu, Shop, Task, Purchase, Pethub, PethubOverlay, Time, UpdateDB]
+
 };
 
 var game = new Phaser.Game(config);

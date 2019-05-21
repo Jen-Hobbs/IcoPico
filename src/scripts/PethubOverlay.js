@@ -8,14 +8,17 @@ class PethubOverlay extends Phaser.Scene {
         this.load.image("whiteCircle", "../images/buttons/Other/white_circle.png");
         this.load.image('yellowCircle', '../images/buttons/Other/yellow_circle.png');
         this.load.image("menuPet", '../images/buttons/Other/menu.png');
-        for (var i = 0; i < player.food.length; i++) {
-            this.load.image(player.food[i].foodType, "../images/food/" + player.food[i].foodType + '.png');
+        this.load.image("task", '../images/buttons/pet_hub/task.png');
+        this.load.image('food', '../images/food/donut.png');
+        for (var i = 0; i < inventoryInfo.length; i++) {
+            console.log('check' + inventoryInfo[i].itemQty);
+            this.load.image('food' + inventoryInfo[i].itemID, "../images/food/" + foodTypes.food[inventoryInfo[i].itemID].type + '.png');
         };
     }
     create() {
-        console.log(foodTypes.food[0]);
+        //console.log(foodTypes.food[0]);
         //menu button
-        let menu = this.add.sprite(this.scale.width * .04, this.scale.height * .05, 'menuPet');
+        let menu = this.add.sprite(this.scale.width*.06, this.scale.height*.06, 'menuPet');
         menu.setInteractive();
         menu.on('pointerdown', () => {
             runningScenes = ['Pethub', 'PethubOverlay'];
@@ -35,11 +38,12 @@ class PethubOverlay extends Phaser.Scene {
     task() {
         var taskActive;
         if (newTask == 0) {
-            taskActive = this.add.sprite(this.scale.width * .95, this.scale.height * .72, 'whiteCircle');
+            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .72, 'whiteCircle');
         }
         else {
-            taskActive = this.add.sprite(this.scale.width * .95, this.scale.height * .72, 'yellowCircle');
+            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .72, 'yellowCircle');
         }
+        this.add.sprite(this.scale.width * .90, this.scale.height * .73, 'task');
     }
     displayfood() {
 
@@ -60,26 +64,27 @@ class PethubOverlay extends Phaser.Scene {
         this.foodButtons = this.add.container(0, 0);
 
 
-        this.white = this.add.sprite(this.scale.width * .95, this.scale.height * .90, 'whiteCircle');
-
+        this.white = this.add.sprite(this.scale.width * .90, this.scale.height * .90, 'whiteCircle');
+        this.food = this.add.sprite(this.scale.width * .90, this.scale.height *.9, 'food').setScale(.7);
         this.white.setInteractive();
         this.foodButtons.add(this.white);
 
         this.white.on('pointerdown', () => {
             if (showfood == 0) {
-                this.yellow = this.add.sprite(this.scale.width * .95, this.scale.height * .90, 'yellowCircle');
+                this.yellow = this.add.sprite(this.scale.width * .90, this.scale.height * .90, 'yellowCircle');
                 this.food = [];
                 this.type = [];
                 this.amount = [];
-                for (var i = 0; i < player.food.length; i++) {
-                    this.food[i] = this.add.sprite(this.scale.width * (.85 - (i * .10)), this.scale.height * .90, 'whiteCircle');
+                for (var i = 0; i < inventoryInfo.length; i++) {
+                    this.food[i] = this.add.sprite(this.scale.width * (.80 - (i * .10)), this.scale.height * .90, 'whiteCircle');
                     this.food[i].setInteractive();
                     this.food[i].name = i;
 
-                    this.food[i].on('clicked', this.location, this);
-                    this.amount[i] = this.add.text(this.scale.width * (.84 - (i * .10)), this.scale.height * .85, player.food[i].amount, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
-                    this.amount[i].alpha = .5;
-                    this.type[i] = this.add.sprite(this.scale.width * (.85 - (i * .10)), this.scale.height * .90, player.food[i].foodType);
+                    this.food[i].on('clicked', this.consume, this);
+                    this.amount[i] = this.add.text(this.scale.width * (.79 - (i * .10)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
+                    this.amount[i].alpha = .8;
+                    this.type[i] = this.add.sprite(this.scale.width * (.80 - (i * .10)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
+                    this.type[i].setScale(.7);
 
                 }
                 this.foodButtons.add(this.food);
@@ -100,37 +105,41 @@ class PethubOverlay extends Phaser.Scene {
 
 
 
-    location(box) {
-        if (player.food[box.name].amount == 1) {
-            player.food.splice(box.name, 1);
+    consume(box) {
+        if (inventoryInfo[box.name].itemQty == 1) {
+            inventoryInfo.splice(box.name, 1);
             this.foodButtons.remove(this.food);
             this.foodButtons.remove(this.type);
             this.food = [];
             this.type = [];
-            for (var i = 0; i < player.food.length; i++) {
-                this.food[i] = this.add.sprite(this.scale.width * (.85 - (i * .10)), this.scale.height * .90, 'whiteCircle');
-                this.type[i] = this.add.sprite(this.scale.width * (.85 - (i * .10)), this.scale.height * .90, player.food[i].foodType);
+            for (var i = 0; i < inventoryInfo.length; i++) {
+                this.food[i] = this.add.sprite(this.scale.width * (.80 - (i * .10)), this.scale.height * .90, 'whiteCircle');
+                this.type[i] = this.add.sprite(this.scale.width * (.80 - (i * .10)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
+                this.type[i].setScale(.7);
                 this.food[i].setInteractive();
                 this.food[i].name = i;
-                this.food[i].on('clicked', this.location, this);
+                this.food[i].on('clicked', this.consume, this);
 
             }
             this.foodButtons.add(this.food);
             this.foodButtons.add(this.type);
         }
         else{
-            player.food[box.name].amount =player.food[box.name].amount-1;
+            inventoryInfo[box.name].itemQty =inventoryInfo[box.name].itemQty-1;
         }
         this.foodButtons.remove(this.amount);
         this.amount = [];
-        for (var i = 0; i < player.food.length; i++) {
-            this.amount[i] = this.add.text(this.scale.width * (.84 - (i * .10)), this.scale.height * .85, player.food[i].amount, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
-            this.amount[i].alpha = .5;
+        for (var i = 0; i < inventoryInfo.length; i++) {
+            this.amount[i] = this.add.text(this.scale.width * (.79 - (i * .10)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
+            this.amount[i].alpha = .8;
         }
         this.foodButtons.add(this.amount);
-        player.happiness[player.activePet] += 30;
-        console.log(player.happiness[player.activePet]);
-        updateHappiness = 1;
+        console.log(playerInfo.activePet);
+        console.log(playerPetInfo[playerInfo.activePet]);
+        playerPetInfo[playerInfo.activePet].currentHunger += 30;
+        console.log('new pet hunger' + playerPetInfo[playerInfo.activePet].currentHunger);
+        updateHunger = 1;
+        console.log('check hunger ' + updateHunger);
     }
 
 }

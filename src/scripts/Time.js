@@ -1,34 +1,125 @@
-//TODO: update time so that new last login is only whole hours so anything below that wont be added.
-//TODO: auto update time to change happinees is on the next hour and every hour after that
+
 class Time extends Phaser.Scene {
-    constructor(){
-        super({key:"Time", active:true});
+    constructor() {
+        super({ key: "Time", active: true });
     }
-    preload(){
+    /**
+     * timer to update last login to database every 10 min
+     */
+    preload() {
+      //emitter presets
+      var emitter = new Phaser.Events.EventEmitter()
+        .on("taskList", updateTaskList)
+        .on("inventory", updateInventory)
+        .on("currency", updateCurrency)
+        .on("happiness", updateCurrentHappiness)
+        .on("hunger", updateCurrentHunger);
         
-        //this.timer = this.time.addEvent({delay: 5000, callback: this.updateLastLogin, callbackScope:this, loop:true});
+        this.timer = this.time.addEvent({ delay: 600000, callback: this.updateLastLogin, callbackScope: this, loop: true });
     }
-    create(){
-        console.log(player.lastlogin.getTime());
+    /**
+     * updates last time user logged in on create
+     */
+    create() {
+        console.log('player tasks length' + playerTasks.length);
+        this.updateLastLogin();
+        this.setTaskList();
+        this.updateTasks();
+        this.updateEmotions();
+        this.evolution();
+        updateTaskList();
+        console.log('player tasks length' + playerTasks.length);
+    }
+    /**
+     * sets changed time for happiness/hunger change in comparison to last login and current time to the nearest 3rd hour
+     */
+    updateLastLogin() {
         this.timeCurrent = new Date();
-        console.log(this.timeCurrent.getTime());
-        console.log((this.timeCurrent.getTime() - player.lastlogin.getTime())/3600000);
-        this.changedTime = (this.timeCurrent.getTime() - player.lastlogin.getTime())/3600000;
-        if(this.changedTime >= 1){
-            this.updateEmotions();
+        console.log("current time " + this.timeCurrent.getDate());
+        console.log('last login ' + lastLogin.lastLogin);
+        this.time = new Date(lastLogin.lastLogin);
+        this.changedTime = (this.timeCurrent.getTime() - this.time.getTime()) / 10800000;
+    }
+    /**
+     * updates the hunger and happiness of the pet in relation to 3 hours from last login to current updates last login time
+     */
+    updateEmotions() {
+        for (var i = 0; i < playerPetInfo.length; i++) {
+            console.log("old" + playerPetInfo[i].currentHappiness);
+            console.log("old" + playerPetInfo[i].currentHunger);
+            playerPetInfo[i].currentHappiness -= this.changedTime;
+            playerPetInfo[i].currentHunger -= this.changedTime;
+            //
+            //happiness hunger updated
+            //
+            //    player.happiness[i] -= this.changedTime; // old version changing happiness
+            if (playerPetInfo[i].currentHappiness < 0) {
+                playerPetInfo[i].currentHappiness = 0;
+            }
+            if (playerPetInfo[i].currentHunger < 0) {
+                playerPetInfo[i].currentHunger = 0;
+            }
+            console.log('new' + playerPetInfo[i].currentHappiness);
+            console.log("new" + playerPetInfo[i].currentHunger);
+        }
+        this.time = this.timeCurrent;
+
+    }
+    /**
+     * change tasklist to array
+     */
+    setTaskList(){
+        console.log('tasklist' + taskListInfo)
+        if(taskListInfo.taskIDa != null){
+            console.log('a added');
+            playerTasks.push(taskListInfo.taskIDa);
+        }
+        if(taskListInfo.taskIDb != null){
+            console.log('b added');
+            playerTasks.push(taskListInfo.taskIDb);
+        }
+        if(taskListInfo.taskIDc != null){
+            console.log('c added' + taskListInfo.taskIDc);
+            playerTasks.push(taskListInfo.taskIDc);
         }
     }
-    updateLastLogin(){
-        
+    /**
+     * update tasks to 3 if last login before midnight
+     */
+    updateTasks() {
 
+        if (this.timeCurrent.getDate() != this.time.getDate()
+            || this.timeCurrent.getMonth() != this.time.getMonth()
+            || this.timeCurrent.getFullYear() != this.time.getFullYear()) {
+            while (playerTasks.length != 3) {
+                newTask = 1;
+                playerTasks[playerTasks.length] = Math.floor(Math.random() * (+10 - +1)) + +1;
+                console.log("random value" + playerTasks[playerTasks.length - 1]);
+            }
+        }
     }
-    updateEmotions(){
-       for(var i = 0; i < playerPets.pet.length; i++){
-           console.log("old" + playerPets.pet[i].currentHappiness)
-           playerPets.pet[i].currentHappiness -= this.changedTime;
-           playerPets.pet[i].currentHunger -= this.changedTime;
-           console.log('new' + playerPets.pet[i].currentHappiness);
-       }
-    }
+    /**
+     * chance of evolving pet
+     * need to save evolution
+     */
+    evolution() {
+        for (var i = 0; i < playerPetInfo.length; i++) {
+            if (playerPetInfo[i].petID <= 3) {
+                if (playerPetInfo[i].recycling > 10 && Math.random() > 0.7) {
+                    playerPetInfo[i].petID += 3;
+                }
+                if (playerPetInfo[i].utility > 10 && Math.random() > 0.7) {
+                    playerPetInfo[i].petID += 6;
+                }
+                if (playerPetInfo[i].health > 10 && Math.random() > 0.7) {
+                    playerPetInfo[i].petID += 9;
+                }
+            }
 
+        }
+        //
+        //evolution updated
+        //
+        //
+    }
 }

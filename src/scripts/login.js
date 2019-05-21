@@ -1,10 +1,13 @@
+var currentUserEmail;
+
 firebase.auth().onAuthStateChanged(function (user) {
     database.ref("userlist/" + user.uid).update({
         "userName": user.displayName,
         "email": user.email
     });
     sessionStorage.setItem("uid", user.uid);
-    sessionStorage.setItem("name", user.displayName);    
+    sessionStorage.setItem("name", user.displayName);
+    sessionStorage.setItem("email", user.email);
 });
 
 // Test Data
@@ -25,7 +28,7 @@ function getUrl(){
 var uiConfig = {
     callbacks: {
         signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-            return true;
+          return true;
         },
         uiShown: function () {
             document.getElementById('loader').style.display = 'none';
@@ -33,7 +36,7 @@ var uiConfig = {
     },
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',
-    signInSuccessUrl: getUrl(),
+    signInSuccessUrl: '../icopico/icopico.html?email=' + sessionStorage.getItem("email"),
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebase.auth.GoogleAuthProvider.PROVIDER_ID
