@@ -58,7 +58,7 @@ var playerPetInfo = [
     recycling: 0,
     utility: 0,
     health: 0
-  
+
   }]
 
 var inventoryInfo =
@@ -87,11 +87,11 @@ let currentDate = new Date(); //last login sample data
 var lastLogin = currentDate;
 
 /** PLAYER TABLE JSON FORMAT
- *[ { playerID:,
+ *{ playerID:,
  *    currency:,
  *    activeItem:,
  *    activePet:,
- *    accountEmail: } ]
+ *    accountEmail: }
  **/
 // var playerInfo;
 // var playerID;

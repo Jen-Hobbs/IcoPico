@@ -16,8 +16,8 @@ var config = {
             debug: false
         }
     },
-    scene: [ShowMenu, Shop, Task, Purchase, Pethub, PethubOverlay, Time]
-    
+    scene: [ShowMenu, Shop, Task, Purchase, Pethub, PethubOverlay, Time, UpdateDB]
+
 };
 
 var game = new Phaser.Game(config);
