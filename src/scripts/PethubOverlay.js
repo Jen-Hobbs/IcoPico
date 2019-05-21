@@ -38,12 +38,25 @@ class PethubOverlay extends Phaser.Scene {
     task() {
         var taskActive;
         if (newTask == 0) {
-            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .72, 'whiteCircle');
+            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .72, 'whiteCircle')
+            .setInteractive()
+            .on('pointerdown', () => {
+            this.scene.stop('Pethub');
+            this.scene.stop('PethubOverlay');
+            this.scene.run('Task');
+        });
         }
         else {
-            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .72, 'yellowCircle');
+            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .72, 'yellowCircle')
+            .setInteractive()
+            .on('pointerdown', () => {
+            this.scene.stop('Pethub');
+            this.scene.stop('PethubOverlay');
+            this.scene.run('Task');
+        });
         }
         this.add.sprite(this.scale.width * .90, this.scale.height * .73, 'task');
+        
     }
     displayfood() {
 
@@ -76,14 +89,14 @@ class PethubOverlay extends Phaser.Scene {
                 this.type = [];
                 this.amount = [];
                 for (var i = 0; i < inventoryInfo.length; i++) {
-                    this.food[i] = this.add.sprite(this.scale.width * (.80 - (i * .10)), this.scale.height * .90, 'whiteCircle');
+                    this.food[i] = this.add.sprite(this.scale.width * (.78 - (i * .12)), this.scale.height * .90, 'whiteCircle');
                     this.food[i].setInteractive();
                     this.food[i].name = i;
 
                     this.food[i].on('clicked', this.consume, this);
-                    this.amount[i] = this.add.text(this.scale.width * (.79 - (i * .10)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
+                    this.amount[i] = this.add.text(this.scale.width * (.76 - (i * .12)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
                     this.amount[i].alpha = .8;
-                    this.type[i] = this.add.sprite(this.scale.width * (.80 - (i * .10)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
+                    this.type[i] = this.add.sprite(this.scale.width * (.78 - (i * .12)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
                     this.type[i].setScale(.7);
 
                 }
@@ -113,8 +126,8 @@ class PethubOverlay extends Phaser.Scene {
             this.food = [];
             this.type = [];
             for (var i = 0; i < inventoryInfo.length; i++) {
-                this.food[i] = this.add.sprite(this.scale.width * (.80 - (i * .10)), this.scale.height * .90, 'whiteCircle');
-                this.type[i] = this.add.sprite(this.scale.width * (.80 - (i * .10)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
+                this.food[i] = this.add.sprite(this.scale.width * (.78 - (i * .12)), this.scale.height * .90, 'whiteCircle');
+                this.type[i] = this.add.sprite(this.scale.width * (.78 - (i * .12)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
                 this.type[i].setScale(.7);
                 this.food[i].setInteractive();
                 this.food[i].name = i;
@@ -130,7 +143,7 @@ class PethubOverlay extends Phaser.Scene {
         this.foodButtons.remove(this.amount);
         this.amount = [];
         for (var i = 0; i < inventoryInfo.length; i++) {
-            this.amount[i] = this.add.text(this.scale.width * (.79 - (i * .10)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
+            this.amount[i] = this.add.text(this.scale.width * (.76 - (i * .12)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
             this.amount[i].alpha = .8;
         }
         this.foodButtons.add(this.amount);
