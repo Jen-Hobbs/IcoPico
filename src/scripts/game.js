@@ -16,7 +16,7 @@ var config = {
             debug: false
         }
     },
-    scene: [ChoosePet, ShowMenu, Shop, Task, Purchase, Pethub, PethubOverlay, Time, UpdateDB]
+    scene: [ShowMenu, Shop, Task, Purchase, Pethub, PethubOverlay, Time, UpdateDB, ChoosePet]
 
 };
 

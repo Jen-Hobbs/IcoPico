@@ -121,7 +121,8 @@ class Pethub extends Phaser.Scene {
      * @param {pet object} pet
      */
     checkHappiness(i, pet) {
-        //console.log(playerPets.pet[i].currentHappiness);
+        console.log('happiness');
+        console.log(playerPetInfo[i]);
         if (playerPetInfo[i].currentHappiness < 33) {
             this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true)
             //.setTint('0xfc1414')
@@ -150,7 +151,8 @@ class Pethub extends Phaser.Scene {
      * @param {pet object} pet
      */
     checkHunger(i, pet){
-        //console.log(playerPets.pet[i].currentHappiness);
+        console.log('hunger');
+        console.log(playerPetInfo[i]);
 
 
         if (playerPetInfo[i].currentHunger < 33) {
