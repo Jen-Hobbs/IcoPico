@@ -52,7 +52,7 @@ initGameInfo();
 
 ////////////////////////////////////////////////////////////////////////////////
 //GETTING FROM database
-
+/*
 function initGameInfo() {
   var parameters = new URLSearchParams(window.location.search);
   playerEmail = parameters.get('email');
@@ -62,13 +62,14 @@ function initGameInfo() {
   getTasks();
   getLastLogin(playerEmail);
   console.log(playerInfo);
-}
+}*/
 
-initGameInfo();
+//initGameInfo();
 
 /** This function grabs the user's initial info before the
  * game starts.
  */
+
 function initGameInfo() {
 	var parameters = new URLSearchParams(window.location.search);
 	playerEmail = parameters.get('email');
@@ -509,6 +510,7 @@ function createDefaultInfo() {
  *
  * 	Returns true if player is new, and returns false otherwise.
  */
+
 function isNewPlayer(email) {
 	
 	$.ajax({

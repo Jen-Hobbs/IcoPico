@@ -19,7 +19,18 @@ const db = mysql.createConnection({
 
 // Connect
 db.connect(function (err) {
+/*
+    try {
+        // the synchronous code that we want to catch thrown errors on
+        throw err
+    } catch (err) {
+        // handle the error safely
+        console.error('db.connect() error: ' + err.message);
+    }*/
+
+    
     if (err) {
+        
         return console.error('db.connect() error: ' + err.message);
     }
     console.log("MySql connected...");
@@ -342,9 +353,13 @@ app.get('/deleteinventory/:id/:itemID', (req, res) => {
 // Inserts a row in the Inventory table (when player buys a new item)
 app.get('/insertinventory/:id/:itemID', (req, res) => {
 
-    // deleting row from the player's inventory
+    // inserting row to player's inventory
+    // if there's already a row for the player and item, it'll just
+    // update the row instead of inserting another row.
     let sqlA = `INSERT INTO Inventory(itemID, playerID, itemQty)
-    VALUES(${req.params.itemID}, ${req.params.playerID}, 1)`;
+    VALUES(${req.params.itemID}, ${req.params.playerID}, 1) 
+    ON DUPLICATE KEY UPDATE
+    itemID = VALUES(itemID), playerID = VALUES(playerID), itemQty = VALUES(itemQty), `;
 
     let queryA = db.query(sqlA, (err, result) => {
         if (err) {
@@ -390,7 +405,7 @@ app.get('/updatecurrenthappiness/:id/:petID/:newHappiness', (req, res) => {
 });
 
 // update hunger
-app.get('/updatecurrenthunger/:id/:petID/:newHappiness', (req, res) => {
+app.get('/updatecurrenthunger/:id/:petID/:newHunger', (req, res) => {
     let sql = `UPDATE PlayerPet SET currentHunger = ${req.params.newHunger}
     WHERE PlayerPet.playerID = ${req.params.id} AND petID = ${req.params.petID}`;
     let query = db.query(sql, (err, result) => {
