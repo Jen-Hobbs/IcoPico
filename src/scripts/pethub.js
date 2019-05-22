@@ -16,7 +16,11 @@ class Pethub extends Phaser.Scene {
           .on("inventory", updateInventory)
           .on("currency", updateCurrency)
           .on("happiness", updateCurrentHappiness)
-          .on("hunger", updateCurrentHunger);
+          .on("hunger", updateCurrentHunger)
+          .on("activePet", updateActivePet) 
+          .on("newPet", insertNewPlayerPet)
+          .on("lastLogin", updateLastLogin);
+
           //.emit("sampleAjax", "sample1@gmail.com");
 
         for (var i = 0; i < playerPetInfo.length; i++) {
