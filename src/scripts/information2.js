@@ -168,7 +168,7 @@ function getTasks()
 //UPDATING TO DATABASE
 
 //update tasklist
-function updateTaskList(newIDa, newIDb, newIDc) {
+function updateTasks(newIDa, newIDb, newIDc) {
 
     //console.log("updating TaskList using this data:", data);
 
