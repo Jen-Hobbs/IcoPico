@@ -1,7 +1,7 @@
 class PethubOverlay extends Phaser.Scene {
     constructor() {
         super({
-            key: 'PethubOverlay', active: false
+            key: 'PethubOverlay', active: true
         });
     }
     preload() {
@@ -50,9 +50,11 @@ class PethubOverlay extends Phaser.Scene {
             taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .72, 'yellowCircle')
             .setInteractive()
             .on('pointerdown', () => {
+            newTask = 0;
             this.scene.stop('Pethub');
             this.scene.stop('PethubOverlay');
             this.scene.run('Task');
+
         });
         }
         this.add.sprite(this.scale.width * .90, this.scale.height * .73, 'task');

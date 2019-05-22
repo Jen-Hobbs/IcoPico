@@ -48,6 +48,7 @@ class ShowMenu extends Phaser.Scene {
         let task =  this.add.sprite(this.scale.width*.06, this.scale.height*.51, 'buttonTask');
         task.setInteractive();
         task.on('pointerdown', () =>{
+            newTask = 0;
             this.stopScenes();
             this.scene.run('Task');
             this.scene.bringToTop('Task');  

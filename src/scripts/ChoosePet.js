@@ -1,7 +1,7 @@
 class ChoosePet extends Phaser.Scene {
     constructor() {
         super({
-            key: 'ChoosePet', active: true
+            key: 'ChoosePet', active: false
         });
     }
     preload(){

@@ -1,6 +1,6 @@
 class Pethub extends Phaser.Scene {
     constructor() {
-        super({ key: 'Pethub', active: false })
+        super({ key: 'Pethub', active: true })
 
     }
     init(data) {
