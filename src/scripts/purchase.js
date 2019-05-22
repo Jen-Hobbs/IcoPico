@@ -1,5 +1,3 @@
-
-
 class Purchase extends Phaser.Scene {
     constructor() {
         super({ key: "Purchase", active: false });
@@ -54,6 +52,7 @@ class Purchase extends Phaser.Scene {
                     emitter.emit("currency", playerInfo.currency);
                     console.log("money left" + playerInfo.currency);
                     console.log("what is this" + this.info.petName);
+
                     var newPet = new Object();
                     //missing playerPetID
                     //no way to set petname
@@ -74,6 +73,7 @@ class Purchase extends Phaser.Scene {
                     newPet.utility = 0;
                     newPet.health = 0;
                     playerPetInfo.push(newPet);
+//***need to emit new pet to database
                     console.log("pet added" + playerPetInfo);
                     image.destroy('purchase');
                     this.scene.stop('Purchase');
@@ -100,12 +100,16 @@ class Purchase extends Phaser.Scene {
                 console.log("buy food");
                 purchase.on('pointerdown', () => {
                     playerInfo.currency = playerInfo.currency - this.info.cost;
+                    //emit money
+                    emitter.emit("currency", playerInfo.currency);
                     console.log("money left" + playerInfo.currency);
                     var check = 0;
                     for(var i = 0; i < inventoryInfo.length; i++){
                         if(foodTypes.food[inventoryInfo[i].itemID].type == this.info.type){
                             inventoryInfo[i].itemQty++;
                             check++;
+                            //emit inventory food?
+                            emitter.emit("inventory", inventoryInfo[i].itemID, inventoryInfo[i].itemQty);
                         }
                     }
                     if(check == 0){
@@ -119,9 +123,15 @@ class Purchase extends Phaser.Scene {
                         stuff.playerID = playerInfo.playerID;
                         //missing inventory id
                         inventoryInfo.push(stuff);
+                        //emit inventory food?
+                        emitter.emit("inventory", stuff.itemID, stuff.itemQty);
 
                         console.log(inventoryInfo);
                     }
+
+                    //emit inventory
+
+
                     //information.push(this.info.petName);
                     //player.happiness.push(50);
                     image.destroy('purchase');
