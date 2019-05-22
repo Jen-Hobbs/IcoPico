@@ -7,12 +7,8 @@ class Task extends Phaser.Scene {
 
   preload() {
     //emitter presets
-    var emitter = new Phaser.Events.EventEmitter()
-      .on("taskList", updateTaskList)
-      .on("inventory", updateInventory)
-      .on("currency", updateCurrency)
-      .on("happiness", updateCurrentHappiness)
-      .on("hunger", updateCurrentHunger);
+    
+
 
     //asset preload
     this.cameras.main.setBackgroundColor('#FF9999');
@@ -32,16 +28,15 @@ class Task extends Phaser.Scene {
   }
 
   create() {
-
-    var emitter = new Phaser.Events.EventEmitter()
-      .on("taskList", updateTasks)
-      .on("inventory", updateInventory)
-      .on("currency", updateCurrency)
-      .on("happiness", updateCurrentHappiness)
-      .on("hunger", updateCurrentHunger)
-      .on("activePet", updateActivePet)
-      .on("newPet", insertNewPlayerPet)
-      .on("lastLogin", updateLastLogin);
+    this.emitter = new Phaser.Events.EventEmitter()
+    .on("taskList", updateTaskList)
+    .on("inventory", updateInventory)
+    .on("currency", updateCurrency)
+    .on("happiness", updateCurrentHappiness)
+    .on("hunger", updateHunger)
+    .on("activePet", updateActivePet) 
+    .on("newPet", insertNewPlayerPet)
+    .on("lastLogin", updateLastLogin);
 
     console.log('tasks' + playerTasks);
     var pet = {};
@@ -309,11 +304,13 @@ class Task extends Phaser.Scene {
     }
     else if (task_list.task[playerTasks[i]].icon == 'type4') {
       playerInfo.currency += 10;
+      this.emitter.emit("currency", playerInfo.currency);
+
     }
     else if (task_list.task[playerTasks[i]].icon == 'type5') {
       for (var n = 0; n < playerPetInfo.length; n++) {
         playerPetInfo[n].currentHappiness += 30;
-
+        this.emitter.emit("happiness", playerPetInfo[n].petID, playerPetInfo[n].currentHappiness);
       }
 
     }
@@ -341,6 +338,7 @@ class Task extends Phaser.Scene {
         if (foodTypes.food[inventoryInfo[i].itemID].type == name) {
           inventoryInfo[i].itemQty++;
           check++;
+          this.emitter.emit("inventory", inventoryInfo[i].itemID, inventoryInfo[i].itemQty);
         }
       }
       if (check == 0) {
