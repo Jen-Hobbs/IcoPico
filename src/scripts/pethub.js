@@ -124,19 +124,15 @@ class Pethub extends Phaser.Scene {
         console.log('happiness');
         console.log(playerPetInfo[i]);
         if (playerPetInfo[i].currentHappiness < 33) {
-            this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true).setTint('0xfc1414')
-            ;
+            this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true);
             
             this.sad[i] = this.add.sprite(this.scale.width*.29, this.scale.height *.37, 'sad');
-            this.thoughtBubble(this.sadBubble[i]);
             pet[i].add(this.sadBubble[i]);
             pet[i].add(this.sad[i]);
         }
         else if (playerPetInfo.currentHappiness < 66) {
-            this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true).setTint('#fc1414')
-            ;
+            this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true);
             this.sad[i] = this.add.sprite(this.scale.width*.29, this.scale.height *.37, 'sad');
-            this.thoughtBubble(this.sadBubble[i]);
             pet[i].add(this.sadBubble[i]);
             pet[i].add(this.sad[i]);
         }
