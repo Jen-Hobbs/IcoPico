@@ -148,11 +148,13 @@ function getTaskList()
 {
     //Ajax call to get info from TaskList table
     $.ajax({
-      url: "/gettasklist/" + "'" + playerID + "'",
+      url: "/gettasklistinfo/" + "'" + playerID + "'",
       dataType: "json",
-	  type: "GET",
-	  async: false,
+      type: "GET",
+      async: false,
       success: function(data) {
+        //playerInfo = JSON.parse(data);
+        //data[0] because there will always only be 1 tasklist per email
         taskListInfo = data[0];
         console.log(taskListInfo);
       },
@@ -166,7 +168,7 @@ function getTaskList()
 //UPDATING TO DATABASE
 
 //update tasklist
-function updateTasks(newIDa, newIDb, newIDc) {
+function updateTaskList(newIDa, newIDb, newIDc) {
 
     //console.log("updating TaskList using this data:", data);
 
@@ -193,14 +195,13 @@ function updateTasks(newIDa, newIDb, newIDc) {
 function updateInventory(itemID, updatedQty) {
 
 	// if updatedQty is not 0, just update existing row in database
-	if (updatedQty != 0 && updatedQty != 1) {
+	if (updatedQty != 0) {
 		$.ajax({
 			url: "/updateinventory/" + playerID + "/"
 			 + itemID  + "/" + updatedQty,
 			dataType: "json",
 			//contentType: 'application/json',
 			type: "GET",
-			port: "8000",
 			async: false,
 			success: function(data) {
 				inventoryInfo = data;
@@ -211,28 +212,6 @@ function updateInventory(itemID, updatedQty) {
 			  console.log('error');
 			}
 		});
-
-	// if updatedQty is 1, we need to insert a new row in the database
-	} else if(updatedQty == 1){
-
-		$.ajax({
-			url: "/insertinventory/" + playerID + "/"
-			 + itemID,
-			dataType: "json",
-			//contentType: 'application/json',
-			type: "GET",
-			port: "8000",
-			async: false,
-			success: function(data) {
-				inventoryInfo = data;
-				console.log(inventoryInfo);
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-			  //console.log("ERROR:", jqXHR, textStatus, errorThrown);
-			  console.log('error');
-			}
-		});
-
 
 	// if updatedQty is 0, we need to delete the row from database
 	} else {
