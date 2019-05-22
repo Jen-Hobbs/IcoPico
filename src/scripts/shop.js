@@ -3,11 +3,18 @@ class Shop extends Phaser.Scene {
         super({key:"Shop", active:false});
     }
     preload(){
-        
+      //emitter presets
+      var emitter = new Phaser.Events.EventEmitter()
+        .on("taskList", updateTaskList)
+        .on("inventory", updateInventory)
+        .on("currency", updateCurrency)
+        .on("happiness", updateCurrentHappiness)
+        .on("hunger", updateCurrentHunger);
+
         this.load.image("menuShop", '../images/buttons/Other/menu.png');
         this.load.image('whiteCircle', '../images/icons/whiteCircle.png');
         // this.load.image('shinyboi', '../images/pets/shinyboi.png');
-        for(var i = 0; i <  pets.pet.length; i++){
+        for(var i = 0; i <  3; i++){
             this.load.image(pets.pet[i].petName, '../images/pets/' + pets.pet[i].petName + '.png');
         }
         this.load.image('money', '../images/icons/money.png');
@@ -17,12 +24,12 @@ class Shop extends Phaser.Scene {
         for(var i = 0; i < foodTypes.food.length; i++){
             this.load.image(foodTypes.food[i].type, '../images/food/' + foodTypes.food[i].type + '.png');
         }
-        
+
     }
     create(){
         this.cameras.main.setBackgroundColor('#65EAA2');
         this.textLayout();
-        let menu2 = this.add.sprite(this.scale.width*.06, this.scale.height*.06, 'menuShop');  
+        let menu2 = this.add.sprite(this.scale.width*.06, this.scale.height*.06, 'menuShop');
         menu2.setInteractive();
         menu2.on('pointerdown', ()=> {
             runningScenes = ['Shop', 'Purchase'];
@@ -38,17 +45,17 @@ class Shop extends Phaser.Scene {
         this.updateMoneyBar();
     }
     updateMoneyBar(){
-        
+
         this.moneyBar = this.add.sprite(this.scale.width, this.scale.height *.10, 'moneyBar').setOrigin(1,0);
-        var money = this.add.text(this.scale.width*.82, this.scale.height *.123, player.money, {fontFamily: 'serif', fontSize: 28}).setColor('black');
-        
-        
+        var money = this.add.text(this.scale.width*.82, this.scale.height *.123, playerInfo.currency, {fontFamily: 'serif', fontSize: 28}).setColor('black');
+
+
     }
     textLayout(){
         var shop = this.add.text(this.scale.width/2, this.scale.height*.10, "Shop", {fontFamily: 'serif', fontSize: 64});
         shop.setOrigin(0.5);
         shop.setColor('black');
-        // let menu2 = this.add.sprite(this.scale.width*.04, this.scale.height*.05, 'menuShop');  
+        // let menu2 = this.add.sprite(this.scale.width*.04, this.scale.height*.05, 'menuShop');
         var food = this.add.text(this.scale.width/2, this.scale.height*.2, "Food", {fontFamily: 'serif', fontSize: 32});
         food.setOrigin(0.5);
         food.setColor('black');
@@ -69,7 +76,7 @@ class Shop extends Phaser.Scene {
         //     white.setInteractive();
         //     white.on('clicked', this.select, this);
         // }
-        for(var i = 0; i < pets.pet.length; i++){
+        for(var i = 0; i < 3; i++){
             var petSelect = this.add.container(this.scale.width*(.2 + (i*.15)), this.scale.height *.75);
             petSelect.setSize(100, 200);
             petSelect.add(this.add.sprite(0,0, 'whiteCircle'));
@@ -101,7 +108,7 @@ class Shop extends Phaser.Scene {
             // var pet = this.add.sprite(0,0, pets.pet[i].petName);
             // pet.setScale(.1);
             // pet.number = i;
-            
+
             foodSelect.add(this.add.sprite(-35,70, 'money').setScale(.4));
             foodSelect.add(food);
             foodSelect.setData("locate", foodTypes.food[i]);
@@ -122,9 +129,9 @@ class Shop extends Phaser.Scene {
         // else{
         //     console.log("food" + pets.getData("locate"));
         // }
-        
+
     }
-   
-    
-    
+
+
+
 }

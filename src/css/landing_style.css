@@ -1,184 +1,262 @@
-html, body {
-    height: 100%;
+@import url('https://fonts.googleapis.com/css?family=Pompiere&display=swap');
+
+html,
+body {
+    width: 100%;
     margin: 0;
     background-color: #FFD465;
 }
 
-/* Landing Page */
-
-#container{
-    display: grid;
-    height: 100%;
-    width: 100%;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+#box_div {
+    filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.37));
 }
 
-#wrapper {
-     /* min-height: 100%;   */
-    background-color: white;
-}
-
-#box_outside{
-    grid-column: span 4;
-    grid-row: span 5;
-    width: auto;
-    height: 100%;
-    padding-top:7%;
-    padding-bottom:7%;
-    background-color: #FFD465;
-}
-
-#box_top {
-    background-color: #FFD465;
-    width: 100%;
-    height: 35%;
-    margin: 0 auto;
-}
-
-#login_button {
-    float: right;
-    font-size: 300%;
-    text-align: center;
-    color: white;
-    font-family: 'Pompiere', cursive;
-    line-height: 90px;
-    width: 200px;
-    height: 100px;
-    border-radius: 8%;
+#banner_pink {
     background-color: #FF9999;
-    box-shadow: 10px 10px 15px rgba(0,0,0,0.37);
 }
 
-#banner {
-    background-color: #FFD465;
-    width: 100%;
-    height: 60%;
+/* Mobile View --------------------------------------------------------------*/
+@media (min-width: 0px) and (max-width: 767px) {
+    #title_logo {
+        position: absolute;
+        width: 12em;
+        height: auto;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: .5em;
+        filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
+    }
+
+    /* Banner */
+    #banner_div {
+        margin-top: 3em;
+    }
+
+    .banner {
+        width: 100%;
+        height: 50px;
+        background-color: #65EAA2;
+    }
+
+    #shiny_boi {
+        position: absolute;
+        width: 20em;
+        height: auto;
+        margin: auto;
+        top: 15em;
+        left: 0;
+        right: 0;
+        filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.37));
+    }
+
+    #box_bot {
+        width: fit-content;
+        margin: 0 auto;
+        padding-top: 15em;
+    }
+
+    .buttons {
+        text-align: center;
+        color: white;
+        font-size: 3em;
+        font-family: 'Pompiere', cursive;
+        width: 5em;
+        height: auto;
+        border-radius: 10px;
+        padding: 10px, 20px, 10px, 20px;
+        background-color: #FF9999;
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.37);
+    }
+
+    #about_button {
+        margin-top: .5em;
+    }
+
+     @keyframes move {
+        0% {left: 5%;top: 37%;}        
+        10% {left: 14.7%;top: 74%;}        
+        20% {left: -5%;top: 0%;}        
+        30% {left: -15%;top: 74%;}        
+        40% {left: 14%;top: 30%;}        
+        50% {left: -20%;top: 0%;}        
+        60% {left: 14.57%;top: 55%;}        
+        70% {left: -15%;top: 40%;}        
+        80% {left: 14.7%;top: 0%;}        
+        90% {left: -15%;top: 40%;}        
+        100% {left: 0%;top: 0%;}        
+    }
 }
 
-#banner_top {
-    background-color: #65EAA2;
-    width: 100%;
-    height: 100px;
+/* Tablet View --------------------------------------------------------------*/
+@media (min-width: 767px) and (max-width: 1240px) {
+    #title_logo {
+        position: absolute;
+        width: 15em;
+        height: auto;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: .5em;
+        filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
+    }
+
+    /* Banner */
+    #banner_div {
+        margin-top: 3em;
+    }
+
+    .banner {
+        width: 100%;
+        height: 65px;
+        background-color: #65EAA2;
+    }
+
+    #shiny_boi {
+        position: absolute;
+        width: 30em;
+        height: auto;
+        margin: auto;
+        margin-top: 3em;
+        margin-left:-5em;
+        filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.37));
+    }
+
+    #box_bot {
+        width: auto;
+        float: right;
+        padding-top: 6em;
+        padding-left: 2em;
+    }
+
+    .buttons {
+        text-align: center;
+        color: white;
+        font-size: 80px;
+        font-family: 'Pompiere', cursive;
+        width: 3em;
+        height: auto;
+        border-radius: 25px;
+        background-color: #FF9999;
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.37);
+        padding: 0;
+    }
+
+    #about_button {
+        margin-top: .5em;
+    }
+
+    #box_tablet_view {
+        width: 42em;
+        height: 25em;
+        margin: 0 auto;
+    }
+
+    @keyframes move {
+        0% {left: 23%;top: 30%;}        
+        10% {left: 60.6%;top: -7%;}        
+        20% {left: 7%;top: 60%;}        
+        30% {left: 60.6%;top: 45%;}        
+        40% {left: 7%;top: 10%;}        
+        50% {left: 60.6%;top: 0%;}        
+        60% {left: 30%;top: -7%;}        
+        70% {left: 60.6%;top: 30%;}        
+        80% {left:7%;top: 0%;}        
+        90% {left: 60.6%;top: 60%;}        
+        100% {left: 7%;top: 30%;}        
+    }
 }
 
-#banner_middle {
-    background-color: #FF9999;
-    width: 100%;
-    height: 100px;
-}
 
-#banner_bottom {
-    background-color: #65EAA2;
-    width: 100%;
-    height: 100px;
-    box-shadow: 0px 10px 15px rgba(0,0,0,0.37);
-}
 
-#logo_box{
-    display: block;
-    width: 60%;
-    height: 400px;
-    margin-left: auto;
-    margin-right: auto;
-}
+/* Desktop View --------------------------------------------------------------*/
+@media (min-width: 1240px) {
+    #title_logo {
+        position: absolute;
+        width: 15em;
+        height: auto;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: .5em;
+        filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
+    }
 
-#logo_name{
-    display: block;
-    width: auto;
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    filter: drop-shadow(5px 5px 15px rgba(0,0,0,0.37));
-}
+    /* Banner */
+    #banner_div {
+        margin-top: 3em;
+    }
 
-#box_bottom {
-    display: grid;
-    width: 100%;
-    height: 30%;
-    padding: 0;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 1fr 1fr;
-}
+    .banner {
+        width: 100%;
+        height: 65px;
+        background-color: #65EAA2;
+    }
 
-#box_mid{
-    width: 100%;
-    height: 80%;
-    padding-top:7%;
-    /* margin-bottom:7%; */
-    background-color: #FFEB6C;
-}
+    #shiny_boi {
+        position: absolute;
+        width: 45em;
+        height: auto;
+        margin: auto;
+        margin-top: 0em;
+        margin-left:-8em;
+        filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.37));
+    }
 
-#play_button {
-    grid-column: 3;
-    grid-row: 1;
-    font-size: 300%;
-    text-align: center;
-    color: white;
-    font-family: 'Pompiere', cursive;
-    line-height: 90px;
-    width: 200px;
-    height: 100px;
-    border-radius: 8%;
-    margin-top:1em;
-    background-color: #FF9999;
-    box-shadow: 10px 10px 15px rgba(0,0,0,0.37);
-}
+    #box_bot {
+        width: auto;
+        float: right;
+        padding-top: 6em;
+        padding-left: 4em;
+    }
 
-#about_button {
-    grid-column: 3;
-    grid-row: 2;
-    font-size: 300%;
-    text-align: center;
-    color: white;
-    font-family: 'Pompiere', cursive;
-    line-height: 90px;
-    width: 200px;
-    height: 100px;
-    border-radius: 8%;
-    margin-top:1em;
-    margin-bottom: 1em;
-    background-color: #FF9999;
-    box-shadow: 10px 10px 15px rgba(0,0,0,0.37);
-}
+    .buttons {
+        text-align: center;
+        color: white;
+        font-size: 80px;
+        font-family: 'Pompiere', cursive;
+        width: 4em;
+        height: auto;
+        border-radius: 25px;
+        background-color: #FF9999;
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.37);
+        padding: 0;
+    }
 
-#pet_div{
-    margin: 0 auto;
-    width: 50%;
-}
+    #about_button {
+        margin-top: .5em;
+    }
 
-#pet_space{
-    width: 100%;
-    height: 100px;
+    #box_tablet_view {
+        width: 60em;
+        height: 25em;
+        margin: 0 auto;
+        margin-top: 5em;
+    }
+
+    @keyframes move {
+        0% {left: 23%;top: 30%;}        
+        10% {left: 53%;top: -7%;}        
+        20% {left: 7%;top: 50%;}        
+        30% {left: 53%;top: 45%;}        
+        40% {left: 7%;top: 10%;}        
+        50% {left: 53%;top: 0%;}        
+        60% {left: 30%;top: -7%;}        
+        70% {left: 53%;top: 30%;}        
+        80% {left:7%;top: 0%;}        
+        90% {left: 53%;top: 50%;}        
+        100% {left: 7%;top: 30%;}        
+    }
 }
 
 /* Animations */
-#shiny_boi {
-    width: 50%;
-    height: auto;
-    top:40%;
-    position: absolute;
-    filter: drop-shadow(10px 10px 15px rgba(0,0,0,0.37));
-    /* Standard syntax */
+/* Pet will start moving after 5 min */
+.animate {
     animation-name: move;
-    animation-duration: 25s;
+    animation-duration: 20s;
     animation-timing-function: linear;
-    animation-delay: 600s;
+    animation-delay: 300s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
 
-@keyframes move {
-    0%   {left:25%; top: 40%;}
-    10%  {left:50%; top: 88%;}
-    20%  {left:-5%; top: 30%;}
-    30%  {left:50%; top:45;}
-    40%  {left:-5%; top: 88%;}
-    50%  {left:30%; top: -5%;}
-    60%  {left:40%; top: 88%;}
-    70%  {left:20%; top: 40%;}
-    80%  {left:10%; top: -5%;}
-    90%  {left:50%; top: 88%;}
-    100% {left:0%; top: 0%;}
-  }
-  

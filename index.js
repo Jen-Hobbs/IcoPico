@@ -224,14 +224,165 @@ app.get('/updatecurrency/:id/:newCurrency', (req, res) => {
     });
 });
 
-// update happiness
-app.get('/updatecurrenthappiness/:id/:petID/:newHappiness', (req, res) => {
-    let sql = `UPDATE PlayerPet SET currentHappiness = ${req.params.newHappiness}
-    WHERE PlayerPet.playerID = ${req.params.id} AND petID = ${req.params.petID}`;
+//get info from PlayerPet table
+app.get('/getplayerpetinfo/:id', (req, res) => {
+    let sql = `SELECT * FROM PlayerPet WHERE playerID = ${req.params.id}`;
     let query = db.query(sql, (err, result) => {
         if (err) {
-            return console.log('updatecurrenthappiness error: ' 
-            + err.message);
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+//get info from Inventory table
+app.get('/getinventoryinfo/:id', (req, res) => {
+    let sql = `SELECT * FROM Inventory WHERE playerID = ${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+//Get info from TaskList table
+app.get('/gettasklistinfo/:id', (req, res) => {
+    let sql = `SELECT * FROM TaskList WHERE playerID = ${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//UPDATING TO DATABASE
+
+//Update tasklist
+app.get('/updatetasklist/:id/:taskIDa/:taskIDb/:taskIDc', (req, res) => {
+
+    let sqlA = `UPDATE TaskList SET taskIDa = ${req.params.taskIDa}, taskIDb = ${req.params.taskIDb},
+        taskIDc = ${req.params.taskIDc} WHERE playerID = ${req.params.id}`;
+    //let data = [1, 2, 3];
+    req.body
+
+    let queryA = db.query(sqlA, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('update TaskList success');
+    });
+
+    let sqlB = `SELECT * FROM TaskList WHERE playerID = ${req.params.id}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        //res.setHeader('Content-Type', 'application/json');
+        console.log("Stuff sent to server", req.body);
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+// Updates the Inventory table (adding/decreasing the quantity of an object)
+app.get('/updateinventory/:id/:itemID/:updatedQty', (req, res) => {
+
+    // updating the player's inventory
+    let sqlA = `UPDATE Inventory SET itemQty = ${req.params.updatedQty}
+    WHERE playerID = ${req.params.id} AND itemID = ${req.params.itemID}`;
+    //let data = [1, 2, 3];
+
+    let queryA = db.query(sqlA, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('update Inventory success');
+    });
+
+    let sqlB = `SELECT * FROM Inventory WHERE playerID = ${req.params.id}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+// Deletes a row from the Inventory table
+app.get('/deleteinventory/:id/:itemID', (req, res) => {
+
+    // deleting row from the player's inventory
+    let sqlA = `DELETE FROM Inventory WHERE
+     playerID = ${req.params.id} AND itemID = ${req.params.itemID}`;
+
+    let queryA = db.query(sqlA, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('delete Inventory success');
+    });
+
+    let sqlB = `SELECT * FROM Inventory WHERE playerID = ${req.params.id}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+// Inserts a row in the Inventory table (when player buys a new item)
+app.get('/insertinventory/:id/:itemID', (req, res) => {
+
+    // deleting row from the player's inventory
+    let sqlA = `INSERT INTO Inventory(itemID, playerID, itemQty)
+    VALUES(${req.params.itemID}, ${req.params.playerID}, 1)`;
+
+    let queryA = db.query(sqlA, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('insert Inventory success');
+    });
+
+    let sqlB = `SELECT * FROM Inventory WHERE playerID = ${req.params.id}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+//update currency
+app.get('/updatecurrency/:id/:newCurrency', (req, res) => {
+
+    let sqlB = `UPDATE Player SET currency = ${req.params.newCurrency} WHERE playerID = ${req.params.id}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+//update happiness
+app.get('/updatecurrenthappiness/:id/:petID/:newHappiness', (req, res) => {
+    let sqlB = `UPDATE PlayerPet SET currentHappiness = ${req.params.newHappiness}
+    WHERE PlayerPet.playerID = ${req.params.id} AND petID = ${req.params.petID}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
         }
         //console.log(JSON.parse(JSON.stringify(result)));
         res.send(JSON.stringify(result));

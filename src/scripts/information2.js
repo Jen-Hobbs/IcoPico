@@ -1,40 +1,68 @@
+/** OTHERS
+  lastLogin: datetime;
+**/
+var lastLogin;
+
 /** PLAYER TABLE JSON FORMAT
- *[ { playerID:,
+ *{ playerID:,
  *    currency:,
  *    activeItem:,
  *    activePet:,
- *    accountEmail: } ]
+ *    accountEmail: }
  **/
 var playerInfo;
 var playerID;
 var lastLogin;
 
 /** PLAYERPET TABLE JSON FORMAT
- *[ { playerID:,
- *    currency:,
- *    activeItem:,
- *    activePet:,
- *    accountEmail: } ]
+ *[ { currentHappiness: 0
+      currentHunger: 0
+      petID: 1
+      petName: "petA"
+      playerID: 1
+      playerPetID: 1
+      totalHappiness: 0
+      totalHunger: 0 } ]
  **/
 var playerPetInfo;
 
 /** INVENTORY TABLE JSON FORMAT
- *[ { playerID:,
- *    currency:,
- *    activeItem:,
- *    activePet:,
- *    accountEmail: } ]
+   [ { inventoryID: 1
+      itemID: 1
+      itemQty: 2
+      playerID: 1 },
+    { inventoryID: 2
+      itemID: 2
+      itemQty: 4
+      playerID: 1 }]
  **/
 var inventoryInfo;
 
 /** TASKLIST TABLE JSON FORMAT
- *[ { playerID:,
- *    currency:,
- *    activeItem:,
- *    activePet:,
- *    accountEmail: } ]
+ *{ playerID: 1
+    taskIDa: 1
+    taskIDb: 2
+    taskIDc: 3
+    taskListID: 1 }
  **/
-var tasklistInfo;
+var taskListInfo;
+
+////////////////////////////////////////////////////////////////////////////////
+initGameInfo();
+
+////////////////////////////////////////////////////////////////////////////////
+//GETTING FROM database
+
+function initGameInfo() {
+  var parameters = new URLSearchParams(window.location.search);
+  playerEmail = parameters.get('email');
+  getPlayerInfo(playerEmail);
+  getPlayerPet();
+  getInventory();
+  getTasks();
+  getLastLogin(playerEmail);
+  console.log(playerInfo);
+}
 
 initGameInfo();
 
@@ -484,7 +512,7 @@ function createDefaultInfo() {
 function isNewPlayer(email) {
 	
 	$.ajax({
-		url: "/checkaccount" + "/" + email,
+		url: "/checkaccount/" + "'" + email + "'",
 		dataType: "json",
 		type: "GET",
 		async: false,
