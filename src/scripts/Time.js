@@ -34,11 +34,16 @@ class Time extends Phaser.Scene {
      * sets changed time for happiness/hunger change in comparison to last login and current time to the nearest 3rd hour
      */
     updateLastLogin() {
+        var emitter = new Phaser.Events.EventEmitter()
+          .on("lastLogin", updateLastLogin);
+
         this.timeCurrent = new Date();
-        console.log("current time " + this.timeCurrent.getDate());
+        emitter.emit("lastLogin", "sample1@gmail.com", this.timeCurrent.toISOString().slice(0, 19).replace('T', ' '));
+        //console.log("current time " + this.timeCurrent.getDate());
         console.log('last login ' + lastLogin.lastLogin);
         this.time = new Date(lastLogin.lastLogin);
         this.changedTime = (this.timeCurrent.getTime() - this.time.getTime()) / 10800000;
+        console.log(this.changedTime);
     }
     /**
      * updates the hunger and happiness of the pet in relation to 3 hours from last login to current updates last login time

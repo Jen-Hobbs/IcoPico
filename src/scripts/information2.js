@@ -353,7 +353,7 @@ function insertNewPlayerPet(petID) {
 /** Update lastLogin value */
 function updateLastLogin(email, lastLoginInfo) {
 	$.ajax({
-		url: "/updatelastlogin" + "/" + email + "/" + lastLoginInfo,
+		url: "/updatelastlogin" + '/"' + email + '"/' + '"' + lastLoginInfo + '"',
 		dataType: "json",
 		type: "GET",
 		async: false,
