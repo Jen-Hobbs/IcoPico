@@ -29,7 +29,7 @@ class Task extends Phaser.Scene {
 
   create() {
     this.emitter = new Phaser.Events.EventEmitter()
-    .on("taskList", updateTaskList)
+    .on("taskList", updateTasks)
     .on("inventory", updateInventory)
     .on("currency", updateCurrency)
     .on("happiness", updateCurrentHappiness)
@@ -173,6 +173,7 @@ class Task extends Phaser.Scene {
       //delete task from task_list at index
       playerTasks.splice(i, 1);
       updateTaskList();
+      this.emitter.emit("taskList", taskListInfo.taskIDa, taskListInfo.taskIDb, taskListInfo.taskIDc);
 
       //destroy whole task list
       for (var i = 0; i < CUR_NUM_TASKS; i++) {
@@ -237,6 +238,7 @@ class Task extends Phaser.Scene {
           playerTasks.splice(i, 1);
           updateTaskList();
           CUR_NUM_TASKS--;
+          this.emitter.emit("taskList", taskListInfo.taskIDa, taskListInfo.taskIDb, taskListInfo.taskIDc);
         }
       }
       //destroy whole task list
