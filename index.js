@@ -144,6 +144,7 @@ app.get('/updatetasklist/:id/:taskIDa/:taskIDb/:taskIDc', (req, res) => {
         console.log(JSON.parse(JSON.stringify(result)));
         res.send(JSON.stringify(result));
     });
+});
 
 // Updates the Inventory table (adding/decreasing the quantity of an object)
 app.get('/updateinventory/:id/:itemID/:updatedQty', (req, res) => {
@@ -194,7 +195,30 @@ app.get('/deleteinventory/:id/:itemID', (req, res) => {
     });
 });
 
+// Inserts a row in the Inventory table (when player buys a new item)
+app.get('/insertinventory/:id/:itemID', (req, res) => {
+
+    // deleting row from the player's inventory
+    let sqlA = `INSERT INTO Inventory(itemID, playerID, itemQty)
+    VALUES(${req.params.itemID}, ${req.params.playerID}, 1)`;
+
+    let queryA = db.query(sqlA, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('insert Inventory success');
+    });
+
+    let sqlB = `SELECT * FROM Inventory WHERE playerID = ${req.params.id}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
 });
+
 //update currency
 app.get('/updatecurrency/:id/:newCurrency', (req, res) => {
 
@@ -233,6 +257,120 @@ app.get('/updatecurrenthappiness/:id/:petID/:newHappiness', (req, res) => {
         res.send(JSON.stringify(result));
     });
 });
+
+// Update active pet (when player scrolls through pets)
+app.get('/updateactivepet/:id/:petID', (req, res) => {
+    let sql = `UPDATE Player SET activePet = ${req.params.petID}
+    WHERE playerID = ${req.params.id}`;
+
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        console.log('updating activePet success');
+        res.send(JSON.stringify(result));
+
+    })
+});
+
+// Insert a new row in the PlayerPet table (when player gets a pet
+// from the shop)
+app.get('/insertnewplayerpet/:id/:petID', (req, res) => {
+    let sql = `INSERT INTO PlayerPet(playerID, petID)
+    VALUES(${req.params.id}, ${req.params.petID})`;
+
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('creating a new PlayerPet row success');
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    })
+});
+
+///////////////////////////////////////////////////////////////////////////////
+/***** CREATING PLAYER DATA FOR A NEW PLAYER
+******/
+
+// Creates a row in the Account table
+app.get('/createaccount/:email', (req, res) => {
+
+    let sql =  `INSERT INTO Account(email) VALUES(${req.params.email})`;
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('creating a new Account row success');
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+// Creates a row in the Player table
+app.get('/createplayer/:email', (req, res) => {
+    let sql = `INSERT INTO Player(accountEmail, activePet, activeItem)
+    VALUES(${req.params.email}, 1, 1)`;
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('creating a new Player row success');
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+// Creates a row in the Inventory table
+// This is different from /insertinventory/ request,
+// because a default item is given whenever a new player signs up
+// playerID is needed for this query
+app.get('/createinventory/:id', (req, res) => {
+    let sql = `INSERT INTO Inventory(playerID, itemID, itemQty)
+     VALUES(${req.params.id}, 1, 1)`;
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('creating a new Inventory row success');
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+// Creates a row in the PlayerPet table, and sets a default pet
+app.get('/createplayerpet/:id', (req, res) => {
+    let sql = `INSERT INTO PlayerPet(playerID, petID)
+    VALUES(${req.params.id}, 1)`;
+
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('creating a new PlayerPet row success');
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+
+
+// Creates a row in the TaskList table, and sets default tasks
+app.get('/createtasklist/:id', (req, res) => {
+    let sql = `INSERT INTO TaskList(playerID, taskIDa, taskIDb, taskIDc)
+    VALUES(${req.params.id}, 1, 2, 3)`;
+
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log('creating a new TaskList row success');
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+
+});
+
 
 var server = app.listen(8080, function(){
     var port = server.address().port;
