@@ -3,10 +3,10 @@ var updateHunger = 0; //used when we feed pet
 var runningScenes = [];
 var newTask = 0;
     // let information = ['shinyboi', 'shinyboi', 'shinyboi'];
-    
+
     // var player = {
     //     // 'happiness' :[20, 60, 70],
-        
+
     //     'activePet' : 0,
     //     'food':[
     //         {'foodType': 'carrot' , 'amount' : 2}
@@ -49,7 +49,7 @@ var playerTasks = [];
 //     'recycling': 0,
 //     'utility' : 0,
 //     'health' : 0}
-// ] 
+// ]
 // }
 // let currentDate = new Date(); //last login sample data
 
@@ -75,7 +75,7 @@ var playerTasks = [];
         {'type' : 'carrot', 'cost' : 10},
         {'type' : 'donut', 'cost' : 30}
     ]};
-    
+
     var task_list = {"task" : [
         {
           "id": "0",
@@ -148,6 +148,7 @@ var playerTasks = [];
             "icon": "type1"
           },
     ]};
+    
     function updateTaskList(){
       if(playerTasks[0] != null){
         taskListInfo.taskIDa =playerTasks[0];
