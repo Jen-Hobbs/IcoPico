@@ -93,7 +93,7 @@ class Pethub extends Phaser.Scene {
             this.checkHappiness(i, this.pet);
             var cam = this.cameras.main;
             cam.centerOn(400 + 800 * playerInfo.activePet, 0);
-
+            
         }
 
     }
@@ -121,9 +121,11 @@ class Pethub extends Phaser.Scene {
      * @param {pet object} pet
      */
     checkHappiness(i, pet) {
-        //console.log(playerPets.pet[i].currentHappiness);
+        console.log('happiness');
+        console.log(playerPetInfo[i]);
         if (playerPetInfo[i].currentHappiness < 33) {
             this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true);
+            
             this.sad[i] = this.add.sprite(this.scale.width*.29, this.scale.height *.37, 'sad');
             pet[i].add(this.sadBubble[i]);
             pet[i].add(this.sad[i]);
@@ -135,7 +137,6 @@ class Pethub extends Phaser.Scene {
             pet[i].add(this.sad[i]);
         }
 
-
     }
     /**
      * check hunger of the pet and create thought bubble corrisponding status
@@ -144,6 +145,8 @@ class Pethub extends Phaser.Scene {
      */
     checkHunger(i, pet){
         //console.log(playerPets.pet[i].currentHappiness);
+        console.log('hunger');
+        console.log(playerPetInfo[i]);
 
 
         if (playerPetInfo[i].currentHunger < 33) {
