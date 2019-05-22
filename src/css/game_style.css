@@ -2,24 +2,7 @@ html,
 body {
     height: 100%;
     margin: 0;
-    background-color: #bfeffd;
-}
-
-#page_banner {
-    margin: 0 auto;
-    padding: 0em;
-    box-shadow: 1px 2px 8px #888888;
-}
-
-#logo_div {
-    position: absolute;
-    top: .5em;
-    /* background-color: bisque; */
-    width: 100px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+    background-color: #FFD465;
 }
 
 #green_div {
@@ -30,72 +13,227 @@ body {
     background-color: #FF9999;
 }
 
-#yellow_div {
-
-    background-color: #FFD465;
-}
-
+/* Game */
 #wrapper {
-    width: 90%;
-    height: 80%;
-    max-height: 600px;
+    width: 100%;
+    height: 100%;
     margin: 0 auto;
-    margin-top: 1em;
+    float: left;
 }
 
-canvas{
+canvas {
     box-shadow: 1px 2px 8px #888888;
-
 }
 
-@media screen and (min-width: 381px) {
-    #logo_div img {
-        width: 100px;
-        height: auto;
-        cursor: pointer;
+
+
+/* Phone Portrait */
+@media screen and (min-width: 0) {
+    #page_banner {
+        width: 100%;
+        padding: 0em;
+        box-shadow: 1px 2px 8px #888888;
+        float: left;
     }
 
     .colour_div {
         width: 100%;
-        height: 2.7em;
+        height: 4em;
     }
 
-}
+    /* Icons */
+    #logo_div {
+        position: absolute;
+        margin: auto;
+        width: 10em;
+        left: 0em;
+        right: 0em;
+        top: 1.2em;
+    }
 
-/* Dont know if need to have this */
-@media screen and (max-width: 381px) {
-    #logo_div img {
-        width: 100px;
+    #logo_icon {
+        width: 30%;
         height: auto;
         cursor: pointer;
     }
 
-    .colour_div {
-        width: 100%;
-        height: 2.7em;
-    }
-
-}
-
-@media screen and (max-height: 670px) {
-    .colour_div {
-        width: 100%;
-        height: 1.5em;
-    }
-
-    #logo_div img {
-        width: 55px;
+    #logo_name {
+        width: 45%;
         height: auto;
         cursor: pointer;
+        padding-left: 1em;
     }
 
+    /* Game */
     #wrapper {
-        width: 90%;
-        max-height: 600px;
-        margin: 0 auto;
-        margin-top: 1em;
-        background-color: blue;
+        width: 100%;
+        height: 70%;
+        margin: 0;
+        margin-top: 5em;
     }
-   
 }
 
+
+/* Tablet View */
+@media screen and (min-width: 380px) {
+
+    /* Banner */
+    #page_banner {
+        width: 100%;
+        padding: 0em;
+        box-shadow: 1px 2px 8px #888888;
+        float: left;
+    }
+
+    .colour_div {
+        width: 100%;
+        height: 3em;
+    }
+
+    /* Icon */
+    #logo_div {
+        position: absolute;
+        margin: auto;
+        width: 10em;
+        left: 0em;
+        right: 0em;
+        top: .5em;
+    }
+
+    /* Icons */
+    #logo_icon {
+        width: 30%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #logo_name {
+        width: 45%;
+        height: auto;
+        cursor: pointer;
+        padding-left: 1em;
+    }
+
+    /* Game */
+    #wrapper {
+        float: none;
+        width: 100%;
+        height: 80%;
+        margin: 0 auto;
+    }
+
+    canvas {
+        margin-top: 5em;
+    }
+
+}
+
+/* Desktop View */
+@media screen and (min-width: 1024px) {
+
+    /* Banner */
+    #page_banner {
+        width: 100%;
+        padding: 0em;
+        box-shadow: 1px 2px 8px #888888;
+    }
+
+    .colour_div {
+        width: 100%;
+        height: 3em;
+    }
+
+    /* Icons */
+    #logo_div {
+        position: absolute;
+        margin: auto;
+        width: 10em;
+        left: 0em;
+        right: 0em;
+        top: .5em;
+    }
+
+    #logo_icon {
+        width: 30%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #logo_name {
+        width: 45%;
+        height: auto;
+        cursor: pointer;
+        padding-left: 1em;
+    }
+
+    /* Game */
+    #wrapper {
+        float: none;
+        width: fit-content;
+        height: 80%;
+        margin: 0 auto;
+    }
+
+    canvas {
+        margin-top: 5em;
+    }
+
+}
+
+/* Phone Landscape */
+@media only screen and (min-width: 380px) and (max-width: 812px) and (min-height: 350px) and (max-height: 375px) and (orientation: landscape) {
+    /* Tablet grid */
+    body{
+        display: grid;
+        grid-template-columns: 30% 70%;
+    }
+     
+
+
+    /* Banner */
+    #page_banner {
+        width: 100%;
+        padding: 0em;
+        box-shadow: 1px 2px 8px #888888;
+        float: left;
+    }
+
+    .colour_div {
+        width: 100%;
+        height: 3em;
+    }
+
+    /* Icons */
+    #logo_div {
+        position: absolute;
+        margin: 0;
+        width: 9em;
+        left: 1em;
+        top: 1em;
+    }
+
+    #logo_icon {
+        width: 30%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #logo_name {
+        width: 45%;
+        height: auto;
+        cursor: pointer;
+        padding-left: 1em;
+    }
+
+    /* Game */
+    #wrapper {
+        width: 100%;
+        height:100%;
+        margin: 0 auto;
+        float: right;
+    }
+
+    canvas {
+        margin-top: 0;
+    }
+}
