@@ -219,6 +219,22 @@ app.get('/insertinventory/:id/:itemID', (req, res) => {
     });
 });
 
+// Update lastlogin (when player scrolls through pets)
+app.get('/updatelastlogin/:email/:login', (req, res) => {
+    let sql = `UPDATE Account SET lastLogin = ${req.params.login}
+    WHERE email = ${req.params.email}`;
+
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        console.log('updating lastLogin success');
+        res.send(JSON.stringify(result));
+
+    })
+});
+
 //update currency
 app.get('/updatecurrency/:id/:newCurrency', (req, res) => {
 
@@ -289,6 +305,7 @@ app.get('/insertnewplayerpet/:id/:petID', (req, res) => {
         res.send(JSON.stringify(result));
     })
 });
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /***** CREATING PLAYER DATA FOR A NEW PLAYER

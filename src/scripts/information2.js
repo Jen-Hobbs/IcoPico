@@ -195,7 +195,7 @@ function updateTasks(newIDa, newIDb, newIDc) {
 function updateInventory(itemID, updatedQty) {
 
 	// if updatedQty is not 0, just update existing row in database
-	if (updatedQty != 0 && updatedQty != 1) {
+	if (updatedQty != 0) {
 		$.ajax({
 			url: "/updateinventory/" + playerID + "/"
 				+ itemID + "/" + updatedQty,
@@ -215,29 +215,7 @@ function updateInventory(itemID, updatedQty) {
 		});
 
 		// if updatedQty is 1, we need to insert a new row in the database
-	} else if (updatedQty == 1) {
-
-		$.ajax({
-			url: "/insertinventory/" + playerID + "/"
-				+ itemID,
-			dataType: "json",
-			//contentType: 'application/json',
-			type: "GET",
-			port: "8000",
-			async: false,
-			success: function (data) {
-				inventoryInfo = data;
-				console.log(inventoryInfo);
-			},
-			error: function (jqXHR, textStatus, errorThrown) {
-				//console.log("ERROR:", jqXHR, textStatus, errorThrown);
-				console.log('error');
-			}
-		});
-
-
-		// if updatedQty is 0, we need to delete the row from database
-	} else {
+	}  else {
 		$.ajax({
 			url: "/deleteinventory/" + playerID + "/" + itemID,
 			dataType: "json",
@@ -352,19 +330,18 @@ function insertNewPlayerPet(petID) {
 
 /** Update lastLogin value */
 function updateLastLogin(email, lastLoginInfo) {
-	$.ajax({
-		url: "/updatelastlogin" + "/" + email + "/" + lastLoginInfo,
-		dataType: "json",
-		type: "GET",
-		async: false,
-		success: function (data) {
-			console.log(data);
-		},
-		error: function (jqXHR, textStatus, errorThrown) {
-			console.log("ERROR:", jqXHR, textStatus, errorThrown);
-		}
-	});
+  $.ajax({
+      url: "/updatelastlogin" + '/"' + email + '"/' + '"' + lastLoginInfo + '"',
+      dataType: "json",
+      type: "GET",
+      async: false,
+      success: function (data) {
+          console.log(data);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+          console.log("ERROR:", jqXHR, textStatus, errorThrown);
+      }
+  });
 }
-
 /////////////////////////////////////////////////////////////////
 //CREATING DEFAULTS FOR NEW PLAYER
