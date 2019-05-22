@@ -1,7 +1,7 @@
 class PethubOverlay extends Phaser.Scene {
     constructor() {
         super({
-            key: 'PethubOverlay', active: true
+            key: 'PethubOverlay', active: false
         });
     }
     preload() {

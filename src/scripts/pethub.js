@@ -1,6 +1,6 @@
 class Pethub extends Phaser.Scene {
     constructor() {
-        super({ key: 'Pethub', active: true })
+        super({ key: 'Pethub', active: false })
 
     }
     init(data) {
@@ -11,12 +11,12 @@ class Pethub extends Phaser.Scene {
     }
     preload() {
       
-        var emitter = new Phaser.Events.EventEmitter()
-          .on("taskList", updateTaskList)
-          .on("inventory", updateInventory)
-          .on("currency", updateCurrency)
-          .on("happiness", updateCurrentHappiness)
-          .on("hunger", updateCurrentHunger);
+        // var emitter = new Phaser.Events.EventEmitter()
+        //   .on("taskList", updateTaskList)
+        //   .on("inventory", updateInventory)
+        //   .on("currency", updateCurrency)
+        //   .on("happiness", updateCurrentHappiness)
+        //   .on("hunger", updateCurrentHunger);
           //.emit("sampleAjax", "sample1@gmail.com");
 
         for (var i = 0; i < playerPetInfo.length; i++) {
