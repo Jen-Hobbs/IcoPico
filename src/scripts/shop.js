@@ -9,7 +9,7 @@ class Shop extends Phaser.Scene {
         .on("inventory", updateInventory)
         .on("currency", updateCurrency)
         .on("happiness", updateCurrentHappiness)
-        .on("hunger", updateCurrentHunger);
+        .on("hunger", updateHunger);
 
         this.load.image("menuShop", '../images/buttons/Other/menu.png');
         this.load.image('whiteCircle', '../images/icons/whiteCircle.png');

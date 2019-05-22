@@ -8,21 +8,27 @@ class Time extends Phaser.Scene {
      */
     preload() {
       //emitter presets
-      var emitter = new Phaser.Events.EventEmitter()
-        .on("taskList", updateTaskList)
-        .on("inventory", updateInventory)
-        .on("currency", updateCurrency)
-        .on("happiness", updateCurrentHappiness)
-        .on("hunger", updateCurrentHunger);
+      
+
         
-        this.timer = this.time.addEvent({ delay: 600000, callback: this.updateLastLogin, callbackScope: this, loop: true });
+        this.timer = this.time.addEvent({ delay: 600000, callback: this.updateLogin, callbackScope: this, loop: true });
     }
     /**
      * updates last time user logged in on create
      */
     create() {
+        this.emitter = new Phaser.Events.EventEmitter()
+          .on("taskList", updateTaskList)
+          .on("inventory", updateInventory)
+          .on("currency", updateCurrency)
+          .on("happiness", updateCurrentHappiness)
+          .on("hunger", updateHunger)
+          .on("activePet", updateActivePet) 
+          .on("newPet", insertNewPlayerPet)
+          .on("lastLogin", updateLastLogin);
+
         console.log('player tasks length' + playerTasks.length);
-        this.updateLastLogin();
+        this.updateLogin();
         this.setTaskList();
         this.updateTasks();
         this.updateEmotions();
@@ -33,20 +39,22 @@ class Time extends Phaser.Scene {
     /**
      * sets changed time for happiness/hunger change in comparison to last login and current time to the nearest 3rd hour
      */
-    updateLastLogin() {
+    updateLogin() {
         this.timeCurrent = new Date();
         console.log("current time " + this.timeCurrent.getDate());
         console.log('last login ' + lastLogin.lastLogin);
         this.time = new Date(lastLogin.lastLogin);
         this.changedTime = (this.timeCurrent.getTime() - this.time.getTime()) / 10800000;
+        this.time = this.timeCurrent;
+        //this.emitter.emit("lastLogin", playerInfo.accountEmail, this.timeCurrent);
     }
     /**
      * updates the hunger and happiness of the pet in relation to 3 hours from last login to current updates last login time
      */
     updateEmotions() {
         for (var i = 0; i < playerPetInfo.length; i++) {
-            console.log("old" + playerPetInfo[i].currentHappiness);
-            console.log("old" + playerPetInfo[i].currentHunger);
+            console.log("old happiness" + playerPetInfo[i].currentHappiness);
+            console.log("old hunger" + playerPetInfo[i].currentHunger);
             playerPetInfo[i].currentHappiness -= this.changedTime;
             playerPetInfo[i].currentHunger -= this.changedTime;
             //
@@ -59,10 +67,13 @@ class Time extends Phaser.Scene {
             if (playerPetInfo[i].currentHunger < 0) {
                 playerPetInfo[i].currentHunger = 0;
             }
-            console.log('new' + playerPetInfo[i].currentHappiness);
-            console.log("new" + playerPetInfo[i].currentHunger);
+            console.log('new happiness' + playerPetInfo[i].currentHappiness);
+            console.log("new hunger" + playerPetInfo[i].currentHunger);
+            this.emitter.emit("happiness", playerPetInfo[i].petID, playerPetInfo[i].currentHappiness);
+            this.emitter.emit("hunger", playerPetInfo[i].petID, playerPetInfo[i].currentHunger);
         }
-        this.time = this.timeCurrent;
+
+        
 
     }
     /**

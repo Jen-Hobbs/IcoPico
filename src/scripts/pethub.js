@@ -11,12 +11,6 @@ class Pethub extends Phaser.Scene {
     }
     preload() {
 
-        var emitter = new Phaser.Events.EventEmitter()
-          .on("taskList", updateTaskList)
-          .on("inventory", updateInventory)
-          .on("currency", updateCurrency)
-          .on("happiness", updateCurrentHappiness)
-          .on("hunger", updateCurrentHunger);
           //.emit("sampleAjax", "sample1@gmail.com");
 
         for (var i = 0; i < playerPetInfo.length; i++) {
@@ -93,7 +87,7 @@ class Pethub extends Phaser.Scene {
             this.checkHappiness(i, this.pet);
             var cam = this.cameras.main;
             cam.centerOn(400 + 800 * playerInfo.activePet, 0);
-
+            
         }
 
     }
@@ -121,20 +115,22 @@ class Pethub extends Phaser.Scene {
      * @param {pet object} pet
      */
     checkHappiness(i, pet) {
-        //console.log(playerPets.pet[i].currentHappiness);
+        console.log('happiness');
+        console.log(playerPetInfo[i]);
         if (playerPetInfo[i].currentHappiness < 33) {
-            this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true);
+            this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true).setTint('0x875e5e');
+            
             this.sad[i] = this.add.sprite(this.scale.width*.29, this.scale.height *.37, 'sad');
             pet[i].add(this.sadBubble[i]);
             pet[i].add(this.sad[i]);
         }
         else if (playerPetInfo.currentHappiness < 66) {
-            this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true);
+            this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true).setTint('0xf9b6a7');
             this.sad[i] = this.add.sprite(this.scale.width*.29, this.scale.height *.37, 'sad');
             pet[i].add(this.sadBubble[i]);
             pet[i].add(this.sad[i]);
         }
-
+        
 
     }
     /**
@@ -143,17 +139,18 @@ class Pethub extends Phaser.Scene {
      * @param {pet object} pet
      */
     checkHunger(i, pet){
-        //console.log(playerPets.pet[i].currentHappiness);
+        console.log('hunger');
+        console.log(playerPetInfo[i]);
 
 
         if (playerPetInfo[i].currentHunger < 33) {
-            this.hungerBubble[i] = this.add.sprite(this.scale.width*.73, this.scale.height *.35, 'thought');
+            this.hungerBubble[i] = this.add.sprite(this.scale.width*.73, this.scale.height *.35, 'thought').setTint('0x875e5e');
             this.hunger[i] = this.add.sprite(this.scale.width*.71, this.scale.height *.27, 'hungry');
             pet[i].add(this.hungerBubble[i]);
             pet[i].add(this.hunger[i]);
         }
         else if (playerPetInfo[i].currentHunger < 66) {
-            this.hungerBubble[i] = this.add.sprite(this.scale.width*.73, this.scale.height *.35, 'thought');
+            this.hungerBubble[i] = this.add.sprite(this.scale.width*.73, this.scale.height *.35, 'thought').setTint('0xf9b6a7');
             this.hunger[i] = this.add.sprite(this.scale.width*.71, this.scale.height *.27, 'hungry');
             pet[i].add(this.hungerBubble[i]);
             pet[i].add(this.hunger[i]);

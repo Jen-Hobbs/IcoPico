@@ -16,6 +16,16 @@ class PethubOverlay extends Phaser.Scene {
         };
     }
     create() {
+        this.emitter = new Phaser.Events.EventEmitter()
+        .on("taskList", updateTaskList)
+        .on("inventory", updateInventory)
+        .on("currency", updateCurrency)
+        .on("happiness", updateCurrentHappiness)
+        .on("hunger", updateHunger)
+        .on("activePet", updateActivePet) 
+        .on("newPet", insertNewPlayerPet)
+        .on("lastLogin", updateLastLogin);
+
         //console.log(foodTypes.food[0]);
         //menu button
         let menu = this.add.sprite(this.scale.width*.06, this.scale.height*.06, 'menuPet');
@@ -38,12 +48,27 @@ class PethubOverlay extends Phaser.Scene {
     task() {
         var taskActive;
         if (newTask == 0) {
-            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .72, 'whiteCircle');
+            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .72, 'whiteCircle')
+            .setInteractive()
+            .on('pointerdown', () => {
+            this.scene.stop('Pethub');
+            this.scene.stop('PethubOverlay');
+            this.scene.run('Task');
+        });
         }
         else {
-            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .72, 'yellowCircle');
+            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .72, 'yellowCircle')
+            .setInteractive()
+            .on('pointerdown', () => {
+            newTask = 0;
+            this.scene.stop('Pethub');
+            this.scene.stop('PethubOverlay');
+            this.scene.run('Task');
+
+        });
         }
         this.add.sprite(this.scale.width * .90, this.scale.height * .73, 'task');
+        
     }
     displayfood() {
 
@@ -76,15 +101,17 @@ class PethubOverlay extends Phaser.Scene {
                 this.type = [];
                 this.amount = [];
                 for (var i = 0; i < inventoryInfo.length; i++) {
-                    this.food[i] = this.add.sprite(this.scale.width * (.80 - (i * .10)), this.scale.height * .90, 'whiteCircle');
+                    if(inventoryInfo[i].itemQty != 0){
+                    this.food[i] = this.add.sprite(this.scale.width * (.78 - (i * .12)), this.scale.height * .90, 'whiteCircle');
                     this.food[i].setInteractive();
                     this.food[i].name = i;
 
                     this.food[i].on('clicked', this.consume, this);
-                    this.amount[i] = this.add.text(this.scale.width * (.79 - (i * .10)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
+                    this.amount[i] = this.add.text(this.scale.width * (.76 - (i * .12)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
                     this.amount[i].alpha = .8;
-                    this.type[i] = this.add.sprite(this.scale.width * (.80 - (i * .10)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
+                    this.type[i] = this.add.sprite(this.scale.width * (.78 - (i * .12)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
                     this.type[i].setScale(.7);
+                    }
 
                 }
                 this.foodButtons.add(this.food);
@@ -106,15 +133,23 @@ class PethubOverlay extends Phaser.Scene {
 
 
     consume(box) {
+        
+
         if (inventoryInfo[box.name].itemQty == 1) {
+            //
+            //
+            //
+            //possible to delete?
+            
+            this.emitter.emit("inventory", inventoryInfo[box.name].itemID, 0);
             inventoryInfo.splice(box.name, 1);
             this.foodButtons.remove(this.food);
             this.foodButtons.remove(this.type);
             this.food = [];
             this.type = [];
             for (var i = 0; i < inventoryInfo.length; i++) {
-                this.food[i] = this.add.sprite(this.scale.width * (.80 - (i * .10)), this.scale.height * .90, 'whiteCircle');
-                this.type[i] = this.add.sprite(this.scale.width * (.80 - (i * .10)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
+                this.food[i] = this.add.sprite(this.scale.width * (.78 - (i * .12)), this.scale.height * .90, 'whiteCircle');
+                this.type[i] = this.add.sprite(this.scale.width * (.78 - (i * .12)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
                 this.type[i].setScale(.7);
                 this.food[i].setInteractive();
                 this.food[i].name = i;
@@ -123,14 +158,20 @@ class PethubOverlay extends Phaser.Scene {
             }
             this.foodButtons.add(this.food);
             this.foodButtons.add(this.type);
+            
         }
         else{
             inventoryInfo[box.name].itemQty =inventoryInfo[box.name].itemQty-1;
+            var item = inventoryInfo[box.name].itemID;
+            var itemQty = inventoryInfo[box.name].itemQty;
+            console.log('item number' + item);
+            console.log('item quantity' + itemQty);
+            this.emitter.emit("inventory", item, itemQty);
         }
         this.foodButtons.remove(this.amount);
         this.amount = [];
         for (var i = 0; i < inventoryInfo.length; i++) {
-            this.amount[i] = this.add.text(this.scale.width * (.79 - (i * .10)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
+            this.amount[i] = this.add.text(this.scale.width * (.76 - (i * .12)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
             this.amount[i].alpha = .8;
         }
         this.foodButtons.add(this.amount);
@@ -140,6 +181,9 @@ class PethubOverlay extends Phaser.Scene {
         console.log('new pet hunger' + playerPetInfo[playerInfo.activePet].currentHunger);
         updateHunger = 1;
         console.log('check hunger ' + updateHunger);
+        console.log(playerPetInfo[playerInfo.activePet].petID+ " " + playerPetInfo[playerInfo.activePet].currentHunger);
+        this.emitter.emit("hunger", playerPetInfo[playerInfo.activePet].petID, Math.floor(playerPetInfo[playerInfo.activePet].currentHunger));
+        
     }
 
 }

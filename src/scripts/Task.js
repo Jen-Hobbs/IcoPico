@@ -32,6 +32,17 @@ class Task extends Phaser.Scene {
   }
 
   create() {
+
+    var emitter = new Phaser.Events.EventEmitter()
+      .on("taskList", updateTasks)
+      .on("inventory", updateInventory)
+      .on("currency", updateCurrency)
+      .on("happiness", updateCurrentHappiness)
+      .on("hunger", updateCurrentHunger)
+      .on("activePet", updateActivePet)
+      .on("newPet", insertNewPlayerPet)
+      .on("lastLogin", updateLastLogin);
+
     console.log('tasks' + playerTasks);
     var pet = {};
     pet = this.add.sprite(this.scale.width * .85, this.scale.height * .85, pets.pet[(playerPetInfo[playerInfo.activePet].petID)].petName).setScale(2);
@@ -59,6 +70,7 @@ class Task extends Phaser.Scene {
       this.scene.run('ShowMenu');
       this.scene.bringToTop('ShowMenu');
     });
+    
     if (playerTasks != 0) {
       //Create dismiss task button
       var dismiss = this.add.sprite(this.scale.width / 2, this.scale.height - 80, "x")
@@ -159,6 +171,7 @@ class Task extends Phaser.Scene {
       * callback function for deleteTask button
       **/
     function deleteTask(rSprite) {
+
       console.log('deletTask');
       var i = rSprite.getData('rindex');
 
