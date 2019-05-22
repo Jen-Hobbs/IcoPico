@@ -19,16 +19,6 @@ const db = mysql.createConnection({
 
 // Connect
 db.connect(function (err) {
-/*
-    try {
-        // the synchronous code that we want to catch thrown errors on
-        throw err
-    } catch (err) {
-        // handle the error safely
-        console.error('db.connect() error: ' + err.message);
-    }*/
-
-    
     if (err) {
         
         return console.error('db.connect() error: ' + err.message);
