@@ -8,9 +8,6 @@ class Time extends Phaser.Scene {
      */
     preload() {
       //emitter presets
-      
-
-        
         this.timer = this.time.addEvent({ delay: 600000, callback: this.updateLogin, callbackScope: this, loop: true });
     }
     /**
@@ -18,7 +15,7 @@ class Time extends Phaser.Scene {
      */
     create() {
         this.emitter = new Phaser.Events.EventEmitter()
-          .on("taskList", updateTaskList)
+          .on("taskList", updateTasks)
           .on("inventory", updateInventory)
           .on("currency", updateCurrency)
           .on("happiness", updateCurrentHappiness)
@@ -30,22 +27,27 @@ class Time extends Phaser.Scene {
         console.log('player tasks length' + playerTasks.length);
         this.updateLogin();
         this.setTaskList();
-        this.updateTasks();
+        this.newTask();
         this.updateEmotions();
         this.evolution();
         updateTaskList();
+        this.time = this.timeCurrent;
         console.log('player tasks length' + playerTasks.length);
+        this.emitter.emit("taskList", taskListInfo.taskIDa, taskListInfo.taskIDb, taskListInfo.taskIDc);
     }
     /**
      * sets changed time for happiness/hunger change in comparison to last login and current time to the nearest 3rd hour
      */
     updateLogin() {
         this.timeCurrent = new Date();
+//
+//
+//
         console.log("current time " + this.timeCurrent.getDate());
         console.log('last login ' + lastLogin.lastLogin);
         this.time = new Date(lastLogin.lastLogin);
         this.changedTime = (this.timeCurrent.getTime() - this.time.getTime()) / 10800000;
-        this.time = this.timeCurrent;
+        
         //this.emitter.emit("lastLogin", playerInfo.accountEmail, this.timeCurrent);
     }
     /**
@@ -76,11 +78,12 @@ class Time extends Phaser.Scene {
         
 
     }
-    /**
+     /**
      * change tasklist to array
      */
     setTaskList(){
-        console.log('tasklist' + taskListInfo)
+        console.log('tasklist')
+        console.log(taskListInfo);
         if(taskListInfo.taskIDa != null){
             console.log('a added');
             playerTasks.push(taskListInfo.taskIDa);
@@ -93,15 +96,17 @@ class Time extends Phaser.Scene {
             console.log('c added' + taskListInfo.taskIDc);
             playerTasks.push(taskListInfo.taskIDc);
         }
+        console.log(playerTasks);
     }
     /**
      * update tasks to 3 if last login before midnight
      */
-    updateTasks() {
-
+    newTask() {
+        console.log('new task');
         if (this.timeCurrent.getDate() != this.time.getDate()
             || this.timeCurrent.getMonth() != this.time.getMonth()
             || this.timeCurrent.getFullYear() != this.time.getFullYear()) {
+                console.log('time out of synch');
             while (playerTasks.length != 3) {
                 newTask = 1;
                 playerTasks[playerTasks.length] = Math.floor(Math.random() * (+10 - +1)) + +1;

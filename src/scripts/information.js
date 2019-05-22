@@ -173,7 +173,8 @@ function updateTaskList(){
     taskListInfo.taskIDc = null;
     console.log("task id c " + taskListInfo.taskIDc);
   }
-  //updateTasks(taskListInfo.taskIDa, taskListInfo.taskIDb, taskListInfo.taskIDc)
+  console.log("task list information " + taskListInfo.taskIDa + taskListInfo.taskIDb + taskListInfo.taskIDc);
+ 
 }
 
 // console.log('current date '+ currentDate);
