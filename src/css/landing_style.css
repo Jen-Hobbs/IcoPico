@@ -16,7 +16,7 @@ body {
 }
 
 /* Mobile View --------------------------------------------------------------*/
-@media (min-width: 0px) and (max-width: 767px) {
+@media screen and (min-width: 0px) and (max-width: 600px) {
     #title_logo {
         position: absolute;
         width: 12em;
@@ -89,7 +89,7 @@ body {
 }
 
 /* Tablet View --------------------------------------------------------------*/
-@media (min-width: 767px) and (max-width: 1240px) {
+@media screen and (min-width: 600px) and (max-width: 1240px) {
     #title_logo {
         position: absolute;
         width: 15em;
@@ -170,7 +170,7 @@ body {
 
 
 /* Desktop View --------------------------------------------------------------*/
-@media (min-width: 1240px) {
+@media screen and (min-width: 1240px) {
     #title_logo {
         position: absolute;
         width: 15em;
