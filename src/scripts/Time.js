@@ -7,6 +7,14 @@ class Time extends Phaser.Scene {
      * timer to update last login to database every 10 min
      */
     preload() {
+      //emitter presets
+      var emitter = new Phaser.Events.EventEmitter()
+        .on("taskList", updateTaskList)
+        .on("inventory", updateInventory)
+        .on("currency", updateCurrency)
+        .on("happiness", updateCurrentHappiness)
+        .on("hunger", updateCurrentHunger);
+        
         this.timer = this.time.addEvent({ delay: 600000, callback: this.updateLastLogin, callbackScope: this, loop: true });
     }
     /**
@@ -17,7 +25,7 @@ class Time extends Phaser.Scene {
         this.updateLastLogin();
         this.setTaskList();
         this.updateTasks();
-        this.updateEmotions(); 
+        this.updateEmotions();
         this.evolution();
         updateTaskList();
         console.log('player tasks length' + playerTasks.length);
@@ -28,8 +36,9 @@ class Time extends Phaser.Scene {
     updateLastLogin() {
         this.timeCurrent = new Date();
         console.log("current time " + this.timeCurrent.getDate());
-        console.log('last login ' + lastLogin.getDate());
-        this.changedTime = (this.timeCurrent.getTime() - lastLogin.getTime()) / 10800000;
+        console.log('last login ' + lastLogin.lastLogin);
+        this.time = new Date(lastLogin.lastLogin);
+        this.changedTime = (this.timeCurrent.getTime() - this.time.getTime()) / 10800000;
     }
     /**
      * updates the hunger and happiness of the pet in relation to 3 hours from last login to current updates last login time
@@ -40,6 +49,9 @@ class Time extends Phaser.Scene {
             console.log("old" + playerPetInfo[i].currentHunger);
             playerPetInfo[i].currentHappiness -= this.changedTime;
             playerPetInfo[i].currentHunger -= this.changedTime;
+            //
+            //happiness hunger updated
+            //
             //    player.happiness[i] -= this.changedTime; // old version changing happiness
             if (playerPetInfo[i].currentHappiness < 0) {
                 playerPetInfo[i].currentHappiness = 0;
@@ -50,23 +62,25 @@ class Time extends Phaser.Scene {
             console.log('new' + playerPetInfo[i].currentHappiness);
             console.log("new" + playerPetInfo[i].currentHunger);
         }
-        lastLogin = this.timeCurrent;
+        this.time = this.timeCurrent;
+
     }
     /**
      * change tasklist to array
      */
     setTaskList(){
-        if(tasklistInfo[0].taskIDa != null){
+        console.log('tasklist' + taskListInfo)
+        if(taskListInfo.taskIDa != null){
             console.log('a added');
-            playerTasks.push(tasklistInfo[0].taskIDa);
+            playerTasks.push(taskListInfo.taskIDa);
         }
-        if(tasklistInfo[0].taskIDb != null){
+        if(taskListInfo.taskIDb != null){
             console.log('b added');
-            playerTasks.push(tasklistInfo[0].taskIDb);
+            playerTasks.push(taskListInfo.taskIDb);
         }
-        if(tasklistInfo[0].taskIDc != null){
-            console.log('c added' + tasklistInfo[0].taskIDc);
-            playerTasks.push(tasklistInfo[0].taskIDc);
+        if(taskListInfo.taskIDc != null){
+            console.log('c added' + taskListInfo.taskIDc);
+            playerTasks.push(taskListInfo.taskIDc);
         }
     }
     /**
@@ -74,9 +88,9 @@ class Time extends Phaser.Scene {
      */
     updateTasks() {
 
-        if (this.timeCurrent.getDate() != lastLogin.getDate()
-            || this.timeCurrent.getMonth() != lastLogin.getMonth()
-            || this.timeCurrent.getFullYear() != lastLogin.getFullYear()) {
+        if (this.timeCurrent.getDate() != this.time.getDate()
+            || this.timeCurrent.getMonth() != this.time.getMonth()
+            || this.timeCurrent.getFullYear() != this.time.getFullYear()) {
             while (playerTasks.length != 3) {
                 newTask = 1;
                 playerTasks[playerTasks.length] = Math.floor(Math.random() * (+10 - +1)) + +1;
@@ -101,6 +115,11 @@ class Time extends Phaser.Scene {
                     playerPetInfo[i].petID += 9;
                 }
             }
+
         }
+        //
+        //evolution updated
+        //
+        //
     }
 }

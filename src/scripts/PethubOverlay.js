@@ -11,6 +11,7 @@ class PethubOverlay extends Phaser.Scene {
         this.load.image("task", '../images/buttons/pet_hub/task.png');
         this.load.image('food', '../images/food/donut.png');
         for (var i = 0; i < inventoryInfo.length; i++) {
+            console.log('check' + inventoryInfo[i].itemQty);
             this.load.image('food' + inventoryInfo[i].itemID, "../images/food/" + foodTypes.food[inventoryInfo[i].itemID].type + '.png');
         };
     }
@@ -133,8 +134,10 @@ class PethubOverlay extends Phaser.Scene {
             this.amount[i].alpha = .8;
         }
         this.foodButtons.add(this.amount);
-        playerPetInfo[playerInfo[0].activePet].currentHunger += 30;
-        console.log('new pet hunger' + playerPetInfo[playerInfo[0].activePet].currentHunger);
+        console.log(playerInfo.activePet);
+        console.log(playerPetInfo[playerInfo.activePet]);
+        playerPetInfo[playerInfo.activePet].currentHunger += 30;
+        console.log('new pet hunger' + playerPetInfo[playerInfo.activePet].currentHunger);
         updateHunger = 1;
         console.log('check hunger ' + updateHunger);
     }

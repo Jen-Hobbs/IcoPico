@@ -60,6 +60,7 @@ body {
     #petImg {
         width: 70%;
         height: auto;
+        cursor: pointer;
     }
 
     #icopico_title {

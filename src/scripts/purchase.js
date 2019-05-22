@@ -38,12 +38,12 @@ class Purchase extends Phaser.Scene {
         purchase.setInteractive();
         if (this.type == 'pet') {
             var image = this.add.sprite(this.scale.width / 2, this.scale.height * .48, this.info.petName).setScale(.2);
-            if (playerInfo[0].currency >= this.info.cost) {
+            if (playerInfo.currency >= this.info.cost) {
                 this.add.text(this.scale.width * .58, this.scale.height * .58, 'Buy').setColor('black');
                 console.log("buy pet");
                 purchase.on('pointerdown', () => {
-                    playerInfo[0].currency = playerInfo[0].currency - this.info.cost;
-                    console.log("money left" + playerInfo[0].currency);
+                    playerInfo.currency = playerInfo.currency - this.info.cost;
+                    console.log("money left" + playerInfo.currency);
                     console.log("what is this" + this.info.petName);
                     var newPet = new Object();
                     //missing playerPetID
@@ -58,7 +58,7 @@ class Purchase extends Phaser.Scene {
                     newPet.currentHappiness = 50;
                     newPet.currentHunger = 50;
                     newPet.petName = 'empty';
-                    newPet.playerID = playerInfo[0];
+                    newPet.playerID = playerInfo;
                     newPet.totalHappiness = 0;
                     newPet.totalHunger = 0;
                     newPet.recycling = 0;
@@ -85,13 +85,13 @@ class Purchase extends Phaser.Scene {
         }
         else {
             var image = this.add.sprite(this.scale.width / 2, this.scale.height * .48, this.info.type).setScale(.8);
-            if (playerInfo[0].currency >= this.info.cost) {
+            if (playerInfo.currency >= this.info.cost) {
                 
                 this.add.text(this.scale.width * .58, this.scale.height * .58, 'Buy').setColor('black');
                 console.log("buy food");
                 purchase.on('pointerdown', () => {
-                    playerInfo[0].currency = playerInfo[0].currency - this.info.cost;
-                    console.log("money left" + playerInfo[0].currency);
+                    playerInfo.currency = playerInfo.currency - this.info.cost;
+                    console.log("money left" + playerInfo.currency);
                     var check = 0;
                     for(var i = 0; i < inventoryInfo.length; i++){
                         if(foodTypes.food[inventoryInfo[i].itemID].type == this.info.type){
@@ -107,7 +107,7 @@ class Purchase extends Phaser.Scene {
                             }
                         }
                         stuff.itemQty = 1;
-                        stuff.playerID = playerInfo[0].playerID;
+                        stuff.playerID = playerInfo.playerID;
                         //missing inventory id
                         inventoryInfo.push(stuff);
                         

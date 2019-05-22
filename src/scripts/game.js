@@ -6,7 +6,6 @@ var config = {
         width: 800,
         height: 600,
         type: Phaser.AUTO,
-        autoCenter: Phaser.Scale.autoCenter
 
     },
     physics: {
@@ -16,8 +15,8 @@ var config = {
             debug: false
         }
     },
-    scene: [ShowMenu, Shop, Task, Purchase, Pethub, PethubOverlay, Time]
-    
+    scene: [ShowMenu, Shop, Task, Purchase, Pethub, PethubOverlay, Time, UpdateDB]
+
 };
 
 var game = new Phaser.Game(config);

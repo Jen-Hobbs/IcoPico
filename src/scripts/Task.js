@@ -6,6 +6,14 @@ class Task extends Phaser.Scene {
   }
 
   preload() {
+    //emitter presets
+    var emitter = new Phaser.Events.EventEmitter()
+      .on("taskList", updateTaskList)
+      .on("inventory", updateInventory)
+      .on("currency", updateCurrency)
+      .on("happiness", updateCurrentHappiness)
+      .on("hunger", updateCurrentHunger);
+
     //asset preload
     this.cameras.main.setBackgroundColor('#FF9999');
     this.load.image("menuPet", '../images/buttons/Other/menu.png');
@@ -19,14 +27,14 @@ class Task extends Phaser.Scene {
     this.load.image("x", '../images/buttons/Other/x.png');
     this.load.image("menuPet", '../images/buttons/Other/menu.png');
     this.load.image("get_new", '../images/buttons/task_hub/get_new.png');
-    console.log(pets.pet[(playerPetInfo[playerInfo[0].activePet].petID)].petName);
-    this.load.image(pets.pet[(playerPetInfo[playerInfo[0].activePet].petID)].petName, '../images/pets/' + pets.pet[(playerPetInfo[playerInfo[0].activePet].petID)].petName + '.png');
+    console.log(pets.pet[(playerPetInfo[playerInfo.activePet].petID)].petName);
+    this.load.image(pets.pet[(playerPetInfo[playerInfo.activePet].petID)].petName, '../images/pets/' + pets.pet[(playerPetInfo[playerInfo.activePet].petID)].petName + '.png');
   }
 
   create() {
     console.log('tasks' + playerTasks);
     var pet = {};
-    pet = this.add.sprite(this.scale.width * .85, this.scale.height * .85, pets.pet[(playerPetInfo[playerInfo[0].activePet].petID)].petName).setScale(2);
+    pet = this.add.sprite(this.scale.width * .85, this.scale.height * .85, pets.pet[(playerPetInfo[playerInfo.activePet].petID)].petName).setScale(2);
     //  If a Game Object is clicked on, this event is fired.
     //  We can use it to emit the 'clicked' event on the game object itself.
     this.input.on('gameobjectup', function (pointer, gameObject) {
@@ -287,32 +295,32 @@ class Task extends Phaser.Scene {
       console.log('donut');
     }
     else if (task_list.task[playerTasks[i]].icon == 'type4') {
-      playerInfo[0].currency += 10;
+      playerInfo.currency += 10;
     }
     else if (task_list.task[playerTasks[i]].icon == 'type5') {
       for (var n = 0; n < playerPetInfo.length; n++) {
         playerPetInfo[n].currentHappiness += 30;
 
       }
-      
+
     }
     //update evolution
     if(task_list.task[playerTasks[i]].evolutionType == 'health'){
-      playerPetInfo[playerInfo[0].activePet].health++;
-      console.log('health' + playerPetInfo[playerInfo[0].activePet].health);
+      playerPetInfo[playerInfo.activePet].health++;
+      console.log('health' + playerPetInfo[playerInfo.activePet].health);
     }
     else if(task_list.task[playerTasks[i]].evolutionType == 'utility'){
-      playerPetInfo[playerInfo[0].activePet].utility++;
-      console.log('utility' + playerPetInfo[playerInfo[0].activePet].utility);
+      playerPetInfo[playerInfo.activePet].utility++;
+      console.log('utility' + playerPetInfo[playerInfo.activePet].utility);
     }
     else if(task_list.task[playerTasks[i]].evolutionType == 'recycling'){
-      playerPetInfo[playerInfo[0].activePet].recycling++;
-      console.log('recycling' + playerPetInfo[playerInfo[0].activePet].recycling);
+      playerPetInfo[playerInfo.activePet].recycling++;
+      console.log('recycling' + playerPetInfo[playerInfo.activePet].recycling);
     }
   }
   /**
    * add food to inventory
-   * @param  name food type 
+   * @param  name food type
    */
   addFood(name){
     var check = 0;
@@ -330,7 +338,7 @@ class Task extends Phaser.Scene {
           }
         }
         stuff.itemQty = 1;
-        stuff.playerID = playerInfo[0].playerID;
+        stuff.playerID = playerInfo.playerID;
         //missing inventory id
         inventoryInfo.push(stuff);
 
