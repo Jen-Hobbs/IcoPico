@@ -168,7 +168,7 @@ function getTasks()
 //UPDATING TO DATABASE
 
 //update tasklist
-function updateTaskList(newIDa, newIDb, newIDc) {
+function updateTasks(newIDa, newIDb, newIDc) {
 
     //console.log("updating TaskList using this data:", data);
 
@@ -302,7 +302,7 @@ function updateCurrentHunger(petID, newHunger)
 {
   //Ajax call to update currency
   $.ajax({
-    url: "/updatecurrenthappiness/" + playerID + "/" + petID + "/" + newHunger,
+    url: "/updatecurrenthunger/" + playerID + "/" + petID + "/" + newHunger,
     dataType: "json",
     type: "GET",
     async: false,

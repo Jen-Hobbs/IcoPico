@@ -246,7 +246,7 @@ app.get('/updatecurrenthappiness/:id/:petID/:newHappiness', (req, res) => {
 });
 
 //update hunger
-app.get('/updatecurrenthappiness/:id/:petID/:newHappiness', (req, res) => {
+app.get('/updatecurrenthunger/:id/:petID/:newHunger', (req, res) => {
     let sqlB = `UPDATE PlayerPet SET currentHunger = ${req.params.newHunger}
     WHERE PlayerPet.playerID = ${req.params.id} AND petID = ${req.params.petID}`;
     let queryB = db.query(sqlB, (err, result) => {
