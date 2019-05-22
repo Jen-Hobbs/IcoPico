@@ -13,7 +13,7 @@ class Time extends Phaser.Scene {
         .on("inventory", updateInventory)
         .on("currency", updateCurrency)
         .on("happiness", updateCurrentHappiness)
-        .on("hunger", updateCurrentHunger);
+        .on("hunger", updateHunger);
         
         this.timer = this.time.addEvent({ delay: 600000, callback: this.updateLastLogin, callbackScope: this, loop: true });
     }

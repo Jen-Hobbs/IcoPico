@@ -21,7 +21,7 @@ class PethubOverlay extends Phaser.Scene {
         .on("inventory", updateInventory)
         .on("currency", updateCurrency)
         .on("happiness", updateCurrentHappiness)
-        .on("hunger", updateCurrentHunger)
+        .on("hunger", updateHunger)
         .on("activePet", updateActivePet) 
         .on("newPet", insertNewPlayerPet)
         .on("lastLogin", updateLastLogin);
@@ -140,6 +140,7 @@ class PethubOverlay extends Phaser.Scene {
             //
             //
             //possible to delete?
+            
             this.emitter.emit("inventory", inventoryInfo[box.name].itemID, 0);
             inventoryInfo.splice(box.name, 1);
             this.foodButtons.remove(this.food);
@@ -161,7 +162,11 @@ class PethubOverlay extends Phaser.Scene {
         }
         else{
             inventoryInfo[box.name].itemQty =inventoryInfo[box.name].itemQty-1;
-            this.emitter.emit("inventory", inventoryInfo[box.name].itemID, inventoryInfo[box.name].itemQty);
+            var item = inventoryInfo[box.name].itemID;
+            var itemQty = inventoryInfo[box.name].itemQty;
+            console.log('item number' + item);
+            console.log('item quantity' + itemQty);
+            this.emitter.emit("inventory", item, itemQty);
         }
         this.foodButtons.remove(this.amount);
         this.amount = [];
@@ -177,7 +182,7 @@ class PethubOverlay extends Phaser.Scene {
         updateHunger = 1;
         console.log('check hunger ' + updateHunger);
         console.log(playerPetInfo[playerInfo.activePet].petID+ " " + playerPetInfo[playerInfo.activePet].currentHunger);
-        this.emitter.emit("hunger", playerPetInfo[playerInfo.activePet].petID, playerPetInfo[playerInfo.activePet].currentHunger);
+        this.emitter.emit("hunger", playerPetInfo[playerInfo.activePet].petID, Math.floor(playerPetInfo[playerInfo.activePet].currentHunger));
         
     }
 

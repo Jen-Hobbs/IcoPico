@@ -35,7 +35,7 @@ class Purchase extends Phaser.Scene {
         .on("inventory", updateInventory)
         .on("currency", updateCurrency)
         .on("happiness", updateCurrentHappiness)
-        .on("hunger", updateCurrentHunger)
+        .on("hunger", updateHunger)
         .on("activePet", updateActivePet) 
         .on("newPet", insertNewPlayerPet) 
         .on("lastLogin", updateLastLogin);
