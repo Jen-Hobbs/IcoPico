@@ -79,7 +79,7 @@ class Pethub extends Phaser.Scene {
 
             this.pet[i] = this.add.container(i * 800, 0);
             this.pet[i].add(this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'backPet')); //background
-            this.pet[i].add(this.add.sprite(this.scale.width / 2, this.scale.height *.97, 'pet' + i).setOrigin(0.5,1)); //addpet
+            this.pet[i].add(this.add.sprite(this.scale.width / 2, this.scale.height * .97, 'pet' + i).setOrigin(0.5, 1)); //addpet
             this.pet[i].add(arrowR[i]);
             this.pet[i].add(arrowL[i]);
 
