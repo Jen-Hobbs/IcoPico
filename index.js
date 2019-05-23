@@ -364,7 +364,7 @@ app.get('/createaccount/:email', (req, res) => {
 // Creates a row in the Player table
 app.get('/createplayer/:email', (req, res) => {
     let sql = `INSERT INTO Player(accountEmail, activePet, activeItem)
-    VALUES(${req.params.email}, 1, 1)`;
+    VALUES(${req.params.email}, 0, 1)`;
     let query = db.query(sql, (err, result) => {
         if (err) {
             return console.log('createplayererror: ' + err.message);
