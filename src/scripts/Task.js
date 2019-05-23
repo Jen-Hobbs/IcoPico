@@ -36,7 +36,10 @@ class Task extends Phaser.Scene {
     .on("hunger", updateHunger)
     .on("activePet", updateActivePet) 
     .on("newPet", insertNewPlayerPet)
-    .on("lastLogin", updateLastLogin);
+    .on("lastLogin", updateLastLogin)
+    .on('utility', updateUtility)
+    .on('recycling', updateRecycling)
+    .on('health', updateHealth);
 
     console.log('tasks' + playerTasks);
     var pet = {};
@@ -320,14 +323,17 @@ class Task extends Phaser.Scene {
     if(task_list.task[playerTasks[i]].evolutionType == 'health'){
       playerPetInfo[playerInfo.activePet].health++;
       console.log('health' + playerPetInfo[playerInfo.activePet].health);
+      this.emitter.emit("health", playerPetInfo[playerInfo.activePet].petID, playerPetInfo[playerInfo.activePet].health);
     }
     else if(task_list.task[playerTasks[i]].evolutionType == 'utility'){
       playerPetInfo[playerInfo.activePet].utility++;
       console.log('utility' + playerPetInfo[playerInfo.activePet].utility);
+      this.emitter.emit("utility", playerPetInfo[playerInfo.activePet].petID, playerPetInfo[playerInfo.activePet].utility);
     }
     else if(task_list.task[playerTasks[i]].evolutionType == 'recycling'){
       playerPetInfo[playerInfo.activePet].recycling++;
       console.log('recycling' + playerPetInfo[playerInfo.activePet].recycling);
+      this.emitter.emit("recycling", playerPetInfo[playerInfo.activePet].petID, playerPetInfo[playerInfo.activePet].recycling);
     }
   }
   /**
