@@ -47,11 +47,14 @@ var inventoryInfo;
 var taskListInfo;
 var parameters;
 ////////////////////////////////////////////////////////////////////////////////
-parameters = new URLSearchParams(window.location.search);
-playerEmail = parameters.get('email');
-createAccount(playerEmail);
-getPlayerInfo(playerEmail);
-createDefaultInfo();
+//testing new player stuff
+// parameters = new URLSearchParams(window.location.search);
+// playerEmail = parameters.get('email');
+// createAccount(playerEmail);
+// getPlayerInfo(playerEmail);
+// createDefaultInfo();
+
+initGameInfo();
 ////////////////////////////////////////////////////////////////////////////////
 //GETTING FROM database
 
