@@ -31,11 +31,14 @@ class Purchase extends Phaser.Scene {
     }
     create() {
       var emitter = new Phaser.Events.EventEmitter()
-        .on("taskList", updateTaskList)
         .on("inventory", updateInventory)
         .on("currency", updateCurrency)
         .on("happiness", updateCurrentHappiness)
-        .on("hunger", updateCurrentHunger);
+        .on("hunger", updateHunger)
+        .on("activePet", updateActivePet) 
+        .on("newPet", insertNewPlayerPet) 
+        .on("lastLogin", updateLastLogin);
+
 
         console.log("purchase" + this.info.petName);
         this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'backdrop');
@@ -72,6 +75,13 @@ class Purchase extends Phaser.Scene {
                     newPet.recycling = 0;
                     newPet.utility = 0;
                     newPet.health = 0;
+                    //
+                    //
+                    //
+                    //
+                    //
+                    console.log('newpet');
+                    emitter.emit("newPet", newPet.petID);
                     playerPetInfo.push(newPet);
 //***need to emit new pet to database
                     console.log("pet added" + playerPetInfo);
@@ -121,10 +131,16 @@ class Purchase extends Phaser.Scene {
                         }
                         stuff.itemQty = 1;
                         stuff.playerID = playerInfo.playerID;
+                        //
+                        //
+                        //
+                        //
+                        //
+                        emitter.emit("insertInventory", stuff.itemID, stuff.itemQty);
                         //missing inventory id
                         inventoryInfo.push(stuff);
                         //emit inventory food?
-                        emitter.emit("inventory", stuff.itemID, stuff.itemQty);
+                        
 
                         console.log(inventoryInfo);
                     }

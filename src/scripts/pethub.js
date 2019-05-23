@@ -11,12 +11,6 @@ class Pethub extends Phaser.Scene {
     }
     preload() {
 
-        var emitter = new Phaser.Events.EventEmitter()
-          .on("taskList", updateTaskList)
-          .on("inventory", updateInventory)
-          .on("currency", updateCurrency)
-          .on("happiness", updateCurrentHappiness)
-          .on("hunger", updateCurrentHunger);
           //.emit("sampleAjax", "sample1@gmail.com");
 
         for (var i = 0; i < playerPetInfo.length; i++) {

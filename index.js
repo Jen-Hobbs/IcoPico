@@ -188,28 +188,24 @@ app.get('/deleteinventory/:id/:itemID', (req, res) => {
 });
 
 
-// Inserts a row in the Inventory table (when player buys a new item)
 app.get('/insertinventory/:id/:itemID', (req, res) => {
 
-    // deleting row from the player's inventory
-    let sqlA = `INSERT INTO Inventory(itemID, playerID, itemQty)
-    VALUES(${req.params.itemID}, ${req.params.playerID}, 1)`;
 
-    let queryA = db.query(sqlA, (err, result) => {
-        if (err) {
-            return console.log('error: ' + err.message);
-        }
-        console.log('insert Inventory success');
-    });
 
-    let sqlB = `SELECT * FROM Inventory WHERE playerID = ${req.params.id}`;
-    let queryB = db.query(sqlB, (err, result) => {
+// Update lastlogin (when player scrolls through pets)
+app.get('/updatelastlogin/:email/:login', (req, res) => {
+    let sql = `UPDATE Account SET lastLogin = ${req.params.login}
+    WHERE email = ${req.params.email}`;
+
+    let query = db.query(sql, (err, result) => {
         if (err) {
             return console.log('error: ' + err.message);
         }
         console.log(JSON.parse(JSON.stringify(result)));
+        console.log('updating lastLogin success');
         res.send(JSON.stringify(result));
-    });
+
+    })
 });
 
 //update currency
@@ -238,9 +234,47 @@ app.get('/updatecurrenthappiness/:id/:petID/:newHappiness', (req, res) => {
     });
 });
 
-// update hunger
+
+//update utility
+app.get('/updatecurrentutility/:id/:petID/:utility', (req, res) => {
+    let sqlB = `UPDATE PlayerPet SET utility = ${req.params.utility}
+    WHERE PlayerPet.playerID = ${req.params.id} AND petID = ${req.params.petID}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+//update recycling
+app.get('/updatecurrentrecycling/:id/:petID/:recycling', (req, res) => {
+    let sqlB = `UPDATE PlayerPet SET recycling = ${req.params.recycling}
+    WHERE PlayerPet.playerID = ${req.params.id} AND petID = ${req.params.petID}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+//update health
+app.get('/updatecurrenthealth/:id/:petID/:health', (req, res) => {
+    let sqlB = `UPDATE PlayerPet SET health = ${req.params.health}
+    WHERE PlayerPet.playerID = ${req.params.id} AND petID = ${req.params.petID}`;
+    let queryB = db.query(sqlB, (err, result) => {
+        if (err) {
+            return console.log('error: ' + err.message);
+        }
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+});
+//update hunger
 app.get('/updatecurrenthunger/:id/:petID/:newHunger', (req, res) => {
-    let sql = `UPDATE PlayerPet SET currentHunger = ${req.params.newHunger}
+    let sqlB = `UPDATE PlayerPet SET currentHunger = ${req.params.newHunger}
+
     WHERE PlayerPet.playerID = ${req.params.id} AND petID = ${req.params.petID}`;
     let query = db.query(sql, (err, result) => {
         if (err) {
@@ -301,6 +335,7 @@ app.get('/updatelastlogin/:email/:login', (req, res) => {
 
     })
 });
+
 
 
 /***** CREATING PLAYER DATA FOR A NEW PLAYER

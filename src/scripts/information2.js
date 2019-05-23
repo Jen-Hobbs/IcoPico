@@ -212,14 +212,6 @@ function getTaskList() {
 
 
 
-
-/*********************** UPDATING PLAYER DATA
-*****
-*****/
-
-/** Updates info in the TaskList table */
-function updateTaskList(newIDa, newIDb, newIDc) {
-
 	//console.log("updating TaskList using this data:", data);
 
 	//Ajax call to update info in TaskList table
@@ -268,44 +260,27 @@ function updateInventory(itemID, updatedQty) {
 		// if updatedQty is 1, we need to insert a new row in the database
 	} else if (updatedQty == 1) {
 
-		$.ajax({
-			url: "/insertinventory/" + playerID + "/"
-				+ itemID,
-			dataType: "json",
-			//contentType: 'application/json',
-			type: "GET",
-			port: "8000",
-			async: false,
-			success: function (data) {
-				inventoryInfo = data;
-				console.log(inventoryInfo);
-			},
-			error: function (jqXHR, textStatus, errorThrown) {
-				//console.log("ERROR:", jqXHR, textStatus, errorThrown);
-				console.log('error');
-			}
-		});
 
+/** Updates/deletes info in the Inventory table */
 
-		// if updatedQty is 0, we need to delete the row from database
-	} else {
-		$.ajax({
-			url: "/deleteinventory/" + playerID + "/" + itemID,
-			dataType: "json",
-			//contentType: 'application/json',
-			type: "GET",
-			port: "8000",
-			async: false,
-			success: function (data) {
-				inventoryInfo = data;
-				console.log(inventoryInfo);
-			},
-			error: function (jqXHR, textStatus, errorThrown) {
-				//console.log("ERROR:", jqXHR, textStatus, errorThrown);
-				console.log('error');
-			}
-		});
-	}
+function updateInventory(itemID, updatedQty) {
+  $.ajax({
+      url: "/updateinventory/" + playerID + "/"
+          + itemID + "/" + updatedQty,
+      dataType: "json",
+      //contentType: 'application/json',
+      type: "GET",
+      port: "8000",
+      async: false,
+      success: function (data) {
+          inventoryInfo = data;
+          console.log(inventoryInfo);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+          //console.log("ERROR:", jqXHR, textStatus, errorThrown);
+          console.log('error');
+      }
+  });
 }
 
 /** Update currency (money) */
@@ -327,42 +302,96 @@ function updateCurrency(newCurrency) {
 	});
 }
 
-/** Update currentHappiness */
-function updateCurrentHappiness(petID, newHappiness) {
-	//Ajax call to update currency
-	$.ajax({
-		url: "/updatecurrenthappiness/" + playerID + "/" + petID + "/" + newHappiness,
-		dataType: "json",
-		type: "GET",
-		async: false,
-		success: function (data) {
-			//playerInfo = JSON.parse(data);
-			//data[0] because there will always only be 1 tasklist per email
-			console.log(data);
-		},
-		error: function (jqXHR, textStatus, errorThrown) {
-			console.log("ERROR:", jqXHR, textStatus, errorThrown);
-		}
-	});
+//update recycling
+function updateRecycling(petID, newRecycling){
+  $.ajax({
+    url: "/updatecurrentrecycling/" + playerID + "/" + petID + "/" + newRecycling,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 tasklist per email
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+}
+//update recycling
+function updateHealth(petID, newHealth){
+  $.ajax({
+    url: "/updatecurrenthealth/" + playerID + "/" + petID + "/" + newHealth,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 tasklist per email
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+}
+//update utility
+function updateUtility(petID, newUtility){
+  $.ajax({
+    url: "/updatecurrentutility/" + playerID + "/" + petID + "/" + newUtility,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 tasklist per email
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+}
+//update currentHappiness
+function updateCurrentHappiness(petID, newHappiness)
+{
+  //Ajax call to update currency
+  $.ajax({
+    url: "/updatecurrenthappiness/" + playerID + "/" + petID + "/" + newHappiness,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 tasklist per email
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
 }
 
-/** Update currentHunger */
-function updateCurrentHunger(petID, newHunger) {
-	//Ajax call to update currency
-	$.ajax({
-		url: "/updatecurrenthunger/" + playerID + "/" + petID + "/" + newHunger,
-		dataType: "json",
-		type: "GET",
-		async: false,
-		success: function (data) {
-			//playerInfo = JSON.parse(data);
-			//data[0] because there will always only be 1 tasklist per email
-			console.log(data);
-		},
-		error: function (jqXHR, textStatus, errorThrown) {
-			console.log("ERROR:", jqXHR, textStatus, errorThrown);
-		}
-	});
+//update currentHunger
+function updateHunger(petID, newHunger)
+{
+  //Ajax call to update currency
+  $.ajax({
+    url: "/updatecurrenthunger/" + playerID + "/" + petID + "/" + newHunger,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 tasklist per email
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+
 }
 
 /** Update active pet */
@@ -400,25 +429,20 @@ function insertNewPlayerPet(petID) {
 
 /** Update lastLogin value */
 function updateLastLogin(email, lastLoginInfo) {
-	$.ajax({
-		url: "/updatelastlogin" + "/" + email + "/" + lastLoginInfo,
-		dataType: "json",
-		type: "GET",
-		async: false,
-		success: function (data) {
-			console.log(data);
-		},
-		error: function (jqXHR, textStatus, errorThrown) {
-			console.log("ERROR:", jqXHR, textStatus, errorThrown);
-		}
-	});
+  $.ajax({
+      url: "/updatelastlogin" + '/"' + email + '"/' + '"' + lastLoginInfo + '"',
+      dataType: "json",
+      type: "GET",
+      async: false,
+      success: function (data) {
+          console.log(data);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+          console.log("ERROR:", jqXHR, textStatus, errorThrown);
+      }
+  });
 }
 
-
-
-/*********************** CREATING DEFAULTS FOR A NEW PLAYER
-*****
-*****/
 
 /** Create a new account for a new player
  * and updates the corresponding player to the database
