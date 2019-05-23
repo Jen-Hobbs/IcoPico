@@ -217,6 +217,7 @@ app.get('/insertinventory/:id/:itemID/:itemQty', (req, res) => {
     // deleting row from the player's inventory
     let sqlA = `INSERT INTO Inventory(itemID, playerID, itemQty)
     VALUES(${req.params.itemID}, ${req.params.playerID}, ${req.params.itemQty})`;
+});
 
 // Update lastlogin (when player scrolls through pets)
 app.get('/updatelastlogin/:email/:login', (req, res) => {
