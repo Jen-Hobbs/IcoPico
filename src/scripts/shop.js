@@ -4,12 +4,7 @@ class Shop extends Phaser.Scene {
     }
     preload(){
       //emitter presets
-      var emitter = new Phaser.Events.EventEmitter()
-        .on("taskList", updateTaskList)
-        .on("inventory", updateInventory)
-        .on("currency", updateCurrency)
-        .on("happiness", updateCurrentHappiness)
-        .on("hunger", updateCurrentHunger);
+    
 
         this.load.image("menuShop", '../images/buttons/Other/menu.png');
         this.load.image('whiteCircle', '../images/icons/whiteCircle.png');

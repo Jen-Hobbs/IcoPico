@@ -58,7 +58,7 @@ function initGameInfo() {
   getPlayerInfo(playerEmail);
   getPlayerPet();
   getInventory();
-  getTaskList();
+  getTasks();
   getLastLogin(playerEmail);
   console.log(playerInfo);
 }
@@ -144,7 +144,7 @@ function getInventory()
     });
 }
   //Get info from TaskList table
-function getTaskList()
+function getTasks()
 {
     //Ajax call to get info from TaskList table
     $.ajax({
@@ -168,7 +168,7 @@ function getTaskList()
 //UPDATING TO DATABASE
 
 //update tasklist
-function updateTaskList(newIDa, newIDb, newIDc) {
+function updateTasks(newIDa, newIDb, newIDc) {
 
     //console.log("updating TaskList using this data:", data);
 
@@ -191,48 +191,27 @@ function updateTaskList(newIDa, newIDb, newIDc) {
     });
 }
 
-// Updates/deletes info in the Inventory table
+
+/** Updates/deletes info in the Inventory table */
+
 function updateInventory(itemID, updatedQty) {
-
-	// if updatedQty is not 0, just update existing row in database
-	if (updatedQty != 0) {
-		$.ajax({
-			url: "/updateinventory/" + playerID + "/"
-			 + itemID  + "/" + updatedQty,
-			dataType: "json",
-			//contentType: 'application/json',
-			type: "GET",
-			port: "8000",
-			async: false,
-			success: function(data) {
-				inventoryInfo = data;
-				console.log(inventoryInfo);
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-			  //console.log("ERROR:", jqXHR, textStatus, errorThrown);
-			  console.log('error');
-			}
-		});
-
-	// if updatedQty is 0, we need to delete the row from database
-	} else {
-		$.ajax({
-			url: "/deleteinventory/" + playerID + "/" + itemID,
-			dataType: "json",
-			//contentType: 'application/json',
-			type: "GET",
-			port: "8000",
-			async: false,
-			success: function(data) {
-				inventoryInfo = data;
-				console.log(inventoryInfo);
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-			  //console.log("ERROR:", jqXHR, textStatus, errorThrown);
-			  console.log('error');
-			}
-		});
-	}
+  $.ajax({
+      url: "/updateinventory/" + playerID + "/"
+          + itemID + "/" + updatedQty,
+      dataType: "json",
+      //contentType: 'application/json',
+      type: "GET",
+      port: "8000",
+      async: false,
+      success: function (data) {
+          inventoryInfo = data;
+          console.log(inventoryInfo);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+          //console.log("ERROR:", jqXHR, textStatus, errorThrown);
+          console.log('error');
+      }
+  });
 }
 
 //update currency (money)
@@ -254,7 +233,57 @@ function updateCurrency(newCurrency)
     }
   });
 }
-
+//update recycling
+function updateRecycling(petID, newRecycling){
+  $.ajax({
+    url: "/updatecurrentrecycling/" + playerID + "/" + petID + "/" + newRecycling,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 tasklist per email
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+}
+//update recycling
+function updateHealth(petID, newHealth){
+  $.ajax({
+    url: "/updatecurrenthealth/" + playerID + "/" + petID + "/" + newHealth,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 tasklist per email
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+}
+//update utility
+function updateUtility(petID, newUtility){
+  $.ajax({
+    url: "/updatecurrentutility/" + playerID + "/" + petID + "/" + newUtility,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function(data) {
+      //playerInfo = JSON.parse(data);
+      //data[0] because there will always only be 1 tasklist per email
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+}
 //update currentHappiness
 function updateCurrentHappiness(petID, newHappiness)
 {
@@ -276,11 +305,11 @@ function updateCurrentHappiness(petID, newHappiness)
 }
 
 //update currentHunger
-function updateCurrentHunger(petID, newHunger)
+function updateHunger(petID, newHunger)
 {
   //Ajax call to update currency
   $.ajax({
-    url: "/updatecurrenthappiness/" + playerID + "/" + petID + "/" + newHunger,
+    url: "/updatecurrenthunger/" + playerID + "/" + petID + "/" + newHunger,
     dataType: "json",
     type: "GET",
     async: false,
@@ -294,3 +323,54 @@ function updateCurrentHunger(petID, newHunger)
     }
   });
 }
+
+/** Update active pet */
+function updateActivePet(petID) {
+	$.ajax({
+		url: "/udpateactivepet" + playerID + "/"
+		+ petID,
+		dataType: "json",
+		type: "GET",
+		async: false,
+		success: function (data) {
+			console.log(data);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			console.log("ERROR:", jqXHR, textStatus, errorThrown);
+		}
+	});
+}
+
+/** Inserts new pet from shop */
+function insertNewPlayerPet(petID) {
+	$.ajax({
+		url: "/insertnewplayerpet" + "/" + playerID + "/" + petID,
+		dataType: "json",
+		type: "GET",
+		async: false,
+		success: function (data) {
+			console.log(data);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			console.log("ERROR:", jqXHR, textStatus, errorThrown);
+		}
+	});
+}
+
+/** Update lastLogin value */
+function updateLastLogin(email, lastLoginInfo) {
+  $.ajax({
+      url: "/updatelastlogin" + '/"' + email + '"/' + '"' + lastLoginInfo + '"',
+      dataType: "json",
+      type: "GET",
+      async: false,
+      success: function (data) {
+          console.log(data);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+          console.log("ERROR:", jqXHR, textStatus, errorThrown);
+      }
+  });
+}
+/////////////////////////////////////////////////////////////////
+//CREATING DEFAULTS FOR NEW PLAYER

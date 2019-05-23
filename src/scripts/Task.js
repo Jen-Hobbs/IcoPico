@@ -7,12 +7,8 @@ class Task extends Phaser.Scene {
 
   preload() {
     //emitter presets
-    var emitter = new Phaser.Events.EventEmitter()
-      .on("taskList", updateTaskList)
-      .on("inventory", updateInventory)
-      .on("currency", updateCurrency)
-      .on("happiness", updateCurrentHappiness)
-      .on("hunger", updateCurrentHunger);
+    
+
 
     //asset preload
     this.cameras.main.setBackgroundColor('#FF9999');
@@ -32,6 +28,19 @@ class Task extends Phaser.Scene {
   }
 
   create() {
+    this.emitter = new Phaser.Events.EventEmitter()
+    .on("taskList", updateTasks)
+    .on("inventory", updateInventory)
+    .on("currency", updateCurrency)
+    .on("happiness", updateCurrentHappiness)
+    .on("hunger", updateHunger)
+    .on("activePet", updateActivePet) 
+    .on("newPet", insertNewPlayerPet)
+    .on("lastLogin", updateLastLogin)
+    .on('utility', updateUtility)
+    .on('recycling', updateRecycling)
+    .on('health', updateHealth);
+
     console.log('tasks' + playerTasks);
     var pet = {};
     pet = this.add.sprite(this.scale.width * .85, this.scale.height * .85, pets.pet[(playerPetInfo[playerInfo.activePet].petID)].petName).setScale(2);
@@ -59,6 +68,7 @@ class Task extends Phaser.Scene {
       this.scene.run('ShowMenu');
       this.scene.bringToTop('ShowMenu');
     });
+    
     if (playerTasks != 0) {
       //Create dismiss task button
       var dismiss = this.add.sprite(this.scale.width / 2, this.scale.height - 80, "x")
@@ -159,12 +169,14 @@ class Task extends Phaser.Scene {
       * callback function for deleteTask button
       **/
     function deleteTask(rSprite) {
+
       console.log('deletTask');
       var i = rSprite.getData('rindex');
 
       //delete task from task_list at index
       playerTasks.splice(i, 1);
       updateTaskList();
+      this.emitter.emit("taskList", taskListInfo.taskIDa, taskListInfo.taskIDb, taskListInfo.taskIDc);
 
       //destroy whole task list
       for (var i = 0; i < CUR_NUM_TASKS; i++) {
@@ -229,6 +241,7 @@ class Task extends Phaser.Scene {
           playerTasks.splice(i, 1);
           updateTaskList();
           CUR_NUM_TASKS--;
+          this.emitter.emit("taskList", taskListInfo.taskIDa, taskListInfo.taskIDb, taskListInfo.taskIDc);
         }
       }
       //destroy whole task list
@@ -296,11 +309,13 @@ class Task extends Phaser.Scene {
     }
     else if (task_list.task[playerTasks[i]].icon == 'type4') {
       playerInfo.currency += 10;
+      this.emitter.emit("currency", playerInfo.currency);
+
     }
     else if (task_list.task[playerTasks[i]].icon == 'type5') {
       for (var n = 0; n < playerPetInfo.length; n++) {
         playerPetInfo[n].currentHappiness += 30;
-
+        this.emitter.emit("happiness", playerPetInfo[n].petID, playerPetInfo[n].currentHappiness);
       }
 
     }
@@ -308,14 +323,17 @@ class Task extends Phaser.Scene {
     if(task_list.task[playerTasks[i]].evolutionType == 'health'){
       playerPetInfo[playerInfo.activePet].health++;
       console.log('health' + playerPetInfo[playerInfo.activePet].health);
+      this.emitter.emit("health", playerPetInfo[playerInfo.activePet].petID, playerPetInfo[playerInfo.activePet].health);
     }
     else if(task_list.task[playerTasks[i]].evolutionType == 'utility'){
       playerPetInfo[playerInfo.activePet].utility++;
       console.log('utility' + playerPetInfo[playerInfo.activePet].utility);
+      this.emitter.emit("utility", playerPetInfo[playerInfo.activePet].petID, playerPetInfo[playerInfo.activePet].utility);
     }
     else if(task_list.task[playerTasks[i]].evolutionType == 'recycling'){
       playerPetInfo[playerInfo.activePet].recycling++;
       console.log('recycling' + playerPetInfo[playerInfo.activePet].recycling);
+      this.emitter.emit("recycling", playerPetInfo[playerInfo.activePet].petID, playerPetInfo[playerInfo.activePet].recycling);
     }
   }
   /**
@@ -328,6 +346,7 @@ class Task extends Phaser.Scene {
         if (foodTypes.food[inventoryInfo[i].itemID].type == name) {
           inventoryInfo[i].itemQty++;
           check++;
+          this.emitter.emit("inventory", inventoryInfo[i].itemID, inventoryInfo[i].itemQty);
         }
       }
       if (check == 0) {
