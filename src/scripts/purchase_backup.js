@@ -35,11 +35,7 @@ class Purchase extends Phaser.Scene {
         .on("inventory", updateInventory)
         .on("currency", updateCurrency)
         .on("happiness", updateCurrentHappiness)
-        .on("hunger", updateHunger)
-        .on("activePet", updateActivePet) 
-        .on("newPet", insertNewPlayerPet) 
-        .on("lastLogin", updateLastLogin);
-
+        .on("hunger", updateCurrentHunger);
 
         console.log("purchase" + this.info.petName);
         this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'backdrop');
@@ -56,7 +52,6 @@ class Purchase extends Phaser.Scene {
                     emitter.emit("currency", playerInfo.currency);
                     console.log("money left" + playerInfo.currency);
                     console.log("what is this" + this.info.petName);
-
                     var newPet = new Object();
                     //missing playerPetID
                     //no way to set petname
@@ -76,13 +71,6 @@ class Purchase extends Phaser.Scene {
                     newPet.recycling = 0;
                     newPet.utility = 0;
                     newPet.health = 0;
-                    //
-                    //
-                    //
-                    //
-                    //
-                    console.log('newpet');
-                    emitter.emit("newPet", newPet.petID);
                     playerPetInfo.push(newPet);
 //***need to emit new pet to database
                     console.log("pet added" + playerPetInfo);
@@ -119,35 +107,26 @@ class Purchase extends Phaser.Scene {
                         if(foodTypes.food[inventoryInfo[i].itemID].type == this.info.type){
                             inventoryInfo[i].itemQty++;
                             check++;
-                            //emit inventory food?
-                            emitter.emit("inventory", inventoryInfo[i].itemID, inventoryInfo[i].itemQty);
                         }
                     }
                     if(check == 0){
                         var stuff = {};
-                        for(var i =0; i < foodTypes.food.length; i++){
+                        for(var i = 0; i < foodTypes.food.length; i++){
                             if(foodTypes.food[i].type == this.info.type){
                                 stuff.itemID = i;
                             }
                         }
                         stuff.itemQty = 1;
                         stuff.playerID = playerInfo.playerID;
-                        //
-                        //
-                        //
-                        //
-                        //
-                        emitter.emit("inventory", stuff.itemID, stuff.itemQty);
+
+
                         //missing inventory id
                         inventoryInfo.push(stuff);
-                        //emit inventory food?
-                        
 
                         console.log(inventoryInfo);
                     }
-
                     //emit inventory
-
+                    emitter.emit("inventory", inventoryInfo.itemID, inventoryInfo.itemQty);
 
                     //information.push(this.info.petName);
                     //player.happiness.push(50);
