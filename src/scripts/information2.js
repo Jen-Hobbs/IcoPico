@@ -46,15 +46,9 @@ var inventoryInfo;
  **/
 var taskListInfo;
 var parameters;
+var check;
 ////////////////////////////////////////////////////////////////////////////////
-//testing new player stuff
-// parameters = new URLSearchParams(window.location.search);
-// playerEmail = parameters.get('email');
-// createAccount(playerEmail);
-// getPlayerInfo(playerEmail);
-// createDefaultInfo();
-
-initGameInfo();
+checkNewPlayer();
 ////////////////////////////////////////////////////////////////////////////////
 //GETTING FROM database
 
@@ -62,7 +56,8 @@ initGameInfo();
 function checkNewPlayer() {
   parameters = new URLSearchParams(window.location.search);
   playerEmail = parameters.get('email');
-  if(isNewPlayer(playerEmail)) {
+  isNewPlayer(playerEmail);
+  if(check == true) {
     console.log("new player");
     initNewPlayer();
   } else {
@@ -451,8 +446,9 @@ function createAccount(email) {
 function createDefaultInfo() {
 
 	// Creating default inventory
+  //item1
 	$.ajax({
-		url: "/createinventory/" + playerID,
+		url: "/createinventory/" + playerID + "/" + 1,
 		dataType: "json",
 		type: "GET",
 		async: false,
@@ -463,6 +459,33 @@ function createDefaultInfo() {
 			console.log("ERROR:", jqXHR, textStatus, errorThrown);
 		}
 	});
+  //item2
+  $.ajax({
+    url: "/createinventory/" + playerID + "/" + 2,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+
+  //item2
+  $.ajax({
+    url: "/createinventory/" + playerID + "/" + 2,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
 
 	// Creating default playerpet
 	$.ajax({
@@ -491,33 +514,6 @@ function createDefaultInfo() {
 			console.log("ERROR:", jqXHR, textStatus, errorThrown);
 		}
 	});
-
-  //add items 2 and 3
-  $.ajax({
-    url: "/insertinventory/" + playerID + "/" + 2 + "/" + 1,
-    dataType: "json",
-    type: "GET",
-    async: false,
-    success: function (data) {
-      console.log(data);
-    },
-    error: function (jqXHR, textStatus, errorThrown) {
-      console.log("ERROR:", jqXHR, textStatus, errorThrown);
-    }
-  });
-
-  $.ajax({
-    url: "/insertinventory/" + playerID + "/" + 3 + "/" + 1,
-    dataType: "json",
-    type: "GET",
-    async: false,
-    success: function (data) {
-      console.log(data);
-    },
-    error: function (jqXHR, textStatus, errorThrown) {
-      console.log("ERROR:", jqXHR, textStatus, errorThrown);
-    }
-  });
 
 }
 

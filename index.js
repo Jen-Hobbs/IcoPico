@@ -379,9 +379,9 @@ app.get('/createplayer/:email', (req, res) => {
 // This is different from /insertinventory/ request,
 // because a default item is given whenever a new player signs up
 // Precondition: playerID is required for this query to work properly
-app.get('/createinventory/:id', (req, res) => {
+app.get('/createinventory/:id/:itemID', (req, res) => {
     let sql = `INSERT INTO Inventory(playerID, itemID, itemQty)
-     VALUES(${req.params.id}, 1, 1)`;
+     VALUES(${req.params.id}, 1, ${req.params.itemID})`;
     let query = db.query(sql, (err, result) => {
         if (err) {
             return console.log('createinventory error: ' + err.message);
@@ -391,27 +391,27 @@ app.get('/createinventory/:id', (req, res) => {
         res.send(JSON.stringify(result));
     });
 
-    let sql2 = `INSERT INTO Inventory(playerID, itemID, itemQty)
-     VALUES(${req.params.id}, 2, 1)`;
-    let query2 = db.query(sql, (err, result) => {
-        if (err) {
-            return console.log('createinventory error: ' + err.message);
-        }
-        console.log('creating a new Inventory row success');
-        //console.log(JSON.parse(JSON.stringify(result)));
-        res.send(JSON.stringify(result));
-    });
+    // let sql2 = `INSERT INTO Inventory(playerID, itemID, itemQty)
+    //  VALUES(${req.params.id}, 2, 1)`;
+    // let query2 = db.query(sql, (err, result) => {
+    //     if (err) {
+    //         return console.log('createinventory error: ' + err.message);
+    //     }
+    //     console.log('creating a new Inventory row success');
+    //     //console.log(JSON.parse(JSON.stringify(result)));
+    //     res.send(JSON.stringify(result));
+    // });
 
-    let sql3 = `INSERT INTO Inventory(playerID, itemID, itemQty)
-     VALUES(${req.params.id}, 3, 1)`;
-    let query3 = db.query(sql, (err, result) => {
-        if (err) {
-            return console.log('createinventory error: ' + err.message);
-        }
-        console.log('creating a new Inventory row success');
-        //console.log(JSON.parse(JSON.stringify(result)));
-        res.send(JSON.stringify(result));
-    });
+    // let sql3 = `INSERT INTO Inventory(playerID, itemID, itemQty)
+    //  VALUES(${req.params.id}, 3, 1)`;
+    // let query3 = db.query(sql, (err, result) => {
+    //     if (err) {
+    //         return console.log('createinventory error: ' + err.message);
+    //     }
+    //     console.log('creating a new Inventory row success');
+    //     //console.log(JSON.parse(JSON.stringify(result)));
+    //     res.send(JSON.stringify(result));
+    // });
 });
 
 // Creates a row in the PlayerPet table, and sets a default pet
