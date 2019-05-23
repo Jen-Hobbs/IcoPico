@@ -33,11 +33,8 @@ class Purchase extends Phaser.Scene {
       var emitter = new Phaser.Events.EventEmitter()
         .on("inventory", updateInventory)
         .on("currency", updateCurrency)
-        .on("happiness", updateCurrentHappiness)
-        .on("hunger", updateHunger)
         .on("activePet", updateActivePet) 
-        .on("newPet", insertNewPlayerPet) 
-        .on("lastLogin", updateLastLogin);
+        .on("newPet", insertNewPlayerPet);
 
 
         console.log("purchase" + this.info.petName);

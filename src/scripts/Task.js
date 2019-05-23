@@ -33,7 +33,7 @@ class Task extends Phaser.Scene {
     .on("inventory", updateInventory)
     .on("currency", updateCurrency)
     .on("happiness", updateCurrentHappiness)
-    .on("hunger", updateHunger)
+    .on("hunger", updateHung)
     .on("activePet", updateActivePet) 
     .on("newPet", insertNewPlayerPet)
     .on("lastLogin", updateLastLogin)

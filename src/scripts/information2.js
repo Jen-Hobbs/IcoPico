@@ -335,7 +335,7 @@ function updateCurrentHappiness(petID, newHappiness)
 }
 
 //update currentHunger
-function updateHunger(petID, newHunger)
+function updateHung(petID, newHunger)
 {
   //Ajax call to update currency
   $.ajax({
