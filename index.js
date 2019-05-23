@@ -211,11 +211,11 @@ app.get('/deleteinventory/:id/:itemID', (req, res) => {
 });
 
 // Inserts a row in the Inventory table (when player buys a new item)
-app.get('/insertinventory/:id/:itemID', (req, res) => {
+app.get('/insertinventory/:id/:itemID/:itemQty', (req, res) => {
 
     // deleting row from the player's inventory
     let sqlA = `INSERT INTO Inventory(itemID, playerID, itemQty)
-    VALUES(${req.params.itemID}, ${req.params.playerID}, 1)`;
+    VALUES(${req.params.itemID}, ${req.params.playerID}, ${req.params.itemQty})`;
 
     let queryA = db.query(sqlA, (err, result) => {
         if (err) {
@@ -315,7 +315,7 @@ app.get('/createaccount/:email', (req, res) => {
     let sql =  `INSERT INTO Account(email) VALUES(${req.params.email})`;
     let query = db.query(sql, (err, result) => {
         if (err) {
-            return console.log('error: ' + err.message);
+            return console.log('createaccount error: ' + err.message);
         }
         console.log('creating a new Account row success');
         //console.log(JSON.parse(JSON.stringify(result)));
@@ -329,7 +329,7 @@ app.get('/createplayer/:email', (req, res) => {
     VALUES(${req.params.email}, 1, 1)`;
     let query = db.query(sql, (err, result) => {
         if (err) {
-            return console.log('error: ' + err.message);
+            return console.log('createplayererror: ' + err.message);
         }
         console.log('creating a new Player row success');
         //console.log(JSON.parse(JSON.stringify(result)));
@@ -340,13 +340,35 @@ app.get('/createplayer/:email', (req, res) => {
 // Creates a row in the Inventory table
 // This is different from /insertinventory/ request,
 // because a default item is given whenever a new player signs up
-// playerID is needed for this query
+// Precondition: playerID is required for this query to work properly
 app.get('/createinventory/:id', (req, res) => {
     let sql = `INSERT INTO Inventory(playerID, itemID, itemQty)
      VALUES(${req.params.id}, 1, 1)`;
     let query = db.query(sql, (err, result) => {
         if (err) {
-            return console.log('error: ' + err.message);
+            return console.log('createinventory error: ' + err.message);
+        }
+        console.log('creating a new Inventory row success');
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+
+    let sql2 = `INSERT INTO Inventory(playerID, itemID, itemQty)
+     VALUES(${req.params.id}, 2, 1)`;
+    let query2 = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('createinventory error: ' + err.message);
+        }
+        console.log('creating a new Inventory row success');
+        //console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+
+    let sql3 = `INSERT INTO Inventory(playerID, itemID, itemQty)
+     VALUES(${req.params.id}, 3, 1)`;
+    let query3 = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('createinventory error: ' + err.message);
         }
         console.log('creating a new Inventory row success');
         //console.log(JSON.parse(JSON.stringify(result)));
@@ -361,13 +383,14 @@ app.get('/createplayerpet/:id', (req, res) => {
 
     let query = db.query(sql, (err, result) => {
         if (err) {
-            return console.log('error: ' + err.message);
+            return console.log('createplayerpet error: ' + err.message);
         }
         console.log('creating a new PlayerPet row success');
         //console.log(JSON.parse(JSON.stringify(result)));
         res.send(JSON.stringify(result));
     });
 });
+
 
 
 // Creates a row in the TaskList table, and sets default tasks
@@ -377,7 +400,7 @@ app.get('/createtasklist/:id', (req, res) => {
 
     let query = db.query(sql, (err, result) => {
         if (err) {
-            return console.log('error: ' + err.message);
+            return console.log('createtasklist error: ' + err.message);
         }
         console.log('creating a new TaskList row success');
         //console.log(JSON.parse(JSON.stringify(result)));
@@ -386,6 +409,25 @@ app.get('/createtasklist/:id', (req, res) => {
 
 });
 
+
+/**************************** OTHER REQUESTS FOR DB
+*****
+*****/
+
+// Returns the corresponding row in the Account table that
+// has the given email.
+app.get('/checkaccount/:email', (req, res) => {
+    let sql = `SELECT * FROM Account WHERE email = ${req.params.email}`;
+
+    let query = db.query(sql, (err, result) => {
+        if (err) {
+            return console.log('checkaccount error: ' + err.message);
+        }
+        console.log(JSON.parse(JSON.stringify(result)));
+        res.send(JSON.stringify(result));
+    });
+
+});
 
 var server = app.listen(8080, function(){
     var port = server.address().port;
