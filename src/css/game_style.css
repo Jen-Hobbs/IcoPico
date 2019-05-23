@@ -129,7 +129,7 @@ canvas {
 }
 
 /* Desktop View */
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 740px) {
 
     /* Banner */
     #page_banner {
