@@ -31,7 +31,6 @@ class Purchase extends Phaser.Scene {
     }
     create() {
       var emitter = new Phaser.Events.EventEmitter()
-        .on("taskList", updateTaskList)
         .on("inventory", updateInventory)
         .on("currency", updateCurrency)
         .on("happiness", updateCurrentHappiness)
@@ -137,7 +136,7 @@ class Purchase extends Phaser.Scene {
                         //
                         //
                         //
-                        emitter.emit("inventory", stuff.itemID, stuff.itemQty);
+                        emitter.emit("insertInventory", stuff.itemID, stuff.itemQty);
                         //missing inventory id
                         inventoryInfo.push(stuff);
                         //emit inventory food?
