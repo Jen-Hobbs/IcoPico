@@ -45,15 +45,42 @@ var inventoryInfo;
     taskListID: 1 }
  **/
 var taskListInfo;
-
+var parameters;
 ////////////////////////////////////////////////////////////////////////////////
-initGameInfo();
-
+parameters = new URLSearchParams(window.location.search);
+playerEmail = parameters.get('email');
+createAccount(playerEmail);
+getPlayerInfo(playerEmail);
+createDefaultInfo();
 ////////////////////////////////////////////////////////////////////////////////
 //GETTING FROM database
 
+//check for new player
+function checkNewPlayer() {
+  parameters = new URLSearchParams(window.location.search);
+  playerEmail = parameters.get('email');
+  if(isNewPlayer(playerEmail)) {
+    console.log("new player");
+    initNewPlayer();
+  } else {
+    console.log("returning player");
+  }
+  initGameInfo();
+}
+
+//add new entries in database for new player
+function initNewPlayer() {
+  createAccount(playerEmail);
+  getPlayerInfo(playerEmail);
+  createDefaultInfo();
+  //add iitems 2 and 3
+
+  //createDefaultInfo();
+}
+
+//fetch game info
 function initGameInfo() {
-  var parameters = new URLSearchParams(window.location.search);
+  parameters = new URLSearchParams(window.location.search);
   playerEmail = parameters.get('email');
   getPlayerInfo(playerEmail);
   getPlayerPet();
@@ -374,3 +401,149 @@ function updateLastLogin(email, lastLoginInfo) {
 }
 /////////////////////////////////////////////////////////////////
 //CREATING DEFAULTS FOR NEW PLAYER
+/*********************** CREATING DEFAULTS FOR A NEW PLAYER
+*****
+*****/
+
+/** Create a new account for a new player
+ * and updates the corresponding player to the database
+ */
+function createAccount(email) {
+
+	// Creating a new account
+	$.ajax({
+		url: "/createaccount/" + "'" + email + "'",
+		dataType: "json",
+		type: "GET",
+		async: false,
+		success: function (data) {
+			console.log(data);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			console.log("ERROR:", jqXHR, textStatus, errorThrown);
+		}
+	});
+
+	// Creating a new player
+	$.ajax({
+		url: "/createplayer/" + "'" + email + "'",
+		dataType: "json",
+		type: "GET",
+		async: false,
+		success: function (data) {
+			console.log(data);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			console.log("ERROR:", jqXHR, textStatus, errorThrown);
+		}
+	});
+
+}
+
+/** Creates all the default info (inventory, playerpet,
+ * tasklist) for a new player.
+ *
+ * Precondition: playerID is required for this function to work.
+ */
+function createDefaultInfo() {
+
+	// Creating default inventory
+	$.ajax({
+		url: "/createinventory/" + playerID,
+		dataType: "json",
+		type: "GET",
+		async: false,
+		success: function (data) {
+			console.log(data);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			console.log("ERROR:", jqXHR, textStatus, errorThrown);
+		}
+	});
+
+	// Creating default playerpet
+	$.ajax({
+		url: "/createplayerpet/" + playerID,
+		dataType: "json",
+		type: "GET",
+		async: false,
+		success: function (data) {
+			console.log(data);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			console.log("ERROR:", jqXHR, textStatus, errorThrown);
+		}
+	});
+
+	// Creating default task list
+	$.ajax({
+		url: "/createtasklist/" + playerID,
+		dataType: "json",
+		type: "GET",
+		async: false,
+		success: function (data) {
+			console.log(data);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			console.log("ERROR:", jqXHR, textStatus, errorThrown);
+		}
+	});
+
+  //add items 2 and 3
+  $.ajax({
+    url: "/insertinventory/" + playerID + "/" + 2 + "/" + 1,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+
+  $.ajax({
+    url: "/insertinventory/" + playerID + "/" + 3 + "/" + 1,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+
+}
+
+/**  Checks if the player logging in is a new player or an
+ *	existing player by checking if their email is already on
+ *	the Account table.
+ *
+ * 	Returns true if player is new, and returns false otherwise.
+ */
+
+ function isNewPlayer(email) {
+
+     $.ajax({
+         url: "/checkaccount/" + "'" + email + "'",
+         dataType: "json",
+         type: "GET",
+         async: false,
+         success: function (data) { // player is already existing
+             console.log(data[0]);
+
+             if (data[0] == undefined) { // no data returned, meaning player is new
+                 check = true;
+             }
+             else {    // there is data returned, and player is not new
+                 check = false;
+             }
+         },
+         error: function (jqXHR, textStatus, errorThrown) {
+             console.log("ERROR:", jqXHR, textStatus, errorThrown);
+         }
+     });
+ }
