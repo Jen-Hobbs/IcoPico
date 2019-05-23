@@ -69,26 +69,31 @@ function initGameInfo() {
 /** This function grabs the user's initial info before the
  * game starts.
  */
-
+var check;
+var playerEmail;
 function initGameInfo() {
 	var parameters = new URLSearchParams(window.location.search);
 	playerEmail = parameters.get('email');
+	//console.log(playerEmail);
+	//console.log(check);
+	isNewPlayer(playerEmail);
 
-	var check = isNewPlayer('sample1@gmail.com');
-	if (check) { // if player is new, call the CREATE functions first.
+	//console.log(check);
+	if (check == true) { // if player is new, call the CREATE functions first.
 		console.log("New player!");
-		//createAccount(playerEmail);
-		//getPlayerInfo(playerInfo);
-		//createDefaultInfo();
+		createAccount(playerEmail);
+		getPlayerInfo(playerEmail);
+		//console.log(playerID);
+		createDefaultInfo();
 
-	} else { // if player is an existing player, call the GET functions
+	} else if (check == false) { // if player is an existing player, call the GET functions
 		console.log("Old player!");
-		//getPlayerInfo(playerEmail);
+		getPlayerInfo(playerEmail);
 	}
-	//getPlayerPet();
-	//getInventory();
-	//getTaskList();
-	//console.log(playerInfo);
+	getPlayerPet();
+	getInventory();
+	getTaskList();
+	console.log(playerInfo);
 }
 
 
@@ -519,12 +524,17 @@ function isNewPlayer(email) {
 		type: "GET",
 		async: false,
 		success: function (data) { // player is already existing
-			console.log(data);
-			return false;
+			console.log(data[0]);
+
+			if (data[0] == undefined) { // no data returned, meaning player is new
+				check = true;
+			}
+			else {	// there is data returned, and player is not new
+				check = false;
+			}
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log("ERROR:", jqXHR, textStatus, errorThrown);
-			return true;
 		}
 	});
 }
