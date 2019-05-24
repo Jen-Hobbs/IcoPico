@@ -9,7 +9,7 @@ class ShowMenu extends Phaser.Scene {
         console.log("init started data pased in " + this.runningScenes);
     }
     preload(){
-        this.load.image("menu", '../images/buttons/other/menu.png');
+        this.load.image("menu", '../images/buttons/Other/menu.png');
         this.load.image("buttonTask", '../images/buttons/scene_button/Task_Button.png');
         this.load.image('buttonShop', '../images/buttons/scene_button/Shopping_Button.png');
         this.load.image('buttonPethub', '../images/buttons/scene_button/PetHub_Button.png');
