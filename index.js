@@ -104,10 +104,6 @@ app.get('/src/scripts/shop.js', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'scripts', 'shop.js'));
 });
 
-app.get('/src/scripts/Purchase.js', (req, res) => {
-    res.sendFile(path.join(__dirname, 'src', 'scripts', 'Shops.js'));
-});
-
 app.get('/src/scripts/pethub.js', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'scripts', 'pethub.js'));
 });
@@ -121,7 +117,7 @@ app.get('/src/scripts/purchase.js', (req, res) => {
 });
 
 app.get('/src/scripts/setup-firebase.js', (req, res) => {
-    res.sendFile(path.join(__dirname, 'src', 'scripts', 'purchase.js'));
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'setup-firebase.js'));
 });
 
 app.get('/src/scripts/ShowMenu.js', (req, res) => {
