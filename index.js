@@ -7,7 +7,7 @@ const express = require('express');
 const mysql = require('mysql');
 const app = express();
 const path = require('path');
-const port= process.env.PORT || 8080;
+//const port= process.env.PORT || 8080;
 
 // Create connection
 const db = mysql.createConnection({
@@ -502,7 +502,7 @@ app.get('/checkaccount/:email', (req, res) => {
 
 });
 
-var server = app.listen(port, function(){
-    //var port = server.address().port;
+var server = app.listen(8080, function(){
+    var port = server.address().port;
     console.log("Server started at http://localhost:%s", port);
 });
