@@ -67,6 +67,73 @@ app.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'signup', 'signup.html'));
 });
 
+app.get('/src/scripts/ChoosePet.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'ChoosePet.js'));
+});
+
+app.get('/src/scripts/game.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'game.js'));
+});
+
+app.get('/src/scripts/home.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'home.js'));
+});
+
+app.get('/src/scripts/index.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'index.js'));
+});
+
+app.get('/src/scripts/information.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'index.js'));
+});
+
+app.get('/src/scripts/information2.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'index.js'));
+});
+
+app.get('/src/scripts/login.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'login.js'));
+});
+
+app.get('/src/scripts/movementOfItems.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'movementOfItems.js'));
+});
+
+app.get('/src/scripts/shop.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'shop.js'));
+});
+
+app.get('/src/scripts/pethub.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'pethub.js'));
+});
+
+app.get('/src/scripts/PethubOverlay.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'PethubOverlay.js'));
+});
+
+app.get('/src/scripts/purchase.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'purchase.js'));
+});
+
+app.get('/src/scripts/setup-firebase.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'setup-firebase.js'));
+});
+
+app.get('/src/scripts/ShowMenu.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'ShowMenu.js'));
+});
+
+app.get('/src/scripts/Task.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'Task.js'));
+});
+
+app.get('/src/scripts/test.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'test.js'));
+});
+
+app.get('/src/scripts/Time.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'scripts', 'Time.js'));
+});
 ///////////////////////////////////////////////////////////////////////////////
 //GETTING FROM DATABASE
 
