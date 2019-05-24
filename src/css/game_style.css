@@ -28,7 +28,7 @@ canvas {
 
 
 /* Phone Portrait */
-@media screen and (min-width: 0) {
+@media screen and (max-width: 376px) {
     #page_banner {
         width: 100%;
         padding: 0em;
@@ -170,7 +170,7 @@ canvas {
     #wrapper {
         float: none;
         width: fit-content;
-        height: 80%;
+        height: 90%;
         margin: 0 auto;
     }
 
@@ -180,15 +180,13 @@ canvas {
 
 }
 
-/* Phone Landscape */
-@media only screen and (min-width: 380px) and (max-width: 812px) and (min-height: 350px) and (max-height: 375px) and (orientation: landscape) {
+/* iPhone X Landscape */
+@media only screen and (min-device-width : 375px) and (max-device-width : 812px) and (-webkit-device-pixel-ratio : 3) and (orientation : landscape) {
     /* Tablet grid */
-    body{
+    body {
         display: grid;
         grid-template-columns: 30% 70%;
     }
-     
-
 
     /* Banner */
     #page_banner {
@@ -228,7 +226,172 @@ canvas {
     /* Game */
     #wrapper {
         width: 100%;
-        height:100%;
+        height: 100%;
+        margin: 0 auto;
+        float: right;
+    }
+
+    canvas {
+        margin-top: 0;
+    }
+}
+
+/* iPhone 6 Landscape*/
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+    body {
+        display: grid;
+        grid-template-columns: 30% 70%;
+    }
+
+    /* Banner */
+    #page_banner {
+        width: 100%;
+        padding: 0em;
+        box-shadow: 1px 2px 8px #888888;
+        float: left;
+    }
+
+    .colour_div {
+        width: 100%;
+        height: 3em;
+    }
+
+    /* Icons */
+    #logo_div {
+        position: absolute;
+        margin: 0;
+        width: 9em;
+        left: 1em;
+        top: 1em;
+    }
+
+    #logo_icon {
+        width: 30%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #logo_name {
+        width: 45%;
+        height: auto;
+        cursor: pointer;
+        padding-left: 1em;
+    }
+
+    /* Game */
+    #wrapper {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        float: right;
+    }
+
+    canvas {
+        margin-top: 0;
+    }
+}
+
+/* Galaxy 6 landscape*/
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 4) and (orientation: landscape) {
+     body {
+        display: grid;
+        grid-template-columns: 30% 70%;
+    }
+
+    /* Banner */
+    #page_banner {
+        width: 100%;
+        padding: 0em;
+        box-shadow: 1px 2px 8px #888888;
+        float: left;
+    }
+
+    .colour_div {
+        width: 100%;
+        height: 3em;
+    }
+
+    /* Icons */
+    #logo_div {
+        position: absolute;
+        margin: 0;
+        width: 9em;
+        left: 1em;
+        top: 1em;
+    }
+
+    #logo_icon {
+        width: 30%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #logo_name {
+        width: 45%;
+        height: auto;
+        cursor: pointer;
+        padding-left: 1em;
+    }
+
+    /* Game */
+    #wrapper {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        float: right;
+    }
+
+    canvas {
+        margin-top: 0;
+    }
+}
+
+/* Pixel Landscape */
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape) {
+    body {
+        display: grid;
+        grid-template-columns: 30% 70%;
+    }
+
+    /* Banner */
+    #page_banner {
+        width: 100%;
+        padding: 0em;
+        box-shadow: 1px 2px 8px #888888;
+        float: left;
+    }
+
+    .colour_div {
+        width: 100%;
+        height: 3em;
+    }
+
+    /* Icons */
+    #logo_div {
+        position: absolute;
+        margin: 0;
+        width: 9em;
+        left: 1em;
+        top: 1em;
+    }
+
+    #logo_icon {
+        width: 30%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #logo_name {
+        width: 45%;
+        height: auto;
+        cursor: pointer;
+        padding-left: 1em;
+    }
+
+    /* Game */
+    #wrapper {
+        width: 100%;
+        height: 100%;
         margin: 0 auto;
         float: right;
     }
