@@ -6,6 +6,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const app = express();
+const path = require('path');
 
 // Create connection
 const db = mysql.createConnection({
@@ -23,15 +24,48 @@ db.connect(function (err) {
     console.log("MySql connected...");
 });
 
-app.use(express.static('./'));
-app.use(express.static('src'));
-app.use('index.html', express.static('index.html'));
-app.use('/css', express.static(__dirname + '/src/css'));
-app.use('/scripts', express.static(__dirname + '/src/scripts'));
-app.use('/images', express.static(__dirname + '/src/images'));
-app.use('login.html', express.static('/src/login/login.html'));
-app.use('icopico.html', express.static('/src/icopico/icopico.html'));
-app.use('icopico.html', express.static('/src/icopicoPet/icopico.html'));
+//hi, if you add a page you need to add an app.use and app.get
+app.use('/', express.static('/'));
+app.use('/src/css', express.static(path.join(__dirname, 'src', 'css')));
+app.use('/src/scripts', express.static(path.join(__dirname, 'src', 'scripts')));
+app.use('/src/images', express.static(path.join(__dirname, 'src', 'images')));
+app.use('/src/icopico', express.static(path.join(__dirname, 'src', 'icopico')));
+app.use('/src/login', express.static(path.join(__dirname, 'src', 'login')));
+app.use('/src/signup', express.static(path.join(__dirname, 'src', 'signup')));
+app.use('/src/signup', express.static(path.join(__dirname, 'src', 'signup')));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname,'index.html'));
+});
+
+app.get('/index.html', (req, res) => {
+    res.sendFile(path.join(__dirname,'index.html'));
+});
+
+app.get('/aboutPage.html', (req, res) => {
+    res.sendFile(path.join(__dirname,'aboutPage.html'));
+});
+
+
+app.get('/src/icopico/icopico.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'icopico', 'icopico.html'));
+});
+
+app.get('/src/login/login.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'login', 'login.html'));
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'login', 'login.html'));
+});
+
+app.get('/src/signup/signup.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'signup', 'signup.html'));
+});
+
+app.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'signup', 'signup.html'));
+});
 
 ///////////////////////////////////////////////////////////////////////////////
 //GETTING FROM DATABASE
