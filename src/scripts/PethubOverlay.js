@@ -77,20 +77,8 @@ class PethubOverlay extends Phaser.Scene {
     }
     displayfood() {
 
-        var showfood = 0;
-        // for (var i = 0; i < player.food.length; i++) {
-        //     this.food[i] = this.add.sprite(this.scale.width * (.85 - (i * .10)), this.scale.height * .95, 'whiteCircle');
-        //     this.food[i].setInteractive();
-        //     this.food[i].name = i;
-        //     this.food[i].setVisible(false);
-        //     this.food[i].disableInteractive();
-        //     this.food[i].on('clicked', this.location, this);
-        //     this.food[i].on('pointerup', () => {
-        //         console.log("pointer up");
-        //     })
+        this.showfood = 0;
 
-
-        // }
         this.foodButtons = this.add.container(0, 0);
 
 
@@ -100,97 +88,90 @@ class PethubOverlay extends Phaser.Scene {
         this.foodButtons.add(this.white);
 
         this.white.on('pointerdown', () => {
-            if (showfood == 0) {
+            if (this.showfood == 0) {
                 this.yellow = this.add.sprite(this.scale.width * .90, this.scale.height * .90, 'yellowCircle');
-                this.food = [];
-                this.type = [];
-                this.amount = [];
-                for (var i = 0; i < inventoryInfo.length; i++) {
-                    if(inventoryInfo[i].itemQty != 0){
-                    this.food[i] = this.add.sprite(this.scale.width * (.78 - (i * .12)), this.scale.height * .90, 'whiteCircle');
-                    this.food[i].setInteractive();
-                    this.food[i].name = i;
-
-                    this.food[i].on('clicked', this.consume, this);
-                    this.amount[i] = this.add.text(this.scale.width * (.76 - (i * .12)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
-                    this.amount[i].alpha = .8;
-                    this.type[i] = this.add.sprite(this.scale.width * (.78 - (i * .12)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
-                    this.type[i].setScale(.7);
-                    }
-                }
-                console.log(this.type);
-                this.foodButtons.add(this.food);
-                this.foodButtons.add(this.type);
                 this.foodButtons.add(this.yellow);
-                this.foodButtons.add(this.amount);
-                showfood = 1;
+                this.showfood = 1;
+                this.addFood();
+                this.addAmount();
             }
             else {
                 this.foodButtons.remove(this.yellow);
-                showfood = 0;
+                this.showfood = 0;
                 this.foodButtons.remove(this.food);
                 this.foodButtons.remove(this.type);
                 this.foodButtons.remove(this.amount);
             }
         });
     }
+    addFood(){
+        this.food = [];
+        this.type = [];
+        var n = 0;
+        for (var i = 0; i < inventoryInfo.length; i++) {
+            if(inventoryInfo[i].itemQty > 0){
+            
+                this.food[n] = this.add.sprite(this.scale.width * (.78 - (n * .12)), this.scale.height * .90, 'whiteCircle');
+                this.food[n].setInteractive();
+                this.food[n].name = i;
+                this.food[n].on('clicked', this.consume, this);
+                this.type[n] = this.add.sprite(this.scale.width * (.78 - (n * .12)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
+                this.type[n].setScale(.7);
+            n++;
+            }
+        }
+        if(this.food.length > 0){
+            this.foodButtons.add(this.food); 
+            this.foodButtons.add(this.type);
+        }
 
+    }
+    addAmount(){
+        this.amount = [];
+        var n = 0;
+        for (var i = 0; i < inventoryInfo.length; i++) {
+            if(inventoryInfo[i].itemQty != 0){
+                this.amount[n] = this.add.text(this.scale.width * (.76 - (n * .12)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
+                this.amount[n].alpha = .8;
+                n++;
+            }
+        }
+        if(this.food.length > 0){
+            this.foodButtons.add(this.amount);
+        }
+    }
 
 
     consume(box) {
-        
 
         if (inventoryInfo[box.name].itemQty == 1) {
             //
             //
             //
             //possible to delete?
-            
+            inventoryInfo[box.name].itemQty--;
             this.emitter.emit("inventory", inventoryInfo[box.name].itemID, 0);
-            inventoryInfo.splice(box.name, 1);
             this.foodButtons.remove(this.food);
             this.foodButtons.remove(this.type);
-            this.food = [];
-            this.type = [];
-            for (var i = 0; i < inventoryInfo.length; i++) {
-                if(inventoryInfo[i].itemQty != 0){
-                    this.food[i] = this.add.sprite(this.scale.width * (.78 - (i * .12)), this.scale.height * .90, 'whiteCircle');
-                    this.type[i] = this.add.sprite(this.scale.width * (.78 - (i * .12)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
-                    this.type[i].setScale(.7);
-                    this.food[i].setInteractive();
-                    this.food[i].name = i;
-                    this.food[i].on('clicked', this.consume, this);
-                }
-
-            }
-            this.foodButtons.add(this.food);
-            this.foodButtons.add(this.type);
+            this.foodButtons.remove(this.amount);
+            this.addFood();
             
         }
         else{
             inventoryInfo[box.name].itemQty =inventoryInfo[box.name].itemQty-1;
             var item = inventoryInfo[box.name].itemID;
             var itemQty = inventoryInfo[box.name].itemQty;
+            this.foodButtons.remove(this.amount);
             console.log('item number' + item);
             console.log('item quantity' + itemQty);
             this.emitter.emit("inventory", item, itemQty);
         }
-        this.foodButtons.remove(this.amount);
-        this.amount = [];
-        for (var i = 0; i < inventoryInfo.length; i++) {
-            if(inventoryInfo[i].itemQty != 0){
-                this.amount[i] = this.add.text(this.scale.width * (.76 - (i * .12)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
-                this.amount[i].alpha = .8;
-            }
-        }
-        this.foodButtons.add(this.amount);
-        console.log(playerInfo.activePet);
-        console.log(playerPetInfo[playerInfo.activePet]);
+        this.addAmount();
+     
         playerPetInfo[playerInfo.activePet].currentHunger += 30;
-        console.log('new pet hunger' + playerPetInfo[playerInfo.activePet].currentHunger);
-        updateHunger = 1;
-        console.log('check hunger ' + updateHunger);
-        console.log(playerPetInfo[playerInfo.activePet].petID+ " " + playerPetInfo[playerInfo.activePet].currentHunger);
+    
+       // updateHunger = 1;
+     
         this.emitter.emit("hunger", playerPetInfo[playerInfo.activePet].petID, Math.floor(playerPetInfo[playerInfo.activePet].currentHunger));
         
     }
