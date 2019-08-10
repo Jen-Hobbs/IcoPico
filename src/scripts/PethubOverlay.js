@@ -10,10 +10,8 @@ class PethubOverlay extends Phaser.Scene {
         this.load.image("menuPet", '../images/buttons/Other/menu.png');
         this.load.image("task", '../images/buttons/pet_hub/task.png');
         this.load.image('food', '../images/food/donut.png');
-        console.log("hello world" + inventoryInfo.length);
         for (var i = 0; i < inventoryInfo.length; i++) {
-            console.log('check' + inventoryInfo[i].itemQty);
-            console.log(inventoryInfo[i].itemID);
+
             this.load.image('food' + inventoryInfo[i].itemID, "../images/food/" + foodTypes.food[inventoryInfo[i].itemID].type + '.png');
         };
         // this.load.image('food0',  "../images/food/icecream.png");
@@ -30,8 +28,6 @@ class PethubOverlay extends Phaser.Scene {
         .on("activePet", updateActivePet) 
         .on("newPet", insertNewPlayerPet)
         .on("lastLogin", updateLastLogin);
-
-        //console.log(foodTypes.food[0]);
         //menu button
         let menu = this.add.sprite(this.scale.width*.06, this.scale.height*.06, 'menuPet');
         menu.setInteractive();
@@ -162,8 +158,6 @@ class PethubOverlay extends Phaser.Scene {
             var item = inventoryInfo[box.name].itemID;
             var itemQty = inventoryInfo[box.name].itemQty;
             this.foodButtons.remove(this.amount);
-            console.log('item number' + item);
-            console.log('item quantity' + itemQty);
             this.emitter.emit("inventory", item, itemQty);
         }
         this.addAmount();

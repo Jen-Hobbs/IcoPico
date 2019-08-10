@@ -1,3 +1,5 @@
+// game startup configure game
+// TODO properally size game
 var config = {
 
     parent: 'wrapper',
@@ -15,7 +17,7 @@ var config = {
             debug: false
         }
     },
-    scene: [ShowMenu, Shop, Task, Purchase, Pethub, PethubOverlay, Time, UpdateDB, ChoosePet]
+    scene: [ShowMenu, Shop, Task, Purchase, Pethub, PethubOverlay, Time, ChoosePet]
 
 };
 

@@ -32,7 +32,6 @@ class Pethub extends Phaser.Scene {
      * sets up camera for multiple pets using arrows on screen to move between pets
      */
     create() {
-        console.log("active pet" + playerInfo.activePet);
         this.resetFood = 0;
         this.cameras.main.setBounds(0, 0, 800 * playerPetInfo.length, 400);
         this.cameras.main.setBackgroundColor('#aaa');
@@ -51,7 +50,6 @@ class Pethub extends Phaser.Scene {
                 var cam = this.cameras.main;
                 if (playerInfo.activePet < playerPetInfo.length - 1) {
                     playerInfo.activePet++;
-                    console.log(playerInfo.activePet);
                 }
                 else {
                     playerInfo.activePet = 0;
@@ -68,7 +66,6 @@ class Pethub extends Phaser.Scene {
                     playerInfo.activePet = playerPetInfo.length - 1;
                 }
                 else {
-                    console.log(playerInfo.activePet);
                     playerInfo.activePet--;
                 }
                 cam.centerOn(400 + 800 * playerInfo.activePet, 0);
@@ -97,12 +94,9 @@ class Pethub extends Phaser.Scene {
     update() {
         //update hunger
         if(updateHunger == 1){
-            console.log("hi" + this.pet[playerInfo.activePet].getIndexList());
-            //console.log(this.hungerBubble);
             this.pet[playerInfo.activePet].remove(this.hungerBubble[playerInfo.activePet]);
             this.pet[playerInfo.activePet].remove(this.hunger[playerInfo.activePet]);
             this.checkHunger(playerInfo.activePet, this.pet);
-
             updateHunger = 0;
         }
         //for happiness from tasks
@@ -115,8 +109,6 @@ class Pethub extends Phaser.Scene {
      * @param {pet object} pet
      */
     checkHappiness(i, pet) {
-        console.log('happiness');
-        console.log(playerPetInfo[i]);
         if (playerPetInfo[i].currentHappiness < 33) {
             this.sadBubble[i] = this.add.sprite(this.scale.width*.28, this.scale.height *.45, 'thought').setFlipX(true).setTint('0x875e5e');
             
@@ -139,10 +131,6 @@ class Pethub extends Phaser.Scene {
      * @param {pet object} pet
      */
     checkHunger(i, pet){
-        console.log('hunger');
-        console.log(playerPetInfo[i]);
-
-
         if (playerPetInfo[i].currentHunger < 33) {
             this.hungerBubble[i] = this.add.sprite(this.scale.width*.73, this.scale.height *.35, 'thought').setTint('0x875e5e');
             this.hunger[i] = this.add.sprite(this.scale.width*.71, this.scale.height *.27, 'hungry');

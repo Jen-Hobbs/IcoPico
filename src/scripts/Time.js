@@ -23,8 +23,6 @@ class Time extends Phaser.Scene {
           .on("activePet", updateActivePet)
           .on("newPet", insertNewPlayerPet)
           .on("lastLogin", updateLastLogin);
-
-        console.log('player tasks length' + playerTasks.length);
         this.updateLogin();
         this.setTaskList();
         this.newTask();
@@ -32,7 +30,6 @@ class Time extends Phaser.Scene {
         this.evolution();
         updateTaskList();
         this.time = this.timeCurrent;
-        console.log('player tasks length' + playerTasks.length);
         this.emitter.emit("taskList", taskListInfo.taskIDa, taskListInfo.taskIDb, taskListInfo.taskIDc);
     }
     /**
@@ -43,12 +40,9 @@ class Time extends Phaser.Scene {
           .on("lastLogin", updateLastLogin);
 
         this.timeCurrent = new Date();
-        emitter.emit("lastLogin", "sample1@gmail.com", this.timeCurrent.toISOString().slice(0, 19).replace('T', ' '));
-        //console.log("current time " + this.timeCurrent.getDate());
-        console.log('last login ' + lastLogin.lastLogin);
+        emitter.emit("lastLogin", this.timeCurrent.toISOString().slice(0, 19).replace('T', ' ')); //change to be on specific email
         this.time = new Date(lastLogin.lastLogin);
         this.changedTime = (this.timeCurrent.getTime() - this.time.getTime()) / 10800000;
-        console.log(this.changedTime);
     }
     /**
      * updates the hunger and happiness of the pet in relation to 3 hours from last login to current updates last login time
@@ -85,32 +79,33 @@ class Time extends Phaser.Scene {
         console.log('tasklist')
         console.log(taskListInfo);
         if(taskListInfo.taskIDa != null){
-            console.log('a added');
             playerTasks.push(taskListInfo.taskIDa);
         }
         if(taskListInfo.taskIDb != null){
-            console.log('b added');
             playerTasks.push(taskListInfo.taskIDb);
         }
         if(taskListInfo.taskIDc != null){
-            console.log('c added' + taskListInfo.taskIDc);
             playerTasks.push(taskListInfo.taskIDc);
         }
         console.log(playerTasks);
     }
     /**
      * update tasks to 3 if last login before midnight
+     * TODO: Make sure you dont get the same task maybe add in a probability to tasks? (done through hard coded task list)
      */
     newTask() {
-        console.log('new task');
         if (this.timeCurrent.getDate() != this.time.getDate()
             || this.timeCurrent.getMonth() != this.time.getMonth()
             || this.timeCurrent.getFullYear() != this.time.getFullYear()) {
-                console.log('time out of synch');
             while (playerTasks.length != 3) {
-                newTask = 1;
-                playerTasks[playerTasks.length] = Math.floor(Math.random() * (+10 - +1)) + +1;
-                console.log("random value" + playerTasks[playerTasks.length - 1]);
+                var determineTask = Math.floor(Math.random() * (+10 - +1)) + +1; //make dynamic
+                for(var i = 0; i < playerTasks.length; i++){
+                    if(determineTask == playerTasks[i]){
+                        i= 0;
+                        determineTask = Math.floor(Math.random() * (+10 - +1)) + +1; //make dynamic
+                    }
+                }
+                playerTasks[playerTasks.length] = determineTask
             }
         }
     }

@@ -12,7 +12,7 @@ var lastLogin;
  **/
 var playerInfo;
 var playerID;
-
+var emailInfo;
 /** PLAYERPET TABLE JSON FORMAT
  *[ { currentHappiness: 0
       currentHunger: 0
@@ -85,11 +85,12 @@ function initGameInfo() {
   getInventory();
   getTasks();
   getLastLogin(playerEmail);
-  console.log(playerInfo);
+//  console.log(playerInfo);
 }
 
 function getLastLogin(email)
 {
+  emailInfo = email;
   //Ajax call to get lastLogin from  table
   $.ajax({
     url: "/getlastlogin/" + "'" + email + "'",
@@ -122,7 +123,7 @@ function getPlayerInfo(email)
       //data[0] because there will always only be 1 playerInfo per email
       playerInfo = data[0];
       playerID = playerInfo.playerID;
-      console.log(playerInfo);
+//      console.log(playerInfo);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -142,7 +143,7 @@ function getPlayerPet()
     success: function(data) {
       //playerInfo = JSON.parse(data);
       playerPetInfo = data;
-      console.log(playerPetInfo);
+//      console.log(playerPetInfo);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -161,7 +162,7 @@ function getInventory()
       success: function(data) {
         //playerInfo = JSON.parse(data);
         inventoryInfo = data;
-        console.log(inventoryInfo);
+//        console.log(inventoryInfo);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -181,7 +182,7 @@ function getTasks()
         //playerInfo = JSON.parse(data);
         //data[0] because there will always only be 1 tasklist per email
         taskListInfo = data[0];
-        console.log(taskListInfo);
+//        console.log(taskListInfo);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -207,7 +208,7 @@ function updateTasks(newIDa, newIDb, newIDc) {
         async: false,
         success: function(data) {
             taskListInfo = data[0];
-            console.log(taskListInfo);
+//            console.log(taskListInfo);
         },
         error: function(jqXHR, textStatus, errorThrown) {
           //console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -230,7 +231,7 @@ function updateInventory(itemID, updatedQty) {
       async: false,
       success: function (data) {
           inventoryInfo = data;
-          console.log(inventoryInfo);
+//          console.log(inventoryInfo);
       },
       error: function (jqXHR, textStatus, errorThrown) {
           //console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -251,7 +252,7 @@ function updateCurrency(newCurrency)
     success: function(data) {
       //playerInfo = JSON.parse(data);
       //data[0] because there will always only be 1 tasklist per email
-      console.log(data);
+//      console.log(data);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -268,7 +269,7 @@ function updateRecycling(petID, newRecycling){
     success: function(data) {
       //playerInfo = JSON.parse(data);
       //data[0] because there will always only be 1 tasklist per email
-      console.log(data);
+//      console.log(data);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -285,7 +286,7 @@ function updateHealth(petID, newHealth){
     success: function(data) {
       //playerInfo = JSON.parse(data);
       //data[0] because there will always only be 1 tasklist per email
-      console.log(data);
+//      console.log(data);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -302,7 +303,7 @@ function updateUtility(petID, newUtility){
     success: function(data) {
       //playerInfo = JSON.parse(data);
       //data[0] because there will always only be 1 tasklist per email
-      console.log(data);
+//      console.log(data);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -321,7 +322,7 @@ function updateCurrentHappiness(petID, newHappiness)
     success: function(data) {
       //playerInfo = JSON.parse(data);
       //data[0] because there will always only be 1 tasklist per email
-      console.log(data);
+//      console.log(data);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -341,7 +342,7 @@ function updateHung(petID, newHunger)
     success: function(data) {
       //playerInfo = JSON.parse(data);
       //data[0] because there will always only be 1 tasklist per email
-      console.log(data);
+//      console.log(data);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -358,7 +359,7 @@ function updateActivePet(petID) {
 		type: "GET",
 		async: false,
 		success: function (data) {
-			console.log(data);
+//			console.log(data);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -374,7 +375,7 @@ function insertNewPlayerPet(petID) {
 		type: "GET",
 		async: false,
 		success: function (data) {
-			console.log(data);
+//			console.log(data);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -383,14 +384,15 @@ function insertNewPlayerPet(petID) {
 }
 
 /** Update lastLogin value */
-function updateLastLogin(email, lastLoginInfo) {
+function updateLastLogin(lastLoginInfo) {
   $.ajax({
-      url: "/updatelastlogin" + '/"' + email + '"/' + '"' + lastLoginInfo + '"',
+      url: "/updatelastlogin" + '/"' + emailInfo + '"/' + '"' + lastLoginInfo + '"',
       dataType: "json",
       type: "GET",
       async: false,
       success: function (data) {
-          console.log(data);
+        console.log("ajax last login sent");
+        console.log(data);
       },
       error: function (jqXHR, textStatus, errorThrown) {
           console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -415,7 +417,7 @@ function createAccount(email) {
 		type: "GET",
 		async: false,
 		success: function (data) {
-			console.log(data);
+//			console.log(data);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -429,7 +431,7 @@ function createAccount(email) {
 		type: "GET",
 		async: false,
 		success: function (data) {
-			console.log(data);
+//			console.log(data);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -453,7 +455,7 @@ function createDefaultInfo() {
 		type: "GET",
 		async: false,
 		success: function (data) {
-			console.log(data);
+//			console.log(data);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -466,7 +468,7 @@ function createDefaultInfo() {
     type: "GET",
     async: false,
     success: function (data) {
-      console.log(data);
+//      console.log(data);
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -480,7 +482,7 @@ function createDefaultInfo() {
     type: "GET",
     async: false,
     success: function (data) {
-      console.log(data);
+//      console.log(data);
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -494,7 +496,7 @@ function createDefaultInfo() {
 		type: "GET",
 		async: false,
 		success: function (data) {
-			console.log(data);
+//			console.log(data);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -508,7 +510,7 @@ function createDefaultInfo() {
 		type: "GET",
 		async: false,
 		success: function (data) {
-			console.log(data);
+//			console.log(data);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -532,7 +534,7 @@ function createDefaultInfo() {
          type: "GET",
          async: false,
          success: function (data) { // player is already existing
-             console.log(data[0]);
+//             console.log(data[0]);
 
              if (data[0] == undefined) { // no data returned, meaning player is new
                  check = true;
