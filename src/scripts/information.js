@@ -1,3 +1,4 @@
+console.log('information 1 loading');
 var updateHunger = 0; //used when we feed pet
 var runningScenes = [];
 var newTask = 0;

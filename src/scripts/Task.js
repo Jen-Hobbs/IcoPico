@@ -7,7 +7,7 @@ class Task extends Phaser.Scene {
 
   preload() {
     //emitter presets
-    
+    console.log("task script preload");
 
 
     //asset preload
@@ -28,6 +28,7 @@ class Task extends Phaser.Scene {
   }
 
   create() {
+    console.log("task script created");
     this.emitter = new Phaser.Events.EventEmitter()
     .on("taskList", updateTasks)
     .on("inventory", updateInventory)

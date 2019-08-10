@@ -14,6 +14,7 @@ class Time extends Phaser.Scene {
      * updates last time user logged in on create
      */
     create() {
+        console.log('time loading');
         this.emitter = new Phaser.Events.EventEmitter()
           .on("taskList", updateTasks)
           .on("inventory", updateInventory)

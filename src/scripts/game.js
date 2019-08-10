@@ -1,7 +1,8 @@
 // game startup configure game
 // TODO properally size game
+console.log('game loading');
 var config = {
-
+    
     parent: 'wrapper',
     scale: {
         mode: Phaser.Scale.FIT,
