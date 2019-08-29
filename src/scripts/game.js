@@ -19,7 +19,7 @@ var config = {
             debug: false
         }
     },
-    scene: [ShowMenu, Shop, Task, Purchase, Pethub, PethubOverlay, Time, ChoosePet]
+    scene: [Pethub, Shop, ShowMenu, Task, Purchase, Time, ChoosePet]
 
 };
 

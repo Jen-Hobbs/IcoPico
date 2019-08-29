@@ -1,5 +1,3 @@
-var CUR_NUM_TASKS = 3;
-
 class Task extends Phaser.Scene {
   constructor() {
     super({ key: "Task", active: false });
@@ -28,6 +26,7 @@ class Task extends Phaser.Scene {
   }
 
   create() {
+    var CUR_NUM_TASKS = playerTasks.length;
     console.log("task script created");
     this.emitter = new Phaser.Events.EventEmitter()
     .on("taskList", updateTasks)
@@ -83,6 +82,7 @@ class Task extends Phaser.Scene {
 
       //populate task list
       for (let i = 0; i < CUR_NUM_TASKS; i++) {
+        console.log("number of tasks " + CUR_NUM_TASKS);
         this.taskButtons[i] = this.add.container(this.scale.width / 2, 150 * i + 100);
         //background sprite
         var sprite = this.add.sprite(0, 0, 'task_new')

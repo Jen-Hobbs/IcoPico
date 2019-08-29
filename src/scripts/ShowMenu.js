@@ -30,9 +30,7 @@ class ShowMenu extends Phaser.Scene {
             console.log('pet');
             this.stopScenes();
             this.scene.run("Pethub");
-            this.scene.bringToTop("Pethub"); 
-            this.scene.run('PethubOverlay');
-            this.scene.bringToTop('PethubOverlay');      
+            this.scene.bringToTop("Pethub");  
             this.scene.stop('ShowMenu');      
         })
         let shop =  this.add.sprite(this.scale.width*.06, this.scale.height*.36, 'buttonShop');
