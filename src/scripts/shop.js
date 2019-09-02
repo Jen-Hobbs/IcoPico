@@ -24,17 +24,6 @@ class Shop extends Phaser.Scene {
     create(){
         this.cameras.main.setBackgroundColor('#65EAA2');
         this.textLayout();
-        let menu2 = this.add.sprite(this.scale.width*.06, this.scale.height*.06, 'menuShop');
-        menu2.setInteractive();
-        menu2.on('pointerdown', ()=> {
-            runningScenes = ['Shop', 'Purchase'];
-            console.log('click ' + runningScenes);
-            this.scene.run('ShowMenu', runningScenes);
-            this.scene.bringToTop('ShowMenu');
-        });
-        this.input.on('gameobjectup', function (pointer, gameObject) {
-            gameObject.emit('clicked', gameObject);
-        }, this);
         this.pets();
         this.food();
         this.updateMoneyBar();

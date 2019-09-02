@@ -60,14 +60,6 @@ class Task extends Phaser.Scene {
       .setOrigin(0.5)
       ;
 
-    //Create Menu Button
-    let menu = this.add.sprite(this.scale.width * .06, this.scale.height * .06, 'menuPet');
-    menu.setInteractive();
-    menu.on('pointerdown', () => {
-      runningScenes = ['Task'];
-      this.scene.run('ShowMenu');
-      this.scene.bringToTop('ShowMenu');
-    });
     
     if (playerTasks != 0) {
       //Create dismiss task button

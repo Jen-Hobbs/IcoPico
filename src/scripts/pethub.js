@@ -13,20 +13,23 @@ class Pethub extends Phaser.Scene {
         console.log('pethub loading');
 
         //.emit("sampleAjax", "sample1@gmail.com");
-
+        this.petName = [];
         for (var i = 0; i < playerPetInfo.length; i++) {
             this.load.image('pet' + i, '../images/pets/' + pets.pet[playerPetInfo[i].petID].petName + '.png');
         }
+       
         this.load.image('arrow', '../images/buttons/Other/arrow.png');
         this.load.image('backPet', '../images/Sad_Appartment.png');
         this.load.image('sad', '../images/buttons/pet_hub/sad.png');
         this.load.spritesheet("thought", '../images/icons/thoughtAnimate.png', { frameWidth: 280, frameHeight: 300 });
+        this.load.spritesheet("Shiny_Boi_Food", '../images/Shiny_Boi_Food/shiny_boi_consume.png', {frameWidth: 943, frameHeight: 470});
         this.load.image('hungry', '../images/buttons/pet_hub/hungry.png');
         this.hunger;
         this.hungerBubble;
         this.sad;
         this.sadBubble;
-        this.currentPet = 0;
+        this.pet;
+        this.currentPet = 0; //needs to be active pet
 
 
         this.load.image("whiteCircle", "../images/buttons/Other/white_circle.png");
@@ -54,38 +57,47 @@ class Pethub extends Phaser.Scene {
         .on("newPet", insertNewPlayerPet)
         .on("lastLogin", updateLastLogin);
 
-        this.pet;
+        
         var arrowR;
         var arrowL;
 
         this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'backPet'); //background
 
         this.pet = this.add.sprite(this.scale.width / 2, this.scale.height * .97, 'pet' + this.currentPet).setOrigin(0.5, 1); //addpet
+        //hungry bubble animation
         this.anims.create({
             key: 'hungry',
             frames: this.anims.generateFrameNumbers('thought', { frames:[0,1,2,3,4] }),
             frameRate: 1.8,
             repeat: 1
         });
+        //sad bubble animation
         this.anims.create({
             key: 'sad',
             frames: this.anims.generateFrameNumbers('thought', { frames:[0,1,2,3,5] }),
             frameRate: 1.8,
             repeat: 1
         });
+        //eating food animation initial pet start
+        this.anims.create({
+            key: 'eat',
+            frames: this.anims.generateFrameNumbers('Shiny_Boi_Food', {frames:[0,1,2,3,2,1,0]}),
+            frameRate: 9,
+            repeat: 0
+        });
+        
         //right arrow
         arrowR = this.add.sprite(this.scale.width * 0.95, this.scale.height / 2, 'arrow');
         arrowR.setInteractive();
         arrowR.on('pointerdown', () => {
-            if(this.currentPet < (playerPetInfo.length-1)){
-                this.currentPet++;
-            }
-            else{
-                this.currentPet = 0;
-            }
-            this.pet.setTexture('pet' + this.currentPet);
-            this.checkHunger(this.currentPet);
-            this.checkHappiness(this.currentPet);
+            this.tweens.add({
+                targets: this.pet,
+                x: 288,
+                ease: 'Linear',
+                duration: 2000,
+                onComplete: this.changePet,
+                callbackScope: this
+            });
         });
         //left arrow
         arrowL = this.add.sprite(this.scale.width * 0.04, this.scale.height / 2, 'arrow');
@@ -106,20 +118,6 @@ class Pethub extends Phaser.Scene {
         this.sadBubble = this.add.sprite(this.scale.width * .28, this.scale.height * .45)
         this.checkHunger(this.currentPet);
         this.checkHappiness(this.currentPet);
-
-        //menu button
-        let menu = this.add.sprite(this.scale.width*.06, this.scale.height*.06, 'menuPet');
-        menu.setInteractive();
-        menu.on('pointerdown', () => {
-            runningScenes = ['Pethub', 'PethubOverlay'];
-
-            this.scene.run('ShowMenu', runningScenes);
-            this.scene.bringToTop('ShowMenu');
-        });
-        this.input.on('gameobjectup', function (pointer, gameObject) {
-            gameObject.emit('clicked', gameObject);
-
-        }, this);
         this.displayfood();
         this.task();
     }
@@ -127,6 +125,24 @@ class Pethub extends Phaser.Scene {
      * update status of pet
      */
     update() {
+    }
+    changePet(){
+        console.log("completion of tween 1");
+            if(this.currentPet < (playerPetInfo.length-1)){
+                this.currentPet++;
+            }
+            else{
+                this.currentPet = 0;
+            }
+            this.pet.setTexture('pet' + this.currentPet);
+            this.checkHunger(this.currentPet);
+            this.checkHappiness(this.currentPet);
+            this.tweens.add({
+                targets: this.pet,
+                x: this.scale.width / 2,
+                duration: 3000,
+                ease: 'Linear'
+            });
     }
     /**
      * check happiness of the pet and create thought bubble corrisponding status
@@ -279,6 +295,7 @@ class Pethub extends Phaser.Scene {
         this.addAmount();
      
         playerPetInfo[playerInfo.activePet].currentHunger += 30;
+        this.pet.play("eat");
         console.log("current hunger of pet " + playerPetInfo[playerInfo.activePet].currentHunger);
         this.checkHunger(this.currentPet);
       
