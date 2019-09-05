@@ -8,6 +8,7 @@ class Purchase extends Phaser.Scene {
         console.log('init');
     }
     preload() {
+        console.log('puchase loaded');
         this.load.image('backdrop', '../images/icons/purchase_screen.png');
         this.load.image('purchase', '../images/buttons/Other/purchase_button.png');
         this.load.image('x', '../images/buttons/Other/x.png');

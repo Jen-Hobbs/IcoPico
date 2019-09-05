@@ -24,6 +24,9 @@ class Shop extends Phaser.Scene {
     create(){
         this.cameras.main.setBackgroundColor('#65EAA2');
         this.textLayout();
+        this.input.on('gameobjectup', function (pointer, gameObject) {
+            gameObject.emit('clicked', gameObject);
+        }, this);
         this.pets();
         this.food();
         this.updateMoneyBar();
