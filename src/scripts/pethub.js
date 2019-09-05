@@ -95,7 +95,7 @@ class Pethub extends Phaser.Scene {
                 x: 900,
                 y: 1700,
                 ease: 'Linear',
-                rotation: .2,
+                rotation: 3,
                 duration: 2000,
                 onComplete: this.changePet,
                 callbackScope: this
@@ -143,7 +143,7 @@ class Pethub extends Phaser.Scene {
             this.pet.y = 1700,
             this.tweens.add({
                 targets: this.pet,
-                rotation: -.2,
+                rotation: 0,
                 x: this.scale.width / 2,
                 y: this.scale.height * .97,
                 duration: 2000,
