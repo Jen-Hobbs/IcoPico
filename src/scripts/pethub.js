@@ -92,8 +92,10 @@ class Pethub extends Phaser.Scene {
         arrowR.on('pointerdown', () => {
             this.tweens.add({
                 targets: this.pet,
-                x: 288,
+                x: 900,
+                y: 1700,
                 ease: 'Linear',
+                rotation: .2,
                 duration: 2000,
                 onComplete: this.changePet,
                 callbackScope: this
@@ -137,10 +139,14 @@ class Pethub extends Phaser.Scene {
             this.pet.setTexture('pet' + this.currentPet);
             this.checkHunger(this.currentPet);
             this.checkHappiness(this.currentPet);
+            this.pet.x = -100,
+            this.pet.y = 1700,
             this.tweens.add({
                 targets: this.pet,
+                rotation: -.2,
                 x: this.scale.width / 2,
-                duration: 3000,
+                y: this.scale.height * .97,
+                duration: 2000,
                 ease: 'Linear'
             });
     }
