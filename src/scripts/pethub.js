@@ -121,6 +121,10 @@ class Pethub extends Phaser.Scene {
         this.sadBubble = this.add.sprite(this.scale.width * .28, this.scale.height * .45)
         this.checkHunger(this.currentPet);
         this.checkHappiness(this.currentPet);
+        this.input.on('gameobjectup', function (pointer, gameObject) {
+            gameObject.emit('clicked', gameObject);
+
+        }, this);
         this.displayfood();
         this.task();
     }
@@ -303,7 +307,7 @@ class Pethub extends Phaser.Scene {
 
 
     consume(box) {
-
+        console.log(box);
         if (inventoryInfo[box.name].itemQty == 1) {
             //
             //
