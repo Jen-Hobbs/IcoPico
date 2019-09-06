@@ -34,7 +34,6 @@ class Pethub extends Phaser.Scene {
 
         this.load.image("whiteCircle", "../images/buttons/Other/white_circle.png");
         this.load.image('yellowCircle', '../images/buttons/Other/yellow_circle.png');
-        this.load.image("menuPet", '../images/buttons/Other/menu.png');
         this.load.image("task", '../images/buttons/pet_hub/task.png');
         this.load.image('food', '../images/food/donut.png');
         for (var i = 0; i < inventoryInfo.length; i++) {
@@ -63,7 +62,7 @@ class Pethub extends Phaser.Scene {
 
         this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'backPet'); //background
 
-        this.pet = this.add.sprite(this.scale.width / 2, this.scale.height * .97, 'pet' + this.currentPet).setOrigin(0.5, 1); //addpet
+        this.pet = this.add.sprite(this.scale.width / 2, this.scale.height * .84, 'pet' + this.currentPet).setOrigin(0.5, 1).setScale(1.2); //addpet
         //hungry bubble animation
         this.anims.create({
             key: 'hungry',
@@ -115,7 +114,7 @@ class Pethub extends Phaser.Scene {
             this.checkHappiness(this.currentPet);
         });
         this.hungerBubble = this.add.sprite(this.scale.width * .73, this.scale.height * .35);
-        this.sadBubble = this.add.sprite(this.scale.width * .28, this.scale.height * .45)
+        this.sadBubble = this.add.sprite(this.scale.width * .28, this.scale.height * .45);
         this.checkHunger(this.currentPet);
         this.checkHappiness(this.currentPet);
         this.displayfood();
@@ -179,11 +178,12 @@ class Pethub extends Phaser.Scene {
             this.hungerBubble.setVisible(false);
         }
     }
-    
+    //task bubble
     task() {
         var taskActive;
         if (newTask == 0) {
-            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .72, 'whiteCircle')
+            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'whiteCircle')
+            .setScale(1.5)
             .setInteractive()
             .on('pointerdown', () => {
             this.scene.stop('Pethub');
@@ -191,7 +191,8 @@ class Pethub extends Phaser.Scene {
         });
         }
         else {
-            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .72, 'yellowCircle')
+            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'yellowCircle')
+            .setScale(1.5)
             .setInteractive()
             .on('pointerdown', () => {
             newTask = 0;
@@ -200,7 +201,7 @@ class Pethub extends Phaser.Scene {
 
         });
         }
-        this.add.sprite(this.scale.width * .90, this.scale.height * .73, 'task');
+        this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'task').setScale(1.5);
         
     }
     displayfood() {
@@ -210,14 +211,14 @@ class Pethub extends Phaser.Scene {
         this.foodButtons = this.add.container(0, 0);
 
 
-        this.white = this.add.sprite(this.scale.width * .90, this.scale.height * .90, 'whiteCircle');
-        this.food = this.add.sprite(this.scale.width * .90, this.scale.height *.9, 'food').setScale(.7);
+        this.white = this.add.sprite(this.scale.width * .90, this.scale.height * .90, 'whiteCircle').setScale(1.5);
+        this.food = this.add.sprite(this.scale.width * .90, this.scale.height *.9, 'food');
         this.white.setInteractive();
         this.foodButtons.add(this.white);
 
         this.white.on('pointerdown', () => {
             if (this.showfood == 0) {
-                this.yellow = this.add.sprite(this.scale.width * .90, this.scale.height * .90, 'yellowCircle');
+                this.yellow = this.add.sprite(this.scale.width * .90, this.scale.height * .90, 'yellowCircle').setScale(1.5);
                 this.foodButtons.add(this.yellow);
                 this.showfood = 1;
                 this.addFood();
@@ -239,11 +240,11 @@ class Pethub extends Phaser.Scene {
         for (var i = 0; i < inventoryInfo.length; i++) {
             if(inventoryInfo[i].itemQty > 0){
             
-                this.food[n] = this.add.sprite(this.scale.width * (.78 - (n * .12)), this.scale.height * .90, 'whiteCircle');
+                this.food[n] = this.add.sprite(this.scale.width * (.78 - (n * .12)), this.scale.height * .90, 'whiteCircle').setScale(1.5);
                 this.food[n].setInteractive();
                 this.food[n].name = i;
                 this.food[n].on('clicked', this.consume, this);
-                this.type[n] = this.add.sprite(this.scale.width * (.78 - (n * .12)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
+                this.type[n] = this.add.sprite(this.scale.width * (.78 - (n * .12)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID).setScale(1.5);
                 this.type[n].setScale(.7);
             n++;
             }
