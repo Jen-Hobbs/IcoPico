@@ -108,6 +108,7 @@ class Shop extends Phaser.Scene {
     }
     select(pets){
         // if(pets.getData('type') == 'pet'){
+            console.log("check");
             this.scene.pause('Shop');
             this.scene.run('Purchase', pets);
             this.scene.bringToTop('Purchase');

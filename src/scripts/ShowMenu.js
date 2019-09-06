@@ -15,7 +15,7 @@ class ShowMenu extends Phaser.Scene {
     create(){
         // let graphics = this.add.graphics();
         // graphics.fillStyle(0X38a081,.8).fillRect(0,0,100, this.scale.height);
-        let pet = this.add.sprite(this.scale.width*.06, this.scale.height*.21, 'buttonPethub');
+        let pet = this.add.sprite(this.scale.width*.15, this.scale.height*.06, 'buttonPethub').setScale(1.5);
         pet.setInteractive();
         pet.on('pointerdown', () =>{
             console.log('pet');
@@ -23,7 +23,7 @@ class ShowMenu extends Phaser.Scene {
             this.scene.run("Pethub");
             this.scene.bringToTop('ShowMenu');      
         })
-        let shop =  this.add.sprite(this.scale.width*.26, this.scale.height*.21, 'buttonShop');
+        let shop =  this.add.sprite(this.scale.width*.38, this.scale.height*.06, 'buttonShop').setScale(1.5);
         shop.setInteractive();
         shop.on('pointerdown', () =>{
             console.log('shop');
@@ -32,7 +32,7 @@ class ShowMenu extends Phaser.Scene {
             this.scene.bringToTop('ShowMenu');  
         })
 
-        let task =  this.add.sprite(this.scale.width*.46, this.scale.height*.21, 'buttonTask');
+        let task =  this.add.sprite(this.scale.width*.62, this.scale.height*.06, 'buttonTask').setScale(1.5);
         task.setInteractive();
         task.on('pointerdown', () =>{
             newTask = 0;
@@ -42,7 +42,7 @@ class ShowMenu extends Phaser.Scene {
             this.scene.bringToTop('ShowMenu'); 
         })
         
-        let logout = this.add.sprite(this.scale.width*.66, this.scale.height*.21, 'logout');
+        let logout = this.add.sprite(this.scale.width*.85, this.scale.height*.06, 'logout').setScale(1.5);
     }
     stopScenes(){
         console.log("stop scenes");
