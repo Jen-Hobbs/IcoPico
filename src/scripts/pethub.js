@@ -91,8 +91,10 @@ class Pethub extends Phaser.Scene {
         arrowR.on('pointerdown', () => {
             this.tweens.add({
                 targets: this.pet,
-                x: 288,
+                x: 900,
+                y: 1700,
                 ease: 'Linear',
+                rotation: 3,
                 duration: 2000,
                 onComplete: this.changePet,
                 callbackScope: this
@@ -103,15 +105,16 @@ class Pethub extends Phaser.Scene {
         arrowL.flipX = !arrowL.flipX;
         arrowL.setInteractive();
         arrowL.on('pointerdown', () => {
-            if(this.currentPet == 0){
-                this.currentPet = playerPetInfo.length-1;
-            }
-            else{
-                this.currentPet--;
-            }
-            this.pet.setTexture('pet' + this.currentPet);
-            this.checkHunger(this.currentPet);
-            this.checkHappiness(this.currentPet);
+            this.tweens.add({
+                targets: this.pet,
+                x: -100,
+                y: 1700,
+                ease: 'Linear',
+                rotation: 3,
+                duration: 2000,
+                onComplete: this.changePetL,
+                callbackScope: this
+            });
         });
         this.hungerBubble = this.add.sprite(this.scale.width * .73, this.scale.height * .35);
         this.sadBubble = this.add.sprite(this.scale.width * .28, this.scale.height * .45);
@@ -136,12 +139,41 @@ class Pethub extends Phaser.Scene {
             this.pet.setTexture('pet' + this.currentPet);
             this.checkHunger(this.currentPet);
             this.checkHappiness(this.currentPet);
+            this.pet.x = -100;
+            this.pet.y = 1700;
+            if(playerPetInfo.length != 1){
+                this.tweens.add({
+                    targets: this.pet,
+                    rotation: 0,
+                    x: this.scale.width / 2,
+                    y: this.scale.height * .97,
+                    duration: 2000,
+                    ease: 'Linear'
+                });
+            }
+    }
+    changePetL(){
+        if(this.currentPet == 0){
+            this.currentPet = playerPetInfo.length-1;
+        }
+        else{
+            this.currentPet--;
+        }
+        this.pet.setTexture('pet' + this.currentPet);
+        this.checkHunger(this.currentPet);
+        this.checkHappiness(this.currentPet);
+        this.pet.x = 900;
+        this.pet.y = 1700;
+        if(playerPetInfo.length != 1){
             this.tweens.add({
                 targets: this.pet,
+                rotation: 0,
                 x: this.scale.width / 2,
-                duration: 3000,
+                y: this.scale.height * .97,
+                duration: 2000,
                 ease: 'Linear'
             });
+        }
     }
     /**
      * check happiness of the pet and create thought bubble corrisponding status
