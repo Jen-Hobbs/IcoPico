@@ -150,7 +150,7 @@ class Pethub extends Phaser.Scene {
                     targets: this.pet,
                     rotation: 0,
                     x: this.scale.width / 2,
-                    y: this.scale.height * .97,
+                    y: this.scale.height * .85,
                     duration: 2000,
                     ease: 'Linear'
                 });
@@ -173,7 +173,7 @@ class Pethub extends Phaser.Scene {
                 targets: this.pet,
                 rotation: 0,
                 x: this.scale.width / 2,
-                y: this.scale.height * .97,
+                y: this.scale.height * .85,
                 duration: 2000,
                 ease: 'Linear'
             });
