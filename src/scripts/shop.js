@@ -33,22 +33,27 @@ class Shop extends Phaser.Scene {
     }
     updateMoneyBar(){
 
-        this.moneyBar = this.add.sprite(this.scale.width, this.scale.height *.10, 'moneyBar').setOrigin(1,0);
-        var money = this.add.text(this.scale.width*.82, this.scale.height *.123, playerInfo.currency, {fontFamily: 'serif', fontSize: 28}).setColor('black');
+        this.moneyBar = this.add.sprite(this.scale.width, this.scale.height *.20, 'moneyBar').setOrigin(1,0);
+        var money = this.add.text(this.scale.width*.82, this.scale.height *.20, playerInfo.currency, {fontFamily: 'serif', fontSize: 28}).setColor('black');
 
 
     }
     textLayout(){
-        var shop = this.add.text(this.scale.width/2, this.scale.height*.10, "Shop", {fontFamily: 'serif', fontSize: 64});
+        var shop = this.add.text(this.scale.width/2, this.scale.height*.18, "Shop", {fontFamily: 'serif', fontSize: 72});
         shop.setOrigin(0.5);
         shop.setColor('black');
         // let menu2 = this.add.sprite(this.scale.width*.04, this.scale.height*.05, 'menuShop');
-        var food = this.add.text(this.scale.width/2, this.scale.height*.2, "Food", {fontFamily: 'serif', fontSize: 32});
+        var food = this.add.text(this.scale.width/2, this.scale.height*.25, "Food", {fontFamily: 'serif', fontSize: 48});
         food.setOrigin(0.5);
         food.setColor('black');
-        var lineL1 = this.add.line(this.scale.width * .30, this.scale.height*.2, 0, 0, 200, 1, 0x000000);
-        var lineR1 = this.add.line(this.scale.width * .7, this.scale.height*.2, 0, 0, 200, 1, 0x000000);
-        var pets = this.add.text(this.scale.width/2, this.scale.height *.6, "Pets", {fontFamily: 'serif', fontSize: 32});
+        var lineL1 = this.add.line(this.scale.width * .30, this.scale.height*.25, 0, 0, 200, 1, 0x000000);
+        var lineR1 = this.add.line(this.scale.width * .7, this.scale.height*.25, 0, 0, 200, 1, 0x000000);
+        var toys = this.add.text(this.scale.width/2, this.scale.height*.45, "Toys", {fontFamily: 'serif', fontSize: 48});
+        toys.setOrigin(.5);
+        toys.setColor('black');
+        var lineL3 = this.add.line(this.scale.width * .30, this.scale.height*.45, 0, 0, 200, 1, 0x000000);
+        var lineR3 = this.add.line(this.scale.width * .7, this.scale.height*.45, 0, 0, 200, 1, 0x000000);
+        var pets = this.add.text(this.scale.width/2, this.scale.height *.6, "Pets", {fontFamily: 'serif', fontSize: 48});
         pets.setOrigin(0.5);
         pets.setColor('black');
         var lineL2 = this.add.line(this.scale.width * .30, this.scale.height*.6, 0, 0, 200, 1, 0x000000);
@@ -64,7 +69,7 @@ class Shop extends Phaser.Scene {
         //     white.on('clicked', this.select, this);
         // }
         for(var i = 0; i < 3; i++){
-            var petSelect = this.add.container(this.scale.width*(.2 + (i*.15)), this.scale.height *.75);
+            var petSelect = this.add.container(this.scale.width*(.2 + (i*.15)), this.scale.height *.95);
             petSelect.setSize(100, 200);
             petSelect.add(this.add.sprite(0,0, 'whiteCircle'));
             var pet = this.add.sprite(0,0, pets.pet[i].petName);
@@ -85,7 +90,7 @@ class Shop extends Phaser.Scene {
     }
     food(){
         for(var i = 0; i < foodTypes.food.length; i++){
-            var foodSelect = this.add.container(this.scale.width*(.2 + (i*.15)), this.scale.height *.35);
+            var foodSelect = this.add.container(this.scale.width*(.2 + (i*.15)), this.scale.height *.55);
             foodSelect.setSize(100, 200);
             foodSelect.add(this.add.sprite(0,0, 'whiteCircle'));
             var food = this.add.sprite(0,0, foodTypes.food[i].type);
