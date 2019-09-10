@@ -56,7 +56,7 @@ class Task extends Phaser.Scene {
     this.description = [];
 
     //Create "tasks done" text to show up when there are no more tasks
-    this.add.text(this.scale.width / 2, 200, "All tasks complete. Great job!", { fontFamily: 'Helvetica', fontSize: 25 })
+    this.add.text(this.scale.width / 2, 300, "All tasks complete. Great job!", { fontFamily: 'Helvetica', fontSize: 25 })
       .setOrigin(0.5)
       ;
 
@@ -75,7 +75,7 @@ class Task extends Phaser.Scene {
       //populate task list
       for (let i = 0; i < CUR_NUM_TASKS; i++) {
         console.log("number of tasks " + CUR_NUM_TASKS);
-        this.taskButtons[i] = this.add.container(this.scale.width / 2, 150 * i + 100);
+        this.taskButtons[i] = this.add.container(this.scale.width / 2, 250 * i + 300).setScale(1.7);
         //background sprite
         var sprite = this.add.sprite(0, 0, 'task_new')
           .setData('index', i)
@@ -181,7 +181,7 @@ class Task extends Phaser.Scene {
 
       //repopulate task list
       for (let i = 0; i < CUR_NUM_TASKS; i++) {
-        this.taskButtons[i] = this.add.container(this.scale.width / 2, 150 * i + 100);
+        this.taskButtons[i] =  this.add.container(this.scale.width / 2, 250 * i + 300).setScale(1.7);
 
         //background sprite
         var sprite = this.add.sprite(0, 0, 'task_new')
@@ -213,7 +213,7 @@ class Task extends Phaser.Scene {
           { fontFamily: 'Helvetica', fontSize: 14, wordWrap: { width: 265, useAdvancedWrap: true } })
           .setColor('black');
 
-        this.taskButtons[i] = this.add.container(this.scale.width / 2, 150 * i + 200);
+        this.taskButtons[i] =  this.add.container(this.scale.width / 2, 250 * i + 300).setScale(1.7);
         this.taskButtons[i].add([sprite, new_task, this.icon[i], this.title[i], this.description[i]]);
       }//end for
 
@@ -244,7 +244,7 @@ class Task extends Phaser.Scene {
 
       //repopulate task list
       for (let i = 0; i < CUR_NUM_TASKS; i++) {
-        this.taskButtons[i] = this.add.container(this.scale.width / 2, 150 * i + 200);
+        this.taskButtons[i] =  this.add.container(this.scale.width / 2, 250 * i + 300).setScale(1.7);
 
         //background sprite
         var sprite = this.add.sprite(0, 0, 'task_new')
@@ -276,7 +276,7 @@ class Task extends Phaser.Scene {
           { fontFamily: 'Helvetica', fontSize: 14, wordWrap: { width: 265, useAdvancedWrap: true } })
           .setColor('black');
 
-        this.taskButtons[i] = this.add.container(this.scale.width / 2, 150 * i + 200);
+        this.taskButtons[i] =  this.add.container(this.scale.width / 2, 250 * i + 300).setScale(1.7);
         this.taskButtons[i].add([sprite, new_task, this.icon[i], this.title[i], this.description[i]]);
       }//end for
 

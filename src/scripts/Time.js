@@ -43,6 +43,8 @@ class Time extends Phaser.Scene {
         this.timeCurrent = new Date();
         emitter.emit("lastLogin", this.timeCurrent.toISOString().slice(0, 19).replace('T', ' ')); //change to be on specific email
         this.time = new Date(lastLogin.lastLogin);
+        console.log(this.time);
+        console.log(this.timeCurrent);
         this.changedTime = (this.timeCurrent.getTime() - this.time.getTime()) / 10800000;
     }
     /**
@@ -52,6 +54,7 @@ class Time extends Phaser.Scene {
         for (var i = 0; i < playerPetInfo.length; i++) {
             console.log("old happiness" + playerPetInfo[i].currentHappiness);
             console.log("old hunger" + playerPetInfo[i].currentHunger);
+            console.log(this.changedTime);
             playerPetInfo[i].currentHappiness -= this.changedTime;
             playerPetInfo[i].currentHunger -= this.changedTime;
             //
