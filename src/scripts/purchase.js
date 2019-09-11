@@ -39,7 +39,7 @@ class Purchase extends Phaser.Scene {
 
 
         console.log("purchase" + this.info.petName);
-        this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'backdrop');
+        this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'backdrop').setScale(1.5);
         var purchase = this.add.sprite(this.scale.width * .60, this.scale.height * .59, 'purchase');
         purchase.setInteractive();
         if (this.type == 'pet') {
