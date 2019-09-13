@@ -1,7 +1,12 @@
-html, body {
-    height: 100%;
+@import url('https://fonts.googleapis.com/css?family=Pompiere&display=swap');
+
+html,
+body {
+    width: 100%;
     margin: 0;
     background-color: #FFD465;
+    font-family: 'Pompiere', cursive;
+
 }
 
 #container {
@@ -11,827 +16,328 @@ html, body {
     font-family: 'Pompiere', cursive;
 }
 
-#top_box {
-    width: 100%;
-    height: 33%;
+#box_div {
+    filter: drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.37));
 }
 
-#title {
-    text-align: center;
-    color: white;
-    font-size: 100px;
-    position: absolute;
-    margin: 5%;
-    filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.45));
-}
-
-#banner {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    width: 100%;
-    height: 60%;
-    padding-top: 4%;
-    box-shadow: 0px 10px 15px rgba(0,0,0,0.37);
-}
-
-#banner_top {
-    grid-row: 1;
-    background-color: #65EAA2;
-    width: 100%;
-}
-
-#banner_middle {
-    grid-row: 2;
+#banner_pink {
     background-color: #FF9999;
-    width: 100%;
-    height: auto;
 }
 
-#banner_bottom {
-    grid-row: 3;
-    background-color: #65EAA2;
-    width: 100%;
-    height: auto;
-}
 
-#mid_box {
-    display: grid;
-    width: 80%;
-    height: 40%;
-    grid-template-columns: 1fr 3fr;
-    margin: 5% 0 0 10%;
-}
+/* Phone Portrait */
+@media screen and (min-width: 0) {
 
-#icopico_logo {
-    object-fit: cover;
-    max-height: 110%;
-    width: auto;
-    margin: -15px 0px 0px -15px;
-    filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
-}
-
-#game_description {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 35px;
-    text-align: justify;
-    margin: 0 2% 0 2%;
-    padding: 0 7% 0 7%;
-    color: white;
-    background-color: rgb(80, 175, 80);
-    filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
-}
-
-#mid_box2 {
-    display: grid;
-    width: 80%;
-    height: 60%;
-    background-color: white;
-    margin: 7% 0 0 10%;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
-}
-
-#play_guide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    grid-column: span 4;
-    font-size: 50px;
-}
-
-.game_image0 {
-    grid-column: 1;
-    grid-row: span 2;
-    border: 2px solid black;
-    width: 80%;
-    max-width: 100%;
-    height: auto;
-    margin: 0 0 0 9%;
-    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
-}
-
-.game_image1 {
-    grid-column: 2;
-    grid-row: span 2;
-    border: 2px solid black;
-    width: 80%;
-    max-width: 100%;
-    height: auto;
-    margin: 0 0 0 9%;
-    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
-}
-
-.game_image2 {
-    grid-column: 3;
-    grid-row: span 2;
-    border: 2px solid black;
-    width: 80%;
-    max-width: 100%;
-    height: auto;
-    margin: 0 0 0 9%;
-    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
-}
-
-.game_image3 {
-    grid-column: 4;
-    grid-row: span 2;
-    border: 2px solid black;
-    width: 80%;
-    max-width: 100%;
-    height: auto;
-    margin: 0 0 0 9%;
-    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
-}
-
-.game_image0:hover, .game_image1:hover, .game_image2:hover, .game_image3:hover {
-    border: 2px yellow solid;
-    filter: drop-shadow(5px 5px 10px rgba(240, 160, 40, 0.5));
-}
-
-.game_instruction0 {
-    font-size: 20px;
-    text-align: justify;
-    padding: 10%;
-}
-
-.game_instruction1 {
-    font-size: 20px;
-    text-align: justify;
-    padding: 10%;
-}
-
-.game_instruction2 {
-    font-size: 20px;
-    text-align: justify;
-    padding: 10%;
-}
-
-.game_instruction3 {
-    font-size: 20px;
-    text-align: justify;
-    padding: 10%;
-}
-
-#bot_box {
-    display: grid;
-    width: 80%;
-    height: 80%;
-    margin: 8% 0 0 10%;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 1.5fr 1fr 3fr;
-    grid-column-gap: 2%;
-    filter: drop-shadow(5px 10px 5px rgba(0, 0, 0, 0.2));
-}
-
-.jen_icon {
-    grid-row: 1;
-    grid-column: 1;
-    object-fit: cover;
-    width: 100%;
-    max-height: 100%;
-}
-
-.joa_icon {
-    grid-row: 1;
-    grid-column: 2;
-    object-fit: cover;
-    width: 100%;
-    max-height: 100%;
-}
-
-.lou_icon {
-    grid-row: 1;
-    grid-column: 3;
-    object-fit: cover;
-    width: 100%;
-    max-height: 100%;
-}
-
-.mik_icon {
-    grid-row: 1;
-    grid-column: 4;
-    object-fit: cover;
-    width: 100%;
-    max-height: 100%;
-}
-
-.nic_icon {
-    grid-row: 1;
-    grid-column: 5;
-    object-fit: cover;
-    width: 100%;
-    max-height: 100%;
-}
-
-.jen_icon:hover, .joa_icon:hover, .lou_icon:hover, .mik_icon:hover, .nic_icon:hover {
-    width: 110%;
-    margin-top: -5%;
-    margin-left: -5%;
-    margin-right: -5%;
-}
-
-b {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Indie Flower', cursive;
-    color: #65EAA2;
-    font-size: 35px;
-    text-align: center;
-    background-color: white;
-}
-
-.jen_desc {
-    grid-row: 3;
-    grid-column: 1;
-    background-color: white;
-    height: 100%;
-    padding: 10%;
-    font-size: 20px;
-    text-align: justify;
-}
-
-.joa_desc {
-    grid-row: 3;
-    grid-column: 2;
-    background-color: white;
-    height: 100%;
-    padding: 10%;
-    font-size: 20px;
-    text-align: justify;
-}
-
-.lou_desc {
-    grid-row: 3;
-    grid-column: 3;
-    background-color: white;
-    height: 100%;
-    padding: 10%;
-    font-size: 20px;
-    text-align: justify;
-}
-
-.mik_desc {
-    grid-row: 3;
-    grid-column: 4;
-    background-color: white;
-    height: 100%;
-    padding: 10%;
-    font-size: 20px;
-    text-align: justify;
-}
-
-.nic_desc {
-    grid-row: 3;
-    grid-column: 5;
-    background-color: white;
-    height: 100%;
-    padding: 10%;
-    font-size: 20px;
-    text-align: justify;
-}
-
-#backButton {
-    text-align: center;
-    color: white;
-    font-size: 40px;
-    font-family: 'Pompiere', cursive;
-    width: 10%;
-    margin: 7% 0 1% 45%;
-    height: auto;
-    border-radius: 8%;
-    background-color: #FF9999;
-    box-shadow: 10px 10px 15px rgba(0,0,0,0.37);
-}
-
-/*
-CSS Media query layout for mobile
-*/ 
-@media only screen and (min-width: 320px) {
-
-
-}
-
-/*
-CSS Media query layout for tablets
-*/
-@media only screen and (min-width: 760px) {
-   
-}
-
-/*
-CSS Media query layout for laptops
-*/ 
-@media only screen and (min-width: 1020px) {
-    #top_box {
-        width: 100%;
-        height: 33%;
-    }
-    
-    #title {
-        text-align: center;
-        color: white;
-        font-size: 110px;
+    /* Logo */
+    #logo_div {
         position: absolute;
-        margin: 4%;
-        filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.45));
+        width: 16em;
+        height: 10em;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        top: 2em;
+        /* background-color: brown; */
     }
-    
-    #banner {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(3, 1fr);
+
+    #title_icon {
+        position: absolute;
+        width: 5em;
+        height: auto;
+        top: 2.2em;
+        cursor: pointer;
+    }
+
+    #title_logo {
+        width: 10em;
+        height: auto;
+        filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
+        float: right;
+        cursor: pointer;
+    }
+
+    /* Banner */
+    #banner_div {
+        margin-top: 3em;
+    }
+
+    .banner {
         width: 100%;
-        height: 60%;
-        padding-top: 4%;
-        box-shadow: 0px 10px 15px rgba(0,0,0,0.37);
-    }
-    
-    #banner_top {
-        grid-row: 1;
+        height: 50px;
         background-color: #65EAA2;
-        width: 100%;
     }
-    
-    #banner_middle {
-        grid-row: 2;
-        background-color: #FF9999;
-        width: 100%;
-        height: auto;
-    }
-    
-    #banner_bottom {
-        grid-row: 3;
-        background-color: #65EAA2;
-        width: 100%;
-        height: auto;
-    }
-    
-    #mid_box {
-        display: grid;
-        width: 80%;
-        height: 60%;
-        grid-template-columns: 1fr 3fr;
-        margin: 5% 0 5% 10%;
-    }
-    
-    #icopico_logo {
-        object-fit: cover;
-        max-height: 110%;
-        width: auto;
-        margin: -15px 0px 0px -15px;
-        filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
-    }
-    
-    #game_description {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 35px;
-        text-align: justify;
-        margin: 0 0% 0 5%;
-        padding: 8%;
-        color: white;
-        background-color: rgb(80, 175, 80);
-        filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
-    }
-    
-    #mid_box2 {
-        display: grid;
-        width: 100%;
-        height: 60%;
-        background-color: white;
-        margin: 10% 0 0 0;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(4, 1fr);
-        filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
-    }
-    
-    #play_guide {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        grid-column: span 4;
-        font-size: 50px;
-    }
-    
-    .game_image0 {
-        grid-column: 1;
-        grid-row: span 2;
-        border: 2px solid black;
-        width: 80%;
-        max-width: 100%;
-        height: auto;
-        margin: 0 0 0 9%;
-        filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
-    }
-    
-    .game_image1 {
-        grid-column: 2;
-        grid-row: span 2;
-        border: 2px solid black;
-        width: 80%;
-        max-width: 100%;
-        height: auto;
-        margin: 0 0 0 9%;
-        filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
-    }
-    
-    .game_image2 {
-        grid-column: 3;
-        grid-row: span 2;
-        border: 2px solid black;
-        width: 80%;
-        max-width: 100%;
-        height: auto;
-        margin: 0 0 0 9%;
-        filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
-    }
-    
-    .game_image3 {
-        grid-column: 4;
-        grid-row: span 2;
-        width: 80%;
-        max-width: 100%;
-        height: auto;
-        margin: 0 0 0 9%;
-    }
-    
-    .game_image0:hover, .game_image1:hover, .game_image2:hover, .game_image3:hover {
-        border: 2px yellow solid;
-    }
-    
-    .game_instruction0 {
-        padding: 10%;
-    }
-    
-    .game_instruction1 {
-        padding: 10%;
-    }
-    
-    .game_instruction2 {
-        padding: 10%;
-    }
-    
-    .game_instruction3 {
-        padding: 10%;
-    }
-    
-    #bot_box {
-        width: 90%;
-        height: 120%;
-        margin: 8% 0 0 5%;
-        grid-template-columns: 1fr 1fr 3fr;
-        grid-template-rows: repeat(5, 1fr);
-        grid-column-gap: 0%;
-        grid-row-gap: 2%;
-    }
-    
-    .jen_icon {
-        grid-row: 1;
-        grid-column: 2;
-        width: 105%;
-        max-height: 100%;
-    }
-    
-    .joa_icon {
-        grid-row: 2;
-        grid-column: 2;
-        width: 100%;
-        max-height: 100%;
-    }
-    
-    .lou_icon {
-        grid-row: 3;
-        grid-column: 2;
-        width: 100%;
-        max-height: 100%;
-    }
-    
-    .mik_icon {
-        grid-row: 4;
-        grid-column: 2;
-        width: 100%;
-        max-height: 100%;
-    }
-    
-    .nic_icon {
-        grid-row: 5;
-        grid-column: 2;
-        width: 100%;
-        max-height: 100%;
-    }
-    
-    .jen_icon:hover, .joa_icon:hover, .lou_icon:hover, .mik_icon:hover, .nic_icon:hover {
-        width: 110%;
-        margin-top: -5%;
-        margin-left: -5%;
-        margin-right: -5%;
-    }
-    
-    b {
+
+    /* What is Icopico? */
+    .section_title {
         font-size: 30px;
-        word-spacing: 20px;
+        color: white;
+        text-align: center;
+        background-color: #FF9999;
+        padding: .5em;
+        filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.45));
     }
-    
-    .jen_desc {
-        grid-row: 1;
-        grid-column: 3;
-        height: 89%;
-        padding: 3% 2% 0% 3%;
+
+    #game_description {
+        width: 80%;
+        height: 180px;
+        color: white;
+        background-color: rgb(85, 148, 85);
+        margin: 0 auto;
+        padding: 1em;
+        border-radius: 10px;
+        font-size: 1.5em;
     }
-    
-    .joa_desc {
-        grid-row: 2;
-        grid-column: 3;
-        height: 89%;
-        padding: 3% 2% 0% 3%;
-    }
-    
-    .lou_desc {
-        grid-row: 3;
-        grid-column: 3;
-        height: 89%;
-        padding: 3% 2% 0% 3%;
-    }
-    
-    .mik_desc {
-        grid-row: 4;
-        grid-column: 3;
-        height: 89%;
-        padding: 3% 2% 0% 3%;
-    }
-    
-    .nic_desc {
-        grid-row: 5;
-        grid-column: 3;
-        height: 89%;
-        padding: 3% 2% 0% 3%;
-    }
-    
-    #backButton {
-        width: 10%;
-        margin: 7% 0 1% 45%;
+
+    /* How to Play */
+    #game_how_to {
+        display: grid;
+        grid-template-rows: 300px 300px 300px 300px;
+        grid-row-gap: 20px;
         height: auto;
     }
+
+    .how_to_section {
+        display: grid;
+        grid-template-rows: 70% 30%;
+        width: 90%;
+        margin: 0 auto;
+        font-size: 1.5em;
+    }
+
+    .game_image {
+        width: auto;
+        height: 65%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #image0 {
+        width: 80%;
+        height: auto;
+    }
+
+    /* Team Section */
+    #team_section {
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    }
+
+    /* Team img and name */
+    .mem_section {
+        display: grid;
+        grid-template-rows: 50% 50%;
+        border-bottom: 3px solid #65EAA2;
+        box-shadow: 5px 5px #88888828;
+        grid-gap: 1em;
+    }
+
+    .mem_img {
+        width: 15em;
+        height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 50%;
+        filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.45));
+
+    }
+
+    .mem_section h2 {
+        text-align: center;
+        color: black;
+        margin: 1em;
+        text-shadow: 2px 2px rgba(145, 145, 145, 0.623);
+    }
+
+    .mem_desc {
+        height: 60%;
+        padding: 1em;
+        margin: 1em;
+        background-color: white;
+        border-radius: 25px;
+        font-size: 1.2em;
+        filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.45));
+
+    }
+
+    #backButton {
+        font-family: 'Pompiere', cursive;
+        color: white;
+        font-size: 2em;
+        padding: .5em 1em .5em 1em;
+        margin: 1.5em;
+        border-radius: 10px;
+        background-color: #FF9999;
+        filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.45));
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
 }
 
-/*
-CSS Media query layout for desktop
-*/ 
-@media only screen and (min-width: 1280px) {
-    #top_box {
-        width: 100%;
-        height: 33%;
-    }
-    
-    #title {
-        text-align: center;
-        color: white;
-        font-size: 100px;
+
+/* Tablet View */
+@media screen and (min-width: 500px) {
+
+    /* Logo */
+    #logo_div {
         position: absolute;
-        margin: 5%;
-        filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.45));
+        width: 21em;
+        height: 10em;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        top: 2em;
+        /* background-color: brown; */
     }
-    
-    #banner {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(3, 1fr);
-        width: 100%;
-        height: 60%;
-        padding-top: 4%;
-        box-shadow: 0px 10px 15px rgba(0,0,0,0.37);
-    }
-    
-    #banner_top {
-        grid-row: 1;
-        background-color: #65EAA2;
-        width: 100%;
-    }
-    
-    #banner_middle {
-        grid-row: 2;
-        background-color: #FF9999;
-        width: 100%;
+
+    #title_icon {
+        position: absolute;
+        width: 7em;
         height: auto;
+        top: 2.5em;
     }
-    
-    #banner_bottom {
-        grid-row: 3;
-        background-color: #65EAA2;
-        width: 100%;
+
+    #title_logo {
+        width: 12em;
         height: auto;
-    }
-    
-    #mid_box {
-        display: grid;
-        width: 80%;
-        height: 40%;
-        grid-template-columns: 1fr 3fr;
-        margin: 5% 0 0 10%;
-    }
-    
-    #icopico_logo {
-        object-fit: cover;
-        max-height: 110%;
-        width: auto;
-        margin: -15px 0px 0px -15px;
         filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
+        float: right
     }
-    
+
+    /* Banner */
+    #banner_div {
+        margin-top: 3em;
+    }
+
+    .banner {
+        width: 100%;
+        height: 65px;
+        background-color: #65EAA2;
+    }
+
+    /* Game Description */
     #game_description {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 35px;
-        text-align: justify;
-        margin: 0 2% 0 2%;
-        padding: 0 7% 0 7%;
-        color: white;
-        background-color: rgb(80, 175, 80);
-        filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
+        height: auto;
+        font-size: 1.8em;
+        padding: 1em;
     }
-    
-    #mid_box2 {
+
+    /* How to Play*/
+    #game_how_to {
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-gap: .5em;
+    }
+
+    .how_to_section {
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 100%;
+    }
+
+    .game_image {
+        width: 80%;
+        height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
+
+    }
+
+    #image0 {
+        width: 90%;
+        height: auto;
+    }
+
+    .game_instruction {
+        font-size: 1.5em;
+        padding: 1em;
+    }
+
+    /* Team Description */
+    #team_section {
         display: grid;
-        width: 80%;
-        height: 60%;
-        background-color: white;
-        margin: 10% 0 0 10%;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(4, 1fr);
-        filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.37));
-    }
-    
-    #play_guide {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        grid-column: span 4;
-        font-size: 50px;
-    }
-    
-    .game_image0 {
-        grid-column: 1;
-        grid-row: span 2;
-        border: 2px solid black;
-        width: 80%;
-        max-width: 100%;
         height: auto;
-        margin: 0 0 0 9%;
-        filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-gap: 1em;
     }
-    
-    .game_image1 {
-        grid-column: 2;
-        grid-row: span 2;
-        border: 2px solid black;
+
+    .mem_img {
         width: 80%;
-        max-width: 100%;
+    }
+
+    .mem_section {
+        grid-template-rows: 50% 40%;
+        grid-gap: 3em;
+    }
+
+    .mem_desc {
+        font-size: 1.1em;
+        padding: 1.5em;
+        width: 70%;
+        height: 70%;
+        margin: 0 auto;
+        margin-bottom: 2em;
+        max-height: 200px;
+    }
+
+
+}
+
+/* Desktop View */
+@media screen and (min-width: 1070px) {
+    #game_how_to {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+
+    .how_to_section {
+        grid-template-columns: 1fr;
+        grid-template-rows: 50% 50%;
+        grid-row-gap: 3em;
+        font-size: 1em;
+
+    }
+
+    .game_image {
+        width: 80%
+    }
+
+    #image0 {
+        width: 100%;
+    }
+
+    #image3 {
+        height: 50%;
+        width: auto;
+    }
+
+    /* Team Description */
+    #team_section {
+        display: grid;
         height: auto;
-        margin: 0 0 0 9%;
-        filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 1em;
+
     }
-    
-    .game_image2 {
-        grid-column: 3;
-        grid-row: span 2;
-        border: 2px solid black;
-        width: 80%;
-        max-width: 100%;
-        height: auto;
-        margin: 0 0 0 9%;
-        filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+
+    .mem_section {
+        grid-template-rows: 50% 50%;
     }
-    
-    .game_image3 {
-        grid-column: 4;
-        grid-row: span 2;
-        width: 80%;
-        height: 100%;
-        margin: 0 0 0 9%;
-    }
-    
-    .game_image0:hover, .game_image1:hover, .game_image2:hover, .game_image3:hover {
-        border: 2px yellow solid;
-    }
-    
-    .game_instruction0 {
-        padding: 10%;
-    }
-    
-    .game_instruction1 {
-        padding: 10%;
-    }
-    
-    .game_instruction2 {
-        padding: 10%;
-    }
-    
-    .game_instruction3 {
-        padding: 10%;
-    }
-    
-    #bot_box {
-        width: 80%;
-        height: 100%;
-        margin: 8% 0 0 10%;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: 1fr 1fr 3fr;
-        grid-column-gap: 2%;
-        grid-row-gap: 0;
-    }
-    
-    .jen_icon {
-        grid-row: 1;
-        grid-column: 1;
-        width: 100%;
-        max-height: 100%;
-    }
-    
-    .joa_icon {
-        grid-row: 1;
-        grid-column: 2;
-        width: 100%;
-        max-height: 100%;
-    }
-    
-    .lou_icon {
-        grid-row: 1;
-        grid-column: 3;
-        width: 100%;
-        max-height: 100%;
-    }
-    
-    .mik_icon {
-        grid-row: 1;
-        grid-column: 4;
-        width: 100%;
-        max-height: 100%;
-    }
-    
-    .nic_icon {
-        grid-row: 1;
-        grid-column: 5;
-        width: 100%;
-        max-height: 100%;
-    }
-    
-    .jen_icon:hover, .joa_icon:hover, .lou_icon:hover, .mik_icon:hover, .nic_icon:hover {
-        width: 110%;
-        margin-top: -5%;
-        margin-left: -5%;
-        margin-right: -5%;
-    }
-    
-    b {
-        font-size: 40px;
-        word-spacing: 20px;
-    }
-    
-    .jen_desc {
-        grid-row: 3;
-        grid-column: 1;
-        height: 100%;
-        padding: 10%;
-    }
-    
-    .joa_desc {
-        grid-row: 3;
-        grid-column: 2;
-        height: 100%;
-        padding: 10%;
-    }
-    
-    .lou_desc {
-        grid-row: 3;
-        grid-column: 3;
-        height: 100%;
-        padding: 10%;
-    }
-    
-    .mik_desc {
-        grid-row: 3;
-        grid-column: 4;
-        height: 100%;
-        padding: 10%;
-    }
-    
-    .nic_desc {
-        grid-row: 3;
-        grid-column: 5;
-        height: 100%;
-        padding: 10%;
-    }
-    
-    #backButton {
-        width: 10%;
-        margin: 7% 0 1% 45%;
-        height: auto;
+
+    .mem_desc {
+        padding: 1.5em;
+        width: 70%;
+        height: 50%;
+        margin: 0 auto;
+        margin-bottom: 2em;
+        font-size: 1.2em;
+
     }
 }

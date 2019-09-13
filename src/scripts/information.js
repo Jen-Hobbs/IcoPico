@@ -1,3 +1,4 @@
+console.log('information 1 loading');
 var updateHunger = 0; //used when we feed pet
 var runningScenes = [];
 var newTask = 0;
@@ -57,17 +58,21 @@ var pets = {"pet" : [
     {"petName": "shinyboi", "cost" : 100},
     {"petName": "dogboi", "cost" : 100},
     {"petName": "octoboi", "cost" : 100},
-    {"petName": "fluffboi"},
-    {"petName": "jellyboi"},
+    //food
+    {"petName": "eggboi"},
     {"petName": "potatoboi"},
     {"petName": "sushiboi"},
-    {"petName": "eggboi"},
+    //exersize
     {"petName": "legboi"},
     {"petName": "longboi"},
     {"petName": "muscleboi"},
+    //utility
+    {"petName": "whaleboi"},
+    {"petName": "fluffboi"},
+    {"petName": "jellyboi"},
+    //recyle
     {"petName": "planteyboi"},
-    {"petName": "squidboi"},
-    {"petName": "whaleboi"}
+    {"petName": "squidboi"}
 ]};
 let foodTypes = {'food' : [
     {'type' : 'icecream', 'cost' : 20},
@@ -147,7 +152,7 @@ var task_list = {"task" : [
     "icon": "type1"
   },
 ]};
-
+// believe this is the create tasks function?
 function updateTaskList(){
   if(playerTasks[0] != null){
     taskListInfo.taskIDa =playerTasks[0];

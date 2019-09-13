@@ -1,9 +1,11 @@
+// start up pet selection screen
 class ChoosePet extends Phaser.Scene {
     constructor() {
         super({
             key: 'ChoosePet', active: false
         });
     }
+    // load images of starting pets and buttons
     preload(){
          this.load.image("white", "../images/choose/white_circle.png");
          this.load.image("yellow", "../images/choose/yellow_circle.png");
@@ -12,6 +14,7 @@ class ChoosePet extends Phaser.Scene {
          this.load.image("petNum1", "../images/pets/dogboi.png");   
          this.load.image('select', "../images/choose/green_button.png");   
     }
+    // creat layout and location of items
     create(){
         this.selected;
         this.number = 0;
@@ -32,6 +35,7 @@ class ChoosePet extends Phaser.Scene {
         }
         
     }
+    // Select pet
     selected(info){
         console.log(info.name);
         if(this.number != 0){

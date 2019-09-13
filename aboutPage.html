@@ -1,84 +1,157 @@
 <!doctype html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8" />
-        <title>About the Icopico Team</title>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="./src/css/aboutPage_style.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    </head>
+    <title>About the Icopico Team</title>
+    <link rel="icon" href="src/images/icons/Icopico_Logo.png" />
+    <link rel="stylesheet" href="./src/css/aboutPage_style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</head>
 
-    <body>
-        <div id = "container"> 
-                <div id = "top_box">
-                    <div id = "title">
-                        What is Icopico?
+<body>
+    <div id="container">
+        <div id="box_top">
+            <div id="logo_div">
+                <img id="title_icon" src="src/images/icons/Icopico_Logo.png"
+                    onclick="window.location.href='index.html'">
+                <img id="title_logo" src="src/images/icons/Icopico_Title_Black.png" alt="Logo_Name"
+                    onclick="window.location.href='index.html'">
+            </div>
+
+            <div id="banner_div">
+                <div class="banner"></div>
+                <div id="banner_pink" class="banner"></div>
+                <div class="banner"></div>
+            </div>
+        </div>
+
+        <div id="mid_box">
+            <h1 class="section_title" id="what_is_icopico">What is Icopico?</h1>
+
+            <div id="game_description">
+                Icopico is a game that helps you integrate ecologically restorative action into your routine.
+                By completing easy, daily sustainability tasks, you help your very own Icopico pet grow!
+                What kind of pet will your Icopico grow into?
+            </div>
+        </div>
+
+        <div id="mid_box2">
+            <h1 class="section_title" id="play_guide">How to Play</h1>
+
+            <div id="game_how_to">
+                <div class="how_to_section" id="game_0">
+                    <img class="game_image" id="image0" src="src/images/tutorial/pick_pet.png"></img>
+                    <div class="game_instruction" id="instruction0"> <b>1)</b> You will first need to choose your pet.
+                        Which Icopico best represents
+                        you?
                     </div>
-                    <div id = "banner">
-                        <div id = "banner_top"></div>
-                        <div id = "banner_middle"></div>
-                        <div id = "banner_bottom"></div>
+                </div>
+
+                <div class="how_to_section" id="game_1">
+                    <img class="game_image" id="image1" src="src/images/tutorial/pethub.png"></img>
+                    <div class="game_instruction" id="instruction1"> <b>2)</b> Like any pet, your Icopico needs food
+                        and attention. Make sure to
+                        maintain its hunger and happiness!</div>
+                </div>
+
+                <div class="how_to_section" id="game_2">
+                    <img class="game_image" id="image2" src="src/images/tutorial/tasks.png"></img>
+                    <div class="game_instruction" id="instruction2"> <b>3)</b> When you complete tasks, your Icopico
+                        will gain activity points.
+                        These new sustainability tasks appear every day.</div>
+                </div>
+
+                <div class="how_to_section" id="game_3">
+                    <img class="game_image" id="image3" src="src/images/tutorial/potatmanV2star.png"></img>
+                    <div class="game_instruction" id="instruction3"> <b>4)</b> As you complete tasks and tend to your
+                        Icopico, it may gain enough
+                        experience to evolve...!</div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div id="bot_box">
+            <h1 class="section_title">Meet the Team!</h1>
+
+            <div id="team_section">
+
+                <div class="mem_section" id="Jen_section">
+                    <div class="img_name">
+                        <img class="mem_img" id="jen_icon" src="./src/images/team/jennifer.PNG">
+                        <h2>Jennifer Hobbs</h2>
                     </div>
-                </div>
-                
-                <div id = "mid_box">
-                    <img id = "icopico_logo" src = "./src/images/icons/Icopico_Logo.png">
-                    <div id = "game_description">
-                        Icopico is a game that helps you integrate ecologically restorative action into your routine.
-                        By completing easy, daily sustainability tasks, you help your very own Icopico pet grow!
-                        What kind of pet will your Icopico grow into?
-                    </div>  
-                </div>
-                <div id = "mid_box2">
-                    <div id = "play_guide">How to Play</div>
-                    <img class = "game_image0" src = "src/images/tutorial/pick_pet.png"></img>
-                    <img class = "game_image1" src = "src/images/tutorial/pethub.png"></img>
-                    <img class = "game_image2" src = "src/images/tutorial/tasks.png"></img>
-                    <img class = "game_image3" src = "src/images/tutorial/potatmanV2star.png"></img>
-                    <div class = "game_instruction0">You will first need to choose your pet. Which Icopico best represents you?</div>
-                    <div class = "game_instruction1">Like any pet, your Icopico needs food and attention. Make sure to maintain its hunger and happiness!</div>
-                    <div class = "game_instruction2">When you complete tasks, your Icopico will gain activity points. These new sustainability tasks appear every day.</div>
-                    <div class = "game_instruction3">As you complete tasks and tend to your Icopico, it may gain enough experience to evolve...!</div>
-                </div>
-                <div id = "bot_box">
-                    <img class = "jen_icon" src = "./src/images/team/jennifer.PNG">
-                    <img class = "joa_icon" src = "./src/images/team/joanna.PNG">
-                    <img class = "lou_icon" src = "./src/images/team/louis.PNG">
-                    <img class = "mik_icon" src = "./src/images/team/mikhaela.PNG">
-                    <img class = "nic_icon" src = "./src/images/team/nicole.PNG">
-                    <b>Jennifer<br>Hobbs</b>
-                    <b>Joanna<br>Ho</b>
-                    <b>Louis<br>Rivest</b>
-                    <b>Mikhaela<br>Layon</b>
-                    <b>Nicole<br>Jingco</b>
-                    <div class = "jen_desc">
-                        Jennifer's primary role is game logic design and development.  
-                        She is a student at BCIT in the technical programming option. 
-                        She enjoys creating games in Unity and her favorite programming language is C#. 
+
+                    <div class="mem_desc" id="jen_desc">
+                        Jennifer's primary role is game logic design and development.
+                        She is a student at BCIT in the technical programming option.
+                        She enjoys creating games in Unity and her favorite programming language is C#.
                         In her spare time she can be found carrying you in League of Legends.
                     </div>
-                    <div class = "joa_desc">
-                        Joanna is a BCIT computing student in the technical programming option. 
-                        She spends her time enjoying the creative process in game dev, solving coding problems and hoarding succulent treats.
+                </div>
+
+                <div class="mem_section" id="Joa_section">
+                    <div class="img_name">
+                        <img class="mem_img" id="joa_icon" src="./src/images/team/joanna.PNG">
+                        <h2>Joanna Ho</h2>
                     </div>
-                    <div class = "lou_desc">
-                        As a student in Computer Systems Technology, Louis is always looking for ways to broaden his skill set. 
-                        When he isn't doodling, you will usually find him testing new recipes in the kitchen.
-                        Louis is responsible for some of the UI, CSS/Javascript design, and art assets.
-                    </div>
-                    <div class = "mik_desc">
-                        Mikhaela worked on the setting up the app's MySQL database and back-end. 
-                        She aims to create an impact on the community by providing technical solutions and bringing people together. 
-                        When she's not typing away on her laptop, she's either watching a movie, drinking tea, or exploring Vancouver.
-                    </div>
-                    <div class = "nic_desc">
-                        Nicole is one of the team's designers in charge of the UI, Pet, CSS and JavaScript design.
-                        She likes to sleep, eat and is an avid Esports supporter, mainly for the Vancouver Titans Overwatch team.
-                        She consumed the most ice cream during the project.
+
+                    <div class="mem_desc" id="joa_desc">
+                        Joanna is a BCIT computing student in the technical programming option.
+                        She spends her time enjoying the creative process in game dev, solving coding problems and
+                        hoarding
+                        succulent treats.
                     </div>
                 </div>
-                <button id = "backButton" onclick="window.location.href='index.html'">Return</button>
+
+                <div class="mem_section" id="Mik_section">
+                    <div class="img_name">
+                        <img class="mem_img" id="mik_icon" src="./src/images/team/mikhaela.PNG">
+                        <h2>Mikhaela Layon</h2>
+                    </div>
+
+                    <div class="mem_desc" id="mik_desc">
+                        Mikhaela worked on setting up the game's MySQL database and back-end. She aims to create an
+                        impact on the community by providing technical solutions and bringing people together. When
+                        she's not typing away on her laptop, she's either watching a movie, drinking tea, or exploring
+                        Vancouver.
+                    </div>
+                </div>
+
+                <div class="mem_section" id="Lou_section">
+                    <div class="img_name">
+                        <img class="mem_img" id="lou_icon" src="./src/images/team/louis.PNG">
+                        <h2>Louis Rivest</h2>
+                    </div>
+
+                    <div class="mem_desc" id="lou_desc">
+                        As a student in Computer Systems Technology, Louis is always looking for ways to broaden his
+                        skill set. When he isn't doodling, you will usually find him testing new recipes in the kitchen.
+                        Louis is responsible for some of the UI, CSS/Javascript design, and art assets.
+                    </div>
+                </div>
+
+                <div class="mem_section" id="Nic_section">
+                    <div class="img_name">
+                        <img class="mem_img" id="nic_icon" src="./src/images/team/nicole.PNG">
+                        <h2>Nicole Jingco</h2>
+                    </div>
+
+                    <div class="mem_desc" id="nic_desc">
+                        Nicole is one of the team's designers in charge of the UI, Pet, CSS and JavaScript design.
+                        She likes to sleep, eat and is an avid Esports supporter, mainly for the Vancouver Titans
+                        Overwatch team. She consumed the most ice cream during the project.
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </body>
+        <button id="backButton" onclick="window.location.href='index.html'">Return</button>
+    </div>
+</body>
+
 </html>
