@@ -1,3 +1,4 @@
+console.log('information 2 loading');
 /** OTHERS
   lastLogin: datetime;
 **/
@@ -12,7 +13,7 @@ var lastLogin;
  **/
 var playerInfo;
 var playerID;
-
+var emailInfo;
 /** PLAYERPET TABLE JSON FORMAT
  *[ { currentHappiness: 0
       currentHunger: 0
@@ -45,26 +46,52 @@ var inventoryInfo;
     taskListID: 1 }
  **/
 var taskListInfo;
-
+var parameters;
+var check;
 ////////////////////////////////////////////////////////////////////////////////
-initGameInfo();
-
+checkNewPlayer();
 ////////////////////////////////////////////////////////////////////////////////
 //GETTING FROM database
 
+//check for new player
+function checkNewPlayer() {
+  parameters = new URLSearchParams(window.location.search);
+  playerEmail = parameters.get('email');
+  isNewPlayer(playerEmail);
+  if(check == true) {
+    console.log("new player");
+    initNewPlayer();
+  } else {
+    console.log("returning player");
+  }
+  initGameInfo();
+}
+
+//add new entries in database for new player
+function initNewPlayer() {
+  createAccount(playerEmail);
+  getPlayerInfo(playerEmail);
+  createDefaultInfo();
+  //add iitems 2 and 3
+
+  //createDefaultInfo();
+}
+
+//fetch game info
 function initGameInfo() {
-  var parameters = new URLSearchParams(window.location.search);
+  parameters = new URLSearchParams(window.location.search);
   playerEmail = parameters.get('email');
   getPlayerInfo(playerEmail);
   getPlayerPet();
   getInventory();
   getTasks();
   getLastLogin(playerEmail);
-  console.log(playerInfo);
+//  console.log(playerInfo);
 }
 
 function getLastLogin(email)
 {
+  emailInfo = email;
   //Ajax call to get lastLogin from  table
   $.ajax({
     url: "/getlastlogin/" + "'" + email + "'",
@@ -97,7 +124,7 @@ function getPlayerInfo(email)
       //data[0] because there will always only be 1 playerInfo per email
       playerInfo = data[0];
       playerID = playerInfo.playerID;
-      console.log(playerInfo);
+//      console.log(playerInfo);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -117,7 +144,7 @@ function getPlayerPet()
     success: function(data) {
       //playerInfo = JSON.parse(data);
       playerPetInfo = data;
-      console.log(playerPetInfo);
+//      console.log(playerPetInfo);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -136,7 +163,7 @@ function getInventory()
       success: function(data) {
         //playerInfo = JSON.parse(data);
         inventoryInfo = data;
-        console.log(inventoryInfo);
+//        console.log(inventoryInfo);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -156,7 +183,7 @@ function getTasks()
         //playerInfo = JSON.parse(data);
         //data[0] because there will always only be 1 tasklist per email
         taskListInfo = data[0];
-        console.log(taskListInfo);
+//        console.log(taskListInfo);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -182,7 +209,7 @@ function updateTasks(newIDa, newIDb, newIDc) {
         async: false,
         success: function(data) {
             taskListInfo = data[0];
-            console.log(taskListInfo);
+//            console.log(taskListInfo);
         },
         error: function(jqXHR, textStatus, errorThrown) {
           //console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -205,7 +232,7 @@ function updateInventory(itemID, updatedQty) {
       async: false,
       success: function (data) {
           inventoryInfo = data;
-          console.log(inventoryInfo);
+//          console.log(inventoryInfo);
       },
       error: function (jqXHR, textStatus, errorThrown) {
           //console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -226,7 +253,7 @@ function updateCurrency(newCurrency)
     success: function(data) {
       //playerInfo = JSON.parse(data);
       //data[0] because there will always only be 1 tasklist per email
-      console.log(data);
+//      console.log(data);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -243,7 +270,7 @@ function updateRecycling(petID, newRecycling){
     success: function(data) {
       //playerInfo = JSON.parse(data);
       //data[0] because there will always only be 1 tasklist per email
-      console.log(data);
+//      console.log(data);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -260,7 +287,7 @@ function updateHealth(petID, newHealth){
     success: function(data) {
       //playerInfo = JSON.parse(data);
       //data[0] because there will always only be 1 tasklist per email
-      console.log(data);
+//      console.log(data);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -277,7 +304,7 @@ function updateUtility(petID, newUtility){
     success: function(data) {
       //playerInfo = JSON.parse(data);
       //data[0] because there will always only be 1 tasklist per email
-      console.log(data);
+//      console.log(data);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -296,7 +323,7 @@ function updateCurrentHappiness(petID, newHappiness)
     success: function(data) {
       //playerInfo = JSON.parse(data);
       //data[0] because there will always only be 1 tasklist per email
-      console.log(data);
+//      console.log(data);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -305,7 +332,7 @@ function updateCurrentHappiness(petID, newHappiness)
 }
 
 //update currentHunger
-function updateHunger(petID, newHunger)
+function updateHung(petID, newHunger)
 {
   //Ajax call to update currency
   $.ajax({
@@ -316,7 +343,7 @@ function updateHunger(petID, newHunger)
     success: function(data) {
       //playerInfo = JSON.parse(data);
       //data[0] because there will always only be 1 tasklist per email
-      console.log(data);
+//      console.log(data);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -333,7 +360,7 @@ function updateActivePet(petID) {
 		type: "GET",
 		async: false,
 		success: function (data) {
-			console.log(data);
+//			console.log(data);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -349,7 +376,7 @@ function insertNewPlayerPet(petID) {
 		type: "GET",
 		async: false,
 		success: function (data) {
-			console.log(data);
+//			console.log(data);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -358,14 +385,15 @@ function insertNewPlayerPet(petID) {
 }
 
 /** Update lastLogin value */
-function updateLastLogin(email, lastLoginInfo) {
+function updateLastLogin(lastLoginInfo) {
   $.ajax({
-      url: "/updatelastlogin" + '/"' + email + '"/' + '"' + lastLoginInfo + '"',
+      url: "/updatelastlogin" + '/"' + emailInfo + '"/' + '"' + lastLoginInfo + '"',
       dataType: "json",
       type: "GET",
       async: false,
       success: function (data) {
-          console.log(data);
+        console.log("ajax last login sent");
+        console.log(data);
       },
       error: function (jqXHR, textStatus, errorThrown) {
           console.log("ERROR:", jqXHR, textStatus, errorThrown);
@@ -374,3 +402,150 @@ function updateLastLogin(email, lastLoginInfo) {
 }
 /////////////////////////////////////////////////////////////////
 //CREATING DEFAULTS FOR NEW PLAYER
+/*********************** CREATING DEFAULTS FOR A NEW PLAYER
+*****
+*****/
+
+/** Create a new account for a new player
+ * and updates the corresponding player to the database
+ */
+function createAccount(email) {
+
+	// Creating a new account
+	$.ajax({
+		url: "/createaccount/" + "'" + email + "'",
+		dataType: "json",
+		type: "GET",
+		async: false,
+		success: function (data) {
+//			console.log(data);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			console.log("ERROR:", jqXHR, textStatus, errorThrown);
+		}
+	});
+
+	// Creating a new player
+	$.ajax({
+		url: "/createplayer/" + "'" + email + "'",
+		dataType: "json",
+		type: "GET",
+		async: false,
+		success: function (data) {
+//			console.log(data);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			console.log("ERROR:", jqXHR, textStatus, errorThrown);
+		}
+	});
+
+}
+
+/** Creates all the default info (inventory, playerpet,
+ * tasklist) for a new player.
+ *
+ * Precondition: playerID is required for this function to work.
+ */
+function createDefaultInfo() {
+
+	// Creating default inventory
+  //item1
+	$.ajax({
+		url: "/createinventory/" + playerID + "/" + 1,
+		dataType: "json",
+		type: "GET",
+		async: false,
+		success: function (data) {
+//			console.log(data);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			console.log("ERROR:", jqXHR, textStatus, errorThrown);
+		}
+	});
+  //item2
+  $.ajax({
+    url: "/createinventory/" + playerID + "/" + 2,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function (data) {
+//      console.log(data);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+
+  //item2
+  $.ajax({
+    url: "/createinventory/" + playerID + "/" + 2,
+    dataType: "json",
+    type: "GET",
+    async: false,
+    success: function (data) {
+//      console.log(data);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log("ERROR:", jqXHR, textStatus, errorThrown);
+    }
+  });
+
+	// Creating default playerpet
+	$.ajax({
+		url: "/createplayerpet/" + playerID,
+		dataType: "json",
+		type: "GET",
+		async: false,
+		success: function (data) {
+//			console.log(data);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			console.log("ERROR:", jqXHR, textStatus, errorThrown);
+		}
+	});
+
+	// Creating default task list
+	$.ajax({
+		url: "/createtasklist/" + playerID,
+		dataType: "json",
+		type: "GET",
+		async: false,
+		success: function (data) {
+//			console.log(data);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			console.log("ERROR:", jqXHR, textStatus, errorThrown);
+		}
+	});
+
+}
+
+/**  Checks if the player logging in is a new player or an
+ *	existing player by checking if their email is already on
+ *	the Account table.
+ *
+ * 	Returns true if player is new, and returns false otherwise.
+ */
+
+ function isNewPlayer(email) {
+
+     $.ajax({
+         url: "/checkaccount/" + "'" + email + "'",
+         dataType: "json",
+         type: "GET",
+         async: false,
+         success: function (data) { // player is already existing
+//             console.log(data[0]);
+
+             if (data[0] == undefined) { // no data returned, meaning player is new
+                 check = true;
+             }
+             else {    // there is data returned, and player is not new
+                 check = false;
+             }
+         },
+         error: function (jqXHR, textStatus, errorThrown) {
+             console.log("ERROR:", jqXHR, textStatus, errorThrown);
+         }
+     });
+ }

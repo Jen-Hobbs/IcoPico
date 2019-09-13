@@ -16,7 +16,9 @@ body {
 }
 
 /* Mobile View --------------------------------------------------------------*/
-@media screen and (min-width: 0px) and (max-width: 600px) {
+@media only screen 
+  and (min-width: 0px) 
+  and (orientation: portrait) { 
     /* Logo */
     #logo_div {
         position: absolute;
@@ -148,7 +150,7 @@ body {
 }
 
 /* Tablet View --------------------------------------------------------------*/
-@media screen and (min-width: 600px) and (max-width: 1240px) {
+@media screen and (min-width: 377px) {
      /* Logo */
      #logo_div {
         position: absolute;
