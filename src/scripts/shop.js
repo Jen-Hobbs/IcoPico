@@ -34,7 +34,7 @@ class Shop extends Phaser.Scene {
     updateMoneyBar(){
 
         this.moneyBar = this.add.sprite(this.scale.width * .97, this.scale.height *.19, 'moneyBar').setOrigin(1,0).setScale(1.3);
-        var money = this.add.text(this.scale.width*.75, this.scale.height *.20, playerInfo.currency, {fontFamily: 'serif', fontSize: 36}).setColor('black');
+        var money = this.add.text(this.scale.width*.75, this.scale.height *.205, playerInfo.currency, {fontFamily: 'serif', fontSize: 36}).setColor('black');
 
 
     }
