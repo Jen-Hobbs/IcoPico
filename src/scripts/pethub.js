@@ -21,7 +21,7 @@ class Pethub extends Phaser.Scene {
         this.load.image('arrow', '../images/buttons/Other/arrow.png');
         this.load.image('backPet', '../images/Sad_Appartment.png');
         this.load.image('sad', '../images/buttons/pet_hub/sad.png');
-        this.load.spritesheet("thought", '../images/icons/thoughtAnimate.png', { frameWidth: 280, frameHeight: 300 });
+        this.load.spritesheet("thought", '../images/icons/thoughtAnimate.png', { frameWidth: 280, frameHeight: 330 });
         this.load.spritesheet("Shiny_Boi_Food", '../images/Shiny_Boi_Food/shiny_boi_consume.png', {frameWidth: 943, frameHeight: 470});
         this.load.image('hungry', '../images/buttons/pet_hub/hungry.png');
         this.hunger;
@@ -116,8 +116,8 @@ class Pethub extends Phaser.Scene {
                 callbackScope: this
             });
         });
-        this.hungerBubble = this.add.sprite(this.scale.width * .73, this.scale.height * .35);
-        this.sadBubble = this.add.sprite(this.scale.width * .28, this.scale.height * .45);
+        this.hungerBubble = this.add.sprite(this.scale.width * .70, this.scale.height * .42);
+        this.sadBubble = this.add.sprite(this.scale.width * .30, this.scale.height * .52);
         this.checkHunger(this.currentPet);
         this.checkHappiness(this.currentPet);
         this.input.on('gameobjectup', function (pointer, gameObject) {
@@ -187,10 +187,10 @@ class Pethub extends Phaser.Scene {
     checkHappiness(i) {
         this.sadBubble.setVisible(true);
         if (playerPetInfo[i].currentHappiness < 33) {
-            this.sadBubble.setTexture('thought').setFlipX(true).setTint('0x875e5e').play('sad');
+            this.sadBubble.setTexture('thought').setFlipX(true).setTint('0x875e5e').play('sad').setScale(1.2);
         }
         else if (playerPetInfo.currentHappiness < 66) {
-            this.sadBubble.setTexture('thought').setFlipX(true).setTint('0xf9b6a7').play('sad');
+            this.sadBubble.setTexture('thought').setFlipX(true).setTint('0xf9b6a7').play('sad').setScale(1.2);
         }
         else{
             this.sadBubble.setVisible(false);
@@ -205,10 +205,10 @@ class Pethub extends Phaser.Scene {
     checkHunger(i) {
         this.hungerBubble.setVisible(true);
         if (playerPetInfo[i].currentHunger < 33) {
-            this.hungerBubble.setTexture('thought').setTint('0x875e5e').play('hungry');
+            this.hungerBubble.setTexture('thought').setTint('0x875e5e').play('hungry').setScale(1.2);
         }
         else if (playerPetInfo[i].currentHunger < 66) {
-            this.hungerBubble.setTexture('thought').setTint('0xf9b6a7').play('hungry');
+            this.hungerBubble.setTexture('thought').setTint('0xf9b6a7').play('hungry').setScale(1.2);
         }
         else{
             this.hungerBubble.setVisible(false);
@@ -276,12 +276,11 @@ class Pethub extends Phaser.Scene {
         for (var i = 0; i < inventoryInfo.length; i++) {
             if(inventoryInfo[i].itemQty > 0){
             
-                this.food[n] = this.add.sprite(this.scale.width * (.78 - (n * .12)), this.scale.height * .90, 'whiteCircle').setScale(1.5);
+                this.food[n] = this.add.sprite(this.scale.width * (.72 - (n * .18)), this.scale.height * .90, 'whiteCircle').setScale(1.5);
                 this.food[n].setInteractive();
                 this.food[n].name = i;
                 this.food[n].on('clicked', this.consume, this);
-                this.type[n] = this.add.sprite(this.scale.width * (.78 - (n * .12)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID).setScale(1.5);
-                this.type[n].setScale(.7);
+                this.type[n] = this.add.sprite(this.scale.width * (.72 - (n * .18)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
             n++;
             }
         }
@@ -296,7 +295,7 @@ class Pethub extends Phaser.Scene {
         var n = 0;
         for (var i = 0; i < inventoryInfo.length; i++) {
             if(inventoryInfo[i].itemQty != 0){
-                this.amount[n] = this.add.text(this.scale.width * (.76 - (n * .12)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
+                this.amount[n] = this.add.text(this.scale.width * (.70 - (n * .18)), this.scale.height * .87, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
                 this.amount[n].alpha = .8;
                 n++;
             }
