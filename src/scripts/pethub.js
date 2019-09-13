@@ -329,7 +329,7 @@ class Pethub extends Phaser.Scene {
             this.emitter.emit("inventory", item, itemQty);
         }
         this.addAmount();
-     
+        var animateFood = this.add.sprite(this.scale.width * (.72 - ((box.name-1) * .18)), this.scale.height * .90, 'food' + inventoryInfo[box.name].itemID)
         playerPetInfo[playerInfo.activePet].currentHunger += 30;
         this.pet.play("eat");
         console.log("current hunger of pet " + playerPetInfo[playerInfo.activePet].currentHunger);
