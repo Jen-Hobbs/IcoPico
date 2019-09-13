@@ -467,7 +467,8 @@ app.get('/checkaccount/:email', (req, res) => {
 
 });
 
-var server = app.listen(8080, function(){
-    var port = server.address().port;
+var port = process.env.PORT || 8080;
+var server = app.listen(port, function(){
+   // var port = server.address().port;
     console.log("Server started at http://localhost:%s", port);
 });
