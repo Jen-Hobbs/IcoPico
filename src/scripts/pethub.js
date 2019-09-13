@@ -216,28 +216,28 @@ class Pethub extends Phaser.Scene {
     }
     //task bubble
     task() {
-        var taskActive;
-        if (newTask == 0) {
-            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'whiteCircle')
-            .setScale(1.5)
-            .setInteractive()
-            .on('pointerdown', () => {
-            this.scene.stop('Pethub');
-            this.scene.run('Task');
-        });
-        }
-        else {
-            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'yellowCircle')
-            .setScale(1.5)
-            .setInteractive()
-            .on('pointerdown', () => {
-            newTask = 0;
-            this.scene.stop('Pethub');
-            this.scene.run('Task');
+        // var taskActive;
+        // if (newTask == 0) {
+        //     taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'whiteCircle')
+        //     .setScale(1.5)
+        //     .setInteractive()
+        //     .on('pointerdown', () => {
+        //     this.scene.stop('Pethub');
+        //     this.scene.run('Task');
+        // });
+        // }
+        // else {
+        //     taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'yellowCircle')
+        //     .setScale(1.5)
+        //     .setInteractive()
+        //     .on('pointerdown', () => {
+        //     newTask = 0;
+        //     this.scene.stop('Pethub');
+        //     this.scene.run('Task');
 
-        });
-        }
-        this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'task').setScale(1.5);
+        // });
+        // }
+        // this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'task').setScale(1.5);
         
     }
     displayfood() {
