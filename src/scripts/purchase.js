@@ -37,12 +37,13 @@ class Purchase extends Phaser.Scene {
         .on("activePet", updateActivePet) 
         .on("newPet", insertNewPlayerPet);
 
-
+        
         console.log("purchase" + this.info.petName);
         this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'backdrop').setScale(1.5);
         var purchase = this.add.sprite(this.scale.width * .65, this.scale.height * .65, 'purchase').setScale(1.8);
         purchase.setInteractive();
         if (this.type == 'pet') {
+            this.add.text(this.scale.width * .30, this.scale.height * .50, this.info.info,  {fontFamily: 'serif', fontSize: 44, wordWrap: { width: 360, useAdvancedWrap: true } }).setColor('black');
             var image = this.add.sprite(this.scale.width * .5, this.scale.height * .4, this.info.petName).setScale(.4);
             if (playerInfo.currency >= this.info.cost) {
                 this.add.text(this.scale.width * .60, this.scale.height * .635, 'Buy',  {fontFamily: 'serif', fontSize: 48}).setColor('black');
@@ -102,6 +103,7 @@ class Purchase extends Phaser.Scene {
         }
         else {
             var image = this.add.sprite(this.scale.width *.5, this.scale.height * .4, this.info.type).setScale(1.4);
+            this.add.text(this.scale.width * .30, this.scale.height * .50, this.info.info,  {fontFamily: 'serif', fontSize: 44, wordWrap: { width: 360, useAdvancedWrap: true } }).setColor('black');
             if (playerInfo.currency >= this.info.cost) {
 
                 this.add.text(this.scale.width * .60, this.scale.height * .635, 'Buy',  {fontFamily: 'serif', fontSize: 48}).setColor('black');
