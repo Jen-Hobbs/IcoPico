@@ -77,13 +77,13 @@ class Pethub extends Phaser.Scene {
             frameRate: 1.8,
             repeat: 1
         });
-        //eating food animation initial pet start
-        this.anims.create({
-            key: 'eat',
-            frames: this.anims.generateFrameNumbers('Shiny_Boi_Food', {frames:[0,1,2,3,2,1,0]}),
-            frameRate: 9,
-            repeat: 0
-        });
+        // //eating food animation initial pet start
+        // this.anims.create({
+        //     key: 'eat',
+        //     frames: this.anims.generateFrameNumbers('Shiny_Boi_Food', {frames:[0,1,2,3,2,1,0]}),
+        //     frameRate: 9,
+        //     repeat: 0
+        // });
         
         //right arrow
         arrowR = this.add.sprite(this.scale.width * 0.95, this.scale.height / 2, 'arrow');
@@ -329,7 +329,14 @@ class Pethub extends Phaser.Scene {
             this.emitter.emit("inventory", item, itemQty);
         }
         this.addAmount();
-        var animateFood = this.add.sprite(this.scale.width * (.72 - ((box.name-1) * .18)), this.scale.height * .90, 'food' + inventoryInfo[box.name].itemID)
+        var animateFood = this.add.sprite(this.scale.width * (.72 - ((box.name-1) * .18)), this.scale.height * .90, 'food' + inventoryInfo[box.name].itemID).setScale(2);
+        this.tweens.add({
+            targets: animateFood,
+            x: this.scale.width / 2,
+            y: this.scale.height * .35,
+            duration: 600,
+            ease: 'Quart'
+        });
         playerPetInfo[playerInfo.activePet].currentHunger += 30;
         this.pet.play("eat");
         console.log("current hunger of pet " + playerPetInfo[playerInfo.activePet].currentHunger);
