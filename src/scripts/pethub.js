@@ -77,13 +77,13 @@ class Pethub extends Phaser.Scene {
             frameRate: 1.8,
             repeat: 1
         });
-        //eating food animation initial pet start
-        this.anims.create({
-            key: 'eat',
-            frames: this.anims.generateFrameNumbers('Shiny_Boi_Food', {frames:[0,1,2,3,2,1,0]}),
-            frameRate: 9,
-            repeat: 0
-        });
+        // //eating food animation initial pet start
+        // this.anims.create({
+        //     key: 'eat',
+        //     frames: this.anims.generateFrameNumbers('Shiny_Boi_Food', {frames:[0,1,2,3,2,1,0]}),
+        //     frameRate: 9,
+        //     repeat: 0
+        // });
         
         //right arrow
         arrowR = this.add.sprite(this.scale.width * 0.95, this.scale.height / 2, 'arrow');
@@ -307,7 +307,7 @@ class Pethub extends Phaser.Scene {
 
 
     consume(box) {
-        console.log(box);
+        console.log("consume clicked" + box);
         if (inventoryInfo[box.name].itemQty == 1) {
             //
             //
@@ -329,9 +329,56 @@ class Pethub extends Phaser.Scene {
             this.emitter.emit("inventory", item, itemQty);
         }
         this.addAmount();
-     
-        playerPetInfo[playerInfo.activePet].currentHunger += 30;
-        this.pet.play("eat");
+        var animateFood = this.add.sprite(this.scale.width * (.72 - ((box.name-1) * .18)), this.scale.height * .90, 'food' + inventoryInfo[box.name].itemID).setScale(2);
+        var particles = this.add.particles('food' + inventoryInfo[box.name].itemID).setScale(.5);
+
+        
+        this.tweens.add({
+            targets: animateFood,
+            x: 400,
+            y: 600,
+            scaleX: .5,
+            scaleY: .5,
+            duration: 1000,
+            ease: 'Sine.easeIn',
+            onComplete: function ()
+            {
+                var emitter3 = particles.createEmitter({
+                    x: 800,
+                    y: 1200,
+                    speed: { min: 200, max: 400 },
+                    maxParticles: 20,
+                    angle: { start: 0, end: 360, steps: 10 },
+                    quantity: 1,
+                    lifespan: { min: 1000, max: 2000 },
+                    blendMode: 'ERASE'
+                });
+                
+                var emitter2 = particles.createEmitter({
+                    delay: 0.3,
+                    x: 800,
+                    y: 1200,
+                    speed: { min: 200, max: 400 },
+                    maxParticles: 30,
+                    angle: { start: 0, end: 360, steps: 10 },
+                    quantity: 1,
+                    lifespan: { min: 1500, max: 2000 },
+                    blendMode: 'ADD'
+                });
+                var emitter = particles.createEmitter({
+                    delay: 0.5,
+                    x: 800,
+                    y: 1200,
+                    speed: { min: 200, max: 400 },
+                    maxParticles: 30,
+                    angle: { start: 0, end: 360, steps: 10 },
+                    quantity: 1,
+                    lifespan: { min: 1500, max: 2000 }
+                });
+                animateFood.destroy();
+            }
+        });
+        playerPetInfo[playerInfo.activePet].currentHunger += foodTypes.food[inventoryInfo[box.name].itemID].hungerIncrease;
         console.log("current hunger of pet " + playerPetInfo[playerInfo.activePet].currentHunger);
         this.checkHunger(this.currentPet);
       

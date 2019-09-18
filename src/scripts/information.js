@@ -55,9 +55,9 @@ var playerTasks = [];
 
 // var lastLogin = currentDate;
 var pets = {"pet" : [
-    {"petName": "shinyboi", "cost" : 100},
-    {"petName": "dogboi", "cost" : 100},
-    {"petName": "octoboi", "cost" : 100},
+    {"petName": "shinyboi", "cost" : 100, 'info': 'Cute little Shinyboi'},
+    {"petName": "dogboi", "cost" : 100, 'info': "Who doesn't want a dogboi"},
+    {"petName": "octoboi", "cost" : 100, 'info': 'Mustache octoboi'},
     //food
     {"petName": "eggboi"},
     {"petName": "potatoboi"},
@@ -75,9 +75,9 @@ var pets = {"pet" : [
     {"petName": "squidboi"}
 ]};
 let foodTypes = {'food' : [
-    {'type' : 'icecream', 'cost' : 20},
-    {'type' : 'carrot', 'cost' : 10},
-    {'type' : 'donut', 'cost' : 30}
+    {'type' : 'icecream', 'cost' : 20, 'hungerIncrease' : 20, 'info' : 'Gives your pet some satisfaction'},
+    {'type' : 'carrot', 'cost' : 30, 'hungerIncrease': 30, 'info': 'Your pet will love eating this'},
+    {'type' : 'donut', 'cost' : 10, 'hungerIncrease': 10, 'info': 'Just a snack'}
 ]};
 
 var task_list = {"task" : [
