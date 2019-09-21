@@ -1,13 +1,12 @@
-var currentUserEmail;
-
 firebase.auth().onAuthStateChanged(function (user) {
     database.ref("userlist/" + user.uid).update({
         "userName": user.displayName,
         "email": user.email
     });
-    sessionStorage.setItem("uid", user.uid);
-    sessionStorage.setItem("name", user.displayName);
-    sessionStorage.setItem("email", user.email);
+    if (user) { initNewUser() }
+    else {
+        console.log("new account");
+    }
 });
 
 // Test Data
