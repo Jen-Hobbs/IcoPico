@@ -277,7 +277,7 @@ function updateRecycling(petID, newRecycling){
     }
   });
 }
-//update recycling
+//update health
 function updateHealth(petID, newHealth){
   $.ajax({
     url: "/updatecurrenthealth/" + playerID + "/" + petID + "/" + newHealth,

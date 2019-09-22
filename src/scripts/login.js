@@ -3,9 +3,12 @@ firebase.auth().onAuthStateChanged(function (user) {
         "userName": user.displayName,
         "email": user.email
     });
-    if (user) { initNewUser() }
+    if (user) { 
+        //var lastLogin, playerInfo, playerID, emailInfo, playerPetInfo, inventoryInfo, taskListInfo;
+        checkNewUser()
+    }
     else {
-        console.log("new account");
+        console.log("login error please log in again");
     }
 });
 
@@ -35,7 +38,7 @@ var uiConfig = {
     },
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',
-    signInSuccessUrl: '../icopico/icopico.html?email=' + sessionStorage.getItem("email"),
+    signInSuccessUrl: '../icopico/icopico.html',
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebase.auth.GoogleAuthProvider.PROVIDER_ID
