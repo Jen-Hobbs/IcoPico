@@ -1,12 +1,16 @@
 console.log('information 3 loading');
 //update functions
 //update tasklist
+var lastLogin, playerInfo, playerID, emailInfo, playerPetInfo, inventoryInfo, taskListInfo;
+var uid; 
+
 function updateTasks(newIDa, newIDb, newIDc) {
     taskListInfo = {
         newIDa,
         newIDb,
         newIDc
     }
+    firebase.database().ref('userlist/' + uid + '/taskLisInfo').update(taskListInfo);
 }
 
 // Updates/deletes info in the Inventory table
@@ -35,78 +39,102 @@ function updateInventory(itemID, updatedQty, type) {
         };
         inventoryInfo.push(newItem)
     }
+
+    firebase.database().ref('userlist/' + uid + '/inventoryInfo').update(inventoryInfo);
 }
 
-// var parameters, check;
-function checkNewUser() {
-    var user = firebase.auth().currentUser; 
-    firebase.database().ref('userlist/' + user.uid + '/playerInfo').once("value",snapshot => {
-        if (snapshot.exists()){
-            //const userData = snapshot.val();
-            //var lastLogin, playerInfo, playerID, emailInfo, playerPetInfo, inventoryInfo, taskListInfo;
-
-            var playerPetInfoRef = firebase.database().ref('userlist/' + user.uid + '/playerPetInfo').once('value').then(function(snapshot) {
-                console.log(snapshot.val());
-                playerPetInfo = snapshot.val();
-                console.log(playerPetInfo);
-            });
-            console.log(playerPetInfo);
-            console.log("returning user");
-        } else {
-            console.log("new user")
-            initNewUser()
-        }
-    });
+//update currency (money)
+function updateCurrency(newCurrency) {
+    playerInfo.currency = newCurrency;
+    firebase.database().ref('userlist/' + uid + '/playerInfo').update(playerInfo);
 }
 
-//make all database members for a new user
-function initNewUser() {
-    var user = firebase.auth().currentUser;
-    //lastLogin =
-    playerInfo = {
-        playerID: user.email,
-        currency: 1000,
-        activeItem: 0,
-        activePet: 0,
-        accountEmail: user.email
-    };
-    playerID = user.email;
-    emailInfo = user.email;
-    playerPetInfo = [ 
+//update recycling
+function updateRecycling(petID, newRecycling){
+    for (var i = 0; i < playerPetInfo.length; i++){
+        var obj = playerPetInfo[i];
+        if(obj.petID == petID)
         {
-            currentHappiness: 0,
-            currentHunger: 0,
-            petID: 1,
-            petName: "petA",
-            playerPetID: 1,
-            totalHappiness: 0,
-            totalHunger: 0
+            playerPetInfo[i].recycling = newRecycling; 
         }
-    ];
-    inventoryInfo = [
-        { 
-            itemID: 1,
-            itemQty: 2,
-        },
-        {
-            itemID: 2,
-            itemQty: 4,
-        }
-    ];
-    taskListInfo = { 
-        taskIDa: 1,
-        taskIDb: 2,
-        taskIDc: 3,
-    };
+    }
+    firebase.database().ref('userlist/' + uid + '/playerPetInfo').update(playerPetInfo);
+}
 
-    var updates = {};
-    //updates['lastLogin'] = lastLogin;
-    updates['playerInfo'] = playerInfo;
-    updates['playerID'] = playerID;
-    updates['emailInfo'] = emailInfo;
-    updates['playerPetInfo'] = playerPetInfo;
-    updates['inventoryInfo'] = inventoryInfo; 
-    //updates['/user-posts/' + uid + '/' + newPostKey] = postData;
-    firebase.database().ref('userlist/' + user.uid + '/').update(updates);
+//update health
+function updateHealth(petID, newHealth){
+    for (var i = 0; i < playerPetInfo.length; i++){
+        var obj = playerPetInfo[i];
+        if(obj.petID == petID)
+        {
+            playerPetInfo[i].health = newHealth; 
+        }
+    }
+    firebase.database().ref('userlist/' + uid + '/playerPetInfo').update(playerPetInfo);
+}
+
+//update utility
+function updateUtility(petID, newUtility){
+    for (var i = 0; i < playerPetInfo.length; i++){
+        var obj = playerPetInfo[i];
+        if(obj.petID == petID)
+        {
+            playerPetInfo[i].utility = newUtility; 
+        }
+    }
+    firebase.database().ref('userlist/' + uid + '/playerPetInfo').update(playerPetInfo);
+}
+
+//update currentHappiness
+function updateCurrentHappiness(petID, newHappiness) {
+    for (var i = 0; i < playerPetInfo.length; i++){
+        var obj = playerPetInfo[i];
+        if(obj.petID == petID)
+        {
+            playerPetInfo[i].currentHappiness = newHappiness; 
+        }
+    }
+    firebase.database().ref('userlist/' + uid + '/playerPetInfo').update(playerPetInfo);
+}
+
+//update currentHunger
+function updateHung(petID, newHunger) {
+    for (var i = 0; i < playerPetInfo.length; i++){
+        var obj = playerPetInfo[i];
+        if(obj.petID == petID)
+        {
+            playerPetInfo[i].currentHunger = newHunger; 
+        }
+    }
+    firebase.database().ref('userlist/' + uid + '/playerPetInfo').update(playerPetInfo);
+}
+
+/** Update active pet */
+function updateActivePet(petID) {
+    playerInfo.activePet = petID;
+    firebase.database().ref('userlist/' + uid + '/playerInfo').update(playerInfo);
 
 }
+
+/** Inserts new pet from shop */
+function insertNewPlayerPet(petID) {
+    newPetID = playerPetInfo.length + 1;
+    var newPet = {        
+        currentHappiness: 0,
+        currentHunger: 0,
+        petID: newPetID,
+        petName: null,
+        totalHappiness: 0,
+        totalHunger: 0
+    }
+    firebase.database().ref('userlist/' + uid + '/playerPetInfo').update(playerPetInfo);
+}
+
+/** Update lastLogin value */
+function updateLastLogin(lastLoginInfo) {
+    lastLogin = lastLoginInfo;
+    console.log(lastLogin);
+    firebase.database().ref('userlist/' + uid + '/lastLogin').update(lastLogin);
+}
+
+

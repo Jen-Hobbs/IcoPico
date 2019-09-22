@@ -5,7 +5,8 @@ firebase.auth().onAuthStateChanged(function (user) {
     });
     if (user) { 
         //var lastLogin, playerInfo, playerID, emailInfo, playerPetInfo, inventoryInfo, taskListInfo;
-        checkNewUser()
+        console.log("login check");
+        checkNewUser();
     }
     else {
         console.log("login error please log in again");
@@ -15,6 +16,97 @@ firebase.auth().onAuthStateChanged(function (user) {
 // Test Data
 let petNum = 1;
 
+// var parameters, check;
+function checkNewUser() {
+    var user = firebase.auth().currentUser; 
+    uid = user.uid;
+    firebase.database().ref('userlist/' + user.uid + '/playerInfo').once("value",snapshot => {
+        if (snapshot.exists()){
+            //const userData = snapshot.val();
+            //var lastLogin, playerInfo, playerID, emailInfo, playerPetInfo, inventoryInfo, taskListInfo;
+
+            var playerPetInfoRef = firebase.database().ref('userlist/' + user.uid + '/playerPetInfo').once('value').then(function(snapshot) {
+                playerPetInfo = snapshot.val();
+            });
+            console.log("returning user");
+
+            firebase.database().ref('userlist/' + user.uid + '/lastLogin').once('value').then(function(snapshot) {
+                lastLogin = snapshot.val();
+                firebase.database().ref('userlist/' + user.uid + '/playerInfo').once('value').then(function(snapshot) {
+                    playerInfo = snapshot.val();
+                    firebase.database().ref('userlist/' + user.uid + '/emailInfo').once('value').then(function(snapshot) {
+                        emailInfo = snapshot.val();
+                        firebase.database().ref('userlist/' + user.uid + '/inventoryInfo').once('value').then(function(snapshot) {
+                            inventoryInfo = snapshot.val();
+                            firebase.database().ref('userlist/' + user.uid + '/taskListInfo').once('value').then(function(snapshot) {
+                                taskListInfo = snapshot.val();
+                                startGame();
+                            });
+                        });
+                    });
+                });
+            });
+        } else {
+            console.log("new user")
+            initNewUser()
+        }
+    });
+}
+
+//make all database members for a new user
+function initNewUser() {
+    var user = firebase.auth().currentUser;
+    lastLogin = {};
+    playerInfo = {
+        playerID: user.email,
+        currency: 1000,
+        activeItem: 0,
+        activePet: 0,
+        accountEmail: user.email
+    };
+    playerID = user.email;
+    emailInfo = user.email;
+    playerPetInfo = [ 
+        {
+            currentHappiness: 0,
+            currentHunger: 0,
+            petID: 1,
+            petName: "petA",
+            totalHappiness: 0,
+            totalHunger: 0,
+            recycling: 0,
+            utility: 0,
+            health:0,
+        }
+    ];
+    inventoryInfo = [
+        { 
+            itemID: 1,
+            itemQty: 2,
+        },
+        {
+            itemID: 2,
+            itemQty: 4,
+        }
+    ];
+    taskListInfo = { 
+        taskIDa: 1,
+        taskIDb: 2,
+        taskIDc: 3,
+    };
+
+    var updates = {};
+    updates['lastLogin'] = lastLogin;
+    updates['playerInfo'] = playerInfo;
+    updates['playerID'] = playerID;
+    updates['emailInfo'] = emailInfo;
+    updates['playerPetInfo'] = playerPetInfo;
+    updates['inventoryInfo'] = inventoryInfo; 
+    //updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+    firebase.database().ref('userlist/' + user.uid + '/').update(updates);
+    startGame();
+
+}
 
 function getUrl(){
     // If the account is new and have to pet
