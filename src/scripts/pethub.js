@@ -136,9 +136,11 @@ class Pethub extends Phaser.Scene {
         console.log("completion of tween 1");
             if(this.currentPet < (playerPetInfo.length-1)){
                 this.currentPet++;
+                playerInfo.activePet++;
             }
             else{
                 this.currentPet = 0;
+                playerInfo.activePet = 0;
             }
             this.pet.setTexture('pet' + this.currentPet);
             this.checkHunger(this.currentPet);
@@ -159,9 +161,11 @@ class Pethub extends Phaser.Scene {
     changePetL(){
         if(this.currentPet == 0){
             this.currentPet = playerPetInfo.length-1;
+            playerInfo.activePet = playerPetInfo.length-1;
         }
         else{
             this.currentPet--;
+            playerInfo.activePet--;
         }
         this.pet.setTexture('pet' + this.currentPet);
         this.checkHunger(this.currentPet);
@@ -290,6 +294,7 @@ class Pethub extends Phaser.Scene {
         }
 
     }
+    //amount of food in inventory
     addAmount(){
         this.amount = [];
         var n = 0;
@@ -305,7 +310,7 @@ class Pethub extends Phaser.Scene {
         }
     }
 
-
+    // consums item from inventory and animates it
     consume(box) {
         console.log("consume clicked" + box);
         if (inventoryInfo[box.name].itemQty == 1) {
@@ -378,6 +383,17 @@ class Pethub extends Phaser.Scene {
                 animateFood.destroy();
             }
         });
+        this.tweens.add({
+            targets: this.pet,
+            x: 400,
+            y: 400,
+            ease: 'Linear',
+            rotation: 10,
+            delay: 100,
+            duration: 1500,
+            onComplete: this.rotate,
+            callbackScope: this
+        });
         playerPetInfo[playerInfo.activePet].currentHunger += foodTypes.food[inventoryInfo[box.name].itemID].hungerIncrease;
         console.log("current hunger of pet " + playerPetInfo[playerInfo.activePet].currentHunger);
         this.checkHunger(this.currentPet);
@@ -385,5 +401,15 @@ class Pethub extends Phaser.Scene {
      
         this.emitter.emit("hunger", playerPetInfo[playerInfo.activePet].petID, Math.floor(playerPetInfo[playerInfo.activePet].currentHunger));
         
+    }
+    rotate(){
+        this.tweens.add({
+            targets: this.pet,
+            rotation: 12.6,
+            x: this.scale.width / 2,
+            y: this.scale.height * .85,
+            duration: 1500,
+            ease: 'Linear'
+        });
     }
 }
