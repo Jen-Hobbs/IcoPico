@@ -24,14 +24,6 @@ class Shop extends Phaser.Scene {
     create(){
         this.cameras.main.setBackgroundColor('#65EAA2');
         this.textLayout();
-        let menu2 = this.add.sprite(this.scale.width*.06, this.scale.height*.06, 'menuShop');
-        menu2.setInteractive();
-        menu2.on('pointerdown', ()=> {
-            runningScenes = ['Shop', 'Purchase'];
-            console.log('click ' + runningScenes);
-            this.scene.run('ShowMenu', runningScenes);
-            this.scene.bringToTop('ShowMenu');
-        });
         this.input.on('gameobjectup', function (pointer, gameObject) {
             gameObject.emit('clicked', gameObject);
         }, this);
@@ -41,26 +33,31 @@ class Shop extends Phaser.Scene {
     }
     updateMoneyBar(){
 
-        this.moneyBar = this.add.sprite(this.scale.width, this.scale.height *.10, 'moneyBar').setOrigin(1,0);
-        var money = this.add.text(this.scale.width*.82, this.scale.height *.123, playerInfo.currency, {fontFamily: 'serif', fontSize: 28}).setColor('black');
+        this.moneyBar = this.add.sprite(this.scale.width * .97, this.scale.height *.19, 'moneyBar').setOrigin(1,0).setScale(1.3);
+        var money = this.add.text(this.scale.width*.75, this.scale.height *.205, playerInfo.currency, {fontFamily: 'serif', fontSize: 36}).setColor('black');
 
 
     }
     textLayout(){
-        var shop = this.add.text(this.scale.width/2, this.scale.height*.10, "Shop", {fontFamily: 'serif', fontSize: 64});
+        var shop = this.add.text(this.scale.width/2, this.scale.height*.16, "Shop", {fontFamily: 'serif', fontSize: 72});
         shop.setOrigin(0.5);
         shop.setColor('black');
         // let menu2 = this.add.sprite(this.scale.width*.04, this.scale.height*.05, 'menuShop');
-        var food = this.add.text(this.scale.width/2, this.scale.height*.2, "Food", {fontFamily: 'serif', fontSize: 32});
+        var food = this.add.text(this.scale.width/2, this.scale.height*.28, "Food", {fontFamily: 'serif', fontSize: 48});
         food.setOrigin(0.5);
         food.setColor('black');
-        var lineL1 = this.add.line(this.scale.width * .30, this.scale.height*.2, 0, 0, 200, 1, 0x000000);
-        var lineR1 = this.add.line(this.scale.width * .7, this.scale.height*.2, 0, 0, 200, 1, 0x000000);
-        var pets = this.add.text(this.scale.width/2, this.scale.height *.6, "Pets", {fontFamily: 'serif', fontSize: 32});
+        var lineL1 = this.add.line(this.scale.width * .30, this.scale.height*.28, 0, 0, 200, 1, 0x000000);
+        var lineR1 = this.add.line(this.scale.width * .7, this.scale.height*.28, 0, 0, 200, 1, 0x000000);
+        var toys = this.add.text(this.scale.width/2, this.scale.height*.53, "Toys", {fontFamily: 'serif', fontSize: 48});
+        toys.setOrigin(.5);
+        toys.setColor('black');
+        var lineL3 = this.add.line(this.scale.width * .30, this.scale.height*.53, 0, 0, 200, 1, 0x000000);
+        var lineR3 = this.add.line(this.scale.width * .7, this.scale.height*.53, 0, 0, 200, 1, 0x000000);
+        var pets = this.add.text(this.scale.width/2, this.scale.height *.78, "Pets", {fontFamily: 'serif', fontSize: 48});
         pets.setOrigin(0.5);
         pets.setColor('black');
-        var lineL2 = this.add.line(this.scale.width * .30, this.scale.height*.6, 0, 0, 200, 1, 0x000000);
-        var lineR2 = this.add.line(this.scale.width * .7, this.scale.height*.6, 0, 0, 200, 1, 0x000000);
+        var lineL2 = this.add.line(this.scale.width * .30, this.scale.height*.78, 0, 0, 200, 1, 0x000000);
+        var lineR2 = this.add.line(this.scale.width * .7, this.scale.height*.78, 0, 0, 200, 1, 0x000000);
         pets.setOrigin(0.5);
     }
     //petnumber = 3 currently only repeating shinyboi
@@ -72,15 +69,15 @@ class Shop extends Phaser.Scene {
         //     white.on('clicked', this.select, this);
         // }
         for(var i = 0; i < 3; i++){
-            var petSelect = this.add.container(this.scale.width*(.2 + (i*.15)), this.scale.height *.75);
+            var petSelect = this.add.container(this.scale.width*(.25 + (i*.25)), this.scale.height *.87).setScale(1.5);
             petSelect.setSize(100, 200);
             petSelect.add(this.add.sprite(0,0, 'whiteCircle'));
             var pet = this.add.sprite(0,0, pets.pet[i].petName);
             pet.setScale(.2);
             petSelect.setData("locate", pets.pet[i]);
             petSelect.setData("type", "pet");
-            petSelect.add(this.add.sprite(-35,70, 'money').setScale(.4));
-            petSelect.add(this.add.text(-15, 65, pets.pet[i].cost).setColor('black'));
+            petSelect.add(this.add.sprite(-20,71, 'money').setScale(.4));
+            petSelect.add(this.add.text(0, 55, pets.pet[i].cost,{fontFamily: 'serif', fontSize: 32}).setColor('black'));
             petSelect.add(pet);
             petSelect.setInteractive();
             console.log("shop " + petSelect.getData("locate").petName);
@@ -93,7 +90,7 @@ class Shop extends Phaser.Scene {
     }
     food(){
         for(var i = 0; i < foodTypes.food.length; i++){
-            var foodSelect = this.add.container(this.scale.width*(.2 + (i*.15)), this.scale.height *.35);
+            var foodSelect = this.add.container(this.scale.width*(.25 + (i*.25)), this.scale.height *.37).setScale(1.5);
             foodSelect.setSize(100, 200);
             foodSelect.add(this.add.sprite(0,0, 'whiteCircle'));
             var food = this.add.sprite(0,0, foodTypes.food[i].type);
@@ -104,11 +101,11 @@ class Shop extends Phaser.Scene {
             // pet.setScale(.1);
             // pet.number = i;
 
-            foodSelect.add(this.add.sprite(-35,70, 'money').setScale(.4));
+            foodSelect.add(this.add.sprite(-20,71, 'money').setScale(.4));
             foodSelect.add(food);
             foodSelect.setData("locate", foodTypes.food[i]);
             foodSelect.setData("type", "food");
-            foodSelect.add(this.add.text(-15, 65, foodTypes.food[i].cost).setColor('black'));
+            foodSelect.add(this.add.text(0, 55, foodTypes.food[i].cost, {fontFamily: 'serif', fontSize: 32}).setColor('black'));
             // foodSelect.add(pet);
             foodSelect.setInteractive();
             foodSelect.on('clicked', this.select, this);
@@ -116,6 +113,7 @@ class Shop extends Phaser.Scene {
     }
     select(pets){
         // if(pets.getData('type') == 'pet'){
+            console.log("check");
             this.scene.pause('Shop');
             this.scene.run('Purchase', pets);
             this.scene.bringToTop('Purchase');

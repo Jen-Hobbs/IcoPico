@@ -1,3 +1,4 @@
+// first page contains easter egg
 let date = new Date();
 let day = date.getDay();
 let clicked = true;

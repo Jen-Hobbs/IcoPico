@@ -1,14 +1,10 @@
-// game startup configure game
-// TODO properally size game
-console.log('game loading');
 var config = {
-    
+
     parent: 'wrapper',
     scale: {
         mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
         width: 800,
-        height: 1600,
+        height: 600,
         type: Phaser.AUTO,
 
     },
@@ -19,7 +15,7 @@ var config = {
             debug: false
         }
     },
-    scene: [Pethub, Shop, Task, ShowMenu, Purchase, Time, ChoosePet]
+    scene: [ChoosePet, ShowMenu, Shop, Task, Purchase, Pethub, PethubOverlay, Time, UpdateDB]
 
 };
 
