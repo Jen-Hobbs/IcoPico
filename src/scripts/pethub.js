@@ -21,7 +21,7 @@ class Pethub extends Phaser.Scene {
         this.load.image('arrow', '../images/buttons/Other/arrow.png');
         this.load.image('backPet', '../images/Sad_Appartment.png');
         this.load.image('sad', '../images/buttons/pet_hub/sad.png');
-        this.load.spritesheet("thought", '../images/icons/thoughtAnimate.png', { frameWidth: 280, frameHeight: 300 });
+        this.load.spritesheet("thought", '../images/icons/thoughtAnimate.png', { frameWidth: 280, frameHeight: 330 });
         this.load.spritesheet("Shiny_Boi_Food", '../images/Shiny_Boi_Food/shiny_boi_consume.png', {frameWidth: 943, frameHeight: 470});
         this.load.image('hungry', '../images/buttons/pet_hub/hungry.png');
         this.hunger;
@@ -77,13 +77,13 @@ class Pethub extends Phaser.Scene {
             frameRate: 1.8,
             repeat: 1
         });
-        //eating food animation initial pet start
-        this.anims.create({
-            key: 'eat',
-            frames: this.anims.generateFrameNumbers('Shiny_Boi_Food', {frames:[0,1,2,3,2,1,0]}),
-            frameRate: 9,
-            repeat: 0
-        });
+        // //eating food animation initial pet start
+        // this.anims.create({
+        //     key: 'eat',
+        //     frames: this.anims.generateFrameNumbers('Shiny_Boi_Food', {frames:[0,1,2,3,2,1,0]}),
+        //     frameRate: 9,
+        //     repeat: 0
+        // });
         
         //right arrow
         arrowR = this.add.sprite(this.scale.width * 0.95, this.scale.height / 2, 'arrow');
@@ -116,8 +116,8 @@ class Pethub extends Phaser.Scene {
                 callbackScope: this
             });
         });
-        this.hungerBubble = this.add.sprite(this.scale.width * .73, this.scale.height * .35);
-        this.sadBubble = this.add.sprite(this.scale.width * .28, this.scale.height * .45);
+        this.hungerBubble = this.add.sprite(this.scale.width * .70, this.scale.height * .42);
+        this.sadBubble = this.add.sprite(this.scale.width * .30, this.scale.height * .52);
         this.checkHunger(this.currentPet);
         this.checkHappiness(this.currentPet);
         this.input.on('gameobjectup', function (pointer, gameObject) {
@@ -187,10 +187,10 @@ class Pethub extends Phaser.Scene {
     checkHappiness(i) {
         this.sadBubble.setVisible(true);
         if (playerPetInfo[i].currentHappiness < 33) {
-            this.sadBubble.setTexture('thought').setFlipX(true).setTint('0x875e5e').play('sad');
+            this.sadBubble.setTexture('thought').setFlipX(true).setTint('0x875e5e').play('sad').setScale(1.2);
         }
         else if (playerPetInfo.currentHappiness < 66) {
-            this.sadBubble.setTexture('thought').setFlipX(true).setTint('0xf9b6a7').play('sad');
+            this.sadBubble.setTexture('thought').setFlipX(true).setTint('0xf9b6a7').play('sad').setScale(1.2);
         }
         else{
             this.sadBubble.setVisible(false);
@@ -205,10 +205,10 @@ class Pethub extends Phaser.Scene {
     checkHunger(i) {
         this.hungerBubble.setVisible(true);
         if (playerPetInfo[i].currentHunger < 33) {
-            this.hungerBubble.setTexture('thought').setTint('0x875e5e').play('hungry');
+            this.hungerBubble.setTexture('thought').setTint('0x875e5e').play('hungry').setScale(1.2);
         }
         else if (playerPetInfo[i].currentHunger < 66) {
-            this.hungerBubble.setTexture('thought').setTint('0xf9b6a7').play('hungry');
+            this.hungerBubble.setTexture('thought').setTint('0xf9b6a7').play('hungry').setScale(1.2);
         }
         else{
             this.hungerBubble.setVisible(false);
@@ -216,28 +216,28 @@ class Pethub extends Phaser.Scene {
     }
     //task bubble
     task() {
-        var taskActive;
-        if (newTask == 0) {
-            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'whiteCircle')
-            .setScale(1.5)
-            .setInteractive()
-            .on('pointerdown', () => {
-            this.scene.stop('Pethub');
-            this.scene.run('Task');
-        });
-        }
-        else {
-            taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'yellowCircle')
-            .setScale(1.5)
-            .setInteractive()
-            .on('pointerdown', () => {
-            newTask = 0;
-            this.scene.stop('Pethub');
-            this.scene.run('Task');
+        // var taskActive;
+        // if (newTask == 0) {
+        //     taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'whiteCircle')
+        //     .setScale(1.5)
+        //     .setInteractive()
+        //     .on('pointerdown', () => {
+        //     this.scene.stop('Pethub');
+        //     this.scene.run('Task');
+        // });
+        // }
+        // else {
+        //     taskActive = this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'yellowCircle')
+        //     .setScale(1.5)
+        //     .setInteractive()
+        //     .on('pointerdown', () => {
+        //     newTask = 0;
+        //     this.scene.stop('Pethub');
+        //     this.scene.run('Task');
 
-        });
-        }
-        this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'task').setScale(1.5);
+        // });
+        // }
+        // this.add.sprite(this.scale.width * .90, this.scale.height * .8, 'task').setScale(1.5);
         
     }
     displayfood() {
@@ -276,12 +276,11 @@ class Pethub extends Phaser.Scene {
         for (var i = 0; i < inventoryInfo.length; i++) {
             if(inventoryInfo[i].itemQty > 0){
             
-                this.food[n] = this.add.sprite(this.scale.width * (.78 - (n * .12)), this.scale.height * .90, 'whiteCircle').setScale(1.5);
+                this.food[n] = this.add.sprite(this.scale.width * (.72 - (n * .18)), this.scale.height * .90, 'whiteCircle').setScale(1.5);
                 this.food[n].setInteractive();
                 this.food[n].name = i;
                 this.food[n].on('clicked', this.consume, this);
-                this.type[n] = this.add.sprite(this.scale.width * (.78 - (n * .12)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID).setScale(1.5);
-                this.type[n].setScale(.7);
+                this.type[n] = this.add.sprite(this.scale.width * (.72 - (n * .18)), this.scale.height * .90, 'food' + inventoryInfo[i].itemID);
             n++;
             }
         }
@@ -296,7 +295,7 @@ class Pethub extends Phaser.Scene {
         var n = 0;
         for (var i = 0; i < inventoryInfo.length; i++) {
             if(inventoryInfo[i].itemQty != 0){
-                this.amount[n] = this.add.text(this.scale.width * (.76 - (n * .12)), this.scale.height * .85, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
+                this.amount[n] = this.add.text(this.scale.width * (.70 - (n * .18)), this.scale.height * .87, inventoryInfo[i].itemQty, { fontFamily: 'serif', fontSize: 64 }).setColor('black');
                 this.amount[n].alpha = .8;
                 n++;
             }
@@ -308,7 +307,7 @@ class Pethub extends Phaser.Scene {
 
 
     consume(box) {
-        console.log(box);
+        console.log("consume clicked" + box);
         if (inventoryInfo[box.name].itemQty == 1) {
             //
             //
@@ -330,9 +329,56 @@ class Pethub extends Phaser.Scene {
             this.emitter.emit("inventory", item, itemQty);
         }
         this.addAmount();
-     
-        playerPetInfo[playerInfo.activePet].currentHunger += 30;
-        this.pet.play("eat");
+        var animateFood = this.add.sprite(this.scale.width * (.72 - ((box.name-1) * .18)), this.scale.height * .90, 'food' + inventoryInfo[box.name].itemID).setScale(2);
+        var particles = this.add.particles('food' + inventoryInfo[box.name].itemID).setScale(.5);
+
+        
+        this.tweens.add({
+            targets: animateFood,
+            x: 400,
+            y: 600,
+            scaleX: .5,
+            scaleY: .5,
+            duration: 1000,
+            ease: 'Sine.easeIn',
+            onComplete: function ()
+            {
+                var emitter3 = particles.createEmitter({
+                    x: 800,
+                    y: 1200,
+                    speed: { min: 200, max: 400 },
+                    maxParticles: 20,
+                    angle: { start: 0, end: 360, steps: 10 },
+                    quantity: 1,
+                    lifespan: { min: 1000, max: 2000 },
+                    blendMode: 'ERASE'
+                });
+                
+                var emitter2 = particles.createEmitter({
+                    delay: 0.3,
+                    x: 800,
+                    y: 1200,
+                    speed: { min: 200, max: 400 },
+                    maxParticles: 30,
+                    angle: { start: 0, end: 360, steps: 10 },
+                    quantity: 1,
+                    lifespan: { min: 1500, max: 2000 },
+                    blendMode: 'ADD'
+                });
+                var emitter = particles.createEmitter({
+                    delay: 0.5,
+                    x: 800,
+                    y: 1200,
+                    speed: { min: 200, max: 400 },
+                    maxParticles: 30,
+                    angle: { start: 0, end: 360, steps: 10 },
+                    quantity: 1,
+                    lifespan: { min: 1500, max: 2000 }
+                });
+                animateFood.destroy();
+            }
+        });
+        playerPetInfo[playerInfo.activePet].currentHunger += foodTypes.food[inventoryInfo[box.name].itemID].hungerIncrease;
         console.log("current hunger of pet " + playerPetInfo[playerInfo.activePet].currentHunger);
         this.checkHunger(this.currentPet);
       
