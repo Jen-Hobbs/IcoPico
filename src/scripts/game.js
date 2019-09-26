@@ -1,6 +1,12 @@
 // game startup configure game
 // TODO properally size game
 console.log('game loading');
+
+function startGame() {
+    console.log("starting game");
+    game = new Phaser.Game(config);
+}
+
 var config = {
     
     parent: 'wrapper',
@@ -23,6 +29,7 @@ var config = {
 
 };
 
-var game = new Phaser.Game(config);
+var game;
+
 var player;
 var display;
