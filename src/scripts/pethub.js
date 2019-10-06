@@ -22,7 +22,14 @@ class Pethub extends Phaser.Scene {
         this.load.image('backPet', '../images/Sad_Appartment.png');
         this.load.image('sad', '../images/buttons/pet_hub/sad.png');
         this.load.spritesheet("thought", '../images/icons/thoughtAnimate.png', { frameWidth: 280, frameHeight: 330 });
-        this.load.spritesheet("Shiny_Boi_Food", '../images/Shiny_Boi_Food/shiny_boi_consume.png', {frameWidth: 943, frameHeight: 470});
+        //this.load.spritesheet("idle0", '../images/Shiny_Boi_Food/shiny_boi_consume.png', {frameWidth: 943, frameHeight: 470});
+        
+        
+        this.load.image('idle00', '../images/idle0/idle0.png');
+        this.load.image('idle01', '../images/idle0/idle1.png');
+        this.load.image('idle02', '../images/idle0/idle2.png');
+        
+        
         this.load.image('hungry', '../images/buttons/pet_hub/hungry.png');
         this.hunger;
         this.hungerBubble;
@@ -63,10 +70,11 @@ class Pethub extends Phaser.Scene {
         this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'backPet'); //background
 
         this.pet = this.add.sprite(this.scale.width / 2, this.scale.height * .84, 'pet' + this.currentPet).setOrigin(0.5, 1).setScale(1.2); //addpet
+        
         //hungry bubble animation
         this.anims.create({
             key: 'hungry',
-            frames: this.anims.generateFrameNumbers('thought', { frames:[0,1,2,3,4] }),
+            frames: [this.anims.generateFrameNumbers('thought', { frames:[0,1,2,3,4] })],
             frameRate: 1.8,
             repeat: 1
         });
@@ -77,14 +85,21 @@ class Pethub extends Phaser.Scene {
             frameRate: 1.8,
             repeat: 1
         });
-        // //eating food animation initial pet start
-        // this.anims.create({
-        //     key: 'eat',
-        //     frames: this.anims.generateFrameNumbers('Shiny_Boi_Food', {frames:[0,1,2,3,2,1,0]}),
-        //     frameRate: 9,
-        //     repeat: 0
-        // });
         
+        // var timedEvent = scene.time.addEvent({
+        //     delay: 500,                // ms
+        //     callback: this.idleAnimate,
+        //     args: [],
+        //     loop: true
+        // });
+        var timedEvent = this.time.delayedCall(300, this.idleAnimate, [], this);
+        // //eating food animation initial pet start
+        this.anims.create({
+            key: 'idle',
+            frames: [{key: 'idle00'}, {key: 'idle02'}, {key:'idle01'}],
+            frameRate: 10,
+            repeat: 1
+        });
         //right arrow
         arrowR = this.add.sprite(this.scale.width * 0.95, this.scale.height / 2, 'arrow');
         arrowR.setInteractive();
@@ -182,6 +197,13 @@ class Pethub extends Phaser.Scene {
                 ease: 'Linear'
             });
         }
+    }
+
+    idleAnimate(){
+        console.log("hi");
+        
+        this.pet.anims.play('idle');
+        
     }
     /**
      * check happiness of the pet and create thought bubble corrisponding status
