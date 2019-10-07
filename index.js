@@ -467,14 +467,9 @@ app.get('/checkaccount/:email', (req, res) => {
 
 });
 
-// var port = process.env.PORT || 8080;
-// var server = app.listen(port, function(){
-//    // var port = server.address().port;
-//     console.log("Server started at http://localhost:%s", port);
-// });
-app.set( 'port', ( process.env.PORT || 8000 ));
+var port = process.env.PORT || 8080;
+var server = app.listen(port, function(){
+   // var port = server.address().port;
+    console.log("Server started at http://localhost:%s", port);
+});
 
-// Start node server
-app.listen( app.get( 'port' ), function() {
-  console.log( 'Node server is running on port ' + app.get( 'port' ));
-  });
