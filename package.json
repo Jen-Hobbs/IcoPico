@@ -7,7 +7,7 @@
     "author": "Microsoft",
     "scripts": {
         "start": "node index.js",
-        "postinstall": "ng build"
+        "build": "webpack"
     },
     "dependencies": {
         "express": "^4.17.1",
