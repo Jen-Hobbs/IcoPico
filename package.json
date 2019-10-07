@@ -6,7 +6,8 @@
     "license": "MIT",
     "author": "Microsoft",
     "scripts": {
-        "start": "node index.js"
+        "start": "node index.js",
+        "postinstall": "ng build"
     },
     "dependencies": {
         "express": "^4.17.1",
