@@ -83,6 +83,7 @@ function initNewUser() {
         { 
             itemID: 1,
             itemQty: 2,
+
         },
         {
             itemID: 2,
