@@ -26,6 +26,7 @@ db.connect(function (err) {
 app.use(express.static('./'));
 app.use(express.static('src'));
 app.use('index.html', express.static('index.html'));
+app.use(express.static(PUBLIC_PATH));
 app.use('/css', express.static(__dirname + '/src/css'));
 app.use('/scripts', express.static(__dirname + '/src/scripts'));
 app.use('/images', express.static(__dirname + '/src/images'));
