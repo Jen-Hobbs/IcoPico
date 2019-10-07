@@ -48,17 +48,11 @@ class Shop extends Phaser.Scene {
         food.setColor('black');
         var lineL1 = this.add.line(this.scale.width * .30, this.scale.height*.28, 0, 0, 200, 1, 0x000000);
         var lineR1 = this.add.line(this.scale.width * .7, this.scale.height*.28, 0, 0, 200, 1, 0x000000);
-        var toys = this.add.text(this.scale.width/2, this.scale.height*.53, "Toys", {fontFamily: 'serif', fontSize: 48});
-        toys.setOrigin(.5);
-        toys.setColor('black');
+        var pets = this.add.text(this.scale.width/2, this.scale.height*.53, "Pets", {fontFamily: 'serif', fontSize: 48});
+        pets.setOrigin(.5);
+        pets.setColor('black');
         var lineL3 = this.add.line(this.scale.width * .30, this.scale.height*.53, 0, 0, 200, 1, 0x000000);
         var lineR3 = this.add.line(this.scale.width * .7, this.scale.height*.53, 0, 0, 200, 1, 0x000000);
-        var pets = this.add.text(this.scale.width/2, this.scale.height *.78, "Pets", {fontFamily: 'serif', fontSize: 48});
-        pets.setOrigin(0.5);
-        pets.setColor('black');
-        var lineL2 = this.add.line(this.scale.width * .30, this.scale.height*.78, 0, 0, 200, 1, 0x000000);
-        var lineR2 = this.add.line(this.scale.width * .7, this.scale.height*.78, 0, 0, 200, 1, 0x000000);
-        pets.setOrigin(0.5);
     }
     //petnumber = 3 currently only repeating shinyboi
     pets(){
@@ -69,7 +63,7 @@ class Shop extends Phaser.Scene {
         //     white.on('clicked', this.select, this);
         // }
         for(var i = 0; i < 3; i++){
-            var petSelect = this.add.container(this.scale.width*(.25 + (i*.25)), this.scale.height *.87).setScale(1.5);
+            var petSelect = this.add.container(this.scale.width*(.25 + (i*.25)), this.scale.height *.62).setScale(1.5);
             petSelect.setSize(100, 200);
             petSelect.add(this.add.sprite(0,0, 'whiteCircle'));
             var pet = this.add.sprite(0,0, pets.pet[i].petName);
