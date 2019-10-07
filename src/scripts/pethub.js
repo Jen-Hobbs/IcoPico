@@ -22,12 +22,13 @@ class Pethub extends Phaser.Scene {
         this.load.image('backPet', '../images/Sad_Appartment.png');
         this.load.image('sad', '../images/buttons/pet_hub/sad.png');
         this.load.spritesheet("thought", '../images/icons/thoughtAnimate.png', { frameWidth: 280, frameHeight: 330 });
-        //this.load.spritesheet("idle0", '../images/Shiny_Boi_Food/shiny_boi_consume.png', {frameWidth: 943, frameHeight: 470});
-        
-        
-        this.load.image('idle00', '../images/idle0/idle0.png');
-        this.load.image('idle01', '../images/idle0/idle1.png');
-        this.load.image('idle02', '../images/idle0/idle2.png');
+    
+        //find nulls?
+        for(var i = 0; i < playerPetInfo.length; i++){
+            for(var j = 0; j < 2; j++){
+                this.load.image('idle' + i + '_' + j, '../images/IdolAnimations/' + pets.pet[playerPetInfo[i].petID].petName + '/' + pets.pet[playerPetInfo[i].petID].petName + '_' + j + '.png')
+            }
+        }
         
         
         this.load.image('hungry', '../images/buttons/pet_hub/hungry.png');
@@ -74,7 +75,7 @@ class Pethub extends Phaser.Scene {
         //hungry bubble animation
         this.anims.create({
             key: 'hungry',
-            frames: [this.anims.generateFrameNumbers('thought', { frames:[0,1,2,3,4] })],
+            frames: this.anims.generateFrameNumbers('thought', { frames:[0,1,2,3,4] }),
             frameRate: 1.8,
             repeat: 1
         });
@@ -92,18 +93,19 @@ class Pethub extends Phaser.Scene {
         //     args: [],
         //     loop: true
         // });
-        var timedEvent = this.time.delayedCall(300, this.idleAnimate, [], this);
+        // var timedEvent = this.time.delayedCall(300, this.idleAnimate, [], this);
         // //eating food animation initial pet start
-        this.anims.create({
-            key: 'idle',
-            frames: [{key: 'idle00'}, {key: 'idle02'}, {key:'idle01'}],
-            frameRate: 10,
-            repeat: 1
-        });
+        // this.anims.create({
+        //     key: 'idle',
+        //     frames: [{key: 'idle'+ }, {key: 'idle02'}],
+        //     frameRate: 10,
+        //     repeat: 1
+        // });
         //right arrow
         arrowR = this.add.sprite(this.scale.width * 0.95, this.scale.height / 2, 'arrow');
         arrowR.setInteractive();
         arrowR.on('pointerdown', () => {
+            if(playerPetInfo.length != 1){
             this.tweens.add({
                 targets: this.pet,
                 x: 900,
@@ -114,12 +116,14 @@ class Pethub extends Phaser.Scene {
                 onComplete: this.changePet,
                 callbackScope: this
             });
+        }
         });
         //left arrow
         arrowL = this.add.sprite(this.scale.width * 0.04, this.scale.height / 2, 'arrow');
         arrowL.flipX = !arrowL.flipX;
         arrowL.setInteractive();
         arrowL.on('pointerdown', () => {
+            if(playerPetInfo.length != 1){
             this.tweens.add({
                 targets: this.pet,
                 x: -100,
@@ -130,6 +134,7 @@ class Pethub extends Phaser.Scene {
                 onComplete: this.changePetL,
                 callbackScope: this
             });
+        }
         });
         this.hungerBubble = this.add.sprite(this.scale.width * .70, this.scale.height * .42);
         this.sadBubble = this.add.sprite(this.scale.width * .30, this.scale.height * .52);
@@ -178,6 +183,7 @@ class Pethub extends Phaser.Scene {
             this.currentPet = playerPetInfo.length-1;
             playerInfo.activePet = playerPetInfo.length-1;
         }
+        
         else{
             this.currentPet--;
             playerInfo.activePet--;
@@ -197,14 +203,15 @@ class Pethub extends Phaser.Scene {
                 ease: 'Linear'
             });
         }
+    
     }
 
-    idleAnimate(){
-        console.log("hi");
+    // idleAnimate(){
+    //     console.log("hi");
         
-        this.pet.anims.play('idle');
+    //     this.pet.anims.play('idle');
         
-    }
+    // }
     /**
      * check happiness of the pet and create thought bubble corrisponding status
      * @param {pet number} i

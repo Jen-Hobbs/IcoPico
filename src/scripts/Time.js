@@ -24,14 +24,14 @@ class Time extends Phaser.Scene {
           .on("activePet", updateActivePet)
           .on("newPet", insertNewPlayerPet)
           .on("lastLogin", updateLastLogin);
-        this.updateLogin();
-        this.setTaskList();
-        this.newTask();
-        this.updateEmotions();
-        this.evolution();
-        updateTaskList();
-        this.time = this.timeCurrent;
-        this.emitter.emit("taskList", taskListInfo.taskIDa, taskListInfo.taskIDb, taskListInfo.taskIDc);
+        // this.updateLogin();
+        // this.setTaskList();
+        // this.newTask();
+        // this.updateEmotions();
+        // this.evolution();
+        // updateTaskList();
+        // this.time = this.timeCurrent;
+        // this.emitter.emit("taskList", taskListInfo.taskIDa, taskListInfo.taskIDb, taskListInfo.taskIDc);
     }
     /**
      * sets changed time for happiness/hunger change in comparison to last login and current time to the nearest 3rd hour
