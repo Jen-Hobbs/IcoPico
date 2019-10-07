@@ -18,7 +18,7 @@ class Pethub extends Phaser.Scene {
             this.load.image('pet' + i, '../images/pets/' + pets.pet[playerPetInfo[i].petID].petName + '.png');
         }
        
-        this.load.image('arrow', '../images/buttons/Other/arrow.png');
+        this.load.image('arrow', '../images/buttons/Other/arrow1.png');
         this.load.image('backPet', '../images/Sad_Appartment.png');
         this.load.image('sad', '../images/buttons/pet_hub/sad.png');
         this.load.spritesheet("thought", '../images/icons/thoughtAnimate.png', { frameWidth: 280, frameHeight: 330 });
@@ -93,7 +93,7 @@ class Pethub extends Phaser.Scene {
             this.animation = this.anims.create({
                 key: 'idle' + i,
                 frames: [{key: 'idle'+ i + '0'}, {key: 'idle' + i + '1'}, {key: 'idle'+ i + '0'}],
-                frameRate: 10,
+                frameRate: 7,
                 repeat: 1
             });
             
@@ -103,7 +103,7 @@ class Pethub extends Phaser.Scene {
         
         this.idlePet();
         //right arrow
-        arrowR = this.add.sprite(this.scale.width * 0.95, this.scale.height / 2, 'arrow');
+        arrowR = this.add.sprite(this.scale.width * 0.90, this.scale.height * .6, 'arrow');
         arrowR.setInteractive();
         arrowR.on('pointerdown', () => {
             if(playerPetInfo.length != 1){
@@ -120,7 +120,7 @@ class Pethub extends Phaser.Scene {
         }
         });
         //left arrow
-        arrowL = this.add.sprite(this.scale.width * 0.04, this.scale.height / 2, 'arrow');
+        arrowL = this.add.sprite(this.scale.width * 0.1, this.scale.height * .6, 'arrow');
         arrowL.flipX = !arrowL.flipX;
         arrowL.setInteractive();
         arrowL.on('pointerdown', () => {
@@ -151,7 +151,7 @@ class Pethub extends Phaser.Scene {
     }
     idlePet(){
         this.timedEvent = this.time.addEvent({
-            delay: 1000, //+ (Math.random() * 10000),                  // ms
+            delay: 1000 + (Math.random() * 1000),                  // ms
             callback: this.idleAnimate,
             args: [],
             repeat: 1,
@@ -160,6 +160,13 @@ class Pethub extends Phaser.Scene {
     }
     idleAnimate(){
         if(this.textures.get('idle' + this.currentPet + '0').manager.exists('idle' + this.currentPet + '0') == true){
+            this.timedEvent.reset({
+                delay: 10000 + (Math.random() * 100000),                  // ms
+                callback: this.idleAnimate,
+                args: [],
+                repeat: 1,
+                callbackScope: this
+            });
             this.pet.anims.play('idle' + this.currentPet);
         }     
     }
