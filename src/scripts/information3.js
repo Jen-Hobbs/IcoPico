@@ -5,11 +5,11 @@ var lastLogin, playerInfo, playerID, emailInfo, playerPetInfo, inventoryInfo, ta
 var uid; 
 
 function updateTasks(newIDa, newIDb, newIDc) {
-    taskListInfo = {
-        newIDa,
-        newIDb,
-        newIDc
-    }
+    // taskListInfo = {
+    //     newIDa,
+    //     newIDb,
+    //     newIDc
+    // }
     firebase.database().ref('userlist/' + uid + '/taskListInfo').set(taskListInfo);
 }
 

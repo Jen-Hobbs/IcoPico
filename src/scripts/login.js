@@ -93,6 +93,7 @@ function initNewUser() {
         }
     ];
     taskListInfo = { 
+        placeholder: 99999,
         taskIDa: 1,
         taskIDb: 2,
         taskIDc: 3,
