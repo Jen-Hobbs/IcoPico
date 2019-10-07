@@ -31,7 +31,8 @@ function checkNewUser() {
             console.log("returning user");
 
             firebase.database().ref('userlist/' + user.uid + '/lastLogin').once('value').then(function(snapshot) {
-                lastLogin = snapshot.val();
+                lastLogin = new Date(snapshot.val());
+                console.log("initlogin", lastLogin);
                 firebase.database().ref('userlist/' + user.uid + '/playerInfo').once('value').then(function(snapshot) {
                     playerInfo = snapshot.val();
                     firebase.database().ref('userlist/' + user.uid + '/emailInfo').once('value').then(function(snapshot) {
@@ -40,6 +41,7 @@ function checkNewUser() {
                             inventoryInfo = snapshot.val();
                             firebase.database().ref('userlist/' + user.uid + '/taskListInfo').once('value').then(function(snapshot) {
                                 taskListInfo = snapshot.val();
+                                console.log("sdkfjhsdfj", taskListInfo);
                                 startGame();
                             });
                         });
@@ -56,7 +58,7 @@ function checkNewUser() {
 //make all database members for a new user
 function initNewUser() {
     var user = firebase.auth().currentUser;
-    lastLogin = {};
+    lastLogin = new Date();
     playerInfo = {
         playerID: user.email,
         currency: 1000,
@@ -97,16 +99,16 @@ function initNewUser() {
     };
 
     var updates = {};
-    updates['lastLogin'] = lastLogin;
+    updates['lastLogin'] = lastLogin.toISOString();
     updates['playerInfo'] = playerInfo;
     updates['playerID'] = playerID;
     updates['emailInfo'] = emailInfo;
     updates['playerPetInfo'] = playerPetInfo;
     updates['inventoryInfo'] = inventoryInfo; 
+    updates['taskListInfo'] = taskListInfo;
     //updates['/user-posts/' + uid + '/' + newPostKey] = postData;
-    firebase.database().ref('userlist/' + user.uid + '/').update(updates);
+    firebase.database().ref('userlist/' + user.uid + '/').set(updates);
     startGame();
-
 }
 
 function getUrl(){

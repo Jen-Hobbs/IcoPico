@@ -129,7 +129,6 @@ class Purchase extends Phaser.Scene {
                             }
                         }
                         stuff.itemQty = 1;
-                        stuff.playerID = playerInfo.playerID;
                         //
                         //
                         //
