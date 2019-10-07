@@ -22,11 +22,12 @@ class Pethub extends Phaser.Scene {
         this.load.image('backPet', '../images/Sad_Appartment.png');
         this.load.image('sad', '../images/buttons/pet_hub/sad.png');
         this.load.spritesheet("thought", '../images/icons/thoughtAnimate.png', { frameWidth: 280, frameHeight: 330 });
-    
+        this.idle = [];
         //find nulls?
         for(var i = 0; i < playerPetInfo.length; i++){
             for(var j = 0; j < 2; j++){
-                this.load.image('idle' + i + j, '../images/IdolAnimations/' + pets.pet[playerPetInfo[i].petID].petName + '/' + pets.pet[playerPetInfo[i].petID].petName + '_' + j + '.png')
+                this.idle[i] = this.load.image('idle' + i + j, '../images/IdolAnimations/' + pets.pet[playerPetInfo[i].petID].petName + '/' + pets.pet[playerPetInfo[i].petID].petName + '_' + j + '.png')
+               
             }
         }
         
@@ -48,7 +49,7 @@ class Pethub extends Phaser.Scene {
 
             this.load.image('food' + inventoryInfo[i].itemID, "../images/food/" + foodTypes.food[inventoryInfo[i].itemID].type + '.png');
         };
-        
+        console.log(this.textures);
     }
     /**
      * create positioning of pet
@@ -87,23 +88,20 @@ class Pethub extends Phaser.Scene {
             frameRate: 1.8,
             repeat: 1
         });
-        this.anims.create({
-            key: 'idle',
-            frames: [{key: 'idle'+ this.currentPet + '0'}, {key: 'idle' + this.currentPet + '1'}, {key: 'idle'+ this.currentPet + '0'}],
-            frameRate: 10,
-            repeat: 1
-        });
+        for(var i = 0; i < playerPetInfo.length; i++){
+            
+            this.animation = this.anims.create({
+                key: 'idle' + i,
+                frames: [{key: 'idle'+ i + '0'}, {key: 'idle' + i + '1'}, {key: 'idle'+ i + '0'}],
+                frameRate: 10,
+                repeat: 1
+            });
+            
+        }
         // var timedEvent = this.time.delayedCall(300, this.idleAnimate, [], this);
         // //eating food animation initial pet start
         
-        this.timedEvent = this.time.addEvent({
-            delay: (Math.random() * 10000),                // ms
-            callback: this.idleAnimate,
-            args: [],
-            repeat: 1,
-            loop: true,
-            callbackScope: this
-        });
+        this.idlePet();
         //right arrow
         arrowR = this.add.sprite(this.scale.width * 0.95, this.scale.height / 2, 'arrow');
         arrowR.setInteractive();
@@ -149,6 +147,21 @@ class Pethub extends Phaser.Scene {
         }, this);
         this.displayfood();
         this.task();
+        this.updatepet = this.currentPet;
+    }
+    idlePet(){
+        this.timedEvent = this.time.addEvent({
+            delay: 1000, //+ (Math.random() * 10000),                  // ms
+            callback: this.idleAnimate,
+            args: [],
+            repeat: 1,
+            callbackScope: this
+        });
+    }
+    idleAnimate(){
+        if(this.textures.get('idle' + this.currentPet + '0').manager.exists('idle' + this.currentPet + '0') == true){
+            this.pet.anims.play('idle' + this.currentPet);
+        }     
     }
     /**
      * update status of pet
@@ -179,6 +192,7 @@ class Pethub extends Phaser.Scene {
                     duration: 2000,
                     ease: 'Linear'
                 });
+                this.idlePet();
             }
     }
     changePetL(){
@@ -206,14 +220,9 @@ class Pethub extends Phaser.Scene {
                 ease: 'Linear'
             });
         }
-    
+        this.idlePet();
     }
 
-    idleAnimate(){
-        console.log('idle animate');
-        this.pet.anims.play('idle');
-        
-    }
     /**
      * check happiness of the pet and create thought bubble corrisponding status
      * @param {pet number} i
