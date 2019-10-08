@@ -12,7 +12,9 @@ function updateTasks(newIDa, newIDb, newIDc) {
     // }
     firebase.database().ref('userlist/' + uid + '/taskListInfo').set(taskListInfo);
 }
-
+function updateCurrentEvoluion() {
+    firebase.database().ref('userlist/' + uid + '/playerPetInfo').set(playerPetInfo);
+}
 // Updates/deletes info in the Inventory table
 function updateInventory(itemID, updatedQty) {
     // var isExisting = 0;

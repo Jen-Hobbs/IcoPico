@@ -23,7 +23,8 @@ class Time extends Phaser.Scene {
           .on("hunger", updateHung)
           .on("activePet", updateActivePet)
           .on("newPet", insertNewPlayerPet)
-          .on("lastLogin", updateLastLogin);
+          .on("lastLogin", updateLastLogin)
+          .on("evolution", updateCurrentEvoluion);
         this.updateLogin();
         this.setTaskList();
         this.newTask();
@@ -120,8 +121,9 @@ class Time extends Phaser.Scene {
      */
     evolution() {
         for (var i = 0; i < playerPetInfo.length; i++) {
-            if (playerPetInfo[i].petID <= 3) {
-                if (playerPetInfo[i].recycling > 10 && Math.random() > 0.7) {
+            console.log("pet recycling complete" + playerPetInfo[i].recycling);
+            if (playerPetInfo[i].petID <= 3 && Math.random() > 0.7) {
+                if (playerPetInfo[i].recycling > 10) {
                     playerPetInfo[i].petID += 3;
                 }
                 if (playerPetInfo[i].utility > 10 && Math.random() > 0.7) {
@@ -131,8 +133,13 @@ class Time extends Phaser.Scene {
                     playerPetInfo[i].petID += 9;
                 }
             }
-
+            console.log("testing evolution");
+            console.log(playerPetInfo);
+            
         }
+        this.emitter.emit("evolution");
+
+
         //
         //evolution updated
         //
