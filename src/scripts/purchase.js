@@ -68,7 +68,6 @@ class Purchase extends Phaser.Scene {
                     newPet.currentHappiness = 50;
                     newPet.currentHunger = 50;
                     newPet.petName = 'empty';
-                    newPet.playerID = playerInfo;
                     newPet.totalHappiness = 0;
                     newPet.totalHunger = 0;
                     newPet.recycling = 0;
@@ -80,8 +79,8 @@ class Purchase extends Phaser.Scene {
                     //
                     //
                     console.log('newpet');
-                    emitter.emit("newPet", newPet.petID);
                     playerPetInfo.push(newPet);
+                    emitter.emit("newPet", newPet.petID);
 //***need to emit new pet to database
                     console.log("pet added" + playerPetInfo);
                     image.destroy('purchase');
@@ -130,15 +129,15 @@ class Purchase extends Phaser.Scene {
                             }
                         }
                         stuff.itemQty = 1;
-                        stuff.playerID = playerInfo.playerID;
                         //
                         //
                         //
                         //
                         //
+                        inventoryInfo.push(stuff);
                         emitter.emit("insertInventory", stuff.itemID, stuff.itemQty);
                         //missing inventory id
-                        inventoryInfo.push(stuff);
+                        
                         //emit inventory food?
                         
 

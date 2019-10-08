@@ -1,10 +1,10 @@
 var config = {
-    apiKey: "AIzaSyBa4tgLd5vJicvFJ_jW7gR2DaoiX6kN9-A",
-    authDomain: "icopico-89023.firebaseapp.com",
-    databaseURL: "https://icopico-89023.firebaseio.com",
-    projectId: "icopico-89023",
-    storageBucket: "icopico-89023.appspot.com",
-    messagingSenderId: "117462095616"
+    apiKey: "AIzaSyCwlbVmDfIDPCHnw3aLI96fDA7zLf0ExKU",
+    authDomain: "icopico-458d3.firebaseapp.com",
+    databaseURL: "https://icopico-458d3.firebaseio.com",
+    projectId: "icopico-458d3",
+    storageBucket: "icopico-458d3.appspot.com",
+    messagingSenderId: "383057020979"
   };
   firebase.initializeApp(config);
   

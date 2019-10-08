@@ -18,9 +18,9 @@ class Task extends Phaser.Scene {
     this.load.image("type3", '../images/food/donut.png');
     this.load.image('type1', '../images/food/icecream.png');
     this.load.image('type5', '../images/buttons/pet_hub/red_heart.png');
-    this.load.image("x", '../images/buttons/Other/x.png');
+    this.load.image("x", '../images/buttons/Other/purchase_button.png');
     this.load.image("menuPet", '../images/buttons/Other/menu.png');
-    this.load.image("get_new", '../images/buttons/task_hub/get_new.png');
+    this.load.image("get_new", '../images/buttons/Other/x.png');
     console.log(pets.pet[(playerPetInfo[playerInfo.activePet].petID)].petName);
     this.load.image(pets.pet[(playerPetInfo[playerInfo.activePet].petID)].petName, '../images/pets/' + pets.pet[(playerPetInfo[playerInfo.activePet].petID)].petName + '.png');
   }
@@ -63,11 +63,12 @@ class Task extends Phaser.Scene {
     
     if (playerTasks != 0) {
       //Create dismiss task button
-      var dismiss = this.add.sprite(this.scale.width / 2, this.scale.height - 80, "x")
-        .setScale(1)
+      var dismiss = this.add.sprite(this.scale.width / 2, this.scale.height - 100, "x")
+        .setScale(4)
         .setInteractive({ useHandCursor: true })
         .setVisible(false)
         .on('clicked', dismiss, this);
+      var complete = this.add.text(this.scale.width / 2, this.scale.height - 100, "Complete", { fontFamily: 'Helvetica', fontSize: 48 }).setOrigin(0.5).setVisible(false);
       //send button to back for now until task is selected
       //this.scene.sendToBack('type2');
 
@@ -86,7 +87,7 @@ class Task extends Phaser.Scene {
         //refresh button to get new task
         var new_task = this.add.sprite(175, -40, 'get_new')
           .setData('rindex', i)
-          .setScale(1.3)
+          .setScale(1)
           .setInteractive({ useHandCursor: true })
           //on('event', callback method, scene)
           .on('clicked', deleteTask, this);
@@ -132,6 +133,7 @@ class Task extends Phaser.Scene {
         this.taskButtons[i].removeAt(1, [, true]);
         //show delete button
         dismiss.setVisible(true);
+        complete.setVisible(true);
         //console.log(this.taskButtons[i].getData('isActive'));
       } else {
         this.taskButtons[i].setData('isActive', false);
@@ -154,6 +156,7 @@ class Task extends Phaser.Scene {
 
         if (!anyActive) {
           dismiss.setVisible(false);
+          complete.setVisible(false);
         }
       }
     }
@@ -193,7 +196,7 @@ class Task extends Phaser.Scene {
         //refresh button to get new task
         var new_task = this.add.sprite(175, -40, 'get_new')
           .setData('rindex', i)
-          .setScale(1.3)
+          .setScale(1)
           .setInteractive({ useHandCursor: true })
           //on('event', callback method, scene)
           .on('clicked', deleteTask, this);
@@ -256,7 +259,7 @@ class Task extends Phaser.Scene {
         //refresh button to get new task
         var new_task = this.add.sprite(175, -40, 'get_new')
           .setData('rindex', i)
-          .setScale(1.3)
+          .setScale(1)
           .setInteractive({ useHandCursor: true })
           //on('event', callback method, scene)
           .on('clicked', deleteTask, this);
