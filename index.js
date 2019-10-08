@@ -33,6 +33,11 @@ app.use('login.html', express.static('/src/login/login.html'));
 app.use('icopico.html', express.static('/src/icopico/icopico.html'));
 app.use('icopico.html', express.static('/src/icopicoPet/icopico.html'));
 
+// debugging hosting issue
+app.get('/src/scripts/Pethub.js', function(req, res){
+    res.redirect('/src/scripts/Pethub.js');
+ });
+
 ///////////////////////////////////////////////////////////////////////////////
 //GETTING FROM DATABASE
 
