@@ -43,6 +43,10 @@ class ShowMenu extends Phaser.Scene {
         })
         
         let logout = this.add.sprite(this.scale.width*.85, this.scale.height*.06, 'logout').setScale(1.5);
+        logout.setInteractive();
+        logout.on('pointerdown', () =>{
+            window.location.href = 'https://icopico-bcit.herokuapp.com/';
+        })
     }
     stopScenes(){
         console.log("stop scenes");
