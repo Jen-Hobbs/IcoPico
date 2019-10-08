@@ -33,10 +33,6 @@ app.use('login.html', express.static('/src/login/login.html'));
 app.use('icopico.html', express.static('/src/icopico/icopico.html'));
 app.use('icopico.html', express.static('/src/icopicoPet/icopico.html'));
 
-// debugging hosting issue
-app.get('/', function(req, res){
-    res.redirect('./');
- });
 
 ///////////////////////////////////////////////////////////////////////////////
 //GETTING FROM DATABASE
