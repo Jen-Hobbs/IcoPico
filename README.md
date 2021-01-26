@@ -1,3 +1,4 @@
+![pet](https://github.com/Jen-Hobbs/IcoPico/blob/master/src/images/pets/shinyboi.png)
 ## About Icopico
 Icopico is a mobile web app developed as a submission for the BCIT COMP 2930 project course and for Ecocity World Summit 2019. 
 
